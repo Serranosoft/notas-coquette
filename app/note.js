@@ -30,18 +30,15 @@ export default function Note() {
                 flatContainerStyle={styles.flatStyle}
                 editor={richText}
                 selectedIconTint={'#000'}
-                disabledIconTint={'#d1d1d1'}
+                disabledIconTint={'#000'}
                 actions={[actions.undo, actions.redo]}
                 iconSize={30}
-                disabled={content.length > 0 ? false : true}
                 
             />
             { openFontSize && <FontSize setFontSize={setFontSize} fontSize={fontSize} /> }
 
             <View style={{ flex: 1 }}>
-                <ScrollView style={styles.scroll}>
-                    
-                    <GridBackground />
+                <GridBackground />                   
                     <RichEditor
                         useContainer={false}
                         ref={richText}
@@ -49,20 +46,16 @@ export default function Note() {
                         placeholder="Escribe tu nota..."
                         onChange={(content) => setContent(content)}
                         editorStyle={{ backgroundColor: "transparent", contentCSSText: "font-size: 24px" }}
-                        
                     />
-                </ScrollView>
-
             </View>
 
             <RichToolbar
                 style={[styles.richBar, styles.footer]}
                 flatContainerStyle={styles.flatStyle}
                 editor={richText}
-                disabled={false}
                 selectedIconTint={'#000'}
-                disabledIconTint={'#d1d1d1'}
-                actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.insertBulletsList, actions.insertLink, actions.checkboxList, "fontSize"]}
+                iconTint={"#666666"}
+                actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.insertBulletsList, "fontSize"]}
                 iconSize={35}
                 iconMap={{ [actions.setBold]: boldLabel, [actions.setItalic]: italicLabel, [actions.setUnderline]: underlineLabel }}
                 fontSize={() => setOpenFontSize(!openFontSize)}
@@ -93,7 +86,7 @@ const styles = StyleSheet.create({
     },
     richBar: {
         width: "100%",
-        backgroundColor: "#ffc4d0"
+        backgroundColor: "#ffc4d0",
     },
     flatStyle: {
         paddingHorizontal: 12,
