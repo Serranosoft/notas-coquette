@@ -1,0 +1,47 @@
+export const ui = {
+    text: {
+        fontFamily: "Regular",
+        color: "black",
+        fontSize: 16.5,
+    },
+    h1: {
+        fontSize: 60,
+        fontFamily: "Semibold",
+        lineHeight: 65,
+    },
+    h2: {
+        fontFamily: "Bold",
+        color: "#fa98ab",
+        fontSize: 27,
+        textAlign: "center"
+    },
+    h3: {
+        fontFamily: "Medium",
+        color: "black",
+        fontSize: 23,
+    },
+    h4: {
+        fontFamily: "Semibold",
+        color: "black",
+        fontSize: 19,
+    },
+}
+
+export const layout = {
+    header: {
+        backgroundColor: "#ffc4d0",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 8,
+        paddingHorizontal: 16,
+        paddingVertical: 12
+    },
+
+    title: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 8
+    }
+}
