@@ -1,11 +1,18 @@
-import { Text } from "react-native"
+import { Image, Text, View } from "react-native"
 
-export const boldLabel = ({tintColor}) => <Text style={[common, { color: tintColor }] }>B</Text>
-export const italicLabel = ({tintColor}) => <Text style={[common, { color: tintColor }] }>I</Text>
-export const underlineLabel = ({tintColor}) => <Text style={[common, { color: tintColor, textDecorationLine: "underline" }] }>U</Text>
+export const boldLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/bold.png")} /></View>
+export const italicLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/italic.png")} /></View>
+export const underlineLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/underline.png")} /></View>
+export const alignLeftLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-left.png")} /></View>
+export const alignCenterLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-center.png")} /></View>
+export const alignRightLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-right.png")} /></View>
+export const listLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/list.png")} /></View>
 
+const wrapper = {
+    padding: 4, 
+    borderRadius: 8
+}
 const common = {
-    fontFamily: "Bold",
-    fontSize: 27,
-    marginTop: -8,
+    width: 30,
+    height: 30
 }

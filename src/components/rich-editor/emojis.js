@@ -12,7 +12,7 @@ export default function Emojis({ setEmoji }) {
                     test.map((item, index) => {
                         return (
                             <TouchableOpacity onPress={() => setEmoji(item)} key={index} style={{ flex: 1 }}>
-                                <Text style={[ui.h4, styles.item]}>{item}</Text>
+                                <Text style={[ui.text, styles.item]}>{item}</Text>
                             </TouchableOpacity>
                         )
                     })

@@ -45,3 +45,16 @@ export const layout = {
         gap: 8
     }
 }
+
+export const editor = {
+    richBar: {
+        width: "100%",
+        backgroundColor: "#ffc4d0",
+    },
+    header: {
+        height: 50,
+        alignItems: "flex-start",
+        paddingHorizontal: 12,
+
+    },
+}
