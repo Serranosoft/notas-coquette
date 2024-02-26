@@ -6,6 +6,7 @@ import GridBackground from "../src/components/grid";
 import HeaderNote from "../src/components/headers/header-note";
 import { boldLabel, h1Label, h2Label, italicLabel, paragraphLabel, test, testLabel, underlineLabel } from "../src/utils/labels";
 import FontSize from "../src/components/rich-editor/font-size";
+import Emojis from "../src/components/rich-editor/emojis";
 
 
 export default function Note() {
@@ -14,11 +15,18 @@ export default function Note() {
 
     const [content, setContent] = useState("");
     const [fontSize, setFontSize] = useState(5);
+    const [emoji, setEmoji] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
+    const [openEmojis, setOpenEmojis] = useState(false);
 
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
     }, [fontSize])
+
+    useEffect(() => {
+        richText.current?.insertText(emoji);
+        setEmoji(null);
+    }, [emoji])
 
 
     return (
@@ -36,6 +44,7 @@ export default function Note() {
                 
             />
             { openFontSize && <FontSize setFontSize={setFontSize} fontSize={fontSize} /> }
+            { openEmojis && <Emojis setEmoji={setEmoji} /> }
 
             <View style={{ flex: 1 }}>
                 <GridBackground />                   
@@ -55,10 +64,11 @@ export default function Note() {
                 editor={richText}
                 selectedIconTint={'#000'}
                 iconTint={"#666666"}
-                actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.insertBulletsList, "fontSize"]}
+                actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.insertBulletsList, "fontSize", "emoji"]}
                 iconSize={35}
-                iconMap={{ [actions.setBold]: boldLabel, [actions.setItalic]: italicLabel, [actions.setUnderline]: underlineLabel }}
+                iconMap={{ [actions.setBold]: boldLabel, [actions.setItalic]: italicLabel, [actions.setUnderline]: underlineLabel, emoji: underlineLabel }}
                 fontSize={() => setOpenFontSize(!openFontSize)}
+                emoji={() => setOpenEmojis(!openEmojis)}
             />
 
         </View>

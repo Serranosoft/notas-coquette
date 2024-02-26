@@ -9,17 +9,13 @@ export default function FontSize({ setFontSize, fontSize }) {
     const [selected, setSelected] = useState(null);
 
     function handleFontSize(size, index) {
-        console.log(size);
         setFontSize(size);
         setSelected(index);
     }
 
     useEffect(() => {
-        console.log(fontSize);
         setSelected(fontSize);
     }, [])
-
-    
 
     return (
         <View style={styles.container}>
