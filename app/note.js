@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
 import HeaderNote from "../src/components/headers/header-note";
 import FontSize from "../src/components/rich-editor/font-size";
-import Emojis from "../src/components/rich-editor/emojis";
 import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
+import Separators from "../src/components/rich-editor/separators";
 
 export default function Note() {
 
@@ -15,18 +15,18 @@ export default function Note() {
 
     const [content, setContent] = useState("");
     const [fontSize, setFontSize] = useState(5);
-    const [emoji, setEmoji] = useState(null);
+    const [separator, setSeparator] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
-    const [openEmojis, setOpenEmojis] = useState(false);
+    const [openSeparators, setOpenSeparators] = useState(false);
 
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
     }, [fontSize])
 
     useEffect(() => {
-        richText.current?.insertText(emoji);
-        setEmoji(null);
-    }, [emoji])
+        richText.current?.insertText(separator);
+        setSeparator(null);
+    }, [separator])
 
 
     return (
@@ -38,12 +38,12 @@ export default function Note() {
                 fontSize={fontSize}
                 setOpenFontSize={setOpenFontSize}
                 openFontSize={openFontSize}
-                openEmojis={openEmojis}
-                setOpenEmojis={setOpenEmojis}
+                openSeparators={openSeparators}
+                setOpenSeparators={setOpenSeparators}
             />
 
             {openFontSize && <FontSize setFontSize={setFontSize} fontSize={fontSize} />}
-            {openEmojis && <Emojis setEmoji={setEmoji} />}
+            {openSeparators && <Separators setSeparator={setSeparator} />}
 
             <View style={{ flex: 1 }}>
                 <GridBackground />

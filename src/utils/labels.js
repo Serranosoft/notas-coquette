@@ -7,7 +7,7 @@ export const alignLeftLabel = ({tintColor}) => <View style={[wrapper, { backgrou
 export const alignCenterLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-center.png")} /></View>
 export const alignRightLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-right.png")} /></View>
 export const listLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/list.png")} /></View>
-
+export const separatorsLabel = ({ openSeparators }) => <View style={[wrapper, { backgroundColor: openSeparators ? "rgba(255, 255, 255, 0.75)": "transparent" }]}><Text style={ { color: "#000", paddingVertical: 4 }}>ʕ•⩊•ʔ</Text></View>
 const wrapper = {
     padding: 4, 
     borderRadius: 8

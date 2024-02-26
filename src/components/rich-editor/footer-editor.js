@@ -14,7 +14,6 @@ export default function FooterEditor({ editorRef }) {
             actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.alignLeft, actions.alignCenter, actions.alignRight, actions.insertBulletsList]}
             iconSize={35}
             iconMap={{ [actions.setBold]: boldLabel, [actions.setItalic]: italicLabel, [actions.setUnderline]: underlineLabel, [actions.insertBulletsList]: listLabel, [actions.alignLeft]: alignLeftLabel, [actions.alignCenter]: alignCenterLabel, [actions.alignRight]: alignRightLabel }}
-            
         />
     )
 }
