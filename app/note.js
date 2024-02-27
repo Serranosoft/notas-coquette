@@ -8,6 +8,7 @@ import FontSize from "../src/components/rich-editor/font-size";
 import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Note() {
 
@@ -28,10 +29,31 @@ export default function Note() {
         setSeparator(null);
     }, [separator])
 
+    // Al pulsar hacia atrás, debe guardarse en el asyncStorage
+    async function saveNote() {
+
+        if (content.length > 0) {
+            let notes = await AsyncStorage.getItem("notes") || [];
+            if (notes.length > 0) {
+                notes = JSON.parse(notes);
+            }
+    
+            const note = {
+                folder: "todos",
+                content: content,
+                date: new Date(),
+            }
+    
+            notes.push(note);
+    
+            const jsonValue = JSON.stringify(notes);
+            await AsyncStorage.setItem("notes", jsonValue);
+        } 
+    }
 
     return (
         <View style={styles.container}>
-            <Stack.Screen options={{ header: () => <HeaderNote /> }} />
+            <Stack.Screen options={{ header: () => <HeaderNote saveNote={saveNote} /> }} />
 
             <HeaderEditor
                 editorRef={richText}

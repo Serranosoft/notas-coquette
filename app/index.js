@@ -1,20 +1,44 @@
 import { Dimensions, FlatList, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Link, Stack } from "expo-router";
+import { Link, Stack, useFocusEffect } from "expo-router";
 import { RichEditor, RichToolbar } from "react-native-pell-rich-editor";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
 import Header from "../src/components/headers/header-home";
 import HeaderHome from "../src/components/headers/header-home";
 import NoteItem from "../src/components/note-item";
 import { ui } from "../src/utils/styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const DATA = [
+/* const DATA = [
     `<div><font size="6">a</font><font size="7">a</font><font size="1">aa</font><font size="2">a</font><font size="4">a</font><font size="5">a</font><font size="6">a</font><font size="7">a</font><font size="1">a</font><font size="2">a</font><font size="3">a</font><font size="4">a</font><font size="5">a</font><font size="6">a</font><font size="7">aa</font></div>`,
     "<div><p>BBB</p></div>",
     "<div><p>CCC</p></div>",
     "<div><p>DDD</p></div>"
-]
+] */
+
 export default function Index() {
+
+
+    const [notes, setNotes] = useState([]);
+
+    useFocusEffect(
+        useCallback(() => {
+            console.log("get notes()");
+            // Do something when the screen is focused
+            getNotes();
+            return () => {};
+        }, [])
+    );
+
+    async function getNotes() {
+        let notes = await AsyncStorage.getItem("notes") || [];
+        if (notes.length > 0) {
+            notes = JSON.parse(notes);
+        }
+
+        setNotes([...notes]);
+    }
+
 
     return (
         <View style={styles.container}>
@@ -29,15 +53,18 @@ export default function Index() {
                 </TouchableOpacity>
             </Link>
 
-            <View style={{ flex: 1 }}>
-                <FlatList
-                    data={DATA}
-                    numColumns={2}
-                    renderItem={({ item, index }) => <NoteItem text={item} />}
-                    contentContainerStyle={{ gap: 16 }}
-                    columnWrapperStyle={{ gap: 16 }}
-                />
-            </View>
+            {
+                notes.length > 0 &&
+                <View style={{ flex: 1 }}>
+                    <FlatList
+                        data={notes}
+                        numColumns={2}
+                        renderItem={(note, index) => <NoteItem note={note.item} />}
+                        contentContainerStyle={{ gap: 16 }}
+                        columnWrapperStyle={{ gap: 16 }}
+                    />
+                </View>
+            }
 
 
         </View>

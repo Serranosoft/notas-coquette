@@ -2,9 +2,10 @@ import { Image, StyleSheet, Text, View, useWindowDimensions } from "react-native
 import GridBackground from "./grid";
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from "react-native-render-html";
 
-export default function NoteItem({ text }) {
+export default function NoteItem({ note }) {
+    console.log(note);
     const { width } = useWindowDimensions();
-    const source = { html: text }
+    const source = { html: note.content }
 
     const customHTMLElementModels = {
         'font': 

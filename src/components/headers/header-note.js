@@ -3,14 +3,18 @@ import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "reac
 import { layout, ui } from "../../utils/styles";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function HeaderNote() {
+export default function HeaderNote({ saveNote }) {
 
     const router = useRouter();
 
+    function back() {
+        saveNote().then(router.back());
+    }
+    
     return (
         <Pressable style={layout.header}>
             <View style={layout.title}>
-                <Pressable onPress={() => router.back()}>
+                <Pressable onPress={back}>
                     <Image style={styles.img} source={require("../../../assets/back.png")} />
                 </Pressable>
                 <Text style={[ui.h4, { color: "#000" }]}>Añadir nota</Text>
