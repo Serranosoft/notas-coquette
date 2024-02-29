@@ -39,6 +39,7 @@ export default function Note() {
             }
     
             const note = {
+                id: notes.length + 1,
                 folder: "todos",
                 content: content,
                 date: new Date(),

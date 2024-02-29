@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, Dimensions, FlatList, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Link, Stack, useFocusEffect } from "expo-router";
 import { RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -20,13 +20,11 @@ export default function Index() {
 
 
     const [notes, setNotes] = useState([]);
+    const [itemsSelected, setItemsSelected] = useState([]);
 
     useFocusEffect(
         useCallback(() => {
-            console.log("get notes()");
-            // Do something when the screen is focused
             getNotes();
-            return () => {};
         }, [])
     );
 
@@ -39,35 +37,47 @@ export default function Index() {
         setNotes([...notes]);
     }
 
+    async function clear() {
+        await AsyncStorage.clear();
+    }
 
     return (
-        <View style={styles.container}>
-            <Stack.Screen options={{ header: () => <HeaderHome /> }} />
+        <>
+            <View style={styles.container}>
+                <Stack.Screen options={{ header: () => <HeaderHome /> }} />
+                <Button onPress={clear} title={"borrar"}></Button>
+                <Link href="/note" asChild>
+                    <TouchableOpacity activeOpacity={0.7}>
+                        <View style={styles.btn}>
+                            <Text style={ui.h3}>+ Añadir nota</Text>
+                            <Image style={styles.img} source={require("../assets/decoration-1.png")} />
+                        </View>
+                    </TouchableOpacity>
+                </Link>
 
-            <Link href="/note" asChild>
-                <TouchableOpacity activeOpacity={0.7}>
-                    <View style={styles.btn}>
-                        <Text style={ui.h3}>+ Añadir nota</Text>
-                        <Image style={styles.img} source={require("../assets/decoration-1.png")} />
+                {
+                    notes.length > 0 &&
+                    <View style={{ flex: 1 }}>
+                        <FlatList
+                            data={notes}
+                            numColumns={2}
+                            renderItem={(note) => <NoteItem note={note.item} itemsSelected={itemsSelected} setItemsSelected={setItemsSelected} />}
+                            contentContainerStyle={{ gap: 16, paddingTop: 16, paddingBottom: 100 }}
+                            columnWrapperStyle={{ gap: 16 }}
+                        />
                     </View>
-                </TouchableOpacity>
-            </Link>
+                }
 
+
+
+            </View>
             {
-                notes.length > 0 &&
-                <View style={{ flex: 1 }}>
-                    <FlatList
-                        data={notes}
-                        numColumns={2}
-                        renderItem={(note, index) => <NoteItem note={note.item} />}
-                        contentContainerStyle={{ gap: 16 }}
-                        columnWrapperStyle={{ gap: 16 }}
-                    />
+                itemsSelected.length > 0 &&
+                <View style={styles.actions}>
+
                 </View>
             }
-
-
-        </View>
+        </>
     )
 }
 
@@ -109,5 +119,21 @@ const styles = StyleSheet.create({
         height: 140,
         transform: [{ rotate: "-15deg" }],
         zIndex: 1
+    },
+
+    actions: {
+        position: "absolute",
+        bottom: 0,
+        left: "50%",
+        marginLeft: -150,
+        width: 300,
+        height: 75,
+        backgroundColor: "rgba(0,0,0,0.8)",
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
+        borderLeftWidth: 3,
+        borderRightWidth: 3,
+        borderTopWidth: 3,
+        borderColor: "#F1F5F4",
     }
 })

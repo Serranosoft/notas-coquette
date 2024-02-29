@@ -7,8 +7,9 @@ export default function HeaderNote({ saveNote }) {
 
     const router = useRouter();
 
-    function back() {
-        saveNote().then(router.back());
+    async function back() {
+        await saveNote();
+        router.back();
     }
     
     return (
