@@ -42,11 +42,15 @@ export default function Note() {
                 notes = JSON.parse(notes);
             }
 
-            if (note) {
+            const isEdit = note.content;
+            if (isEdit) {
                 editNote(notes);
             } else {
                 newNote(notes);
             }
+
+            const jsonValue = JSON.stringify(notes);
+            await AsyncStorage.setItem("notes", jsonValue);
         }
     }
 
@@ -59,13 +63,10 @@ export default function Note() {
         }
 
         notes.push(newNote);
-
-        const jsonValue = JSON.stringify(notes);
-        await AsyncStorage.setItem("notes", jsonValue);
     }
 
     function editNote(notes) {
-        
+        notes.find((oldNote) => oldNote.id === note.id).content = content;
     }
 
 
@@ -95,7 +96,7 @@ export default function Note() {
                     placeholder="Escribe tu nota..."
                     onChange={(content) => setContent(content)}
                     editorStyle={{ backgroundColor: "transparent", contentCSSText: `font-size: 24px` }}
-                    initialContentHTML={note.content.length > 0 && note.content}
+                    initialContentHTML={note.content && note.content}
                 />
             </View>
 
