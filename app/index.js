@@ -1,20 +1,13 @@
-import { Button, Dimensions, FlatList, Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Link, Stack, useFocusEffect } from "expo-router";
-import { RichEditor, RichToolbar } from "react-native-pell-rich-editor";
-import { useCallback, useEffect, useRef, useState } from "react";
-import GridBackground from "../src/components/grid";
-import Header from "../src/components/headers/header-home";
+import { useCallback, useEffect, useState } from "react";
 import HeaderHome from "../src/components/headers/header-home";
 import NoteItem from "../src/components/note-item";
-import { ui } from "../src/utils/styles";
+import { colors, ui } from "../src/utils/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Actions from "../src/components/actions";
+import HomeButton from "../src/components/home-button";
 
-/* const DATA = [
-    `<div><font size="6">a</font><font size="7">a</font><font size="1">aa</font><font size="2">a</font><font size="4">a</font><font size="5">a</font><font size="6">a</font><font size="7">a</font><font size="1">a</font><font size="2">a</font><font size="3">a</font><font size="4">a</font><font size="5">a</font><font size="6">a</font><font size="7">aa</font></div>`,
-    "<div><p>BBB</p></div>",
-    "<div><p>CCC</p></div>",
-    "<div><p>DDD</p></div>"
-] */
 
 export default function Index() {
 
@@ -37,23 +30,12 @@ export default function Index() {
         setNotes([...notes]);
     }
 
-    async function clear() {
-        await AsyncStorage.clear();
-    }
-
     return (
         <>
             <View style={styles.container}>
                 <Stack.Screen options={{ header: () => <HeaderHome /> }} />
-                <Button onPress={clear} title={"borrar"}></Button>
-                <Link href="/note" asChild>
-                    <TouchableOpacity activeOpacity={0.7}>
-                        <View style={styles.btn}>
-                            <Text style={ui.h3}>+ Añadir nota</Text>
-                            <Image style={styles.img} source={require("../assets/decoration-1.png")} />
-                        </View>
-                    </TouchableOpacity>
-                </Link>
+
+                <HomeButton />
 
                 {
                     notes.length > 0 &&
@@ -68,15 +50,9 @@ export default function Index() {
                     </View>
                 }
 
-
-
             </View>
-            {
-                itemsSelected.length > 0 &&
-                <View style={styles.actions}>
 
-                </View>
-            }
+            {itemsSelected.length > 0 && <Actions itemsSelected={itemsSelected} setNotes={setNotes} setItemsSelected={setItemsSelected} />}
         </>
     )
 }
@@ -88,52 +64,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
 
-    btn: {
-        position: "relative",
-        backgroundColor: "#EBBAB9",
-        padding: 8,
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 60,
-        marginBottom: 40,
-        borderWidth: 3,
-        borderColor: "#F1F5F4",
-        borderRadius: 6,
 
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
 
-    img: {
-        position: "absolute",
-        top: -75,
-        left: 0,
-        width: 140,
-        height: 140,
-        transform: [{ rotate: "-15deg" }],
-        zIndex: 1
-    },
 
-    actions: {
-        position: "absolute",
-        bottom: 0,
-        left: "50%",
-        marginLeft: -150,
-        width: 300,
-        height: 75,
-        backgroundColor: "rgba(0,0,0,0.8)",
-        borderTopLeftRadius: 16,
-        borderTopRightRadius: 16,
-        borderLeftWidth: 3,
-        borderRightWidth: 3,
-        borderTopWidth: 3,
-        borderColor: "#F1F5F4",
-    }
 })

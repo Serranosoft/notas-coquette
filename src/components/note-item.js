@@ -1,7 +1,9 @@
-import { StyleSheet, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import GridBackground from "./grid";
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from "react-native-render-html";
 import React, { useState } from "react";
+import { Path, Svg } from "react-native-svg";
+import { colors, ui } from "../utils/styles";
 
 function NoteItem({ note, itemsSelected, setItemsSelected }) {
 
@@ -35,13 +37,28 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
     return (
         <TouchableOpacity style={[styles.container, selected && styles.selected]} onLongPress={highlight} onPress={itemsSelected.length > 0 ? highlight : unhighlight}>
             <GridBackground />
-            <View style={{ paddingHorizontal: 16 }}>
-                <RenderHTML
-                    contentWidth={width}
-                    source={source}
-                    customHTMLElementModels={customHTMLElementModels}
-                />
+            <View>
+                <View style={styles.header}>
+                    <Text style={ui.text}>{note.date}</Text>
+                </View>
+                <View style={styles.htmlPadding}>
+                    <RenderHTML
+                        contentWidth={width}
+                        source={source}
+                        customHTMLElementModels={customHTMLElementModels}
+                    />
+                </View>
             </View>
+            {
+                itemsSelected.length > 0 &&
+                <View style={styles.selectedBox}>
+                    {selected &&
+                        <Svg width={32} height={32} viewBox="0 0 40 40">
+                            <Path d="M15.48 28.62a1 1 0 01-.71-.29l-7.54-7.54a1 1 0 010-1.41 1 1 0 011.42 0l6.83 6.83L32.12 9.57a1 1 0 011.41 0 1 1 0 010 1.42L16.18 28.33a1 1 0 01-.7.29z" />
+                        </Svg>
+                    }
+                </View>
+            }
         </TouchableOpacity>
     )
 }
@@ -50,14 +67,35 @@ export default NoteItem;
 
 const styles = StyleSheet.create({
     container: {
-        height: 150,
-        width: "100%",
-        flex: 1,
+        height: 175,
+        flex: 1 / 2,
         backgroundColor: "#fff",
+        position: "relative",
+        borderWidth: 2,
+        borderColor: "#fff",
+        elevation: 5,
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: colors.button,
+        paddingHorizontal: 12,
+    },
+    htmlPadding: {
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+    },
+    selectedBox: {
+        width: 30,
+        height: 30,
+        borderWidth: 1,
+        borderRadius: 100,
+        position: "absolute",
+        right: 10,
+        bottom: 10,
     },
     selected: {
-        backgroundColor: "rgba(235, 186, 185,0.55)",
-        borderWidth: 3,
-        borderColor: "#F1F5F4",
-    }
+        backgroundColor: colors.selected,
+        elevation: 0,
+    },
 })

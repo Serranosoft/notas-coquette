@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { Stack } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
 import { useEffect, useRef, useState } from "react";
@@ -9,6 +9,7 @@ import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from 'react-native-uuid';
 
 export default function Note() {
 
@@ -39,10 +40,10 @@ export default function Note() {
             }
     
             const note = {
-                id: notes.length + 1,
+                id: uuid.v4(),
                 folder: "todos",
                 content: content,
-                date: new Date(),
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
             }
     
             notes.push(note);

@@ -2,7 +2,7 @@ export const ui = {
     text: {
         fontFamily: "Regular",
         color: "black",
-        fontSize: 16.5,
+        fontSize: 15,
     },
     h1: {
         fontSize: 60,
@@ -55,6 +55,11 @@ export const editor = {
         height: 50,
         alignItems: "flex-start",
         paddingHorizontal: 12,
-
     },
+}
+
+export const colors = {
+    button: "#EBBAB9",
+    selected: "rgba(191,165,164,0.5)"
+    
 }
