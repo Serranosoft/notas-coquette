@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, View } from "react-native";
-import { Stack } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
 import { useEffect, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
@@ -12,6 +12,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
 
 export default function Note() {
+
+    const note = useLocalSearchParams();
 
     const richText = useRef(null);
 
@@ -34,24 +36,39 @@ export default function Note() {
     async function saveNote() {
 
         if (content.length > 0) {
+
             let notes = await AsyncStorage.getItem("notes") || [];
             if (notes.length > 0) {
                 notes = JSON.parse(notes);
             }
-    
-            const note = {
-                id: uuid.v4(),
-                folder: "todos",
-                content: content,
-                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
+
+            if (note) {
+                editNote(notes);
+            } else {
+                newNote(notes);
             }
-    
-            notes.push(note);
-    
-            const jsonValue = JSON.stringify(notes);
-            await AsyncStorage.setItem("notes", jsonValue);
-        } 
+        }
     }
+
+    async function newNote(notes) {
+        const newNote = {
+            id: uuid.v4(),
+            folder: "todos",
+            content: content,
+            date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
+        }
+
+        notes.push(newNote);
+
+        const jsonValue = JSON.stringify(notes);
+        await AsyncStorage.setItem("notes", jsonValue);
+    }
+
+    function editNote(notes) {
+        
+    }
+
+
 
     return (
         <View style={styles.container}>
@@ -78,6 +95,7 @@ export default function Note() {
                     placeholder="Escribe tu nota..."
                     onChange={(content) => setContent(content)}
                     editorStyle={{ backgroundColor: "transparent", contentCSSText: `font-size: 24px` }}
+                    initialContentHTML={note.content.length > 0 && note.content}
                 />
             </View>
 

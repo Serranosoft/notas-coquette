@@ -4,6 +4,7 @@ import RenderHTML, { HTMLContentModel, HTMLElementModel } from "react-native-ren
 import React, { useState } from "react";
 import { Path, Svg } from "react-native-svg";
 import { colors, ui } from "../utils/styles";
+import { router } from "expo-router";
 
 function NoteItem({ note, itemsSelected, setItemsSelected }) {
 
@@ -34,8 +35,19 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
         }
     }
 
+    function onPress() {
+        if (itemsSelected.length > 0) {
+            // Hace highlight o unhighlight, depende.
+            highlight();
+        } else {
+            // Accede a la nota.
+            router.push({ pathname : "/note", params: note});
+            unhighlight();
+        }
+    }
+
     return (
-        <TouchableOpacity style={[styles.container, selected && styles.selected]} onLongPress={highlight} onPress={itemsSelected.length > 0 ? highlight : unhighlight}>
+        <TouchableOpacity style={[styles.container, selected && styles.selected]} onLongPress={highlight} onPress={onPress}>
             <GridBackground />
             <View>
                 <View style={styles.header}>
