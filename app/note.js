@@ -23,6 +23,8 @@ export default function Note() {
     const [openFontSize, setOpenFontSize] = useState(false);
     const [openSeparators, setOpenSeparators] = useState(false);
 
+    const [hasSaved, setHasSaved] = useState(false); // Flag para saber si ya ha guardado alguna vez una nota para editarla o no
+
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
     }, [fontSize])
@@ -42,9 +44,17 @@ export default function Note() {
                 notes = JSON.parse(notes);
             }
 
-            const isEdit = note.content;
+            const isEdit = note.content || hasSaved;
+
+            // Si es una nota nueva, debe entrar en newNote, pero si es una nota nueva, y le da a guardar mas de una vez, entonces
+            // debe entrar en isEdit para que no cree una nota nueva constantemente.
+            // Para ello, notifico desde el guardar un hasSaved para que sepa que debe entrar en isEdit.
+            // Ya que el note.content seguirá siendo vacío ya que el primer note que recibe al entrar está vacio (era una nota nueva).
+            // Si no encuentra un id en el note, pero aún así entra en isEdit, comprueba si en el storage existe un content igual al
+            // content que se está editando ahora mismo y obtiene su id para que actualice la nota correctamente
             if (isEdit) {
-                editNote(notes);
+                const id = note.id ? note.id : notes.find(oldNote => oldNote.content == content).id;
+                editNote(notes, id);
             } else {
                 newNote(notes);
             }
@@ -65,15 +75,15 @@ export default function Note() {
         notes.push(newNote);
     }
 
-    function editNote(notes) {
-        notes.find((oldNote) => oldNote.id === note.id).content = content;
+    function editNote(notes, id) {
+        notes.find((oldNote) => oldNote.id === id).content = content;
     }
-
-
 
     return (
         <View style={styles.container}>
-            <Stack.Screen options={{ header: () => <HeaderNote saveNote={saveNote} isEdit={note.content} /> }} />
+            <Stack.Screen options={{
+                header: () => <HeaderNote saveNote={saveNote} isEdit={note.content} setHasSaved={setHasSaved} richEditorRef={richText} />
+            }} />
 
             <HeaderEditor
                 editorRef={richText}
