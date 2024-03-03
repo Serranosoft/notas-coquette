@@ -63,17 +63,6 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
 
 const styles = StyleSheet.create({
 
-    info: {
-        position: "absolute",
-        top: 32,
-        right: 10,
-        backgroundColor: "#fff",
-        padding: 4,
-        width: 160,
-        borderWidth: 1,
-        borderColor: "#e1e1e1"
-    },
-
     img: {
         width: 30,
         height: 30,

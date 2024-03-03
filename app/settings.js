@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import { colors } from "../src/utils/styles";
 
 export default function Settings() {
 
@@ -13,7 +14,7 @@ export default function Settings() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffc4d0",
+        backgroundColor: colors.light,
         paddingHorizontal: 16,
     },
 })

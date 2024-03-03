@@ -84,16 +84,15 @@ const styles = StyleSheet.create({
         flex: 1 / 2,
         backgroundColor: "#fff",
         position: "relative",
-        borderWidth: 2,
-        borderColor: "#fff",
         elevation: 5,
-        overflow: "hidden"
+        overflow: "hidden",
     },
     header: {
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: colors.button,
-        paddingHorizontal: 12,
+        paddingHorizontal: 8,
+        paddingVertical: 2,
     },
     htmlPadding: {
         paddingHorizontal: 8,

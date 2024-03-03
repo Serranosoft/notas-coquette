@@ -1,41 +1,49 @@
+export const colors = {
+    button: "#e62272",
+    selected: "rgba(191,165,164,0.5)",
+    light: "#FACCD6",
+    dark: "#e62272"
+    
+}
+
 export const ui = {
     text: {
-        fontFamily: "Regular",
-        color: "black",
-        fontSize: 15,
+        fontFamily: "aroma",
+        color: "#fff",
+        fontSize: 16.5,
     },
     h1: {
         fontSize: 60,
-        fontFamily: "Semibold",
+        fontFamily: "aroma",
         lineHeight: 65,
     },
     h2: {
-        fontFamily: "Bold",
-        color: "#fa98ab",
-        fontSize: 27,
+        fontFamily: "aroma",
+        color: "#fff",
+        fontSize: 35,
         textAlign: "center"
     },
     h3: {
-        fontFamily: "Medium",
-        color: "black",
-        fontSize: 23,
+        fontFamily: "aroma",
+        color: "#fff",
+        fontSize: 31,
     },
     h4: {
-        fontFamily: "Semibold",
-        color: "black",
-        fontSize: 19,
+        fontFamily: "aroma",
+        color: "#fff",
+        fontSize: 24,
     },
 }
 
 export const layout = {
     header: {
-        backgroundColor: "#ffc4d0",
+        backgroundColor: colors.light,
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         gap: 8,
-        paddingHorizontal: 16,
+        paddingHorizontal: 8,
         paddingVertical: 12
     },
 
@@ -49,7 +57,7 @@ export const layout = {
 export const editor = {
     richBar: {
         width: "100%",
-        backgroundColor: "#ffc4d0",
+        backgroundColor: colors.light
     },
     header: {
         height: 50,
@@ -58,8 +66,3 @@ export const editor = {
     },
 }
 
-export const colors = {
-    button: "#EBBAB9",
-    selected: "rgba(191,165,164,0.5)"
-    
-}

@@ -69,7 +69,7 @@ export default function Note() {
             id: uuid.v4(),
             folder: "todos",
             content: content,
-            date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
+            date: new Date().toLocaleDateString(),
         }
 
         notes.push(newNote);

@@ -8,7 +8,7 @@ export default function HomeButton() {
         <Link href="/note" asChild>
             <TouchableOpacity activeOpacity={0.7}>
                 <View style={styles.btn}>
-                    <Text style={ui.h3}>+ Añadir nota</Text>
+                    <Text style={ui.h3}>Añadir nota</Text>
                     <Image style={styles.img} source={require("../../assets/decoration-1.png")} />
                 </View>
             </TouchableOpacity>
@@ -26,10 +26,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 60,
         marginBottom: 40,
-        borderWidth: 3,
-        borderColor: "#F1F5F4",
         borderRadius: 6,
-
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -43,7 +40,7 @@ const styles = StyleSheet.create({
     img: {
         position: "absolute",
         top: -75,
-        left: 0,
+        left: -10,
         width: 140,
         height: 140,
         transform: [{ rotate: "-15deg" }],

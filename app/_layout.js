@@ -2,16 +2,14 @@ import { SplashScreen, Stack } from "expo-router";
 import { View, StatusBar, StyleSheet } from "react-native";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
+import { colors } from "../src/utils/styles";
 
 SplashScreen.preventAutoHideAsync();
 export default function Layout() {
 
     // Carga de fuentes.
     const [fontsLoaded] = useFonts({
-        "Regular": require("../assets/fonts/Mali-Regular.ttf"),
-        "Medium": require("../assets/fonts/Mali-Medium.ttf"),
-        "Semibold": require("../assets/fonts/Mali-Semibold.ttf"),
-        "Bold": require("../assets/fonts/Mali-Bold.ttf"),
+        "aroma": require("../assets/fonts/Aroma.ttf")
     });
 
     useEffect(() => {
@@ -37,7 +35,8 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        marginTop: StatusBar.currentHeight,
+        paddingTop: StatusBar.currentHeight,
+        backgroundColor: colors.light
     },
     wrapper: {
         flex: 1,

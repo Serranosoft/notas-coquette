@@ -51,10 +51,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.selected,
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
-        borderLeftWidth: 3,
-        borderRightWidth: 3,
-        borderTopWidth: 3,
-        borderColor: "#F1F5F4",
     },
 
     position: {

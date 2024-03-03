@@ -28,9 +28,10 @@ const styles = StyleSheet.create({
     },
     
     item: {
-        paddingHorizontal: 8,
+        paddingHorizontal: 12,
         textAlign: "center",
-        paddingVertical: 4,
-        borderWidth: 2,
+        paddingVertical: 6,
+        borderWidth: 1,
+        color: "#000"
     },
 })

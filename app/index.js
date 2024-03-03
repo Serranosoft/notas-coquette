@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "../src/components/actions";
 import HomeButton from "../src/components/home-button";
 import Animated, { ZoomInEasyUp, ZoomOutEasyUp } from 'react-native-reanimated';
+import { colors } from "../src/utils/styles";
 
 
 export default function Index() {
@@ -77,11 +78,7 @@ export default function Index() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffc4d0",
+        backgroundColor: colors.light,
         paddingHorizontal: 16,
     },
-
-
-
-
 })

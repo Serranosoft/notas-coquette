@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     item: {
         paddingVertical: 8,
         paddingHorizontal: 8,
-        textAlign: "center"
+        textAlign: "center",
+        color: "#000"
     },
 
     selected: {
@@ -69,7 +70,5 @@ const styles = StyleSheet.create({
 
     sizeList: {
         flexDirection: "row",
-        // gap: 24,
-        // backgroundColor: "red"
     }
 })
