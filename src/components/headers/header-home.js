@@ -3,6 +3,7 @@ import { layout, ui } from "../../utils/styles";
 import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import { useState } from "react";
 import { router } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -12,13 +13,18 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
     const hideMenu = () => setVisible(false);
     const showMenu = () => setVisible(true);
 
-    function changeLayout() {
+    async function changeLayout() {
+        let grid = columnNumber;
         if (columnNumber > 2) {
-            setColumnNumber(1);
+            grid = 1;
         } else {
-            setColumnNumber((columnNumber) => columnNumber + 1)
+            grid = columnNumber + 1;
         }
+
+        setColumnNumber(grid);
         hideMenu();
+
+        await AsyncStorage.setItem("grid", grid.toString());
     }
     return (
         <Pressable style={layout.header}>

@@ -1,13 +1,13 @@
-import { Button, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Link, Stack, useFocusEffect } from "expo-router";
+import { FlatList, StyleSheet, View } from "react-native";
+import { Stack, useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import HeaderHome from "../src/components/headers/header-home";
 import NoteItem from "../src/components/note-item";
-import { colors, ui } from "../src/utils/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "../src/components/actions";
 import HomeButton from "../src/components/home-button";
-import Animated, { ZoomInEasyUp, ZoomInRotate, ZoomOutEasyUp, ZoomOutRotate } from 'react-native-reanimated';
+import Animated, { ZoomInEasyUp, ZoomOutEasyUp } from 'react-native-reanimated';
+
 
 export default function Index() {
 
@@ -28,6 +28,18 @@ export default function Index() {
             notes = JSON.parse(notes);
         }
         setNotes([...notes]);
+    }
+
+    useEffect(() => {
+        // 1. Obtener configuración del layout seleccionado
+        getGridLayout();
+    }, [])
+
+    async function getGridLayout() {
+        const grid = await AsyncStorage.getItem("grid");
+        if (grid !== null) {
+            setColumnNumber(parseInt(grid));
+        }
     }
 
     return (
