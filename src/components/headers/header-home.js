@@ -1,26 +1,55 @@
-import { Link, useRouter } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Keyboard, Pressable, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { layout, ui } from "../../utils/styles";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
+import { useState } from "react";
+import { router } from "expo-router";
 
-export default function HeaderHome() {
 
+
+export default function HeaderHome({ setColumnNumber, columnNumber }) {
+
+    const [visible, setVisible] = useState(false);
+    const hideMenu = () => setVisible(false);
+    const showMenu = () => setVisible(true);
+
+    function changeLayout() {
+        if (columnNumber > 2) {
+            setColumnNumber(1);
+        } else {
+            setColumnNumber((columnNumber) => columnNumber + 1)
+        }
+        hideMenu();
+    }
     return (
         <Pressable style={layout.header}>
             <View style={layout.title}>
-                <Image style={{ width: 50, height: 50 }} source={require("../../../assets/logo.png")} />
+                <Image style={styles.img} source={require("../../../assets/logo.png")} />
                 <Text style={[ui.h4, { color: "#000" }]}>Notas Coquette</Text>
             </View>
 
             <View>
-                <Ionicons name="ellipsis-vertical" size={28} color="#000" /* onPress={() => setOpen(!open)} *//>
-                {/* <View style={[styles.info, { display: open ? "flex" : "none"}]}>
-                    <Link href="/" asChild style={{ paddingVertical: 8 }}>
-                        <TouchableOpacity>
-                            <Text style={[ui.text, { textAlign: "center", fontFamily: "Bold" }]}>Mis Favoritos 🏹</Text>
-                        </TouchableOpacity>
-                    </Link>
-                </View> */}
+
+                <Menu
+                    visible={visible}
+                    onRequestClose={hideMenu}
+                    anchor={(
+                        <TouchableWithoutFeedback onPress={showMenu}>
+                            <Image source={require("../../../assets/more.png")} style={styles.img} />
+                        </TouchableWithoutFeedback>
+                    )}>
+                    <MenuItem onPress={changeLayout}>
+                        <View style={styles.row}>
+                            <Image style={styles.icon} source={require("../../../assets/grid.png")} />
+                            <Text>Cambiar cuadricula</Text>
+                        </View>
+                    </MenuItem>
+                    <MenuItem onPress={() => router.push("settings")}>
+                        <View style={styles.row}>
+                            <Image style={styles.icon} source={require("../../../assets/settings.png")} />
+                            <Text>Configuración</Text>
+                        </View>
+                    </MenuItem>
+                </Menu>
             </View>
         </Pressable>
     )
@@ -42,5 +71,15 @@ const styles = StyleSheet.create({
     img: {
         width: 30,
         height: 30,
+    },
+
+    row: {
+        flexDirection: "row",
+        gap: 6
+    },
+
+    icon: {
+        width: 20,
+        height: 20
     }
 })

@@ -41,12 +41,13 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
             highlight();
         } else {
             // Accede a la nota.
-            router.push({ pathname : "/note", params: note});
+            router.push({ pathname: "/note", params: note });
             unhighlight();
         }
     }
 
     return (
+
         <TouchableOpacity style={[styles.container, selected && styles.selected]} onLongPress={highlight} onPress={onPress}>
             <GridBackground />
             <View>

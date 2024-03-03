@@ -7,13 +7,14 @@ import { colors, ui } from "../src/utils/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "../src/components/actions";
 import HomeButton from "../src/components/home-button";
-
+import Animated, { ZoomInEasyUp, ZoomInRotate, ZoomOutEasyUp, ZoomOutRotate } from 'react-native-reanimated';
 
 export default function Index() {
 
 
     const [notes, setNotes] = useState([]);
     const [itemsSelected, setItemsSelected] = useState([]);
+    const [columnNumber, setColumnNumber] = useState(2);
 
     useFocusEffect(
         useCallback(() => {
@@ -26,14 +27,13 @@ export default function Index() {
         if (notes.length > 0) {
             notes = JSON.parse(notes);
         }
-
         setNotes([...notes]);
     }
 
     return (
         <>
             <View style={styles.container}>
-                <Stack.Screen options={{ header: () => <HeaderHome /> }} />
+                <Stack.Screen options={{ header: () => <HeaderHome setColumnNumber={setColumnNumber} columnNumber={columnNumber} /> }} />
 
                 <HomeButton />
 
@@ -41,11 +41,16 @@ export default function Index() {
                     notes.length > 0 &&
                     <View style={{ flex: 1 }}>
                         <FlatList
+                            key={columnNumber}
+                            numColumns={columnNumber}
                             data={notes}
-                            numColumns={2}
-                            renderItem={(note) => <NoteItem note={note.item} itemsSelected={itemsSelected} setItemsSelected={setItemsSelected} />}
-                            contentContainerStyle={{ gap: 16, paddingTop: 16, paddingBottom: 100 }}
-                            columnWrapperStyle={{ gap: 16 }}
+                            renderItem={(note) =>
+                                <Animated.View style={{ flex: 1 / 2 }} entering={ZoomInEasyUp.duration(2000)} exiting={ZoomOutEasyUp.duration(2000)}>
+                                    <NoteItem note={note.item} itemsSelected={itemsSelected} setItemsSelected={setItemsSelected} />
+                                </Animated.View>
+                            }
+                            contentContainerStyle={{ gap: 12, paddingTop: 16, paddingBottom: 100 }}
+                            columnWrapperStyle={columnNumber > 1 && { gap: 12 }}
                         />
                     </View>
                 }
