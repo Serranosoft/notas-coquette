@@ -1,5 +1,5 @@
-import { Link, useRouter } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { layout, ui } from "../../utils/styles";
 import Ionicons from '@expo/vector-icons/Ionicons';
 

@@ -1,6 +1,6 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, ui } from "../../utils/styles";
-import { separatorsLabel } from "../../utils/labels";
+import { redoLabel, separatorsLabel, undoLabel } from "../../utils/labels";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { SIZES } from "./font-size";
 
@@ -22,7 +22,7 @@ export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSepara
             selectedIconTint={"red"}
             actions={[actions.undo, actions.redo, "separator", "fontSize"]}
             iconSize={35}
-            iconMap={{ separator: () => separatorsLabel({ openSeparators }), fontSize: () => fontSizeLabel({ openFontSize, fontSize }) }}
+            iconMap={{ [actions.undo]: undoLabel, [actions.redo]: redoLabel, separator: () => separatorsLabel({ openSeparators }), fontSize: () => fontSizeLabel({ openFontSize, fontSize }) }}
             fontSize={() => setOpenFontSize(!openFontSize)}
             separator={() => setOpenSeparators(!openSeparators)}
         />

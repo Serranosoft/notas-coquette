@@ -8,6 +8,9 @@ export const alignCenterLabel = ({tintColor}) => <View style={[wrapper, { backgr
 export const alignRightLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-right.png")} /></View>
 export const listLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/list.png")} /></View>
 export const separatorsLabel = ({ openSeparators }) => <View style={[wrapper, { backgroundColor: openSeparators ? "rgba(255, 255, 255, 0.75)": "transparent" }]}><Text style={ { color: "#000", paddingVertical: 4 }}>ʕ•⩊•ʔ</Text></View>
+export const undoLabel = () => <View style={[wrapper]}><Image style={common} source={require("../../assets/undo.png")} /></View>
+export const redoLabel = () => <View style={[wrapper]}><Image style={common} source={require("../../assets/redo.png")} /></View>
+
 const wrapper = {
     padding: 4, 
     borderRadius: 8
