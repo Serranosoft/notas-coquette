@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "#fff",
         elevation: 5,
+        overflow: "hidden"
     },
     header: {
         flexDirection: "row",
