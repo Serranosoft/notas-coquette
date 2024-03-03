@@ -3,7 +3,7 @@ import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "reac
 import { layout, ui } from "../../utils/styles";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function HeaderNote({ saveNote }) {
+export default function HeaderNote({ saveNote, isEdit }) {
 
     const router = useRouter();
 
@@ -18,7 +18,7 @@ export default function HeaderNote({ saveNote }) {
                 <Pressable onPress={back}>
                     <Image style={styles.img} source={require("../../../assets/back.png")} />
                 </Pressable>
-                <Text style={[ui.h4, { color: "#000" }]}>Añadir nota</Text>
+                <Text style={[ui.h4, { color: "#000" }]}>{isEdit ? "Editar nota" : "Añadir nota"}</Text>
             </View>
 
             <View>

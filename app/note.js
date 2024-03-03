@@ -73,7 +73,7 @@ export default function Note() {
 
     return (
         <View style={styles.container}>
-            <Stack.Screen options={{ header: () => <HeaderNote saveNote={saveNote} /> }} />
+            <Stack.Screen options={{ header: () => <HeaderNote saveNote={saveNote} isEdit={note.content} /> }} />
 
             <HeaderEditor
                 editorRef={richText}
