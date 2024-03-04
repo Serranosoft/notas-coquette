@@ -49,6 +49,7 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
                             <Text>Cambiar cuadricula</Text>
                         </View>
                     </MenuItem>
+                    <MenuDivider />
                     <MenuItem onPress={() => router.push("settings")}>
                         <View style={styles.row}>
                             <Image style={styles.icon} source={require("../../../assets/settings.png")} />

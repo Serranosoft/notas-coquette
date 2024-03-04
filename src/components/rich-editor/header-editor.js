@@ -12,11 +12,11 @@ const fontSizeLabel = ({ openFontSize, fontSize }) =>
     </View>
 );
 
-export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, fontSize }) {
+export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, fontSize, hide }) {
 
     return (
         <RichToolbar
-            style={[editor.richBar, editor.header, { alignItems: "flex-end" }]}
+            style={[editor.richBar, editor.header, { alignItems: "flex-end", height: hide ? 0 : "auto" }]}
             flatContainerStyle={{ paddingHorizontal: 12 }}
             editor={editorRef}
             selectedIconTint={"red"}

@@ -1,6 +1,6 @@
 import { FlatList, Image, StyleSheet, Switch, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { colors, ui } from "../src/utils/styles";
-import { Stack } from "expo-router";
+import { Stack, router, useLocalSearchParams } from "expo-router";
 import HeaderSettings from "../src/components/headers/header-settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import GridBackground from "../src/components/grid";
@@ -25,6 +25,7 @@ export default function Settings() {
     
     const [autoSave, setAutoSave] = useState(true);
     const [typo, setTypo] = useState(null);
+    const [forceHome, setForceHome] = useState(false);
 
     useEffect(() => {
         getData();
@@ -32,6 +33,7 @@ export default function Settings() {
 
     async function updateTypo(typo) {
         setTypo(typo);
+        setForceHome(true);
         await AsyncStorage.setItem("font", typo);
         ToastAndroid.showWithGravityAndOffset("Tipografía guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
     }
@@ -46,7 +48,6 @@ export default function Settings() {
     async function getData() {
         const font = await AsyncStorage.getItem("font");
         const autosave = await AsyncStorage.getItem("autosave");
-        console.log(font);
         if (font) {
             setTypo(font);
         }
@@ -57,7 +58,7 @@ export default function Settings() {
 
     return (
         <>
-            <Stack.Screen options={{ header: () => <HeaderSettings /> }} />
+            <Stack.Screen options={{ header: () => <HeaderSettings forceHome={forceHome} /> }} />
             <View style={styles.container}>
                 {
                     /* 
@@ -79,6 +80,7 @@ export default function Settings() {
                             </TouchableOpacity>
                         )}
                     />
+                    <Text style={ui.muted}>Al cambiar de tipografía se le enviará a la pantalla de inicio para cargar la nueva fuente</Text>
 
                 </View>
                 <View style={styles.box}>

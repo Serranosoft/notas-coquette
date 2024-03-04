@@ -1,9 +1,8 @@
 import { useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, ToastAndroid, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { layout, ui } from "../../utils/styles";
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
-import Menu, { MenuItem } from "react-native-material-menu";
+import { Menu, MenuDivider, MenuItem } from 'react-native-material-menu';
 
 export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRef, setReadingMode, readingMode, autoSave }) {
 
@@ -26,6 +25,11 @@ export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRe
         ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
     }
 
+    function updateReadingMode() {
+        setReadingMode(!readingMode);
+        hideMenu();
+    }
+
 
     return (
         <View style={layout.header}>
@@ -36,30 +40,38 @@ export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRe
                 <Text style={[ui.h4, { color: "#000" }]}>{isEdit ? "Editar nota" : "Añadir nota"}</Text>
             </View>
 
+
             <View style={styles.row}>
                 <TouchableOpacity onPress={save}>
                     <Image style={styles.img} source={require("../../../assets/save.png")}></Image>
                 </TouchableOpacity>
+                <View>
+
+                    <Menu
+                        visible={visible}
+                        onRequestClose={hideMenu}
+                        anchor={(
+                            <TouchableWithoutFeedback onPress={showMenu}>
+                                <Image source={require("../../../assets/more.png")} style={styles.img} />
+                            </TouchableWithoutFeedback>
+                        )}>
+                        <MenuItem onPress={updateReadingMode}>
+                            <View style={styles.row}>
+                                <Image style={styles.icon} source={require("../../../assets/read.png")} />
+                                <Text>{readingMode ? "Modo edición" : "Modo lectura"}</Text>
+                            </View>
+                        </MenuItem>
+                        <MenuDivider />
+                        <MenuItem onPress={() => router.push({ pathname: "settings", params: true })}>
+                            <View style={styles.row}>
+                                <Image style={styles.icon} source={require("../../../assets/settings.png")} />
+                                <Text>Configuración</Text>
+                            </View>
+                        </MenuItem>
+                    </Menu>
+                </View>
             </View>
 
-            {/* <View>
-
-                <Menu
-                    visible={visible}
-                    onRequestClose={hideMenu}
-                    anchor={(
-                        <TouchableWithoutFeedback onPress={showMenu}>
-                            <Image source={require("../../../assets/more.png")} style={styles.img} />
-                        </TouchableWithoutFeedback>
-                    )}>
-                    <MenuItem onPress={() => setReadingMode(!readingMode)}>
-                        <View style={styles.row}>
-                            <Image style={styles.icon} source={require("../../../assets/read.png")} />
-                            <Text>{readingMode ? "Modo edición" : "Modo lectura"}</Text>
-                        </View>
-                    </MenuItem>
-                </Menu>
-            </View> */}
         </View>
     )
 }
@@ -76,4 +88,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 12
     },
+
+    icon: {
+        width: 20,
+        height: 20
+    }
 })

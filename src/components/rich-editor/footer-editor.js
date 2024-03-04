@@ -2,11 +2,11 @@ import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, ui } from "../../utils/styles";
 import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, italicLabel, listLabel, underlineLabel } from "../../utils/labels";
 
-export default function FooterEditor({ editorRef }) {
+export default function FooterEditor({ editorRef, hide }) {
 
     return (
         <RichToolbar
-            style={[editor.richBar, editor.footer]}
+            style={[editor.richBar, editor.footer, { height: hide ? 0 : "auto" }]}
             flatContainerStyle={{ paddingHorizontal: 12}}
             editor={editorRef}
             selectedIconTint={"rgba(255, 255, 255, 0.75)"}

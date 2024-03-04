@@ -1,7 +1,7 @@
-import { Dimensions, StyleSheet, View } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Stack, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
-import { useEffect, useRef, useState } from "react";
+import { createRef, useEffect, useReducer, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
 import HeaderNote from "../src/components/headers/header-note";
 import FontSize from "../src/components/rich-editor/font-size";
@@ -28,7 +28,7 @@ export default function Note() {
     const [autoSave, setAutoSave] = useState(true);
 
     const [hasSaved, setHasSaved] = useState(false); // Flag para saber si ya ha guardado alguna vez una nota para editarla o no
-    
+
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
         getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
@@ -55,12 +55,6 @@ export default function Note() {
 
             const isEdit = note.content || hasSaved;
 
-            // Si es una nota nueva, debe entrar en newNote, pero si es una nota nueva, y le da a guardar mas de una vez, entonces
-            // debe entrar en isEdit para que no cree una nota nueva constantemente.
-            // Para ello, notifico desde el guardar un hasSaved para que sepa que debe entrar en isEdit.
-            // Ya que el note.content seguirá siendo vacío ya que el primer note que recibe al entrar está vacio (era una nota nueva).
-            // Si no encuentra un id en el note, pero aún así entra en isEdit, comprueba si en el storage existe un content igual al
-            // content que se está editando ahora mismo y obtiene su id para que actualice la nota correctamente
             if (isEdit) {
                 const id = note.id ? note.id : notes.find(oldNote => oldNote.content == content).id;
                 editNote(notes, id);
@@ -92,13 +86,11 @@ export default function Note() {
     async function getFont() {
         let font = {};
         font.fontFamily = await AsyncStorage.getItem("font");
-        console.log(font.fontFamily);
         switch (font.fontFamily) {
             case "roboto": font.fontFace = roboto; break;
             case "madimi": font.fontFace = madimi; break;
             case "aroma": font.fontFace = aroma; break;
         }
-
         setFont(font);
     }
 
@@ -134,6 +126,7 @@ export default function Note() {
                         openFontSize={openFontSize}
                         openSeparators={openSeparators}
                         setOpenSeparators={setOpenSeparators}
+                        hide={readingMode}
                     />
 
 
@@ -150,11 +143,12 @@ export default function Note() {
                             onChange={(content) => setContent(content)}
                             editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily}` }}
                             initialContentHTML={note.content && note.content}
+                            disabled={readingMode}
                         />
                     </View>
-                    <FooterEditor editorRef={richText} />
+                    <FooterEditor editorRef={richText} hide={readingMode} />
                 </>
-            
+
             }
 
         </View>

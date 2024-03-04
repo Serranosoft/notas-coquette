@@ -7,6 +7,11 @@ export const colors = {
 }
 
 export const ui = {
+    muted: {
+        fontFamily: "aroma",
+        color: "#9c9c9c",
+        fontSize: 16.5
+    },
     text: {
         fontFamily: "aroma",
         color: "#fff",
