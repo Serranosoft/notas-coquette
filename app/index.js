@@ -2,18 +2,16 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { Stack, useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import HeaderHome from "../src/components/headers/header-home";
-import NoteItem from "../src/components/note-item";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "../src/components/actions";
 import HomeButton from "../src/components/home-button";
-import Animated, { ZoomInEasyUp, ZoomOutEasyUp } from 'react-native-reanimated';
 import { colors } from "../src/utils/styles";
+import HomeFlatListItem from "../src/components/home-flatlist-item";
 
 export default function Index() {
 
-
     const [notes, setNotes] = useState([]);
-    const [itemsSelected, setItemsSelected] = useState([]);
+    const [selected, setSelected] = useState([]);
     const [columnNumber, setColumnNumber] = useState(2);
 
     useFocusEffect(
@@ -22,6 +20,10 @@ export default function Index() {
         }, [])
     );
 
+    useEffect(() => {
+        getGridLayout();
+    }, [])
+
     async function getNotes() {
         let notes = await AsyncStorage.getItem("notes") || [];
         if (notes.length > 0) {
@@ -29,11 +31,6 @@ export default function Index() {
         }
         setNotes([...notes]);
     }
-
-    useEffect(() => {
-        // 1. Obtener configuración del layout seleccionado
-        getGridLayout();
-    }, [])
 
     async function getGridLayout() {
         const grid = await AsyncStorage.getItem("grid");
@@ -56,20 +53,16 @@ export default function Index() {
                             key={columnNumber}
                             numColumns={columnNumber}
                             data={notes}
-                            renderItem={(note) =>
-                                <Animated.View style={{ flex: 1 / 2 }} entering={ZoomInEasyUp.duration(2000)} exiting={ZoomOutEasyUp.duration(2000)}>
-                                    <NoteItem note={note.item} itemsSelected={itemsSelected} setItemsSelected={setItemsSelected} />
-                                </Animated.View>
-                            }
                             contentContainerStyle={{ gap: 12, paddingTop: 16, paddingBottom: 100 }}
                             columnWrapperStyle={columnNumber > 1 && { gap: 12 }}
+                            renderItem={(note) => <HomeFlatListItem note={note.item} selected={selected} setSelected={setSelected} />}
                         />
                     </View>
                 }
 
             </View>
 
-            {itemsSelected.length > 0 && <Actions itemsSelected={itemsSelected} setNotes={setNotes} setItemsSelected={setItemsSelected} />}
+            {selected.length > 0 && <Actions selected={selected} setNotes={setNotes} setSelected={setSelected} />}
         </>
     )
 }

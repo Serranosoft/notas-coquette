@@ -1,6 +1,6 @@
 export const colors = {
     button: "#e62272",
-    selected: "rgba(191,165,164,0.5)",
+    selected: "rgba(230, 34, 114, 0.25)",
     light: "#FACCD6",
     dark: "#e62272"
     
@@ -13,7 +13,7 @@ export const ui = {
         fontSize: 16.5
     },
     text: {
-        fontFamily: "aroma",
+        fontFamily: "madimi",
         color: "#fff",
         fontSize: 16.5,
     },

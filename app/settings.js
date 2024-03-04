@@ -96,9 +96,6 @@ export default function Settings() {
                         />
                     </View>
                 </View>
-                <View style={styles.box}>
-
-                </View>
             </View>
         </>
     )

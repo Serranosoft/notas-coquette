@@ -3,7 +3,7 @@ import { Path, Svg } from "react-native-svg"
 import { colors } from "../utils/styles"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Actions({ itemsSelected, setItemsSelected, setNotes }) {
+export default function Actions({ selected, setSelected, setNotes }) {
 
     // Se obtiene todas las notas
     async function get() {
@@ -18,7 +18,7 @@ export default function Actions({ itemsSelected, setItemsSelected, setNotes }) {
     async function remove() {
         let notes = await get();
 
-        const newNotes = notes.filter(note => !itemsSelected.includes(note.id));
+        const newNotes = notes.filter(note => !selected.includes(note.id));
 
         await add(newNotes);
     }
@@ -27,7 +27,7 @@ export default function Actions({ itemsSelected, setItemsSelected, setNotes }) {
     async function add(newNotes) {
         await AsyncStorage.setItem("notes", JSON.stringify(newNotes));
 
-        setItemsSelected([])
+        setSelected([])
         setNotes(newNotes);
     }
 
@@ -48,22 +48,29 @@ const styles = StyleSheet.create({
     layout: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.selected,
+        backgroundColor: colors.light,
         borderTopLeftRadius: 16,
-        borderTopRightRadius: 16,
+        borderBottomLeftRadius: 16,
+        borderWidth: 2,
+        borderRightWidth: 0,
+        borderColor: "#000"
     },
 
     position: {
         position: "absolute",
         bottom: 0,
-        left: "50%",
-        marginLeft: -100,
-        width: 200,
-        height: 75,
+        right: 0,
+        marginLeft: -45,
+        width: 90,
+        height: 70,
     },
 
     action: {
-        width: 45,
-        height: 45,
+        width: 50,
+        height: 50,
+        borderWidth: 2,
+        borderColor: colors.dark,
+        padding: 8,
+        borderRadius: 100
     }
 })

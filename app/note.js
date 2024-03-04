@@ -1,7 +1,7 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
-import { Stack, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { Dimensions, StyleSheet, View } from "react-native";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
-import { createRef, useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
 import HeaderNote from "../src/components/headers/header-note";
 import FontSize from "../src/components/rich-editor/font-size";
@@ -9,7 +9,6 @@ import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import uuid from 'react-native-uuid';
 import { aroma, madimi, roboto } from "../src/components/rich-editor/fonts";
 
 export default function Note() {
@@ -27,8 +26,6 @@ export default function Note() {
     const [font, setFont] = useState(null);
     const [autoSave, setAutoSave] = useState(true);
 
-    const [hasSaved, setHasSaved] = useState(false); // Flag para saber si ya ha guardado alguna vez una nota para editarla o no
-
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
         getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
@@ -42,46 +39,6 @@ export default function Note() {
         richText.current?.insertText(separator);
         setSeparator(null);
     }, [separator])
-
-    // Al pulsar hacia atrás, debe guardarse en el asyncStorage
-    async function saveNote() {
-
-        if (content.length > 0) {
-
-            let notes = await AsyncStorage.getItem("notes") || [];
-            if (notes.length > 0) {
-                notes = JSON.parse(notes);
-            }
-
-            const isEdit = note.content || hasSaved;
-
-            if (isEdit) {
-                const id = note.id ? note.id : notes.find(oldNote => oldNote.content == content).id;
-                editNote(notes, id);
-            } else {
-                newNote(notes);
-            }
-
-            const jsonValue = JSON.stringify(notes);
-            await AsyncStorage.setItem("notes", jsonValue);
-        }
-    }
-
-    async function newNote(notes) {
-        const newNote = {
-            id: uuid.v4(),
-            folder: "todos",
-            content: content,
-            date: new Date().toLocaleDateString(),
-        }
-
-        notes.push(newNote);
-    }
-
-    function editNote(notes, id) {
-        notes.find((oldNote) => oldNote.id === id).content = content;
-    }
-
 
     async function getFont() {
         let font = {};
@@ -106,9 +63,8 @@ export default function Note() {
             <Stack.Screen options={{
                 header: () =>
                     <HeaderNote
-                        saveNote={saveNote}
-                        isEdit={note.content}
-                        setHasSaved={setHasSaved}
+                        note={note}
+                        content={content}
                         richEditorRef={richText}
                         setReadingMode={setReadingMode}
                         readingMode={readingMode}
