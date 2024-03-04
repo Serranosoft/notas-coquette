@@ -9,7 +9,9 @@ export default function Layout() {
 
     // Carga de fuentes.
     const [fontsLoaded] = useFonts({
-        "aroma": require("../assets/fonts/Aroma.ttf")
+        "aroma": require("../assets/fonts/Aroma.ttf"),
+        "roboto": require("../assets/fonts/Roboto.ttf"),
+        "madimi": require("../assets/fonts/Madimi.ttf")
     });
 
     useEffect(() => {

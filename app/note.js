@@ -10,6 +10,7 @@ import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
+import { aroma, madimi, roboto } from "../src/components/rich-editor/fonts";
 
 export default function Note() {
 
@@ -22,8 +23,14 @@ export default function Note() {
     const [separator, setSeparator] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
     const [openSeparators, setOpenSeparators] = useState(false);
+    const [readingMode, setReadingMode] = useState(false);
+    const [font, setFont] = useState(null);
 
     const [hasSaved, setHasSaved] = useState(false); // Flag para saber si ya ha guardado alguna vez una nota para editarla o no
+
+    useEffect(() => {
+        getFont(); // Obtiene la fuente en el que va a instanciar el editor
+    }, [])
 
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
@@ -79,38 +86,67 @@ export default function Note() {
         notes.find((oldNote) => oldNote.id === id).content = content;
     }
 
+
+    async function getFont() {
+        let font = {};
+        font.fontFamily = await AsyncStorage.getItem("font");
+        console.log(font.fontFamily);
+        switch (font.fontFamily) {
+            case "roboto": font.fontFace = roboto; break;
+            case "madimi": font.fontFace = madimi; break;
+            case "aroma": font.fontFace = aroma; break;
+        }
+
+        setFont(font);
+    }
+
     return (
         <View style={styles.container}>
             <Stack.Screen options={{
-                header: () => <HeaderNote saveNote={saveNote} isEdit={note.content} setHasSaved={setHasSaved} richEditorRef={richText} />
+                header: () =>
+                    <HeaderNote
+                        saveNote={saveNote}
+                        isEdit={note.content}
+                        setHasSaved={setHasSaved}
+                        richEditorRef={richText}
+                        setReadingMode={setReadingMode}
+                        readingMode={readingMode}
+                    />
             }} />
 
-            <HeaderEditor
-                editorRef={richText}
-                fontSize={fontSize}
-                setOpenFontSize={setOpenFontSize}
-                openFontSize={openFontSize}
-                openSeparators={openSeparators}
-                setOpenSeparators={setOpenSeparators}
-            />
+            {
+                font &&
+                <>
+                    <HeaderEditor
+                        editorRef={richText}
+                        fontSize={fontSize}
+                        setOpenFontSize={setOpenFontSize}
+                        openFontSize={openFontSize}
+                        openSeparators={openSeparators}
+                        setOpenSeparators={setOpenSeparators}
+                    />
 
-            {openFontSize && <FontSize setFontSize={setFontSize} fontSize={fontSize} />}
-            {openSeparators && <Separators setSeparator={setSeparator} />}
 
-            <View style={{ flex: 1 }}>
-                <GridBackground />
-                <RichEditor
-                    useContainer={false}
-                    ref={richText}
-                    style={styles.rich}
-                    placeholder="Escribe tu nota..."
-                    onChange={(content) => setContent(content)}
-                    editorStyle={{ backgroundColor: "transparent", contentCSSText: `font-size: 24px` }}
-                    initialContentHTML={note.content && note.content}
-                />
-            </View>
+                    {openFontSize && <FontSize setFontSize={setFontSize} fontSize={fontSize} />}
+                    {openSeparators && <Separators setSeparator={setSeparator} />}
 
-            <FooterEditor editorRef={richText} />
+                    <View style={{ flex: 1 }}>
+                        <GridBackground />
+                        <RichEditor
+                            useContainer={false}
+                            ref={richText}
+                            style={styles.rich}
+                            placeholder="Escribe tu nota..."
+                            onChange={(content) => setContent(content)}
+                            editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily}` }}
+                            initialContentHTML={note.content && note.content}
+                        />
+                    </View>
+                    <FooterEditor editorRef={richText} />
+                </>
+            
+            }
+
         </View>
     )
 }

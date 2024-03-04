@@ -1,11 +1,16 @@
 import { useRouter } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, ToastAndroid, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { layout, ui } from "../../utils/styles";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useState } from "react";
+import Menu, { MenuItem } from "react-native-material-menu";
 
-export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRef }) {
+export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRef, setReadingMode, readingMode }) {
 
     const router = useRouter();
+    const [visible, setVisible] = useState(false);
+    const hideMenu = () => setVisible(false);
+    const showMenu = () => setVisible(true);
 
     async function back() {
         await saveNote();
@@ -33,8 +38,26 @@ export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRe
                 <TouchableOpacity onPress={save}>
                     <Image style={styles.img} source={require("../../../assets/save.png")}></Image>
                 </TouchableOpacity>
-                <Ionicons name="ellipsis-vertical" size={28} color="#000" />
             </View>
+
+            {/* <View>
+
+                <Menu
+                    visible={visible}
+                    onRequestClose={hideMenu}
+                    anchor={(
+                        <TouchableWithoutFeedback onPress={showMenu}>
+                            <Image source={require("../../../assets/more.png")} style={styles.img} />
+                        </TouchableWithoutFeedback>
+                    )}>
+                    <MenuItem onPress={() => setReadingMode(!readingMode)}>
+                        <View style={styles.row}>
+                            <Image style={styles.icon} source={require("../../../assets/read.png")} />
+                            <Text>{readingMode ? "Modo edición" : "Modo lectura"}</Text>
+                        </View>
+                    </MenuItem>
+                </Menu>
+            </View> */}
         </View>
     )
 }
