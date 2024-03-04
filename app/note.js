@@ -25,11 +25,13 @@ export default function Note() {
     const [openSeparators, setOpenSeparators] = useState(false);
     const [readingMode, setReadingMode] = useState(false);
     const [font, setFont] = useState(null);
+    const [autoSave, setAutoSave] = useState(true);
 
     const [hasSaved, setHasSaved] = useState(false); // Flag para saber si ya ha guardado alguna vez una nota para editarla o no
-
+    
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
+        getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
     }, [])
 
     useEffect(() => {
@@ -100,6 +102,13 @@ export default function Note() {
         setFont(font);
     }
 
+    async function getAutoSave() {
+        const autoSave = await AsyncStorage.getItem("autosave");
+        if (autoSave) {
+            setAutoSave(autoSave === "true" ? true : false);
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Stack.Screen options={{
@@ -111,6 +120,7 @@ export default function Note() {
                         richEditorRef={richText}
                         setReadingMode={setReadingMode}
                         readingMode={readingMode}
+                        autoSave={autoSave}
                     />
             }} />
 

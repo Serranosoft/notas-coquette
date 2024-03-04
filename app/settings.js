@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import HeaderSettings from "../src/components/headers/header-settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import GridBackground from "../src/components/grid";
+import { useEffect, useState } from "react";
 
 const FONTS = [
     {
@@ -21,12 +22,38 @@ const FONTS = [
 ];
 
 export default function Settings() {
+    
+    const [autoSave, setAutoSave] = useState(true);
+    const [typo, setTypo] = useState(null);
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     async function updateTypo(typo) {
+        setTypo(typo);
         await AsyncStorage.setItem("font", typo);
         ToastAndroid.showWithGravityAndOffset("Tipografía guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
     }
 
+    async function updateAutoSave() {
+        setAutoSave(autoSave => !autoSave);
+        await AsyncStorage.setItem("autosave", !autoSave ? "true" : "false");
+        ToastAndroid.showWithGravityAndOffset(`Guardado automatico ${!autoSave ? 'activado' : 'desactivado'}`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+    }
+
+
+    async function getData() {
+        const font = await AsyncStorage.getItem("font");
+        const autosave = await AsyncStorage.getItem("autosave");
+        console.log(font);
+        if (font) {
+            setTypo(font);
+        }
+        if (autosave) {
+            setAutoSave(autosave === "true" ? true : false);
+        }
+    }
 
     return (
         <>
@@ -46,7 +73,7 @@ export default function Settings() {
                         data={FONTS}
                         contentContainerStyle={{ gap: 16 }}
                         renderItem={({ item: font }) => (
-                            <TouchableOpacity onPress={() => updateTypo(font.key)} style={styles.typoItem}>
+                            <TouchableOpacity onPress={() => updateTypo(font.key)} style={[styles.typoItem, font.key == typo && styles.typoSelected]}>
                                 <GridBackground />
                                 <Image source={font.preview} style={styles.typoImg} />
                             </TouchableOpacity>
@@ -58,13 +85,12 @@ export default function Settings() {
                     <Text style={[ui.h4, { color: "#000" }]}>Ajustes del editor</Text>
                     <View style={styles.row}>
                         <Text>Guardado automático</Text>
-                        <Switch
-                            style={{ transform: [ { scale: 1.3 }]}}
-                            trackColor={{ false: '#767577', true: '#81b0ff' }}
-                            thumbColor={/* isEnabled ? '#f5dd4b' :  */'#f4f3f4'}
-                            ios_backgroundColor="#3e3e3e"
-                            // onValueChange={toggleSwitch}
-                            // value={isEnabled}
+                        <Switch 
+                            style={styles.switch} 
+                            trackColor={{ false: '#767577', true: colors.light }} 
+                            thumbColor={autoSave ? colors.dark : '#f4f3f4'}
+                            onValueChange={updateAutoSave}
+                            value={autoSave}
                         />
                     </View>
                 </View>
@@ -86,7 +112,12 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        marginVertical: 8
+    },
+
+    switch: {
+        transform: [{ scale: 1.3 }]
     },
 
     box: {
@@ -114,5 +145,10 @@ const styles = StyleSheet.create({
         width: "90%",
         height: "90%",
         resizeMode: "contain",
+    },
+
+    typoSelected: {
+        borderWidth: 3,
+        borderColor: colors.dark
     }
 })

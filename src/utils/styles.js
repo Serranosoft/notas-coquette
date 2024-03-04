@@ -32,7 +32,6 @@ export const ui = {
         fontFamily: "aroma",
         color: "#fff",
         fontSize: 24,
-        wordSpacing: 2,
     },
 }
 

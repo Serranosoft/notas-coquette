@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from "react";
 import Menu, { MenuItem } from "react-native-material-menu";
 
-export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRef, setReadingMode, readingMode }) {
+export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRef, setReadingMode, readingMode, autoSave }) {
 
     const router = useRouter();
     const [visible, setVisible] = useState(false);
@@ -13,7 +13,9 @@ export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRe
     const showMenu = () => setVisible(true);
 
     async function back() {
-        await saveNote();
+        if (autoSave) {
+            await saveNote();
+        }
         router.back();
     }
 
