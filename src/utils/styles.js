@@ -43,7 +43,7 @@ export const layout = {
         alignItems: "center",
         justifyContent: "space-between",
         gap: 8,
-        paddingHorizontal: 8,
+        paddingHorizontal: 12,
         paddingVertical: 12
     },
 

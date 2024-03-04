@@ -27,7 +27,7 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
         await AsyncStorage.setItem("grid", grid.toString());
     }
     return (
-        <Pressable style={layout.header}>
+        <View style={layout.header}>
             <View style={layout.title}>
                 <Image style={styles.img} source={require("../../../assets/logo.png")} />
                 <Text style={[ui.h4, { color: "#000" }]}>Notas Coquette</Text>
@@ -57,7 +57,7 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
                     </MenuItem>
                 </Menu>
             </View>
-        </Pressable>
+        </View>
     )
 }
 

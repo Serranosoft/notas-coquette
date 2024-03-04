@@ -21,7 +21,7 @@ export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRe
 
 
     return (
-        <Pressable style={layout.header}>
+        <View style={layout.header}>
             <View style={layout.title}>
                 <Pressable onPress={back}>
                     <Image style={styles.img} source={require("../../../assets/back.png")} />
@@ -35,7 +35,7 @@ export default function HeaderNote({ saveNote, isEdit, setHasSaved, richEditorRe
                 </TouchableOpacity>
                 <Ionicons name="ellipsis-vertical" size={28} color="#000" />
             </View>
-        </Pressable>
+        </View>
     )
 }
 

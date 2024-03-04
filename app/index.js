@@ -9,7 +9,6 @@ import HomeButton from "../src/components/home-button";
 import Animated, { ZoomInEasyUp, ZoomOutEasyUp } from 'react-native-reanimated';
 import { colors } from "../src/utils/styles";
 
-
 export default function Index() {
 
 
