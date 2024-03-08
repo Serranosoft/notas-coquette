@@ -11,7 +11,9 @@ export default function Layout() {
     const [fontsLoaded] = useFonts({
         "aroma": require("../assets/fonts/Aroma.ttf"),
         "roboto": require("../assets/fonts/Roboto.ttf"),
-        "madimi": require("../assets/fonts/Madimi.ttf")
+        "madimi": require("../assets/fonts/Madimi.ttf"),
+        "oswald": require("../assets/fonts/Oswald.ttf"),
+        "ojuju": require("../assets/fonts/Ojuju.ttf"),
     });
 
     useEffect(() => {

@@ -9,7 +9,7 @@ import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { aroma, madimi, roboto } from "../src/components/rich-editor/fonts";
+import { aroma, madimi, ojuju, oswald, roboto } from "../src/components/rich-editor/fonts";
 
 export default function Note() {
 
@@ -46,7 +46,8 @@ export default function Note() {
         switch (font.fontFamily) {
             case "roboto": font.fontFace = roboto; break;
             case "madimi": font.fontFace = madimi; break;
-            case "aroma": font.fontFace = aroma; break;
+            case "oswald": font.fontFace = oswald; break;
+            case "ojuju": font.fontFace = ojuju; break;
         }
         setFont(font);
     }
