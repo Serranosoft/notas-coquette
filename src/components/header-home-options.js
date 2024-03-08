@@ -30,19 +30,19 @@ export default function HeaderHomeOptions({ }) {
             onRequestClose={hideMenu}
             anchor={(
                 <TouchableWithoutFeedback onPress={showMenu}>
-                    <Image source={require("../../../assets/more.png")} style={styles.img} />
+                    <Image source={require("../../assets/more.png")} style={styles.img} />
                 </TouchableWithoutFeedback>
             )}>
             <MenuItem onPress={changeLayout}>
                 <View style={styles.row}>
-                    <Image style={styles.icon} source={require("../../../assets/grid.png")} />
+                    <Image style={styles.icon} source={require("../../assets/grid.png")} />
                     <Text>Cambiar cuadricula</Text>
                 </View>
             </MenuItem>
             <MenuDivider />
             <MenuItem onPress={() => router.push("settings")}>
                 <View style={styles.row}>
-                    <Image style={styles.icon} source={require("../../../assets/settings.png")} />
+                    <Image style={styles.icon} source={require("../../assets/settings.png")} />
                     <Text>Configuración</Text>
                 </View>
             </MenuItem>
@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: "row",
         gap: 6
+    },
+
+    img: {
+        width: 25,
+        height: 25 
     },
 
     icon: {

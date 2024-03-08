@@ -44,8 +44,8 @@ export default function HeaderNoteOptions({ setReadingMode, readingMode }) {
 const styles = StyleSheet.create({
 
     img: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
     },
 
     row: {

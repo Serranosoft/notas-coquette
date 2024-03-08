@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { layout, ui } from "../../utils/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
 import HeaderNoteOptions from "../header-note-options";
@@ -9,7 +9,11 @@ import HeaderNoteOptions from "../header-note-options";
 export default function HeaderNote({ note, content, richEditorRef, setReadingMode, readingMode, autoSave }) {
 
     const router = useRouter();
-    const [hasSaved, setHasSaved] = useState(false); // Flag para saber si ya ha guardado alguna vez una nota para editarla o no
+    const [noteSavedId, setNoteSavedId] = useState(null);
+
+    useEffect(() => {
+        setNoteSavedId(note.id)
+    }, [note])
 
     // Al pulsar hacia atrás, debe guardarse en el asyncStorage
     async function saveNote() {
@@ -21,11 +25,10 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
                 notes = JSON.parse(notes);
             }
 
-            const isEdit = note.content || hasSaved;
+            const isEdit = noteSavedId;
 
             if (isEdit) {
-                const id = note.id ? note.id : notes.find(oldNote => oldNote.content == content).id;
-                editNote(notes, id);
+                editNote(notes, noteSavedId);
             } else {
                 newNote(notes);
             }
@@ -36,8 +39,11 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
     }
 
     async function newNote(notes) {
+        const id = uuid.v4();
+        setNoteSavedId(id);
+
         const newNote = {
-            id: uuid.v4(),
+            id: id,
             folder: "todos",
             content: content,
             date: new Date().toLocaleDateString(),
@@ -59,7 +65,6 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
 
     async function save() {
         richEditorRef.current.dismissKeyboard();
-        setHasSaved(true);
         await saveNote();
         ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
     }
