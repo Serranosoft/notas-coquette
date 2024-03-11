@@ -1,16 +1,16 @@
 export const colors = {
-    button: "#e62272",
+    button: "#ff4a94",
     selected: "rgba(230, 34, 114, 0.25)",
     light: "#FACCD6",
-    dark: "#e62272"
+    dark: "#ff4a94"
     
 }
 
 export const ui = {
     muted: {
-        fontFamily: "aroma",
+        fontFamily: "madimi",
         color: "#9c9c9c",
-        fontSize: 16.5
+        fontSize: 14
     },
     text: {
         fontFamily: "madimi",

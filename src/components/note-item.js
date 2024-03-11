@@ -1,10 +1,13 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import GridBackground from "./grid";
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from "react-native-render-html";
 import React, { useState } from "react";
 import { Path, Svg } from "react-native-svg";
 import { colors, ui } from "../utils/styles";
 import { router } from "expo-router";
+// import { LinearGradient } from 'expo-linear-gradient';
+
+const { height } = Dimensions.get('window');
 
 function NoteItem({ note, itemsSelected, setItemsSelected }) {
 
@@ -52,7 +55,7 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
             <GridBackground />
             <View>
                 <View style={styles.header}>
-                    <Text style={ui.text}>{note.date}</Text>
+                    <Text style={[ui.muted, { color: "#8a8a8a" }]}>{note.date}</Text>
                 </View>
                 <View style={styles.htmlPadding}>
                     <RenderHTML
@@ -62,6 +65,10 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
                     />
                 </View>
             </View>
+            {/* <LinearGradient
+                colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
+                style={styles.gradient}
+            /> */}
             {
                 itemsSelected.length > 0 &&
                 <View style={styles.selectedBox}>
@@ -90,13 +97,26 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: colors.button,
+        justifyContent: "flex-end",
+        backgroundColor: "transparent",
         paddingHorizontal: 8,
-        paddingVertical: 2,
+        paddingBottom: 2,
+        paddingTop: 6,
+        // borderBottomWidth: 1,
+        // borderColor: colors.button,
     },
     htmlPadding: {
         paddingHorizontal: 8,
         paddingVertical: 4,
+        position: "relative",
+
+    },
+    gradient: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: height * 0.2, // Altura del 20% de la pantalla
     },
     selectedBox: {
         width: 30,
