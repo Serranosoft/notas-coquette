@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Image, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
 
-export default function HeaderHomeOptions({ }) {
+export default function HeaderHomeOptions({ columnNumber, setColumnNumber }) {
 
     const [visible, setVisible] = useState(false);
     const hideMenu = () => setVisible(false);
