@@ -9,7 +9,7 @@ import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { aroma, madimi, ojuju, oswald, roboto } from "../src/components/rich-editor/fonts";
+import { madimi, ojuju, oswald, roboto } from "../src/components/rich-editor/fonts";
 
 export default function Note() {
 
@@ -87,8 +87,8 @@ export default function Note() {
                     />
 
 
-                    {openFontSize && <FontSize setFontSize={setFontSize} fontSize={fontSize} />}
-                    {openSeparators && <Separators setSeparator={setSeparator} />}
+                    {openFontSize && !readingMode && <FontSize setFontSize={setFontSize} fontSize={fontSize} openSeparators={openSeparators} />}
+                    {openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
 
                     <View style={{ flex: 1 }}>
                         <GridBackground />
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     rich: {
         flex: 1,
         height: Dimensions.get("window").height,
+        paddingBottom: 16
     },
 
     scroll: {

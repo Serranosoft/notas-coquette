@@ -55,7 +55,7 @@ export default function Index() {
                             data={notes}
                             contentContainerStyle={{ gap: 32, paddingTop: 16, paddingBottom: 100 }}
                             columnWrapperStyle={columnNumber > 1 && { gap: 12 }}
-                            renderItem={(note) => <HomeFlatListItem note={note.item} selected={selected} setSelected={setSelected} />}
+                            renderItem={({item, index}) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />}
                         />
                     </View>
                 }

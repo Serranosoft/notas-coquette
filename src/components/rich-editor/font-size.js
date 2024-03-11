@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { ui } from "../../utils/styles";
+import { colors, ui } from "../../utils/styles";
 import { useEffect, useState } from "react";
 
 export const SIZES = { "10": 1, "13": 2, "16": 3, "18": 4, "24": 5, "32": 6, "48": 7 }
 
-export default function FontSize({ setFontSize, fontSize }) {
+export default function FontSize({ setFontSize, fontSize, openSeparators }) {
 
     const [selected, setSelected] = useState(null);
 
@@ -18,7 +18,7 @@ export default function FontSize({ setFontSize, fontSize }) {
     }, [])
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { borderBottomWidth: openSeparators ? 0 : 2}]}>
             <View style={styles.sizeList}>
                 {
                     Object.keys(SIZES).map((size, index) => {
@@ -41,31 +41,20 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         gap: 8,
-        backgroundColor: "#fff",
-    },
-
-    close: {
-        position: "absolute",
-        top: -24,
-        right: 8,
-        backgroundColor: "#fff",
-        borderRadius: 100,
-        width: 40,
-        height: 40,
-        justifyContent: "center",
-        alignItems: "center",
-        borderWidth: 1,
+        backgroundColor: colors.light,
+        borderTopWidth: 2,
     },
 
     item: {
         paddingVertical: 8,
         paddingHorizontal: 8,
         textAlign: "center",
-        color: "#000"
+        color: "#000",
+        borderRightWidth: 2,
     },
 
     selected: {
-        backgroundColor: "pink"
+        backgroundColor: colors.dark
     },
 
     sizeList: {

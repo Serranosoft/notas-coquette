@@ -1,9 +1,9 @@
 export const colors = {
-    button: "#ff4a94",
+    button: "#cc527a",
     selected: "rgba(230, 34, 114, 0.25)",
     light: "#FACCD6",
-    dark: "#ff4a94"
-    
+    dark: "#cc527a"
+
 }
 
 export const ui = {
@@ -36,7 +36,7 @@ export const ui = {
     h4: {
         fontFamily: "aroma",
         color: "#fff",
-        fontSize: 24,
+        fontSize: 21,
     },
 }
 
@@ -69,5 +69,24 @@ export const editor = {
         alignItems: "flex-start",
         paddingHorizontal: 12,
     },
+
+    footer: {
+        width: "90%",
+        alignSelf: "center",
+        justifyContent: "center",
+        // position: "absolute",
+        // bottom: 16,
+        paddingVertical: 12,
+        borderRadius: 100,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        marginBottom: 20
+    }
 }
 
