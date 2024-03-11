@@ -53,7 +53,7 @@ export default function Index() {
                             key={columnNumber}
                             numColumns={columnNumber}
                             data={notes}
-                            contentContainerStyle={{ gap: 12, paddingTop: 16, paddingBottom: 100 }}
+                            contentContainerStyle={{ gap: 32, paddingTop: 16, paddingBottom: 100 }}
                             columnWrapperStyle={columnNumber > 1 && { gap: 12 }}
                             renderItem={(note) => <HomeFlatListItem note={note.item} selected={selected} setSelected={setSelected} />}
                         />
