@@ -1,13 +1,8 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
-import { editor, ui } from "../../utils/styles";
+import { editor } from "../../utils/styles";
 import { fontSizeLabel, redoLabel, separatorsLabel, undoLabel } from "../../utils/labels";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { SIZES } from "./font-size";
+import { StyleSheet } from "react-native";
 
-/* const fontSizeLabel = ({ openFontSize, fontSize }) =>
-(
-    <View style={[wrapper, { backgroundColor: tintColor }]}><LottieView source={require("../../assets/lottie/test.json")} loop={true} autoPlay={true} style={{ width: "100%", transform: [{ scale: 1}], alignSelf: "center", }} /></View>
-); */
 
 export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, fontSize, hide }) {
 

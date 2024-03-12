@@ -8,7 +8,7 @@ export const alignLeftLabel = ({tintColor}) => <View style={[wrapper, { backgrou
 export const alignCenterLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-center.png")} /></View>
 export const alignRightLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/align-right.png")} /></View>
 export const listLabel = ({tintColor}) => <View style={[wrapper, { backgroundColor: tintColor }]}><Image style={common} source={require("../../assets/list.png")} /></View>
-export const separatorsLabel = () => <View style={[wrapper, { width: 40, height: 40, marginRight: -16 }]}><LottieView source={require("../../assets/lottie/separators.json")} loop={true} autoPlay={true} width={40} height={40} /></View>
+export const separatorsLabel = () => <View style={[wrapper, { width: 30, height: 30, marginRight: -16 }]}><LottieView source={require("../../assets/lottie/separators.json")} loop={true} autoPlay={true} width={30} height={30} /></View>
 export const fontSizeLabel = () => <View style={[wrapper, { width: 40, height: 40, marginRight: -16 }]}><LottieView source={require("../../assets/lottie/font-size.json")} loop={true} autoPlay={true} width={40} height={40} /></View>
 export const undoLabel = () => <View style={[wrapper]}><Image style={common} source={require("../../assets/undo.png")} /></View>
 export const redoLabel = () => <View style={[wrapper]}><Image style={common} source={require("../../assets/redo.png")} /></View>

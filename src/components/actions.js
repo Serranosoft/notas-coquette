@@ -49,28 +49,30 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: colors.light,
-        borderTopLeftRadius: 16,
-        borderBottomLeftRadius: 16,
+        borderRadius: 100,
         borderWidth: 2,
-        borderRightWidth: 0,
-        borderColor: "#000"
+        borderColor: "#000",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
 
     position: {
         position: "absolute",
-        bottom: 0,
-        right: 0,
-        marginLeft: -45,
-        width: 90,
+        bottom: 16,
+        width: 70,
         height: 70,
+        alignSelf: "center",
     },
 
     action: {
         width: 50,
         height: 50,
-        borderWidth: 2,
-        borderColor: colors.dark,
         padding: 8,
-        borderRadius: 100
     }
 })

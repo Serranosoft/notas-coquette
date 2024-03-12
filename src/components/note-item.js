@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Path, Svg } from "react-native-svg";
 import { colors, ui } from "../utils/styles";
 import { router } from "expo-router";
-// import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { height } = Dimensions.get('window');
 
@@ -65,10 +65,7 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
                     />
                 </View>
             </View>
-            {/* <LinearGradient
-                colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
-                style={styles.gradient}
-            /> */}
+            {itemsSelected < 1 && <LinearGradient colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']} style={styles.gradient} />}
             {
                 itemsSelected.length > 0 &&
                 <View style={styles.selectedBox}>
@@ -102,21 +99,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingBottom: 2,
         paddingTop: 6,
-        // borderBottomWidth: 1,
-        // borderColor: colors.button,
     },
     htmlPadding: {
         paddingHorizontal: 8,
         paddingVertical: 4,
         position: "relative",
-
     },
     gradient: {
         position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,
-        height: height * 0.2, // Altura del 20% de la pantalla
+        height: height * 0.13, // Altura del 20% de la pantalla
     },
     selectedBox: {
         width: 30,
@@ -126,9 +120,13 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 10,
         bottom: 10,
+        zIndex: 9,
+        backgroundColor: "#fff"
     },
     selected: {
         backgroundColor: colors.selected,
         elevation: 0,
+        borderWidth: 2,
+        borderColor: colors.dark
     },
 })
