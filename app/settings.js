@@ -60,17 +60,16 @@ export default function Settings() {
         }
     }
 
+    async function removeAll() {
+        await AsyncStorage.setItem("notes", JSON.stringify([]));
+        router.push("/");
+        ToastAndroid.showWithGravityAndOffset(`Se han eliminado todas las notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+    }
+
     return (
         <>
             <Stack.Screen options={{ header: () => <HeaderSettings forceHome={forceHome} /> }} />
             <View style={styles.container}>
-                {
-                    /* 
-                    Ajustes .-
-                        1. Editor de texto: Tipografia
-                        2. Visualización: Layout del mosaico
-                    */
-                }
                 <View style={styles.box}>
                     <Text style={[ui.h4, { color: "#000" }]}>Tipografia</Text>
                     <FlatList
@@ -90,7 +89,7 @@ export default function Settings() {
                 <View style={styles.box}>
                     <Text style={[ui.h4, { color: "#000" }]}>Ajustes del editor</Text>
                     <View style={styles.row}>
-                        <Text>Guardado automático</Text>
+                        <Text style={[ui.text, { color: "#000" }]}>Guardado automático</Text>
                         <Switch 
                             style={styles.switch} 
                             trackColor={{ false: '#767577', true: colors.light }} 
@@ -99,6 +98,15 @@ export default function Settings() {
                             value={autoSave}
                         />
                     </View>
+                </View>
+                <View style={styles.box}>
+                    <Text style={[ui.h4, { color: "#000" }]}>Ajustes de la aplicación</Text>
+                    <View style={styles.row}>
+                        <TouchableOpacity style={styles.btn} onPress={removeAll}>
+                            <Text style={[ui.text, { color: colors.dark, textAlign: "center" }]}>Eliminar todas las notas</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={ui.muted}>¡CUIDADO! Al pulsar en el siguiente botón se eliminarán todas las notas guardadas</Text>
                 </View>
             </View>
         </>
@@ -153,5 +161,13 @@ const styles = StyleSheet.create({
     typoSelected: {
         borderWidth: 3,
         borderColor: colors.dark
+    },
+
+    btn: {
+        width: "100%",
+        borderRadius: 100,
+        borderWidth: 2,
+        borderColor: colors.dark,
+        padding: 8,
     }
 })
