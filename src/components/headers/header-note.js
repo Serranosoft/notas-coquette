@@ -82,7 +82,7 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
                 <TouchableOpacity onPress={save}>
                     <Image style={styles.img} source={require("../../../assets/save.png")}></Image>
                 </TouchableOpacity>
-                <HeaderNoteOptions setReadingMode={setReadingMode} readingMode={readingMode} />
+                <HeaderNoteOptions setReadingMode={setReadingMode} readingMode={readingMode} noteSavedId={noteSavedId} />
             </View>
 
         </View>
