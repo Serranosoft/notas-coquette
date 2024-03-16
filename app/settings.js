@@ -54,6 +54,8 @@ export default function Settings() {
         const autosave = await AsyncStorage.getItem("autosave");
         if (font) {
             setTypo(font);
+        } else {
+            setTypo("roboto")
         }
         if (autosave) {
             setAutoSave(autosave === "true" ? true : false);
