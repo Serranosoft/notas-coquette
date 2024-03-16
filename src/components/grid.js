@@ -51,7 +51,7 @@ export default function GridBackground() {
     };
 
     return (
-        <View style={[styles.container/* , { width: windowWidth, height: windowHeight } */]}>
+        <View style={styles.container}>
             {renderHorizontalLines()}
             {renderVerticalLines()}
         </View>

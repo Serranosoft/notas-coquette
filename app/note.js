@@ -1,7 +1,7 @@
 import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
 import HeaderNote from "../src/components/headers/header-note";
 import FontSize from "../src/components/rich-editor/font-size";
@@ -45,7 +45,7 @@ export default function Note() {
         let font = {};
         font.fontFamily = await AsyncStorage.getItem("font");
         if (!font.fontFamily) {
-            font.fontFamily = "roboto"; 
+            font.fontFamily = "roboto";
         }
         switch (font.fontFamily) {
             case "roboto": font.fontFace = roboto; break;
@@ -63,9 +63,7 @@ export default function Note() {
         }
     }
 
-    function handleCursorPosition() {
-        this.scrollRef.current.scrollTo({y: scrollY + 15, animated: true});
-    }
+    const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
 
     return (
         <View style={styles.container}>
@@ -98,21 +96,22 @@ export default function Note() {
                     {openFontSize && !readingMode && <FontSize setFontSize={setFontSize} fontSize={fontSize} openSeparators={openSeparators} />}
                     {openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
 
-                    <ScrollView style={{ zIndex: 1 }} ref={scrollRef}>
-                        <RichEditor
-                            useContainer={true}
-                            ref={richText}
-                            style={styles.rich}
-                            placeholder="Escribe tu nota..."
-                            onChange={(content) => setContent(content)}
-                            editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily}` }}
-                            initialContentHTML={note.content && note.content}
-                            disabled={readingMode}
-                            onCursorPosition={handleCursorPosition}
-                        />
-                    </ScrollView>
-                    <FooterEditor editorRef={richText} hide={readingMode} />
-                    <GridBackground />
+                    <View style={{ flex: 1, zIndex: 1 }}>
+                        <ScrollView style={{ zIndex: 1 }} ref={scrollRef}>
+                            <RichEditor
+                                useContainer={true}
+                                ref={richText}
+                                placeholder="Escribe tu nota..."
+                                onChange={(content) => setContent(content)}
+                                editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily};` }}
+                                initialContentHTML={note.content && note.content}
+                                disabled={readingMode}
+                                onCursorPosition={handleCursorPosition}
+                            />
+                        </ScrollView>
+                        <GridBackground />
+                        <FooterEditor editorRef={richText} hide={readingMode} />
+                    </View>
                 </>
 
             }
@@ -125,11 +124,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-    },
-
-    rich: {
-        // flex: 1,
-        // height: Dimensions.get("window").height,
     },
 
     scroll: {

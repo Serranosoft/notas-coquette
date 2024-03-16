@@ -49,7 +49,7 @@ export const layout = {
         justifyContent: "space-between",
         gap: 8,
         paddingHorizontal: 12,
-        paddingVertical: 12
+        paddingVertical: 12,
     },
 
     title: {
@@ -62,13 +62,14 @@ export const layout = {
 export const editor = {
     richBar: {
         width: "100%",
-        backgroundColor: colors.light
+        backgroundColor: colors.light,
     },
     header: {
         height: 50,
         alignItems: "flex-start",
         paddingHorizontal: 12,
-        zIndex: 1
+        zIndex: 99,
+        backgroundColor: colors.light,
     },
 
     footer: {

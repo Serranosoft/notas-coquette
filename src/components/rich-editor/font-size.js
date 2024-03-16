@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         gap: 8,
         backgroundColor: colors.light,
         borderTopWidth: 2,
-        zIndex: 1,
+        zIndex: 99
     },
 
     item: {
