@@ -36,7 +36,7 @@ export const ui = {
     h4: {
         fontFamily: "aroma",
         color: "#fff",
-        fontSize: 21,
+        fontSize: 22,
     },
 }
 
@@ -68,6 +68,7 @@ export const editor = {
         height: 50,
         alignItems: "flex-start",
         paddingHorizontal: 12,
+        zIndex: 1
     },
 
     footer: {
@@ -86,7 +87,8 @@ export const editor = {
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        marginBottom: 20
+        marginBottom: 20,
+        zIndex: 1,
     }
 }
 

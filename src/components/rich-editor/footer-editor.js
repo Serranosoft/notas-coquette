@@ -8,7 +8,7 @@ export default function FooterEditor({ editorRef, hide }) {
 
     return (
         <View style={{ paddingTop: 23, height: hide ? 0 : "auto" }}>
-            <GridBackground />
+            {/* <GridBackground /> */}
             <RichToolbar
                 style={[editor.richBar, editor.footer, { height: "auto" }]}
                 editor={editorRef}

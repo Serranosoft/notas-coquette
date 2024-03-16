@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
 import { useEffect, useRef, useState } from "react";
@@ -16,6 +16,7 @@ export default function Note() {
     const note = useLocalSearchParams();
 
     const richText = useRef(null);
+    const scrollRef = useRef(null);
 
     const [content, setContent] = useState("");
     const [fontSize, setFontSize] = useState(5);
@@ -43,6 +44,9 @@ export default function Note() {
     async function getFont() {
         let font = {};
         font.fontFamily = await AsyncStorage.getItem("font");
+        if (!font.fontFamily) {
+            font.fontFamily = "roboto"; 
+        }
         switch (font.fontFamily) {
             case "roboto": font.fontFace = roboto; break;
             case "madimi": font.fontFace = madimi; break;
@@ -57,6 +61,10 @@ export default function Note() {
         if (autoSave) {
             setAutoSave(autoSave === "true" ? true : false);
         }
+    }
+
+    function handleCursorPosition() {
+        this.scrollRef.current.scrollTo({y: scrollY + 15, animated: true});
     }
 
     return (
@@ -90,10 +98,9 @@ export default function Note() {
                     {openFontSize && !readingMode && <FontSize setFontSize={setFontSize} fontSize={fontSize} openSeparators={openSeparators} />}
                     {openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
 
-                    <View style={{ flex: 1 }}>
-                        <GridBackground />
+                    <ScrollView style={{ zIndex: 1 }} ref={scrollRef}>
                         <RichEditor
-                            useContainer={false}
+                            useContainer={true}
                             ref={richText}
                             style={styles.rich}
                             placeholder="Escribe tu nota..."
@@ -101,9 +108,11 @@ export default function Note() {
                             editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily}` }}
                             initialContentHTML={note.content && note.content}
                             disabled={readingMode}
+                            onCursorPosition={handleCursorPosition}
                         />
-                    </View>
+                    </ScrollView>
                     <FooterEditor editorRef={richText} hide={readingMode} />
+                    <GridBackground />
                 </>
 
             }
@@ -119,9 +128,8 @@ const styles = StyleSheet.create({
     },
 
     rich: {
-        flex: 1,
-        height: Dimensions.get("window").height,
-        paddingBottom: 16
+        // flex: 1,
+        // height: Dimensions.get("window").height,
     },
 
     scroll: {

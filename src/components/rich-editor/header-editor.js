@@ -1,10 +1,9 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor } from "../../utils/styles";
 import { fontSizeLabel, redoLabel, separatorsLabel, undoLabel } from "../../utils/labels";
-import { StyleSheet } from "react-native";
 
 
-export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, fontSize, hide }) {
+export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, hide }) {
 
     return (
         <RichToolbar
@@ -20,14 +19,3 @@ export default function HeaderEditor({ editorRef, setOpenFontSize, setOpenSepara
         />
     )
 }
-
-const styles = StyleSheet.create({
-
-    fontSizeLabel: {
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 4,
-        borderRadius: 8,
-        marginLeft: 16
-    }
-})
