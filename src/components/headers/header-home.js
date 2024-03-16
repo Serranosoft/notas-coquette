@@ -7,8 +7,8 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
     return (
         <View style={layout.header}>
             <View style={layout.title}>
-                <Image style={styles.img} source={require("../../../assets/logo.png")} />
-                <Text style={[ui.h4, { color: "#000" }]}>Notas Coquette</Text>
+                <Image style={styles.img} source={require("../../../assets/icon-notes.png")} />
+                <Text style={[ui.h4, { color: "#000", fontSize: 27 }]}>Notas Coquette</Text>
             </View>
             <HeaderHomeOptions setColumnNumber={setColumnNumber} columnNumber={columnNumber} />
         </View>
@@ -18,7 +18,8 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
 const styles = StyleSheet.create({
 
     img: {
-        width: 30,
-        height: 30,
+        width: 50,
+        height: 50,
+        transform: [{ rotate: "-12deg" }]
     },
 })
