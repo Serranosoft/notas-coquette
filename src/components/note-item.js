@@ -84,7 +84,7 @@ export default NoteItem;
 
 const styles = StyleSheet.create({
     container: {
-        height: 175,
+        height: 205,
         flex: 1 / 2,
         backgroundColor: "#fff",
         position: "relative",
