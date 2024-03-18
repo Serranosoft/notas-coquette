@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
 import HeaderNoteOptions from "../header-note-options";
+import useBackHandler from "../useBackHandler";
 
 export default function HeaderNote({ note, content, richEditorRef, setReadingMode, readingMode, autoSave }) {
 
@@ -57,6 +58,7 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
     }
 
     async function back() {
+        console.log("a?xd");
         if (autoSave) {
             await saveNote();
         }
@@ -68,6 +70,8 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
         await saveNote();
         ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
     }
+
+    useBackHandler(() => back());
 
     return (
         <View style={layout.header}>
