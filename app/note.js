@@ -66,10 +66,9 @@ export default function Note() {
     
     function handleFocusContent() {
         if (!focused) {
-            setFocused(true); 
-            return;
-        } 
-        richText.current.focusContentEditor();
+            setFocused(true);
+            richText.current.focusContentEditor();
+        }
     }
     
     const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
