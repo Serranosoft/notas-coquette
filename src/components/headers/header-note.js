@@ -96,8 +96,8 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
 const styles = StyleSheet.create({
 
     img: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
     },
 
     row: {

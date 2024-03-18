@@ -1,15 +1,18 @@
-import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { RichEditor } from "react-native-pell-rich-editor";
 import { useCallback, useEffect, useRef, useState } from "react";
 import GridBackground from "../src/components/grid";
 import HeaderNote from "../src/components/headers/header-note";
 import FontSize from "../src/components/rich-editor/font-size";
-import HeaderEditor from "../src/components/rich-editor/header-editor";
 import FooterEditor from "../src/components/rich-editor/footer-editor";
 import Separators from "../src/components/rich-editor/separators";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { madimi, ojuju, oswald, roboto } from "../src/components/rich-editor/fonts";
+import Colors from "../src/components/rich-editor/colors";
+import HeaderLeftEditor from "../src/components/rich-editor/header-left-editor";
+import HeaderRightEditor from "../src/components/rich-editor/header-right-editor";
+import { colors } from "../src/utils/styles";
 
 export default function Note() {
 
@@ -23,13 +26,16 @@ export default function Note() {
     const [separator, setSeparator] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
     const [openSeparators, setOpenSeparators] = useState(false);
+    const [openColors, setOpenColors] = useState(false);
     const [readingMode, setReadingMode] = useState(false);
     const [font, setFont] = useState(null);
+    const [color, setColor] = useState(null);
     const [autoSave, setAutoSave] = useState(true);
-    const [focused, setFocused] = useState(false); 
+    const [focused, setFocused] = useState(false);
 
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
+        getColor(); // Obtiene el color de la fuente en el que va a instanciar el editor
         getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
     }, [])
 
@@ -63,14 +69,22 @@ export default function Note() {
             setAutoSave(autoSave === "true" ? true : false);
         }
     }
-    
+
+    async function getColor() {
+        const color = await AsyncStorage.getItem("color");
+        if (color) {
+            console.log(color);
+            setColor(color);
+        }
+    }
+
     function handleFocusContent() {
         if (!focused) {
             setFocused(true);
             richText.current.focusContentEditor();
         }
     }
-    
+
     const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
 
     return (
@@ -88,21 +102,26 @@ export default function Note() {
             }} />
 
             {
-                font &&
+                font && color && 
                 <>
-                    <HeaderEditor
-                        editorRef={richText}
-                        fontSize={fontSize}
-                        setOpenFontSize={setOpenFontSize}
-                        openFontSize={openFontSize}
-                        openSeparators={openSeparators}
-                        setOpenSeparators={setOpenSeparators}
-                        hide={readingMode}
-                    />
+                    <View style={[styles.headerEditor, { height: readingMode ? 0 : "auto" }]}>
+                        <HeaderLeftEditor editorRef={richText} />
+                        <HeaderRightEditor 
+                            editorRef={richText}
+                            fontSize={fontSize}
+                            setOpenFontSize={setOpenFontSize}
+                            openFontSize={openFontSize}
+                            openSeparators={openSeparators}
+                            setOpenSeparators={setOpenSeparators}
+                            setOpenColors={setOpenColors}
+                            openColors={openColors}                        
+                        />
+                    </View>
 
 
-                    {openFontSize && !readingMode && <FontSize setFontSize={setFontSize} fontSize={fontSize} openSeparators={openSeparators} />}
-                    {openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
+                    { openFontSize && !readingMode && <FontSize setFontSize={setFontSize} fontSize={fontSize} openSeparators={openSeparators} />}
+                    { openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
+                    { openColors && !readingMode && <Colors setColor={setColor} color={color} />}
 
                     <View style={{ flex: 1, zIndex: 1 }}>
                         <ScrollView style={{ zIndex: 1 }} ref={scrollRef} onTouchEnd={handleFocusContent}>
@@ -111,7 +130,7 @@ export default function Note() {
                                 ref={richText}
                                 placeholder="Escribe tu nota..."
                                 onChange={(content) => setContent(content)}
-                                editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily};` }}
+                                editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 24px; font-family: ${font.fontFamily};`, color: color }}
                                 initialContentHTML={note.content && note.content}
                                 disabled={readingMode}
                                 onCursorPosition={handleCursorPosition}
@@ -137,4 +156,10 @@ const styles = StyleSheet.create({
     scroll: {
         flex: 1,
     },
+
+    headerEditor: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: colors.light,
+    }
 })
