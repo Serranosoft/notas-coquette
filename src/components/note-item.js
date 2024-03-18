@@ -55,7 +55,7 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
             <GridBackground />
             <View>
                 <View style={styles.header}>
-                    <Text style={[ui.muted, { color: "#8a8a8a" }]}>{note.date}</Text>
+                    <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(note.date).toLocaleDateString()}</Text>
                 </View>
                 <View style={styles.htmlPadding}>
                     <RenderHTML

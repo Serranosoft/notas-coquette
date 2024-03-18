@@ -45,20 +45,20 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
 
         const newNote = {
             id: id,
-            folder: "todos",
             content: content,
-            date: new Date().toLocaleDateString(),
+            date: new Date().getTime(),
         }
 
         notes.push(newNote);
     }
 
     function editNote(notes, id) {
-        notes.find((oldNote) => oldNote.id === id).content = content;
+        const noteEdited = notes.find((oldNote) => oldNote.id === id)
+        noteEdited.content = content;
+        noteEdited.date = new Date();
     }
 
     async function back() {
-        console.log("a?xd");
         if (autoSave) {
             await saveNote();
         }

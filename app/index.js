@@ -29,7 +29,7 @@ export default function Index() {
         if (notes.length > 0) {
             notes = JSON.parse(notes);
         }
-        setNotes([...notes]);
+        setNotes([...notes].sort((a, b) => b.date - a.date));
     }
 
     async function getGridLayout() {
