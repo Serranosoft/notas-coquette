@@ -39,6 +39,7 @@ export default function Layout() {
         
                 notes.push(newNote);
                 await AsyncStorage.setItem("notes", JSON.stringify(notes));
+                await AsyncStorage.setItem("FIRST_LAUNCH_APP", "true");
             }
         }
         setInitialNote();

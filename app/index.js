@@ -1,11 +1,11 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { Stack, useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import HeaderHome from "../src/components/headers/header-home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "../src/components/actions";
 import HomeButton from "../src/components/home-button";
-import { colors } from "../src/utils/styles";
+import { colors, ui } from "../src/utils/styles";
 import HomeFlatListItem from "../src/components/home-flatlist-item";
 
 export default function Index() {
@@ -46,19 +46,21 @@ export default function Index() {
 
                 <HomeButton />
 
-                {
-                    notes.length > 0 &&
-                    <View style={{ flex: 1 }}>
-                        <FlatList
-                            key={columnNumber}
-                            numColumns={columnNumber}
-                            data={notes}
-                            contentContainerStyle={{ gap: 32, paddingTop: 16, paddingBottom: 100 }}
-                            columnWrapperStyle={columnNumber > 1 && { gap: 12 }}
-                            renderItem={({item, index}) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />}
-                        />
-                    </View>
-                }
+                <View style={{ flex: 1 }}>
+                    {
+                        notes.length > 0 ?
+                            <FlatList
+                                key={columnNumber}
+                                numColumns={columnNumber}
+                                data={notes}
+                                contentContainerStyle={{ gap: 32, paddingTop: 16, paddingBottom: 100 }}
+                                columnWrapperStyle={columnNumber > 1 && { gap: 12 }}
+                                renderItem={({ item, index }) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />}
+                            />
+                            :
+                            <Text style={[ui.muted, { fontSize: 20 }]}>No tienes ninguna nota creada</Text>
+                    }
+                </View>
 
             </View>
 
