@@ -97,7 +97,7 @@ export default function Note() {
                     {openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
 
                     <View style={{ flex: 1, zIndex: 1 }}>
-                        <ScrollView style={{ zIndex: 1 }} ref={scrollRef}>
+                        <ScrollView style={{ zIndex: 1 }} ref={scrollRef} onTouchEnd={() => richText.current.focusContentEditor()}>
                             <RichEditor
                                 useContainer={true}
                                 ref={richText}
