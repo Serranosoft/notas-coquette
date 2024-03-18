@@ -26,6 +26,7 @@ export default function Note() {
     const [readingMode, setReadingMode] = useState(false);
     const [font, setFont] = useState(null);
     const [autoSave, setAutoSave] = useState(true);
+    const [focused, setFocused] = useState(false); 
 
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
@@ -62,7 +63,15 @@ export default function Note() {
             setAutoSave(autoSave === "true" ? true : false);
         }
     }
-
+    
+    function handleFocusContent() {
+        if (!focused) {
+            setFocused(true); 
+            return;
+        } 
+        richText.current.focusContentEditor();
+    }
+    
     const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
 
     return (
@@ -97,7 +106,7 @@ export default function Note() {
                     {openSeparators && !readingMode && <Separators setSeparator={setSeparator} />}
 
                     <View style={{ flex: 1, zIndex: 1 }}>
-                        <ScrollView style={{ zIndex: 1 }} ref={scrollRef} onTouchEnd={() => richText.current.focusContentEditor()}>
+                        <ScrollView style={{ zIndex: 1 }} ref={scrollRef} onTouchEnd={handleFocusContent}>
                             <RichEditor
                                 useContainer={true}
                                 ref={richText}
