@@ -3,11 +3,11 @@ import { editor } from "../../utils/styles";
 import { colorsLabel, fontSizeLabel, separatorsLabel} from "../../utils/labels";
 
 
-export default function HeaderRightEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, setOpenColors, openColors }) {
+export default function HeaderRightEditor({ editorRef, setOpenFontSize, setOpenSeparators, openSeparators, openFontSize, setOpenColors, openColors, readingMode }) {
 
     return (
         <RichToolbar
-            style={[editor.header]}
+            style={[editor.header, {height: readingMode ? 0 : "auto" }]}
             editor={editorRef}
             actions={["separator", "fontSize", "colors"]}
             iconSize={30}

@@ -73,7 +73,6 @@ export default function Note() {
     async function getColor() {
         const color = await AsyncStorage.getItem("color");
         if (color) {
-            console.log(color);
             setColor(color);
         }
     }
@@ -104,8 +103,8 @@ export default function Note() {
             {
                 font && color && 
                 <>
-                    <View style={[styles.headerEditor, { height: readingMode ? 0 : "auto" }]}>
-                        <HeaderLeftEditor editorRef={richText} />
+                    <View style={styles.headerEditor}>
+                        <HeaderLeftEditor editorRef={richText} readingMode={readingMode} />
                         <HeaderRightEditor 
                             editorRef={richText}
                             fontSize={fontSize}
@@ -114,7 +113,8 @@ export default function Note() {
                             openSeparators={openSeparators}
                             setOpenSeparators={setOpenSeparators}
                             setOpenColors={setOpenColors}
-                            openColors={openColors}                        
+                            openColors={openColors}
+                            readingMode={readingMode}
                         />
                     </View>
 
