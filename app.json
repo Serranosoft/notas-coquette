@@ -1,37 +1,38 @@
 {
-  "expo": {
-    "name": "notas-coquette",
-    "slug": "notas-coquette",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon-notes.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash-notes-coquette.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#FACCD6"
-    },
-    "scheme": "notas-coquette",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon-notes.png",
-        "backgroundColor": "#FACCD6"
-      },
-      "package": "com.paulaymanu113.notascoquette"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "c19b7487-3441-46c9-aaef-1b2d4f52c873"
-      }
+    "expo": {
+        "name": "Notas Coquette",
+        "slug": "notas-coquette",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon-notes.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./assets/splash-notes-coquette.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#FACCD6"
+        },
+        "scheme": "notas-coquette",
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/icon-notes.png",
+                "backgroundColor": "#FACCD6"
+            },
+            "versionCode": 2,
+            "package": "com.paulaymanu113.notascoquette"
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "c19b7487-3441-46c9-aaef-1b2d4f52c873"
+            }
+        }
     }
-  }
 }

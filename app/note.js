@@ -74,6 +74,8 @@ export default function Note() {
         const color = await AsyncStorage.getItem("color");
         if (color) {
             setColor(color);
+        } else {
+            setColor("#000")
         }
     }
 
