@@ -54,7 +54,7 @@ export default function HeaderNoteContainer({ note, content, richText, setReadin
     function editNote(notes, id) {
         const noteEdited = notes.find((oldNote) => oldNote.id === id)
         noteEdited.content = content;
-        noteEdited.date = new Date();
+        noteEdited.date = new Date().getTime();
     }
 
     async function back() {

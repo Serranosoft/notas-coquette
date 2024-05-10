@@ -1,5 +1,5 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import { components, header, layout, padding, ui } from "../utils/styles";
+import { Text, View } from "react-native";
+import { components, layout, ui } from "../utils/styles";
 import HeaderHomeOptionsContainer from "./header-home-options-container";
 
 export default function HeaderHome({ setColumnNumber, columnNumber }) {
