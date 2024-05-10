@@ -1,21 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors, ui } from "../../utils/styles";
-import { useEffect, useState } from "react";
+import { SIZES } from "./font-size-container";
 
-export const SIZES = { "10": 1, "13": 2, "16": 3, "18": 4, "24": 5, "32": 6, "48": 7 }
 
-export default function FontSize({ setFontSize, fontSize, openSeparators }) {
+export default function FontSize({ selected, openSeparators, handleFontSize }) {
 
-    const [selected, setSelected] = useState(null);
-
-    function handleFontSize(size, index) {
-        setFontSize(size);
-        setSelected(index);
-    }
-
-    useEffect(() => {
-        setSelected(fontSize);
-    }, [])
 
     return (
         <View style={[styles.container, { borderBottomWidth: openSeparators ? 0 : 2}]}>

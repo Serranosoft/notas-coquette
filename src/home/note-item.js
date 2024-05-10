@@ -1,15 +1,14 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
-import GridBackground from "./grid";
-import RenderHTML, { HTMLContentModel, HTMLElementModel } from "react-native-render-html";
-import React, { useState } from "react";
-import { Path, Svg } from "react-native-svg";
-import { colors, ui } from "../utils/styles";
-import { router } from "expo-router";
 import { LinearGradient } from 'expo-linear-gradient';
+import { colors, ui } from "../utils/styles";
+import { Path, Svg } from "react-native-svg";
+import React from "react";
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import GridBackground from '../components/grid';
+import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';
 
 const { height } = Dimensions.get('window');
 
-function NoteItem({ note, itemsSelected, setItemsSelected }) {
+export default function NoteItem({ note, selected, onPress, highlight }) {
 
     const { width } = useWindowDimensions();
     const source = { html: note.content }
@@ -18,40 +17,11 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
         'font': HTMLElementModel.fromCustomModel({ tagName: 'font', mixedUAStyles: { fontSize: 18 }, contentModel: HTMLContentModel.textual })
     };
 
-    const [selected, setSelected] = useState(false);
-
-    function highlight() {
-
-        setSelected(true);
-        if (!selected) {
-            setItemsSelected((itemsSelected) => [...itemsSelected, note.id]);
-        } else {
-            unhighlight();
-        }
-    }
-
-    function unhighlight() {
-        if (selected) {
-            setSelected(false);
-            const updatedSelected = itemsSelected.filter(item => item !== note.id);
-            setItemsSelected(updatedSelected);
-        }
-    }
-
-    function onPress() {
-        if (itemsSelected.length > 0) {
-            // Hace highlight o unhighlight, depende.
-            highlight();
-        } else {
-            // Accede a la nota.
-            router.push({ pathname: "/note", params: note });
-            unhighlight();
-        }
-    }
+    const isSelected = selected.includes(note.id);
 
     return (
 
-        <TouchableOpacity style={[styles.container, selected && styles.selected]} onLongPress={highlight} onPress={onPress}>
+        <TouchableOpacity style={[styles.container, isSelected && styles.selected]} onLongPress={highlight} onPress={onPress}>
             <GridBackground />
             <View>
                 <View style={styles.header}>
@@ -65,11 +35,11 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
                     />
                 </View>
             </View>
-            {itemsSelected < 1 && <LinearGradient colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']} style={styles.gradient} />}
+            {selected.length < 1 && <LinearGradient colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']} style={styles.gradient} />}
             {
-                itemsSelected.length > 0 &&
+                selected.length > 0 &&
                 <View style={styles.selectedBox}>
-                    {selected &&
+                    {isSelected &&
                         <Svg width={32} height={32} viewBox="0 0 40 40">
                             <Path d="M15.48 28.62a1 1 0 01-.71-.29l-7.54-7.54a1 1 0 010-1.41 1 1 0 011.42 0l6.83 6.83L32.12 9.57a1 1 0 011.41 0 1 1 0 010 1.42L16.18 28.33a1 1 0 01-.7.29z" />
                         </Svg>
@@ -80,7 +50,6 @@ function NoteItem({ note, itemsSelected, setItemsSelected }) {
     )
 }
 
-export default NoteItem;
 
 const styles = StyleSheet.create({
     container: {

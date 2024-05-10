@@ -1,13 +1,12 @@
 import { useRouter } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
-import { layout, ui } from "../../utils/styles";
+import { ToastAndroid } from "react-native";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
-import HeaderNoteOptions from "../header-note-options";
-import useBackHandler from "../useBackHandler";
+import HeaderNote from "./header-note";
+import useBackHandler from "../components/use-back-handler";
 
-export default function HeaderNote({ note, content, richEditorRef, setReadingMode, readingMode, autoSave }) {
+export default function HeaderNoteContainer({ note, content, richText, setReadingMode, readingMode, autoSave }) {
 
     const router = useRouter();
     const [noteSavedId, setNoteSavedId] = useState(null);
@@ -66,7 +65,7 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
     }
 
     async function save() {
-        richEditorRef.current.dismissKeyboard();
+        richText.current.dismissKeyboard();
         await saveNote();
         ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
     }
@@ -74,35 +73,6 @@ export default function HeaderNote({ note, content, richEditorRef, setReadingMod
     useBackHandler(() => back());
 
     return (
-        <View style={layout.header}>
-            <View style={layout.title}>
-                <Pressable onPress={back}>
-                    <Image style={styles.img} source={require("../../../assets/back.png")} />
-                </Pressable>
-                <Text style={[ui.h4, { color: "#000" }]}>{note.content ? "Editar nota" : "Añadir nota"}</Text>
-            </View>
-
-            <View style={styles.row}>
-                <TouchableOpacity onPress={save}>
-                    <Image style={styles.img} source={require("../../../assets/save.png")}></Image>
-                </TouchableOpacity>
-                <HeaderNoteOptions setReadingMode={setReadingMode} readingMode={readingMode} noteSavedId={noteSavedId} />
-            </View>
-
-        </View>
+        <HeaderNote {...{ note, save, back, setReadingMode, readingMode, noteSavedId}} />
     )
 }
-
-const styles = StyleSheet.create({
-
-    img: {
-        width: 25,
-        height: 25,
-    },
-
-    row: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 12
-    }
-})

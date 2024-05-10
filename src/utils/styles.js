@@ -3,7 +3,6 @@ export const colors = {
     selected: "rgba(230, 34, 114, 0.25)",
     light: "#FACCD6",
     dark: "#cc527a"
-
 }
 
 export const ui = {
@@ -38,25 +37,55 @@ export const ui = {
         color: "#fff",
         fontSize: 22,
     },
+    black: {
+        color: "#000",
+    }
 }
 
 export const layout = {
-    header: {
-        backgroundColor: colors.light,
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 8,
-        paddingHorizontal: 12,
-        paddingVertical: 12,
+    flex: {
+        flex: 1,
     },
 
     title: {
         flexDirection: "row",
         alignItems: "center",
         gap: 8
-    }
+    },
+
+    paddingHorizontal: {
+        paddingHorizontal: 16
+    },
+
+    backgroundLight: {
+        backgroundColor: colors.light,
+    },
+
+    backgroundWhite: {
+        backgroundColor: "#fff",
+    },
+
+    contentList: {
+        gap: 32, 
+        paddingTop: 16, 
+        paddingBottom: 100
+    },
+
+    zIndex: {
+        zIndex: 1,
+    },
+
+    row: {
+        flexDirection: "row",
+    },
+
+    justifyBetween: {
+        justifyContent: "space-between",
+    },
+
+    alignCenter: {
+        alignItems: "center",
+    }    
 }
 
 export const editor = {
@@ -67,7 +96,7 @@ export const editor = {
     header: {
         height: 50,
         alignItems: "flex-start",
-        paddingHorizontal: 12,
+        paddingHorizontal: 8,
         zIndex: 99,
         backgroundColor: colors.light,
     },
@@ -76,8 +105,6 @@ export const editor = {
         width: "90%",
         alignSelf: "center",
         justifyContent: "center",
-        // position: "absolute",
-        // bottom: 16,
         paddingVertical: 12,
         borderRadius: 100,
         shadowColor: "#000",
@@ -93,3 +120,82 @@ export const editor = {
     }
 }
 
+export const header = {
+    img: {
+        width: 23,
+        height: 23,
+    }
+}
+
+
+export const sizes = {
+    medium: {
+        fontSize: 20
+    }
+}
+
+export const gap = {
+    small: {
+        gap: 8
+    },
+
+    medium: {
+        gap: 12
+    },
+
+    big: {
+        gap: 16
+    }
+}
+
+export const padding = {
+    smallHorizontal: {
+        paddingHorizontal: 8
+    },
+
+    mediumHorizontal: {
+        paddingHorizontal: 12
+    },
+
+    bigHorizontal: {
+        paddingHorizontal: 16
+    },
+
+    smallVertical: {
+        paddingVertical: 8,
+    },
+    mediumVertical: {
+        paddingVertical: 12,
+    },
+    bigVertical: {
+        paddingVertical: 16,
+    },
+    
+    smallTop: {
+        paddingTop: 8,
+    },
+    mediumTop: {
+        paddingTop: 12,
+    },
+    bigTop: {
+        paddingTop: 16,
+    },
+}
+
+export const components = {
+    header: [
+        layout.row, 
+        layout.justifyBetween, 
+        layout.alignCenter, 
+        layout.backgroundLight, 
+        padding.mediumHorizontal,
+        padding.mediumVertical, 
+        gap.small
+    ],
+
+    row: [
+        layout.row,
+        layout.alignCenter,
+        gap.medium,
+    ],
+}

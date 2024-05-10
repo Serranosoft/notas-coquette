@@ -1,17 +1,15 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
-import { editor, ui } from "../../utils/styles";
-import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, italicLabel, listLabel, underlineLabel } from "../../utils/labels";
+import { editor, padding } from "../utils/styles";
+import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, italicLabel, listLabel, underlineLabel } from "../utils/labels";
 import { View } from "react-native";
-import GridBackground from "../grid";
 
-export default function FooterEditor({ editorRef, hide }) {
+export default function FooterEditor({ richText, readingMode }) {
 
     return (
-        <View style={{ paddingTop: 23, height: hide ? 0 : "auto" }}>
-            {/* <GridBackground /> */}
+        <View style={{ paddingTop: padding.bigTop, height: readingMode ? 0 : "auto" }}>
             <RichToolbar
                 style={[editor.richBar, editor.footer, { height: "auto" }]}
-                editor={editorRef}
+                editor={richText}
                 selectedIconTint={"rgba(255, 255, 255, 0.75)"}
                 iconTint={"transparent"}
                 actions={[actions.setBold, actions.setItalic, actions.setUnderline, actions.alignLeft, actions.alignCenter, actions.alignRight, actions.insertBulletsList]}
