@@ -1,8 +1,13 @@
 import NoteItem from "./note-item";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { router } from "expo-router";
+import LockScreenModal from "../modals/lock-screen-modal";
 
 export default function NoteItemContainer({ note, selected, setSelected }) {
+
+    const [unlocked, setUnlocked] = useState(null);
+    const [lockModal, setLockModal] = useState(false);
+    const [pwd, setPwd] = useState("");
 
     function highlight() {
         if (selected.includes(note.id)) {
@@ -18,9 +23,31 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
             highlight();
         } else {
             // Accede a la nota.
-            router.push({ pathname: "/note", params: note });
+            if (note.hasOwnProperty("pwd") && note.pwd) {
+                setLockModal(true);
+            } else {
+                router.push({ pathname: "/note", params: note });
+            }
         }
     }
 
-    return <NoteItem {...{note, selected, onPress, highlight}} />
+    useEffect(() => {
+        if (unlocked === true) {
+            router.push({ pathname: "/note", params: note });
+            onPush();
+        }
+        setPwd("");
+    }, [unlocked])
+
+    function onPush() {
+        setLockModal(false);
+        setUnlocked(null);
+    }
+
+    return (
+        <>
+            <LockScreenModal {...{ isUnlock: true, note, lockModal, setLockModal, setUnlocked, unlocked, pwd, setPwd }}/>
+            <NoteItem {...{ note, selected, onPress, highlight }} />
+        </>
+    )
 }

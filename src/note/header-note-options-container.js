@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import HeaderNoteOptions from "./header-note-options";
 
-export default function HeaderNoteOptionsContainer({ setReadingMode, readingMode, noteSavedId }) {
+export default function HeaderNoteOptionsContainer({ setReadingMode, readingMode, noteSavedId, lock }) {
 
     const [visible, setVisible] = useState(false);
 
@@ -27,7 +27,7 @@ export default function HeaderNoteOptionsContainer({ setReadingMode, readingMode
     }
 
     return (
-        <HeaderNoteOptions {...{ showMenu, updateReadingMode, readingMode, visible, hideMenu, remove }}/>
+        <HeaderNoteOptions {...{ showMenu, updateReadingMode, readingMode, visible, hideMenu, remove, lock }}/>
     )
 }
 

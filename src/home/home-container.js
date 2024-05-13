@@ -30,6 +30,10 @@ export default function HomeContainer() {
         getGridLayout();
     }, [])
 
+    useEffect(() => {
+        console.log(notes);
+    }, [notes])
+
     async function getNotes() {
         let notes = await AsyncStorage.getItem("notes") || [];
         if (notes.length > 0) {

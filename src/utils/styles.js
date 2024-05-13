@@ -39,7 +39,7 @@ export const ui = {
     },
     black: {
         color: "#000",
-    }
+    },
 }
 
 export const layout = {
@@ -198,4 +198,9 @@ export const components = {
         layout.alignCenter,
         gap.medium,
     ],
+
+    error: [
+        ui.text,
+        { color: "red" }
+    ]
 }
