@@ -9,7 +9,7 @@ export default function HeaderHome({ setColumnNumber, columnNumber }) {
             <View style={layout.title}>
                 <Text style={[ui.h4, ui.black]}>Mis notas</Text>
             </View>
-            <HeaderHomeOptionsContainer setColumnNumber={setColumnNumber} columnNumber={columnNumber} />
+            <HeaderHomeOptionsContainer {...{setColumnNumber, columnNumber }} />
         </View>
     )
 }

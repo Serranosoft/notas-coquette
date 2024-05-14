@@ -35,7 +35,7 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
 
     return (
         <>
-            <HeaderNoteOptions {...{ showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }} />
+            <HeaderNoteOptions {...{ note, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }} />
             <LockScreenModal {...{ note, isUnlock: false, lockModal, setLockModal, pwd, setPwd }} />
         </>
     )

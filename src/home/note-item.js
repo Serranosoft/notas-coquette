@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { colors, ui } from "../utils/styles";
 import { Path, Svg } from "react-native-svg";
 import React from "react";
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import GridBackground from '../components/grid';
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';
 
@@ -24,16 +24,25 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
         <TouchableOpacity style={[styles.container, isSelected && styles.selected]} onLongPress={highlight} onPress={onPress}>
             <GridBackground />
             <View>
-                <View style={styles.header}>
-                    <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(note.date).toLocaleDateString()}</Text>
-                </View>
-                <View style={styles.htmlPadding}>
-                    <RenderHTML
-                        contentWidth={width}
-                        source={source}
-                        customHTMLElementModels={customHTMLElementModels}
-                    />
-                </View>
+                {
+                    note.pwd ?
+                        <View style={styles.screenBlock}>
+                            <Image source={require("../../assets/lock.png")} />
+                        </View>
+                        :
+                        <>
+                            <View style={styles.header}>
+                                <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(note.date).toLocaleDateString()}</Text>
+                            </View>
+                            <View style={styles.htmlPadding}>
+                                <RenderHTML
+                                    contentWidth={width}
+                                    source={source}
+                                    customHTMLElementModels={customHTMLElementModels}
+                                />
+                            </View>
+                        </>
+                }
             </View>
             {selected.length < 1 && <LinearGradient colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']} style={styles.gradient} />}
             {
@@ -98,4 +107,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.dark
     },
+    screenBlock: {
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: 0.4,
+    }
 })

@@ -4,7 +4,7 @@ import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
 import { Path, Svg } from "react-native-svg";
 import { components, header } from "../utils/styles";
 
-export default function HeaderNoteOptions({ showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }) {
+export default function HeaderNoteOptions({ note, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }) {
 
     return (
         <Menu
@@ -31,10 +31,18 @@ export default function HeaderNoteOptions({ showMenu, updateReadingMode, reading
             </MenuItem>
             <MenuItem onPress={showLockModal}>
                 <View style={components.row}>
-                    <Svg style={header.img} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <Path d="M10 18a1 1 0 001-1v-6a1 1 0 00-2 0v6a1 1 0 001 1zM20 6h-4V5a3 3 0 00-3-3h-2a3 3 0 00-3 3v1H4a1 1 0 000 2h1v11a3 3 0 003 3h8a3 3 0 003-3V8h1a1 1 0 000-2zM10 5a1 1 0 011-1h2a1 1 0 011 1v1h-4zm7 14a1 1 0 01-1 1H8a1 1 0 01-1-1V8h10zm-3-1a1 1 0 001-1v-6a1 1 0 00-2 0v6a1 1 0 001 1z" />
-                    </Svg>
-                    <Text>Bloquear nota</Text>
+                    {
+                        note.pwd ?
+                        <>
+                            <Image style={header.img} source={require("../../assets/unlock.png")} />
+                            <Text>Desbloquear nota</Text>
+                        </>
+                        :
+                        <>
+                            <Image style={header.img} source={require("../../assets/lock.png")} />
+                            <Text>Bloquear nota</Text>
+                        </>
+                    }
                 </View>
             </MenuItem>
             <MenuDivider />
