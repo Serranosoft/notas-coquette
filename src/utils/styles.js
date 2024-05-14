@@ -40,6 +40,9 @@ export const ui = {
     black: {
         color: "#000",
     },
+    center: {
+        textAlign: "center"
+    }
 }
 
 export const layout = {

@@ -4,7 +4,7 @@ import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
 import { Path, Svg } from "react-native-svg";
 import { components, header } from "../utils/styles";
 
-export default function HeaderNoteOptions({ note, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }) {
+export default function HeaderNoteOptions({ showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked }) {
 
     return (
         <Menu
@@ -29,22 +29,22 @@ export default function HeaderNoteOptions({ note, showMenu, updateReadingMode, r
                     <Text>Eliminar nota</Text>
                 </View>
             </MenuItem>
-            <MenuItem onPress={showLockModal}>
-                <View style={components.row}>
-                    {
-                        note.pwd ?
-                        <>
+            {
+                noteLocked ?
+                    <MenuItem onPress={unlock}>
+                        <View style={components.row}>
                             <Image style={header.img} source={require("../../assets/unlock.png")} />
                             <Text>Desbloquear nota</Text>
-                        </>
-                        :
-                        <>
+                        </View>
+                    </MenuItem>
+                    :
+                    <MenuItem onPress={showLockModal}>
+                        <View style={components.row}>
                             <Image style={header.img} source={require("../../assets/lock.png")} />
                             <Text>Bloquear nota</Text>
-                        </>
-                    }
-                </View>
-            </MenuItem>
+                        </View>
+                    </MenuItem>
+            }
             <MenuDivider />
             <MenuItem onPress={() => router.push({ pathname: "settings", params: true })}>
                 <View style={components.row}>

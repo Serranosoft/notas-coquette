@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native"
 import { Modal } from "react-native"
 import { components, ui } from "../utils/styles"
 import SmoothPinCodeInput from "react-native-smooth-pincode-input"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 export default function LockScreenModal({ note, isUnlock = false, lockModal, setLockModal, pwd, setPwd, setUnlocked, unlocked }) {
 
@@ -45,29 +45,34 @@ export default function LockScreenModal({ note, isUnlock = false, lockModal, set
             onRequestClose={close}>
             <View style={styles.center}>
                 <View style={styles.wrapper}>
-                    <TouchableOpacity style={styles.close} onPress={close}>
-                        <Text style={[ui.h4, ui.black]}>&#10006;</Text>
-                    </TouchableOpacity>
-                    <View style={styles.content}>
-                        <Text style={[ui.h2, ui.black]}>Introduce el código PIN</Text>
-                        { unlocked === false && <Text style={[ui.text, components.error]}>PIN incorrecto</Text> }
-                        <SmoothPinCodeInput
-                            value={pwd}
-                            onTextChange={pwd => setPwd(pwd)}
-                            cellStyle={{
-                                borderWidth: 2,
-                                borderRadius: 8,
-                            }}
-                            cellStyleFocused={{
-                                borderColor: '#cc527a',
-                                backgroundColor: '#FACCD6',
-                            }}
-                            textStyle={{
-                                fontSize: 40,
-                                color: '#000'
-                            }}
-                            cellSize={65}
-                        />
+                    <View style={styles.border}>
+                        <TouchableOpacity style={styles.close} onPress={close}>
+                            <Text style={[ui.h4, ui.black]}>&#10006;</Text>
+                        </TouchableOpacity>
+                        <View style={styles.content}>
+                            <Text style={[ui.h2, ui.black]}>Introduce el código PIN</Text>
+                            { isUnlock && <Text style={[ui.muted, ui.center]}>Esta nota está bloqueada, introduce el código PIN para poder acceder a ella</Text> }
+                            {unlocked === false && <Text style={[ui.text, components.error]}>PIN incorrecto</Text>}
+                            <View style={styles.pinWrapper}>
+                                <SmoothPinCodeInput
+                                    value={pwd}
+                                    onTextChange={pwd => setPwd(pwd)}
+                                    cellStyle={{
+                                        borderWidth: 2,
+                                        borderRadius: 8,
+                                    }}
+                                    cellStyleFocused={{
+                                        // borderColor: '#cc527a',
+                                        backgroundColor: '#cc527a',
+                                    }}
+                                    textStyle={{
+                                        fontSize: 40,
+                                        color: '#000'
+                                    }}
+                                    cellSize={65}
+                                />
+                            </View>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -86,8 +91,8 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         width: "90%",
-        paddingHorizontal: 16,
-        paddingVertical: 24,
+        paddingHorizontal: 4,
+        paddingVertical: 4,
         gap: 8,
         backgroundColor: '#fafafa',
         borderRadius: 20,
@@ -103,13 +108,26 @@ const styles = StyleSheet.create({
 
     close: {
         position: "absolute",
-        top: 2,
-        right: 12,
+        top: 0,
+        right: 8,
+    },
+
+    border: {
+        borderWidth: 6,
+        borderRadius: 20,
+        borderColor: "#FACCD6",
+        paddingHorizontal: 24,
+        paddingVertical: 32,
+
     },
 
     content: {
         marginTop: 32,
-        gap: 48,
+        gap: 8,
         alignItems: "center",
+    },
+
+    pinWrapper: {
+        marginTop: 24,
     }
 })

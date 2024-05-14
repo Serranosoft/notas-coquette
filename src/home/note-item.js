@@ -25,9 +25,9 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
             <GridBackground />
             <View>
                 {
-                    note.pwd ?
+                    note.hasOwnProperty("pwd") && note.pwd.length > 0 ?
                         <View style={styles.screenBlock}>
-                            <Image source={require("../../assets/lock.png")} />
+                            <Image source={require("../../assets/lock-home.png")} />
                         </View>
                         :
                         <>

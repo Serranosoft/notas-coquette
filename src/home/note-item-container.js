@@ -23,7 +23,7 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
             highlight();
         } else {
             // Accede a la nota.
-            if (note.hasOwnProperty("pwd") && note.pwd) {
+            if (note.hasOwnProperty("pwd") && note.pwd.length > 0) {
                 setLockModal(true);
             } else {
                 router.push({ pathname: "/note", params: note });

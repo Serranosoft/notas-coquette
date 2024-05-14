@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderNoteOptions from "./header-note-options";
 import LockScreenModal from "../modals/lock-screen-modal";
 
@@ -16,12 +16,20 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
     const showLockModal = () => setLockModal(true);
     const [pwd, setPwd] = useState("");
 
+    const [noteLocked, setNoteLocked] = useState(false);
 
     function updateReadingMode() {
         setReadingMode(!readingMode);
         hideMenu();
     }
 
+    function unlock() {
+        note.pwd = "";
+        setPwd("");
+        setMenuVisible(false);
+        setNoteLocked(false)
+    }
+    
     async function remove() {
         let notes = await AsyncStorage.getItem("notes") || [];
         if (notes.length > 0) {
@@ -33,9 +41,27 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
         router.push("/");
     }
 
+
+    useEffect(() => {
+        if (note && note.hasOwnProperty("pwd") && note.pwd.length > 0) {
+            setNoteLocked(true);
+            setPwd(note.pwd);
+        } else {
+            setNoteLocked(false);
+        }
+        setMenuVisible(false);
+    }, [note])
+
+    useEffect(() => {
+        if (pwd.length === 4) {
+            setNoteLocked(true);
+            setMenuVisible(false);
+        }
+    }, [pwd])
+
     return (
         <>
-            <HeaderNoteOptions {...{ note, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }} />
+            <HeaderNoteOptions {...{ note, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked }} />
             <LockScreenModal {...{ note, isUnlock: false, lockModal, setLockModal, pwd, setPwd }} />
         </>
     )

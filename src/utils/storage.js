@@ -11,9 +11,7 @@ export async function save({ note, noteSavedId }) {
         if (oldNote) {
             oldNote.content = note.content;
             oldNote.date = new Date().getTime();
-            if (note.pwd) {
-                oldNote.pwd = note.pwd;
-            }
+            oldNote.pwd = note.pwd;
         } else {
             notes.push(note);
         }
