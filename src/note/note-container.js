@@ -36,7 +36,7 @@ export default function NoteContainer() {
             setNote(noteReceived);
             setColor(noteReceived.color);
         } else {
-            const newNote = { id: uuid.v4(), content: "", date: new Date(), pwd: "", color: "#000" }
+            const newNote = { id: uuid.v4(), content: "", date: new Date().getTime(), pwd: "", color: "#000" }
             setNote(newNote);
             setColor(newNote.color);
         }

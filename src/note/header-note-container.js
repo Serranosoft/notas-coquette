@@ -18,7 +18,7 @@ export default function HeaderNoteContainer({ note, richText, setReadingMode, re
     
     async function back() {
         if (autoSave) {
-            saveNote();
+            await saveNote();
         }
         router.back();
     }
