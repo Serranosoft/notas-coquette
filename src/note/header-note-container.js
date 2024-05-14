@@ -25,8 +25,8 @@ export default function HeaderNoteContainer({ note, richText, setReadingMode, re
 
     async function saveNote() {
         richText.current.dismissKeyboard();
-        await save({ ...{ note, noteSavedId, setNoteSavedId } });
-        onSave();
+        const isSaved = await save({ ...{ note, noteSavedId, setNoteSavedId } });
+        isSaved && onSave();
     }
 
     async function onSave() {

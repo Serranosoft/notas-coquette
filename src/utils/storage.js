@@ -20,5 +20,8 @@ export async function save({ note, noteSavedId }) {
     
         const jsonValue = JSON.stringify(notes);
         await AsyncStorage.setItem("notes", jsonValue);
+
+        return true;
     }
+    return false;
 }
