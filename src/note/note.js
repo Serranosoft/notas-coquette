@@ -13,7 +13,6 @@ export default function Note(
     {
         note,
         readingMode,
-        setContent,
         setFontSize,
         openFontSize,
         setOpenFontSize,
@@ -65,7 +64,7 @@ export default function Note(
                                 useContainer={true}
                                 ref={richText}
                                 placeholder="Escribe tu nota..."
-                                onChange={(content) => setContent(content)}
+                                onChange={(content) => note.content = content}
                                 editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
                                 initialContentHTML={note.content && note.content}
                                 disabled={readingMode}

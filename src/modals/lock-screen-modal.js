@@ -6,17 +6,13 @@ import { components, ui } from "../utils/styles"
 import SmoothPinCodeInput from "react-native-smooth-pincode-input"
 import { useEffect, useState } from "react"
 
-export default function LockScreenModal({ note, isUnlock = false, saveNote, lockModal, setLockModal, pwd, setPwd, setUnlocked, unlocked }) {
+export default function LockScreenModal({ note, isUnlock = false, lockModal, setLockModal, pwd, setPwd, setUnlocked, unlocked }) {
 
     useEffect(() => {
-        console.log(pwd);
-        console.log(isUnlock);
-        console.log(note);
         if (pwd.length === 4) {
             if (isUnlock) {
                 if (note.pwd) {
                     if (note.pwd === pwd) {
-                        console.log("trigger setUnlocked a true");
                         setUnlocked(true);
                     } else {
                         setUnlocked(false);
@@ -27,7 +23,7 @@ export default function LockScreenModal({ note, isUnlock = false, saveNote, lock
                     setPwd("");
                 }
             } else {
-                saveNote();
+                note.pwd = pwd;
                 setLockModal(false);
             }
         }

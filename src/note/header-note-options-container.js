@@ -2,13 +2,20 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { useState } from "react";
 import HeaderNoteOptions from "./header-note-options";
+import LockScreenModal from "../modals/lock-screen-modal";
 
-export default function HeaderNoteOptionsContainer({ setReadingMode, readingMode, noteSavedId, lock }) {
+export default function HeaderNoteOptionsContainer({ note, setReadingMode, readingMode, noteSavedId }) {
 
-    const [visible, setVisible] = useState(false);
+    // Estados para abrir el menu
+    const [menuVisible, setMenuVisible] = useState(false);
+    const showMenu = () => setMenuVisible(true);
+    const hideMenu = () => setMenuVisible(false);
 
-    const showMenu = () => setVisible(true);
-    const hideMenu = () => setVisible(false);
+    // Estados para abrir el modal de bloquear nota
+    const [lockModal, setLockModal] = useState(false);
+    const showLockModal = () => setLockModal(true);
+    const [pwd, setPwd] = useState("");
+
 
     function updateReadingMode() {
         setReadingMode(!readingMode);
@@ -27,7 +34,10 @@ export default function HeaderNoteOptionsContainer({ setReadingMode, readingMode
     }
 
     return (
-        <HeaderNoteOptions {...{ showMenu, updateReadingMode, readingMode, visible, hideMenu, remove, lock }}/>
+        <>
+            <HeaderNoteOptions {...{ showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal }} />
+            <LockScreenModal {...{ note, isUnlock: false, lockModal, setLockModal, pwd, setPwd }} />
+        </>
     )
 }
 

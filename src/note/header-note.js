@@ -2,7 +2,7 @@ import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { components, header, layout, ui } from "../utils/styles";
 import HeaderNoteOptionsContainer from "./header-note-options-container";
 
-export default function HeaderNote({ note, saveNote, back, setReadingMode, readingMode, noteSavedId, lock }) {
+export default function HeaderNote({ note, saveNote, back, setReadingMode, readingMode, noteSavedId }) {
 
     return (
         <View style={components.header}>
@@ -17,7 +17,7 @@ export default function HeaderNote({ note, saveNote, back, setReadingMode, readi
                 <TouchableOpacity onPress={saveNote}>
                     <Image style={header.img} source={require("../../assets/save.png")}></Image>
                 </TouchableOpacity>
-                <HeaderNoteOptionsContainer {...{ setReadingMode, readingMode, noteSavedId, lock }} />
+                <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId }} />
             </View>
 
         </View>

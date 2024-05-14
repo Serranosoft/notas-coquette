@@ -4,15 +4,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
+import uuid from 'react-native-uuid';
 
 export default function NoteContainer() {
 
-    const note = useLocalSearchParams();
+    const noteReceived = useLocalSearchParams();
 
     const richText = useRef(null);
     const scrollRef = useRef(null);
 
-    const [content, setContent] = useState("");
+    const [note, setNote] = useState({});
     const [fontSize, setFontSize] = useState(4);
     const [separator, setSeparator] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
@@ -30,6 +31,14 @@ export default function NoteContainer() {
         getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
     }, [])
 
+    useEffect(() => {
+        if (noteReceived.hasOwnProperty("id")) {
+            setNote(noteReceived);
+        } else {
+            const newNote = { id: uuid.v4(), content: "", date: new Date(), pwd: "" }
+            setNote(newNote);
+        }
+    }, [noteReceived])
 
     async function getFont() {
         let font = {};
@@ -83,13 +92,13 @@ export default function NoteContainer() {
     return (
         <>
             <Stack.Screen options={{
-                header: () => <HeaderNoteContainer {...{note, content, richText, setReadingMode, readingMode, autoSave }} />
+                header: () => <HeaderNoteContainer {...{note, richText, setReadingMode, readingMode, autoSave }} />
             }} />
+
             <Note {...
                 {
                     note,
                     readingMode,
-                    setContent,
                     setFontSize,
                     openFontSize,
                     setOpenFontSize,
