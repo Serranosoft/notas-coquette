@@ -2,6 +2,8 @@ import { FlatList, Image, StyleSheet, Switch, Text, TouchableOpacity, View } fro
 import { colors, gap, layout, padding, ui } from "../utils/styles";
 import GridBackground from "../components/grid";
 import { FONTS } from "./settings-container";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import { bannerId } from "../utils/constants";
 
 export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSave, typo }) {
 
@@ -23,6 +25,8 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
                 <Text style={ui.muted}>Al cambiar de tipografía se le enviará a la pantalla de inicio para cargar la nueva fuente</Text>
 
             </View>
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+
             <View style={styles.box}>
                 <Text style={[ui.h4, ui.black]}>Ajustes del editor</Text>
                 <View style={styles.row}>
@@ -36,6 +40,7 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
                     />
                 </View>
             </View>
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
             <View style={styles.box}>
                 <Text style={[ui.h4, ui.black]}>Ajustes de la aplicación</Text>
                 <View style={styles.row}>
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
     },
 
     box: {
-        gap: 16,
+        gap: 12,
         backgroundColor: "#fff",
         paddingVertical: 16,
         paddingHorizontal: 24,
