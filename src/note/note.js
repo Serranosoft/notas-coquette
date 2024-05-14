@@ -35,7 +35,7 @@ export default function Note(
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
             {
-                font && color && autoSave &&
+                font && autoSave &&
                 <>
                     <View style={[layout.row, layout.justifyBetween, layout.backgroundLight]}>
                         <HeaderLeftEditor {...{ richText, readingMode }} />
@@ -56,7 +56,7 @@ export default function Note(
 
                     {openFontSize && !readingMode && <FontSizeContainer {...{ setFontSize, fontSize, openSeparators }} />}
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
-                    {openColors && !readingMode && <Colors {...{ setColor, color }} />}
+                    {openColors && !readingMode && <Colors {...{ note, setColor }} />}
 
                     <View style={[layout.flex, layout.zIndex]}>
                         <ScrollView style={layout.zIndex} ref={scrollRef} onTouchEnd={handleFocusContent}>

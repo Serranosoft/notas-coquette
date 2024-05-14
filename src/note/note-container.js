@@ -27,16 +27,18 @@ export default function NoteContainer() {
 
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
-        getColor(); // Obtiene el color de la fuente en el que va a instanciar el editor
         getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
     }, [])
 
     useEffect(() => {
         if (noteReceived.hasOwnProperty("id")) {
+            if (!noteReceived.hasOwnProperty("color")) noteReceived.color = "#000"; // Compatibilidad con versiones antiguas
             setNote(noteReceived);
+            setColor(noteReceived.color);
         } else {
-            const newNote = { id: uuid.v4(), content: "", date: new Date(), pwd: "" }
+            const newNote = { id: uuid.v4(), content: "", date: new Date(), pwd: "", color: "#000" }
             setNote(newNote);
+            setColor(newNote.color);
         }
     }, [noteReceived])
 
@@ -59,15 +61,6 @@ export default function NoteContainer() {
         const autoSave = await AsyncStorage.getItem("autosave");
         if (autoSave) {
             setAutoSave(autoSave === "true" ? true : false);
-        }
-    }
-
-    async function getColor() {
-        const color = await AsyncStorage.getItem("color");
-        if (color) {
-            setColor(color);
-        } else {
-            setColor("#000")
         }
     }
 
