@@ -1,10 +1,13 @@
 import Note from "./note";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, router, useLocalSearchParams } from "expo-router";
 import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
+import useBackHandler from "../components/use-back-handler";
+import { ToastAndroid } from "react-native";
+import { save } from "../utils/storage";
 
 export default function NoteContainer() {
 
@@ -23,6 +26,7 @@ export default function NoteContainer() {
     const [font, setFont] = useState(null);
     const [color, setColor] = useState(null);
     const [autoSave, setAutoSave] = useState(true);
+    const [noteSavedId, setNoteSavedId] = useState(null);
     const [focused, setFocused] = useState(false);
 
     useEffect(() => {
@@ -30,17 +34,61 @@ export default function NoteContainer() {
         getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
     }, [])
 
+    // Al recibir la nota, la actualizará con las propiedades pertinentes, sino creará una nueva para controlar el estado de la nota
+    // que posteriormente se guardará.
     useEffect(() => {
         if (noteReceived.hasOwnProperty("id")) {
             if (!noteReceived.hasOwnProperty("color")) noteReceived.color = "#000"; // Compatibilidad con versiones antiguas
             setNote(noteReceived);
             setColor(noteReceived.color);
+            setNoteSavedId(noteReceived.id)
         } else {
             const newNote = { id: uuid.v4(), content: "", date: new Date().getTime(), pwd: "", color: "#000" }
             setNote(newNote);
             setColor(newNote.color);
+            setNoteSavedId(newNote.id)
         }
+
     }, [noteReceived])
+
+    // Asegurar el cierre de todos los dropdown de opciones antes de permitir salir de la nota
+    useBackHandler(() => {
+        if (!openColors && !openFontSize && !openSeparators) {
+            back();
+        }
+
+        if (openColors) {
+            setOpenColors(false);
+        }
+
+        if (openFontSize) {
+            setOpenFontSize(false);
+        }
+
+        if (openSeparators) {
+            setOpenSeparators(false);
+        }
+
+        return true;
+
+    }, [openColors, openFontSize, openSeparators])
+
+    async function back() {
+        if (autoSave) {
+            await saveNote();
+        }
+        router.back();
+    }
+
+    async function saveNote() {
+        richText.current.dismissKeyboard();
+        const isSaved = await save({ ...{ note, noteSavedId, setNoteSavedId } });
+        isSaved && onSave();
+    }
+
+    async function onSave() {
+        ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+    }
 
     async function getFont() {
         let font = {};
@@ -85,7 +133,7 @@ export default function NoteContainer() {
     return (
         <>
             <Stack.Screen options={{
-                header: () => <HeaderNoteContainer {...{note, richText, setReadingMode, readingMode, autoSave }} />
+                header: () => <HeaderNoteContainer {...{ note, setReadingMode, readingMode, back, saveNote, noteSavedId }} />
             }} />
 
             <Note {...

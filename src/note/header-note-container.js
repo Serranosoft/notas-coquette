@@ -1,37 +1,7 @@
-import { useRouter } from "expo-router";
-import { ToastAndroid } from "react-native";
 import { useEffect, useState } from "react";
 import HeaderNote from "./header-note";
-import useBackHandler from "../components/use-back-handler";
-import { save } from "../utils/storage";
 
-export default function HeaderNoteContainer({ note, richText, setReadingMode, readingMode, autoSave, updatePwd }) {
-
-    const router = useRouter();
-    const [noteSavedId, setNoteSavedId] = useState(null);
-
-    useEffect(() => {
-        setNoteSavedId(note.id)
-    }, [note])
-    
-    useBackHandler(() => back());
-    
-    async function back() {
-        if (autoSave) {
-            await saveNote();
-        }
-        router.back();
-    }
-
-    async function saveNote() {
-        richText.current.dismissKeyboard();
-        const isSaved = await save({ ...{ note, noteSavedId, setNoteSavedId } });
-        isSaved && onSave();
-    }
-
-    async function onSave() {
-        ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
-    }
+export default function HeaderNoteContainer({ note, setReadingMode, readingMode, updatePwd, saveNote, back, noteSavedId }) {
 
     return (
         <HeaderNote {...{ note, saveNote, back, setReadingMode, readingMode, noteSavedId, updatePwd }} />
