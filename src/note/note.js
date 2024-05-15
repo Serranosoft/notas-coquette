@@ -30,14 +30,13 @@ export default function Note(
         scrollRef,
         font,
         color,
-        autoSave,
         setColor
     }) {
 
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
             {
-                font && autoSave &&
+                font &&
                 <>
                     <View style={[layout.row, layout.justifyBetween, layout.backgroundLight]}>
                         <HeaderLeftEditor {...{ richText, readingMode }} />

@@ -1,7 +1,7 @@
 import Note from "./note";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Stack, router, useLocalSearchParams } from "expo-router";
+import { Stack, router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
@@ -31,8 +31,16 @@ export default function NoteContainer() {
 
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
-        getAutoSave(); // Obtiene info sobre si el usuario quiere guardado automatico
     }, [])
+
+    // Obtiene info sobre si el usuario quiere guardado automatico, lo debe hacer siempre que entre o vuelva a esta screen
+    // Ya que es posible que cambie este parametro durante la edición accediendo a settings y al volver a la pantalla no
+    // sepa cual es el valor actual de «autoSave»
+    useFocusEffect(
+        useCallback(() => {
+            getAutoSave(); 
+        }, [])
+    );
 
     // Al recibir la nota, la actualizará con las propiedades pertinentes, sino creará una nueva para controlar el estado de la nota
     // que posteriormente se guardará.
@@ -155,7 +163,6 @@ export default function NoteContainer() {
                     scrollRef,
                     font,
                     color,
-                    autoSave,
                     setColor
                 }
             } />
