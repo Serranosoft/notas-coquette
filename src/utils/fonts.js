@@ -1,3 +1,24 @@
+export const FONTS = [
+    {
+        key: "roboto",
+        preview: require("../../assets/roboto-preview.png")
+    },
+    {
+        key: "madimi",
+        preview: require("../../assets/madimi-preview.png")
+    },
+    {
+        key: "oswald",
+        preview: require("../../assets/oswald-preview.png")
+    },
+    {
+        key: "ojuju",
+        preview: require("../../assets/ojuju-preview.png"),
+    },
+];
+
+
+
 export const ojuju = `
 @font-face {
     font-family: 'ojuju';

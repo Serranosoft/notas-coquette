@@ -1,9 +1,9 @@
 import { FlatList, Image, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import { colors, gap, layout, padding, ui } from "../utils/styles";
 import GridBackground from "../components/grid";
-import { FONTS } from "./settings-container";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId } from "../utils/constants";
+import { FONTS } from "../utils/fonts";
 
 export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSave, typo }) {
 
