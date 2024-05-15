@@ -12,6 +12,7 @@ export async function save({ note, noteSavedId }) {
             oldNote.content = note.content;
             oldNote.date = new Date().getTime();
             oldNote.pwd = note.pwd;
+            oldNote.color = note.color
         } else {
             notes.push(note);
         }
