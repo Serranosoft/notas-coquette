@@ -8,10 +8,11 @@ import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
 import { ToastAndroid } from "react-native";
 import { save } from "../utils/storage";
+import { useCanvasRef } from "@shopify/react-native-skia";
 
 export default function NoteContainer() {
 
-    const noteReceived = useLocalSearchParams();
+    const { id } = useLocalSearchParams();
 
     const richText = useRef(null);
     const scrollRef = useRef(null);
@@ -29,6 +30,34 @@ export default function NoteContainer() {
     const [noteSavedId, setNoteSavedId] = useState(null);
     const [focused, setFocused] = useState(false);
 
+    const [paint, setPaint] = useState(false);
+    const canvasRef = useCanvasRef();
+
+    useEffect(() => {
+        async function getNote() {
+            let notes = await AsyncStorage.getItem("notes") || [];
+            if (notes.length > 0) {
+                notes = JSON.parse(notes);
+            }
+
+            let note = notes.find((note) => note.id === id);
+
+            if (note) {
+                if (!note.hasOwnProperty("color")) note.color = "#000"; // Compatibilidad con versiones antiguas
+                setNote(note);
+                setColor(note.color);
+                setNoteSavedId(note.id)
+            } else {
+                const newNote = { id: uuid.v4(), content: "", date: new Date().getTime(), pwd: "", color: "#000" }
+                setNote(newNote);
+                setColor(newNote.color);
+                setNoteSavedId(newNote.id)
+            }
+        }
+
+        getNote();
+    }, [id])
+
     useEffect(() => {
         getFont(); // Obtiene la fuente en el que va a instanciar el editor
     }, [])
@@ -38,26 +67,9 @@ export default function NoteContainer() {
     // sepa cual es el valor actual de «autoSave»
     useFocusEffect(
         useCallback(() => {
-            getAutoSave(); 
+            getAutoSave();
         }, [])
     );
-
-    // Al recibir la nota, la actualizará con las propiedades pertinentes, sino creará una nueva para controlar el estado de la nota
-    // que posteriormente se guardará.
-    useEffect(() => {
-        if (noteReceived.hasOwnProperty("id")) {
-            if (!noteReceived.hasOwnProperty("color")) noteReceived.color = "#000"; // Compatibilidad con versiones antiguas
-            setNote(noteReceived);
-            setColor(noteReceived.color);
-            setNoteSavedId(noteReceived.id)
-        } else {
-            const newNote = { id: uuid.v4(), content: "", date: new Date().getTime(), pwd: "", color: "#000" }
-            setNote(newNote);
-            setColor(newNote.color);
-            setNoteSavedId(newNote.id)
-        }
-
-    }, [noteReceived])
 
     // Asegurar el cierre de todos los dropdown de opciones antes de permitir salir de la nota
     useBackHandler(() => {
@@ -163,7 +175,11 @@ export default function NoteContainer() {
                     scrollRef,
                     font,
                     color,
-                    setColor
+                    setColor,
+
+                    paint,
+                    setPaint,
+                    canvasRef,
                 }
             } />
         </>
