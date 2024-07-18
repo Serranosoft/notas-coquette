@@ -8,7 +8,6 @@ import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
 import { ToastAndroid } from "react-native";
 import { save } from "../utils/storage";
-import { useCanvasRef } from "@shopify/react-native-skia";
 
 export default function NoteContainer() {
 
@@ -29,9 +28,6 @@ export default function NoteContainer() {
     const [autoSave, setAutoSave] = useState(true);
     const [noteSavedId, setNoteSavedId] = useState(null);
     const [focused, setFocused] = useState(false);
-
-    const [paint, setPaint] = useState(false);
-    const canvasRef = useCanvasRef();
 
     useEffect(() => {
         async function getNote() {
@@ -176,10 +172,6 @@ export default function NoteContainer() {
                     font,
                     color,
                     setColor,
-
-                    paint,
-                    setPaint,
-                    canvasRef,
                 }
             } />
         </>
