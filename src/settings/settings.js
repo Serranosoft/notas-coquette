@@ -12,8 +12,6 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
 
     const { language } = useContext(LangContext);
 
-    console.log(language);
-
     return (
         <View style={[layout.flex, layout.backgroundLight, padding.bigHorizontal]}>
             <ScrollView style={{ flex: 1 }}>

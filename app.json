@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/icon-notes.png",
         "backgroundColor": "#FACCD6"
       },
-      "versionCode": 6,
+      "versionCode": 7,
       "package": "com.paulaymanu113.notascoquette"
     },
     "web": {
@@ -37,14 +37,14 @@
     "plugins": [
       "expo-font",
       "expo-router",
+      "expo-localization",
       [
         "react-native-google-mobile-ads",
         {
           "androidAppId": "ca-app-pub-3738413299329691~3051293801",
           "iosAppId": "ca-app-pub-3738413299329691~3051293801"
         }
-      ],
-      "expo-localization"
+      ]
     ]
   }
 }

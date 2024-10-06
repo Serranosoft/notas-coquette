@@ -22,7 +22,7 @@ export default function Layout() {
     });
 
     // Idioma
-    const [language, setLanguage] = useState(getLocales()[0].languageCode);
+    const [language, setLanguage] = useState(getLocales()[0].languageCode || "es");
     const i18n = new I18n(translations);
     i18n.locale = language;
     i18n.enableFallback = true
