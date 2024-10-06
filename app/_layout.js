@@ -1,10 +1,13 @@
 import { SplashScreen, Stack } from "expo-router";
 import { View, StatusBar, StyleSheet } from "react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { colors } from "../src/utils/styles";
 import { setInitialNote } from "../src/utils/setInitialNote";
-
+import { getLocales } from 'expo-localization';
+import { I18n } from 'i18n-js'
+import { translations } from "../src/utils/localizations";
+import { LangContext } from "../src/utils/Context";
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
@@ -17,6 +20,13 @@ export default function Layout() {
         "oswald": require("../assets/fonts/Oswald.ttf"),
         "ojuju": require("../assets/fonts/Ojuju.ttf"),
     });
+
+    // Idioma
+    const [language, setLanguage] = useState(getLocales()[0].languageCode);
+    const i18n = new I18n(translations);
+    i18n.locale = language;
+    i18n.enableFallback = true
+    i18n.defaultLocale = "es";
 
     useEffect(() => {
         if (fontsLoaded) {
@@ -34,10 +44,12 @@ export default function Layout() {
     }
 
     return (
-        <View style={styles.container}>
-            <Stack />
-            <StatusBar style="light" />
-        </View>
+        <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
+            <View style={styles.container}>
+                <Stack />
+                <StatusBar style="light" />
+            </View>
+        </LangContext.Provider >
     )
 }
 const styles = StyleSheet.create({

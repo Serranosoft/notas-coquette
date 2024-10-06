@@ -4,12 +4,18 @@ import { gap, layout, sizes, ui } from "../../src/utils/styles";
 import { FlatList, Text, View } from "react-native";
 import NoteItemContainer from "./note-item-container";
 import ActionsContainer from "./actions-container";
+import { useContext } from "react";
+import { LangContext } from "../utils/Context";
 
 export default function Home({columnNumber, notes, setNotes, selected, setSelected}) {
+    
+    
+    const { language } = useContext(LangContext);
+
     return (
         <>
             <View style={[layout.flex, layout.backgroundLight, layout.paddingHorizontal]}>
-                <HomeButton />
+                <HomeButton {...{ language }} />
                 <View style={layout.flex}>
                     {
                         notes.length > 0 ?
@@ -22,7 +28,7 @@ export default function Home({columnNumber, notes, setNotes, selected, setSelect
                                 renderItem={({ item, index }) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />}
                             />
                             :
-                            <Text style={[ui.muted, sizes.medium]}>No tienes ninguna nota creada</Text>
+                            <Text style={[ui.muted, sizes.medium]}>{language.t("_homeEmptyList")}</Text>
                     }
                 </View>
             </View>

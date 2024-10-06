@@ -2,8 +2,12 @@ import { router } from "expo-router";
 import { Image, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
 import { components, header } from "../utils/styles";
+import { useContext } from "react";
+import { LangContext } from "../utils/Context";
 
 export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeLayout }) {
+
+    const { language } = useContext(LangContext);
 
     return (
         <Menu
@@ -17,14 +21,14 @@ export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeL
             <MenuItem onPress={changeLayout}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/grid.png")} />
-                    <Text>Cambiar cuadricula</Text>
+                    <Text>{language.t("_headerDropdownOption1")}</Text>
                 </View>
             </MenuItem>
             <MenuDivider />
             <MenuItem onPress={() => router.push("settings")}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/settings.png")} />
-                    <Text>Configuración</Text>
+                    <Text>{language.t("_headerDropdownOption2")}</Text>
                 </View>
             </MenuItem>
         </Menu>

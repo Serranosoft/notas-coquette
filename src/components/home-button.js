@@ -2,13 +2,13 @@ import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors, ui } from "../utils/styles";
 
-export default function HomeButton() {
+export default function HomeButton({ language }) {
 
     return (
         <Link href="/note" asChild>
             <TouchableOpacity activeOpacity={0.7}>
                 <View style={styles.btn}>
-                    <Text style={ui.h3}>Añadir nota</Text>
+                    <Text style={ui.h3}>{language.t("_homeButton")}</Text>
                     <Image style={styles.img} source={require("../../assets/decoration-1.png")} />
                 </View>
             </TouchableOpacity>
