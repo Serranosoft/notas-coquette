@@ -59,7 +59,7 @@ export default function Note(
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
                     {openColors && !readingMode && <Colors {...{ note, setColor }} />}
                     <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
-                    
+
                     <View style={[layout.flex, layout.zIndex]}>
                         <ScrollView style={layout.zIndex} ref={scrollRef} onTouchEnd={handleFocusContent}>
                             <RichEditor
@@ -67,13 +67,14 @@ export default function Note(
                                 ref={richText}
                                 placeholder="Escribe tu nota..."
                                 onChange={(content) => note.content = content}
+                                style={{ zIndex: 999 }}
                                 editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
                                 initialContentHTML={note.content && note.content}
                                 disabled={readingMode}
                                 onCursorPosition={handleCursorPosition}
                             />
+                            <GridBackground />
                         </ScrollView>
-                        <GridBackground />
                         <FooterEditor {...{ richText, readingMode }} />
                     </View>
                 </>

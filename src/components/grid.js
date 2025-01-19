@@ -1,59 +1,32 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-
+import { View, StyleSheet } from 'react-native';
+import Svg, { Rect, Defs, Pattern } from 'react-native-svg';
 export default function GridBackground() {
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-
-    // Definir la cantidad de líneas y el espacio entre ellas
-    const numLines = 25;
-    const lineSpacingX = (windowWidth + 450) / numLines;
-    const lineSpacingY = (windowHeight) / numLines;
-
-    const renderHorizontalLines = () => {
-        const lines = [];
-        for (let i = 0; i < numLines; i++) {
-            lines.push(
-                <View
-                    key={`horizontal-line-${i}`}
-                    style={{
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        top: i * lineSpacingY,
-                        height: StyleSheet.hairlineWidth,
-                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                    }}
-                />
-            );
-        }
-        return lines;
-    };
-
-    const renderVerticalLines = () => {
-        const lines = [];
-        for (let i = 0; i < numLines; i++) {
-            lines.push(
-                <View
-                    key={`vertical-line-${i}`}
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        bottom: 0,
-                        left: i * lineSpacingX,
-                        width: StyleSheet.hairlineWidth,
-                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                    }}
-                />
-            );
-        }
-        return lines;
-    };
 
     return (
         <View style={styles.container}>
-            {renderHorizontalLines()}
-            {renderVerticalLines()}
+            <View style={styles.container}>
+                <Svg height="100%" width="100%">
+                    <Defs>
+                        <Pattern
+                            id="grid"
+                            patternUnits="userSpaceOnUse"
+                            width="30"
+                            height="30"
+                        >
+                            {/* Horizontal lines */}
+                            <Rect x="0" y="24" width="30" height="1" fill="#ededed" />
+                            <Rect x="0" y="74" width="30" height="1" fill="#ededed" />
+
+                            {/* Vertical lines */}
+                            <Rect x="24" y="0" width="1" height="30" fill="#ededed" />
+                            <Rect x="74" y="0" width="1" height="30" fill="#ededed" />
+                        </Pattern>
+                    </Defs>
+                    <Rect width="100%" height="100%" fill="#fff" />
+                    <Rect width="100%" height="100%" fill="url(#grid)" />
+                </Svg>
+            </View>
         </View>
     );
 }
@@ -64,7 +37,6 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         width: "100%",
-        height: "100%",
-        overflow: "hidden",
+        height: 10000,
     },
 });
