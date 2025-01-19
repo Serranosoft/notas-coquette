@@ -1,13 +1,14 @@
 import { SplashScreen, Stack } from "expo-router";
 import { View, StatusBar, StyleSheet } from "react-native";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { colors } from "../src/utils/styles";
 import { setInitialNote } from "../src/utils/setInitialNote";
 import { getLocales } from 'expo-localization';
 import { I18n } from 'i18n-js'
 import { translations } from "../src/utils/localizations";
-import { LangContext } from "../src/utils/Context";
+import { AdsContext, LangContext } from "../src/utils/Context";
+import AdsHandler from "../src/utils/AdsHandler";
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
@@ -38,18 +39,32 @@ export default function Layout() {
         setInitialNote();
     }, [])
 
+    const [adTrigger, setAdTrigger] = useState(0);
+    const [showOpenAd, setShowOpenAd] = useState(true);
+    const adsHandlerRef = createRef();
+
+    useEffect(() => {
+        if (adTrigger > 4) {
+            adsHandlerRef.current.showIntersitialAd();
+            setAdTrigger(0);
+        }
+    }, [adTrigger])
+
     // Esperar hasta que las fuentes se carguen
     if (!fontsLoaded) {
         return null;
     }
 
     return (
-        <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
-            <View style={styles.container}>
-                <Stack />
-                <StatusBar style="light" />
-            </View>
-        </LangContext.Provider >
+        <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, setShowOpenAd: setShowOpenAd }}>
+            <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} setShowOpenAd={setShowOpenAd} />
+            <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
+                <View style={styles.container}>
+                    <Stack />
+                    <StatusBar style="light" />
+                </View>
+            </LangContext.Provider >
+        </AdsContext.Provider>
     )
 }
 const styles = StyleSheet.create({

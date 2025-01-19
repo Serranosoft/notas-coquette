@@ -1,13 +1,15 @@
 import NoteItem from "./note-item";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { router } from "expo-router";
 import LockScreenModal from "../modals/lock-screen-modal";
+import { AdsContext } from "../utils/Context";
 
 export default function NoteItemContainer({ note, selected, setSelected }) {
 
     const [unlocked, setUnlocked] = useState(null);
     const [lockModal, setLockModal] = useState(false);
     const [pwd, setPwd] = useState("");
+    const { setAdTrigger } = useContext(AdsContext);
 
     function highlight() {
         if (selected.includes(note.id)) {
@@ -29,6 +31,8 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
                 router.navigate({ pathname: "/note", params: {id: note.id } });
             }
         }
+
+        setAdTrigger((adTrigger) => adTrigger + 1);
     }
 
     useEffect(() => {
