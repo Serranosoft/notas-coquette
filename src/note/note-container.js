@@ -54,15 +54,13 @@ export default function NoteContainer() {
         getNote();
     }, [id])
 
-    useEffect(() => {
-        getFont(); // Obtiene la fuente en el que va a instanciar el editor
-    }, [])
-
-    // Obtiene info sobre si el usuario quiere guardado automatico, lo debe hacer siempre que entre o vuelva a esta screen
-    // Ya que es posible que cambie este parametro durante la edición accediendo a settings y al volver a la pantalla no
-    // sepa cual es el valor actual de «autoSave»
+    // Obtiene info sobre si el usuario quiere guardado automatico y/o ha cambiado de fuente, lo debe hacer siempre que entre o vuelva a esta screen
+    // Ya que es posible que cambie estos parametros durante la edición accediendo a settings y al volver a la pantalla no
+    // sepa cual es el valor actual de ambos.
     useFocusEffect(
         useCallback(() => {
+            setFont(null);
+            getFont(); // Obtiene la fuente en el que va a instanciar el editor
             getAutoSave();
         }, [])
     );

@@ -50,7 +50,7 @@ export default function HeaderNoteOptions({ showMenu, updateReadingMode, reading
                     </MenuItem>
             }
             <MenuDivider />
-            <MenuItem onPress={() => router.push({ pathname: "settings", params: true })}>
+            <MenuItem onPress={() => router.push({ pathname: "settings" })}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/settings.png")} />
                     <Text>{language.t("_headerNoteDropdownOption6")}</Text>
