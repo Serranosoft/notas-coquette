@@ -17,7 +17,7 @@ export default function NoteContainer() {
     const scrollRef = useRef(null);
 
     const [note, setNote] = useState({});
-    const [fontSize, setFontSize] = useState(4);
+    const [fontSize, setFontSize] = useState(null);
     const [separator, setSeparator] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
     const [openSeparators, setOpenSeparators] = useState(false);
@@ -136,6 +136,7 @@ export default function NoteContainer() {
     }, [separator])
 
     function handleFocusContent() {
+        setFontSize(null);
         if (!focused) {
             setFocused(true);
             richText.current.focusContentEditor();

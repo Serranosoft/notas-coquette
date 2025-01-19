@@ -13,7 +13,7 @@ export default function FontSizeContainer({ setFontSize, fontSize, openSeparator
 
     useEffect(() => {
         setSelected(fontSize);
-    }, [])
+    }, [fontSize])
 
     return (
         <FontSize {...{ selected, openSeparators, handleFontSize }}/>
