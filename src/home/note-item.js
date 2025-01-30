@@ -11,7 +11,7 @@ const { height } = Dimensions.get('window');
 export default function NoteItem({ note, selected, onPress, highlight }) {
 
     const { width } = useWindowDimensions();
-    const source = { html: note.content }
+    const source = { html: getSubstringUntilNthDiv(note.content) }
 
     const customHTMLElementModels = {
         'font': HTMLElementModel.fromCustomModel({ tagName: 'font', mixedUAStyles: { fontSize: 18 }, contentModel: HTMLContentModel.textual })
@@ -57,6 +57,25 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
             }
         </TouchableOpacity>
     )
+}
+
+
+// Renderizar en cada nota de la home un limite de 9 <div> **Mejora de performance**
+function getSubstringUntilNthDiv(html, limit = 9) {
+    const regex = /<\/div>/g;
+    let match;
+    let count = 0;
+    let lastIndex = html.length;
+
+    while ((match = regex.exec(html)) !== null) {
+        count++;
+        if (count === limit) {
+            lastIndex = match.index + match[0].length;
+            break;
+        }
+    }
+
+    return html.substring(0, lastIndex);
 }
 
 
