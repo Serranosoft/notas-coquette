@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import { RichEditor } from "react-native-pell-rich-editor";
 import GridBackground from "../../src/components/grid";
 import { layout } from "../../src/utils/styles";
@@ -30,8 +30,12 @@ export default function Note(
         scrollRef,
         font,
         color,
-        setColor
+        setColor,
+        editorHeight,
+        setEditorHeight
     }) {
+
+    const windowHeight = Dimensions.get('window').height;
 
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
@@ -54,7 +58,6 @@ export default function Note(
                         />
                     </View>
 
-
                     {openFontSize && !readingMode && <FontSizeContainer {...{ setFontSize, fontSize, openSeparators }} />}
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
                     {openColors && !readingMode && <Colors {...{ note, setColor }} />}
@@ -72,8 +75,10 @@ export default function Note(
                                 initialContentHTML={note.content && note.content}
                                 disabled={readingMode}
                                 onCursorPosition={handleCursorPosition}
+                                initialHeight={600}
+                                onHeightChange={(height) => setEditorHeight(height)}
                             />
-                            <GridBackground />
+                            <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                         </ScrollView>
                         <FooterEditor {...{ richText, readingMode }} />
                     </View>

@@ -28,6 +28,7 @@ export default function NoteContainer() {
     const [autoSave, setAutoSave] = useState(true);
     const [noteSavedId, setNoteSavedId] = useState(null);
     const [focused, setFocused] = useState(false);
+    const [editorHeight, setEditorHeight] = useState(600);
 
     useEffect(() => {
         async function getNote() {
@@ -171,6 +172,8 @@ export default function NoteContainer() {
                     font,
                     color,
                     setColor,
+                    editorHeight,
+                    setEditorHeight,
                 }
             } />
         </>
