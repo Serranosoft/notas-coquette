@@ -16,14 +16,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.paulaymanu113.notascoquette"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon-notes.png",
         "backgroundColor": "#FACCD6"
       },
-      "versionCode": 9,
+      "versionCode": 10,
       "package": "com.paulaymanu113.notascoquette"
     },
     "web": {
