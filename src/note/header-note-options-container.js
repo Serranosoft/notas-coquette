@@ -13,11 +13,14 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
 
     // Estados para abrir el modal de bloquear nota
     const [lockModal, setLockModal] = useState(false);
-    const showLockModal = () => setLockModal(true);
     const [pwd, setPwd] = useState("");
 
     const [noteLocked, setNoteLocked] = useState(false);
 
+    function showLockModal() {
+        setLockModal(true);
+        hideMenu();
+    }
     function updateReadingMode() {
         setReadingMode(!readingMode);
         hideMenu();
@@ -27,7 +30,8 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
         note.pwd = "";
         setPwd("");
         setMenuVisible(false);
-        setNoteLocked(false)
+        setNoteLocked(false);
+        hideMenu();
     }
     
     async function remove() {
@@ -39,6 +43,7 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
         const newNotes = notes.filter((note) => note.id !== noteSavedId);
         await AsyncStorage.setItem("notes", JSON.stringify(newNotes));
         router.push("/");
+        hideMenu();
     }
 
 

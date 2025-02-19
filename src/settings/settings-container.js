@@ -1,5 +1,5 @@
 import Settings from "./settings";
-import { ToastAndroid } from "react-native";
+import { Alert, Platform, ToastAndroid } from "react-native";
 import { Stack, router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
@@ -19,13 +19,21 @@ export default function SettingsContainer() {
         setTypo(typo);
         setForceHome(true);
         await AsyncStorage.setItem("font", typo);
-        ToastAndroid.showWithGravityAndOffset("Tipografía guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset("Tipografía guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        } else {
+            Alert.alert("Tipografía guardada");
+        }
     }
 
     async function updateAutoSave() {
         setAutoSave(autoSave => !autoSave);
         await AsyncStorage.setItem("autosave", !autoSave ? "true" : "false");
-        ToastAndroid.showWithGravityAndOffset(`Guardado automatico ${!autoSave ? 'activado' : 'desactivado'}`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset(`Guardado automatico ${!autoSave ? 'activado' : 'desactivado'}`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        } else {
+            Alert.alert(`Guardado automatico ${!autoSave ? 'activado' : 'desactivado'}`);
+        }
     }
 
 
@@ -45,7 +53,11 @@ export default function SettingsContainer() {
     async function removeAll() {
         await AsyncStorage.setItem("notes", JSON.stringify([]));
         router.push("/");
-        ToastAndroid.showWithGravityAndOffset(`Se han eliminado todas las notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset(`Se han eliminado todas las notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        } else {
+            Alert.alert(`Se han eliminado todas las notas`);
+        }
     }
 
 

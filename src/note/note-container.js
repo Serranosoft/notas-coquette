@@ -6,7 +6,7 @@ import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
-import { ToastAndroid } from "react-native";
+import { Alert, Platform, ToastAndroid } from "react-native";
 import { save } from "../utils/storage";
 
 export default function NoteContainer() {
@@ -102,7 +102,17 @@ export default function NoteContainer() {
     }
 
     async function onSave() {
-        ToastAndroid.showWithGravityAndOffset("Nota guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset(
+                "Nota guardada",
+                ToastAndroid.LONG,
+                ToastAndroid.BOTTOM,
+                25,
+                50
+            );
+        } else {
+            Alert.alert("Nota guardada");
+        }
     }
 
     async function getFont() {

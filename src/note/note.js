@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { RichEditor } from "react-native-pell-rich-editor";
 import GridBackground from "../../src/components/grid";
 import { layout } from "../../src/utils/styles";
@@ -63,25 +63,32 @@ export default function Note(
                     {openColors && !readingMode && <Colors {...{ note, setColor }} />}
                     <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
 
-                    <View style={[layout.flex, layout.zIndex]}>
-                        <ScrollView style={layout.zIndex} ref={scrollRef} onTouchEnd={handleFocusContent}>
-                            <RichEditor
-                                useContainer={true}
-                                ref={richText}
-                                placeholder="Escribe tu nota..."
-                                onChange={(content) => note.content = content}
-                                style={{ zIndex: 999 }}
-                                editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
-                                initialContentHTML={note.content && note.content}
-                                disabled={readingMode}
-                                onCursorPosition={handleCursorPosition}
-                                initialHeight={600}
-                                onHeightChange={(height) => setEditorHeight(height)}
-                            />
-                            <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
-                        </ScrollView>
-                        <FooterEditor {...{ richText, readingMode }} />
-                    </View>
+
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS === "ios" ? "padding" : undefined}
+                        keyboardVerticalOffset={Platform.OS === "ios" ? 85 : 0} // Ajusta según el diseño
+                        style={{ flex: 1 }}
+                    >
+                        <View style={[layout.flex, layout.zIndex]}>
+                            <ScrollView style={layout.zIndex} ref={scrollRef} onTouchEnd={handleFocusContent}>
+                                <RichEditor
+                                    useContainer={true}
+                                    ref={richText}
+                                    placeholder="Escribe tu nota..."
+                                    onChange={(content) => note.content = content}
+                                    style={{ zIndex: 999 }}
+                                    editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
+                                    initialContentHTML={note.content && note.content}
+                                    disabled={readingMode}
+                                    onCursorPosition={handleCursorPosition}
+                                    initialHeight={600}
+                                    onHeightChange={(height) => setEditorHeight(height)}
+                                />
+                                <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
+                            </ScrollView>
+                            <FooterEditor {...{ richText, readingMode }} />
+                        </View>
+                    </KeyboardAvoidingView>
                 </>
 
             }

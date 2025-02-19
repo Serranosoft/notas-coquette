@@ -9,6 +9,8 @@ import { I18n } from 'i18n-js'
 import { translations } from "../src/utils/localizations";
 import { AdsContext, LangContext } from "../src/utils/Context";
 import AdsHandler from "../src/utils/AdsHandler";
+import Constants from "expo-constants";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        paddingTop: StatusBar.currentHeight,
+        paddingTop: Constants.statusBarHeight,
         backgroundColor: colors.light
     },
     wrapper: {
