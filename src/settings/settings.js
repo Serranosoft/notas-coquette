@@ -1,8 +1,8 @@
-import { FlatList, Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Platform, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 import { colors, gap, layout, padding, ui } from "../utils/styles";
 import GridBackground from "../components/grid";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { bannerId } from "../utils/constants";
+import { bannerId, bannerIdIOS } from "../utils/constants";
 import { FONTS } from "../utils/fonts";
 import LangList from "../components/lang-list";
 import { useContext } from "react";
@@ -64,7 +64,7 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
 
 
             </ScrollView>
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
 
         </View>
     )

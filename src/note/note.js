@@ -8,7 +8,7 @@ import HeaderRightEditor from "../rich-editor/header-right-editor";
 import FontSizeContainer from "../rich-editor/font-size/font-size-container";
 import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
-import { bannerId } from "../utils/constants";
+import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 export default function Note(
@@ -61,7 +61,7 @@ export default function Note(
                     {openFontSize && !readingMode && <FontSizeContainer {...{ setFontSize, fontSize, openSeparators }} />}
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
                     {openColors && !readingMode && <Colors {...{ note, setColor }} />}
-                    <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+                    <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
 
 
                     <KeyboardAvoidingView

@@ -6,7 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderHome from "./header-home";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { bannerId } from "../utils/constants";
+import { bannerId, bannerIdIOS } from "../utils/constants";
+import { Platform } from "react-native";
 
 export default function HomeContainer() {
     const [notes, setNotes] = useState([]);
@@ -51,7 +52,7 @@ export default function HomeContainer() {
         <>
             <Stack.Screen options={{ header: () => <HeaderHome {...{setColumnNumber, columnNumber}} /> }} />
             <Home {...{ columnNumber, notes, setNotes, selected, setSelected}} />
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     )
 }
