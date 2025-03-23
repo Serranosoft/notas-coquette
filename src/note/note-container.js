@@ -6,7 +6,7 @@ import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
-import { Alert, Platform, ToastAndroid } from "react-native";
+import { Alert, Keyboard, Platform, ToastAndroid } from "react-native";
 import { save } from "../utils/storage";
 
 export default function NoteContainer() {
@@ -88,6 +88,18 @@ export default function NoteContainer() {
 
     }, [openColors, openFontSize, openSeparators])
 
+    useEffect(() => {
+        const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
+            setOpenFontSize(false);
+            setOpenColors(false);
+            setOpenSeparators(false);
+        });
+
+        return () => {
+            keyboardDidHideListener.remove();
+        };
+    }, []);
+
     async function back() {
         if (autoSave) {
             await saveNote();
@@ -159,7 +171,7 @@ export default function NoteContainer() {
     return (
         <>
             <Stack.Screen options={{
-                header: () => <HeaderNoteContainer {...{ note, setReadingMode, readingMode, back, saveNote, noteSavedId }} />
+                header: () => <HeaderNoteContainer {...{ note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText }} />
             }} />
 
             <Note {...

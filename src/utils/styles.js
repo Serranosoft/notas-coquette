@@ -97,7 +97,7 @@ export const editor = {
         backgroundColor: colors.light,
     },
     header: {
-        height: 50,
+        // height: 32,
         alignItems: "flex-start",
         paddingHorizontal: 8,
         zIndex: 99,

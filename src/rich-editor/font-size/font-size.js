@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors, ui } from "../../utils/styles";
+import { colors, editor, ui } from "../../utils/styles";
 
 export const SIZES = { "10": 1, "13": 2, "16": 3, "18": 4, "24": 5, "32": 6, "48": 7 }
 
@@ -7,14 +7,14 @@ export default function FontSize({ selected, openSeparators, handleFontSize }) {
 
 
     return (
-        <View style={[styles.container, { borderBottomWidth: openSeparators ? 0 : 2}]}>
+        <View style={[editor.footer, styles.container, { height: "auto" }]}>
             <View style={styles.sizeList}>
                 {
                     Object.keys(SIZES).map((size, index) => {
                         let realIndex = (index + 1);
                         return (
                             <TouchableOpacity key={realIndex} onPress={() => handleFontSize(SIZES[size], realIndex)} style={{ flex: 1 }}>
-                                <Text style={[ui.h4, selected === realIndex && styles.selected, styles.item]}>{size}</Text>
+                                <Text style={[ui.text, selected === realIndex && styles.selected, styles.item]}>{size}</Text>
                             </TouchableOpacity>
                         )
                     })
@@ -27,27 +27,31 @@ export default function FontSize({ selected, openSeparators, handleFontSize }) {
 const styles = StyleSheet.create({
 
     container: {
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: 8,
-        backgroundColor: colors.light,
-        borderTopWidth: 2,
-        zIndex: 99
+        position: "absolute",
+        top: 75,
+        right: 8,
+        backgroundColor: "#fff",
+        borderWidth: 4,
+        borderColor: colors.light,
+        zIndex: 99,
+        borderRadius: 100,
+        paddingVertical: 0,
+        overflow: "hidden",
+        width: "auto",
     },
-
+    
     item: {
-        paddingVertical: 8,
-        paddingHorizontal: 8,
         textAlign: "center",
         color: "#000",
-        borderRightWidth: 2,
+        paddingVertical: 12,
+        paddingHorizontal: 12,
     },
 
     selected: {
-        backgroundColor: colors.dark
+        backgroundColor: colors.light
     },
 
     sizeList: {
-        flexDirection: "row",
+        overflow: "hidden"
     }
 })

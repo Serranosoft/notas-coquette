@@ -7,7 +7,7 @@ export default function HeaderLeftEditor({ richText, readingMode }) {
 
     return (
         <RichToolbar
-            style={[editor.header, !readingMode && padding.smallVertical, !readingMode && padding.bigTop, {height: readingMode ? 0 : "auto"}]}
+            style={[editor.header, {height: readingMode ? 0 : "auto"}]}
             editor={richText}
             actions={[actions.undo, actions.redo]}
             iconMap={{ [actions.undo]: undoLabel, [actions.redo]: redoLabel }}

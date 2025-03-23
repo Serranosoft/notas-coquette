@@ -3,8 +3,6 @@ import { RichEditor } from "react-native-pell-rich-editor";
 import GridBackground from "../../src/components/grid";
 import { layout } from "../../src/utils/styles";
 import FooterEditor from "../rich-editor/footer-editor";
-import HeaderLeftEditor from "../rich-editor/header-left-editor";
-import HeaderRightEditor from "../rich-editor/header-right-editor";
 import FontSizeContainer from "../rich-editor/font-size/font-size-container";
 import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
@@ -32,7 +30,7 @@ export default function Note(
         color,
         setColor,
         editorHeight,
-        setEditorHeight
+        setEditorHeight,
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -42,7 +40,7 @@ export default function Note(
             {
                 font &&
                 <>
-                    <View style={[layout.row, layout.justifyBetween, layout.backgroundLight]}>
+                    {/* <View style={[layout.row, layout.justifyBetween, layout.backgroundLight]}>
                         <HeaderLeftEditor {...{ richText, readingMode }} />
                         <HeaderRightEditor
                             {...{
@@ -56,7 +54,7 @@ export default function Note(
                                 readingMode
                             }}
                         />
-                    </View>
+                    </View> */}
 
                     {openFontSize && !readingMode && <FontSizeContainer {...{ setFontSize, fontSize, openSeparators }} />}
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
@@ -81,12 +79,17 @@ export default function Note(
                                     initialContentHTML={note.content && note.content}
                                     disabled={readingMode}
                                     onCursorPosition={handleCursorPosition}
+                                    onBlur={() => {
+                                        setOpenFontSize(false);
+                                        setOpenColors(false);
+                                        setOpenSeparators(false);
+                                    }}
                                     initialHeight={600}
                                     onHeightChange={(height) => setEditorHeight(height)}
                                 />
                                 <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                             </ScrollView>
-                            <FooterEditor {...{ richText, readingMode }} />
+                            <FooterEditor {...{ richText, readingMode, setOpenFontSize, openFontSize, setOpenColors, openColors, openSeparators, setOpenSeparators }} />
                         </View>
                     </KeyboardAvoidingView>
                 </>

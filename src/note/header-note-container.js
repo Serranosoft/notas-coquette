@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import HeaderNote from "./header-note";
 
-export default function HeaderNoteContainer({ note, setReadingMode, readingMode, updatePwd, saveNote, back, noteSavedId }) {
+export default function HeaderNoteContainer({ note, setReadingMode, readingMode, updatePwd, saveNote, back, noteSavedId, richText }) {
 
     return (
-        <HeaderNote {...{ note, saveNote, back, setReadingMode, readingMode, noteSavedId, updatePwd }} />
+        <HeaderNote {...{ note, saveNote, back, setReadingMode, readingMode, noteSavedId, updatePwd, richText }} />
     )
 }
