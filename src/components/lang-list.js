@@ -3,6 +3,8 @@ import LangListItem from "./lang-list-item";
 import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../utils/Context";
 import { colors } from "../utils/styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { storage } from "../utils/storage";
 
 export default function LangList() {
 
@@ -18,13 +20,14 @@ export default function LangList() {
         { title: language.t("_langListHindi"), acronym: "hi" },
     ]
 
-    function updateLanguage(acronym) {
+    async function updateLanguage(acronym) {
         setLanguage(acronym);
+        await AsyncStorage.setItem(storage.LANGUAGE, acronym);
     }
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.scroll} nestedScrollEnabled={true} /* contentContainerStyle={{ paddingVertical: 8 }} */>
+            <ScrollView style={styles.scroll} nestedScrollEnabled={true}>
                 {
                     languages.map((language, index) => {
                         return (

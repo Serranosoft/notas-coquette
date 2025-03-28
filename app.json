@@ -28,7 +28,7 @@
         "foregroundImage": "./assets/icon-notes.png",
         "backgroundColor": "#FACCD6"
       },
-      "versionCode": 11,
+      "versionCode": 12,
       "package": "com.paulaymanu113.notascoquette"
     },
     "web": {

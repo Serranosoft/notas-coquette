@@ -1,11 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "./actions";
+import { storage } from "../utils/storage";
 
 
 export default function ActionsContainer({ selected, setSelected, setNotes }) {
     // Se obtiene todas las notas
     async function get() {
-        let notes = await AsyncStorage.getItem("notes") || [];
+        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
         if (notes.length > 0) {
             notes = JSON.parse(notes);
         }
@@ -23,7 +24,7 @@ export default function ActionsContainer({ selected, setSelected, setNotes }) {
 
     // Se añade el nuevo array de notas actualizado y se actualiza el front con la nueva información
     async function add(newNotes) {
-        await AsyncStorage.setItem("notes", JSON.stringify(newNotes));
+        await AsyncStorage.setItem(storage.NOTES, JSON.stringify(newNotes));
 
         setSelected([])
         setNotes(newNotes);

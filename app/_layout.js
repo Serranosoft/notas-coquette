@@ -10,6 +10,8 @@ import { translations } from "../src/utils/localizations";
 import { AdsContext, LangContext } from "../src/utils/Context";
 import AdsHandler from "../src/utils/AdsHandler";
 import Constants from "expo-constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { storage } from "../src/utils/storage";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,8 +40,14 @@ export default function Layout() {
     }, [fontsLoaded])
 
     useEffect(() => {
+        getLanguage();
         setInitialNote();
     }, [])
+
+    async function getLanguage() {
+        const language = await AsyncStorage.getItem(storage.LANGUAGE);
+        setLanguage(language || "es");
+    }
 
     const [adTrigger, setAdTrigger] = useState(0);
     const [showOpenAd, setShowOpenAd] = useState(true);

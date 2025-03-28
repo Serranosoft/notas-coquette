@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import HeaderNoteOptions from "./header-note-options";
 import LockScreenModal from "../modals/lock-screen-modal";
+import { storage } from "../utils/storage";
 
 export default function HeaderNoteOptionsContainer({ note, setReadingMode, readingMode, noteSavedId }) {
 
@@ -35,13 +36,13 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
     }
     
     async function remove() {
-        let notes = await AsyncStorage.getItem("notes") || [];
+        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
         if (notes.length > 0) {
             notes = JSON.parse(notes);
         }
 
         const newNotes = notes.filter((note) => note.id !== noteSavedId);
-        await AsyncStorage.setItem("notes", JSON.stringify(newNotes));
+        await AsyncStorage.setItem(storage.NOTES, JSON.stringify(newNotes));
         router.push("/");
         hideMenu();
     }

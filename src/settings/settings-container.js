@@ -2,10 +2,14 @@ import Settings from "./settings";
 import { Alert, Platform, ToastAndroid } from "react-native";
 import { Stack, router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import HeaderSettingsContainer from "./header-settings-container";
+import { storage } from "../utils/storage";
+import { LangContext } from "../utils/Context";
 
 export default function SettingsContainer() {
+
+    const { language } = useContext(LangContext);
 
     const [autoSave, setAutoSave] = useState(true);
     const [typo, setTypo] = useState(null);
@@ -18,28 +22,28 @@ export default function SettingsContainer() {
     async function updateTypo(typo) {
         setTypo(typo);
         setForceHome(true);
-        await AsyncStorage.setItem("font", typo);
+        await AsyncStorage.setItem(storage.FONT, typo);
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset("Tipografía guardada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(language.t("_toastTypoSaved"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert("Tipografía guardada");
+            Alert.alert(language.t("_toastTypoSaved"));
         }
     }
 
     async function updateAutoSave() {
         setAutoSave(autoSave => !autoSave);
-        await AsyncStorage.setItem("autosave", !autoSave ? "true" : "false");
+        await AsyncStorage.setItem(storage.AUTOSAVE, !autoSave ? "true" : "false");
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset(`Guardado automatico ${!autoSave ? 'activado' : 'desactivado'}`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(`${language.t("_toastAutoSave")} ${!autoSave ? language.t("_toastActivated") : language.t("_toastDeactivated")}`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert(`Guardado automatico ${!autoSave ? 'activado' : 'desactivado'}`);
+            Alert.alert(`${language.t("_toastAutoSave")} ${!autoSave ? language.t("_toastActivated") : language.t("_toastDeactivated")}`);
         }
     }
 
 
     async function getData() {
-        const font = await AsyncStorage.getItem("font");
-        const autosave = await AsyncStorage.getItem("autosave");
+        const font = await AsyncStorage.getItem(storage.FONT);
+        const autosave = await AsyncStorage.getItem(storage.AUTOSAVE);
 
         if (font) {
             setTypo(font);
@@ -51,12 +55,12 @@ export default function SettingsContainer() {
     }
 
     async function removeAll() {
-        await AsyncStorage.setItem("notes", JSON.stringify([]));
+        await AsyncStorage.setItem(storage.NOTES, JSON.stringify([]));
         router.push("/");
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset(`Se han eliminado todas las notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(language.t("_toastAllNotesDeleted"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert(`Se han eliminado todas las notas`);
+            Alert.alert(language.t("_toastAllNotesDeleted"));
         }
     }
 

@@ -2,13 +2,14 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "react-native";
 import { colors, editor } from "../../utils/styles";
+import { storage } from "../../utils/storage";
 
 export default function Colors({ note, setColor }) {
 
     async function handleColor(color) {
         setColor(color);
         note.color = color;
-        await AsyncStorage.setItem("color", color);
+        await AsyncStorage.setItem(storage.COLOR, color);
     }
 
     return (

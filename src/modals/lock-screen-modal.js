@@ -4,9 +4,12 @@ import { TouchableOpacity } from "react-native"
 import { Modal } from "react-native"
 import { components, ui } from "../utils/styles"
 import SmoothPinCodeInput from "react-native-smooth-pincode-input"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
+import { LangContext } from "../utils/Context"
 
 export default function LockScreenModal({ note, isUnlock = false, lockModal, setLockModal, pwd, setPwd, setUnlocked, unlocked }) {
+
+    const { language } = useContext(LangContext);
 
     useEffect(() => {
         if (pwd.length === 4) {
@@ -50,9 +53,9 @@ export default function LockScreenModal({ note, isUnlock = false, lockModal, set
                             <Text style={[ui.h4, ui.black]}>&#10006;</Text>
                         </TouchableOpacity>
                         <View style={styles.content}>
-                            <Text style={[ui.h2, ui.black]}>Introduce el código PIN</Text>
-                            { isUnlock && <Text style={[ui.muted, ui.center]}>Esta nota está bloqueada, introduce el código PIN para poder acceder a ella</Text> }
-                            {unlocked === false && <Text style={[ui.text, components.error]}>PIN incorrecto</Text>}
+                            <Text style={[ui.h2, ui.black]}>{language.t("_lockNoteTitle")}</Text>
+                            { isUnlock && <Text style={[ui.muted, ui.center]}>{language.t("_lockInfo")}</Text> }
+                            {unlocked === false && <Text style={[ui.text, components.error]}>{language.t("_lockError")}</Text>}
                             <View style={styles.pinWrapper}>
                                 <SmoothPinCodeInput
                                     value={pwd}

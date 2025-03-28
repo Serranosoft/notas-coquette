@@ -38,6 +38,20 @@ const translations = {
         _settingsResetAll: "Reestablecer todo",
         _settingsRemoveAll: "Eliminar todas las notas",
         _settingsRemoveAllWarning: "¡CUIDADO! Al pulsar en el siguiente botón se eliminarán todas las notas guardadas",
+
+        // 26-03-2025: Faltaban las siguientes variables por traducir
+        _settingTitle: "Configuración",
+        _noteInputPlaceholder: "Escribe tu nota...",
+        _toastNoteSaved: "Nota guardada",
+        _toastTypoSaved: "Tipografía guardada",
+        _toastAutoSave: "Guardado automatico",
+        _toastActivated: "Activado",
+        _toastDeactivated: "Desactivado",
+        _toastAllNotesDeleted: "Se han eliminado todas las notas",
+        _lockNoteTitle: "Introduce el código PIN",
+        _lockInfo: "Esta nota está bloqueada, introduce el código PIN para poder acceder a ella",
+        _lockError: "PIN incorrecto"
+
     },
 
     en: {
@@ -78,6 +92,18 @@ const translations = {
         _settingsResetAll: "Reset all",
         _settingsRemoveAll: "Delete all notes",
         _settingsRemoveAllWarning: "WARNING! Pressing the button below will delete all saved notes",
+
+        _settingTitle: "Settings",
+        _noteInputPlaceholder: "Write your note...",
+        _toastNoteSaved: "Note saved",
+        _toastTypoSaved: "Typography saved",
+        _toastAutoSave: "Auto-save",
+        _toastActivated: "Activated",
+        _toastDeactivated: "Deactivated",
+        _toastAllNotesDeleted: "All notes have been deleted",
+        _lockNoteTitle: "Enter the PIN code",
+        _lockInfo: "This note is locked, enter the PIN code to access it",
+        _lockError: "Incorrect PIN"
     },
     ar: {
         // Header Home
@@ -117,6 +143,18 @@ const translations = {
         _settingsResetAll: "إعادة ضبط كل شيء",
         _settingsRemoveAll: "حذف جميع الملاحظات",
         _settingsRemoveAllWarning: "تحذير! عند الضغط على الزر أدناه، سيتم حذف جميع الملاحظات المحفوظة",
+
+        _settingTitle: "الإعدادات",
+        _noteInputPlaceholder: "اكتب ملاحظتك...",
+        _toastNoteSaved: "تم حفظ الملاحظة",
+        _toastTypoSaved: "تم حفظ الخط",
+        _toastAutoSave: "تم الحفظ التلقائي",
+        _toastActivated: "مفعل",
+        _toastDeactivated: "غير مفعل",
+        _toastAllNotesDeleted: "تم حذف جميع الملاحظات",
+        _lockNoteTitle: "أدخل رمز PIN",
+        _lockInfo: "هذه الملاحظة مقفلة، أدخل رمز PIN للوصول إليها",
+        _lockError: "رمز PIN غير صحيح"
     },
     fr: {
         // Header Home
@@ -156,6 +194,18 @@ const translations = {
         _settingsResetAll: "Réinitialiser tout",
         _settingsRemoveAll: "Supprimer toutes les notes",
         _settingsRemoveAllWarning: "ATTENTION ! En appuyant sur le bouton ci-dessous, toutes les notes enregistrées seront supprimées",
+
+        _settingTitle: "Paramètres",
+        _noteInputPlaceholder: "Écrivez votre note...",
+        _toastNoteSaved: "Note enregistrée",
+        _toastTypoSaved: "Typographie enregistrée",
+        _toastAutoSave: "Sauvegarde automatique",
+        _toastActivated: "Activé",
+        _toastDeactivated: "Désactivé",
+        _toastAllNotesDeleted: "Toutes les notes ont été supprimées",
+        _lockNoteTitle: "Entrez le code PIN",
+        _lockInfo: "Cette note est verrouillée, entrez le code PIN pour y accéder",
+        _lockError: "Code PIN incorrect"
     },
     de: {
         // Header Home
@@ -195,6 +245,18 @@ const translations = {
         _settingsResetAll: "Alles zurücksetzen",
         _settingsRemoveAll: "Alle Notizen löschen",
         _settingsRemoveAllWarning: "WARNUNG! Durch Drücken der Schaltfläche unten werden alle gespeicherten Notizen gelöscht",
+
+        _settingTitle: "Einstellungen",
+        _noteInputPlaceholder: "Schreiben Sie Ihre Notiz...",
+        _toastNoteSaved: "Notiz gespeichert",
+        _toastTypoSaved: "Schriftart gespeichert",
+        _toastAutoSave: "Automatisch gespeichert",
+        _toastActivated: "Aktiviert",
+        _toastDeactivated: "Deaktiviert",
+        _toastAllNotesDeleted: "Alle Notizen wurden gelöscht",
+        _lockNoteTitle: "Geben Sie den PIN-Code ein",
+        _lockInfo: "Diese Notiz ist gesperrt, geben Sie den PIN-Code ein, um darauf zuzugreifen",
+        _lockError: "Falscher PIN"
     },
     hi: {
         // Header Home
@@ -234,6 +296,18 @@ const translations = {
         _settingsResetAll: "सब कुछ रीसेट करें",
         _settingsRemoveAll: "सभी नोट्स हटाएं",
         _settingsRemoveAllWarning: "चेतावनी! नीचे दिए गए बटन को दबाने से सभी सहेजे गए नोट्स हट जाएंगे",
+
+        _settingTitle: "सेटिंग्स",
+        _noteInputPlaceholder: "अपना नोट लिखें...",
+        _toastNoteSaved: "नोट सहेजा गया",
+        _toastTypoSaved: "टाइपोग्राफी सहेजी गई",
+        _toastAutoSave: "स्वचालित सहेजा गया",
+        _toastActivated: "सक्रिय",
+        _toastDeactivated: "निष्क्रिय",
+        _toastAllNotesDeleted: "सभी नोट हटा दिए गए हैं",
+        _lockNoteTitle: "पिन कोड दर्ज करें",
+        _lockInfo: "यह नोट लॉक है, इसे एक्सेस करने के लिए पिन कोड दर्ज करें",
+        _lockError: "गलत पिन"
     }
 }
 

@@ -1,8 +1,21 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+export const storage = {
+    NOTES: "notes",
+    LANGUAGE: "language",
+    GRID: "grid",
+    FONT: "font",
+    AUTOSAVE: "autosave",
+    FIRST_LAUNCH_APP: "FIRST_LAUNCH_APP",
+    COLOR: "color",
+}
+
+
+
 export async function save({ note, noteSavedId }) {
     if (note.content.length > 0) {
-        let notes = await AsyncStorage.getItem("notes") || [];
+        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
         if (notes.length > 0) {
             notes = JSON.parse(notes);
         }
@@ -36,7 +49,7 @@ export async function save({ note, noteSavedId }) {
         }
 
         const jsonValue = JSON.stringify(notes);
-        await AsyncStorage.setItem("notes", jsonValue);
+        await AsyncStorage.setItem(storage.NOTES, jsonValue);
 
         return true;
     }

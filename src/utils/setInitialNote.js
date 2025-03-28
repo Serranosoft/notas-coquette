@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
+import { storage } from "./storage";
 
 export async function setInitialNote() {
-    const value = await AsyncStorage.getItem("FIRST_LAUNCH_APP");
+    const value = await AsyncStorage.getItem(storage.FIRST_LAUNCH_APP);
     if (!value) {
         const id = uuid.v4();
 
@@ -15,7 +16,7 @@ export async function setInitialNote() {
         }
 
         notes.push(newNote);
-        await AsyncStorage.setItem("notes", JSON.stringify(notes));
-        await AsyncStorage.setItem("FIRST_LAUNCH_APP", "true");
+        await AsyncStorage.setItem(storage.NOTES, JSON.stringify(notes));
+        await AsyncStorage.setItem(storage.FIRST_LAUNCH_APP, "true");
     }
 }

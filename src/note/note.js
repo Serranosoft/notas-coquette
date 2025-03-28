@@ -8,6 +8,8 @@ import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import { useContext } from "react";
+import { LangContext } from "../utils/Context";
 
 export default function Note(
     {
@@ -34,6 +36,7 @@ export default function Note(
     }) {
 
     const windowHeight = Dimensions.get('window').height;
+    const { language } = useContext(LangContext);
 
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
@@ -72,7 +75,7 @@ export default function Note(
                                 <RichEditor
                                     useContainer={true}
                                     ref={richText}
-                                    placeholder="Escribe tu nota..."
+                                    placeholder={language.t("_noteInputPlaceholder")}
                                     onChange={(content) => note.content = content}
                                     style={{ zIndex: 999 }}
                                     editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}

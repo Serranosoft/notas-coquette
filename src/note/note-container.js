@@ -1,17 +1,20 @@
 import Note from "./note";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Stack, router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
 import { Alert, Keyboard, Platform, ToastAndroid } from "react-native";
-import { save } from "../utils/storage";
+import { save, storage } from "../utils/storage";
+import { LangContext } from "../utils/Context";
 
 export default function NoteContainer() {
 
     const { id } = useLocalSearchParams();
+
+    const { language } = useContext(LangContext);
 
     const richText = useRef(null);
     const scrollRef = useRef(null);
@@ -32,7 +35,7 @@ export default function NoteContainer() {
 
     useEffect(() => {
         async function getNote() {
-            let notes = await AsyncStorage.getItem("notes") || [];
+            let notes = await AsyncStorage.getItem(storage.NOTES) || [];
             if (notes.length > 0) {
                 notes = JSON.parse(notes);
             }
@@ -116,20 +119,20 @@ export default function NoteContainer() {
     async function onSave() {
         if (Platform.OS === "android") {
             ToastAndroid.showWithGravityAndOffset(
-                "Nota guardada",
+                language.t("_toastNoteSaved"),
                 ToastAndroid.LONG,
                 ToastAndroid.BOTTOM,
                 25,
                 50
             );
         } else {
-            Alert.alert("Nota guardada");
+            Alert.alert(language.t("_toastNoteSaved"));
         }
     }
 
     async function getFont() {
         let font = {};
-        font.fontFamily = await AsyncStorage.getItem("font");
+        font.fontFamily = await AsyncStorage.getItem(storage.FONT);
         if (!font.fontFamily) {
             font.fontFamily = "roboto";
         }
@@ -143,7 +146,7 @@ export default function NoteContainer() {
     }
 
     async function getAutoSave() {
-        const autoSave = await AsyncStorage.getItem("autosave");
+        const autoSave = await AsyncStorage.getItem(storage.AUTOSAVE);
         if (autoSave) {
             setAutoSave(autoSave === "true" ? true : false);
         }
