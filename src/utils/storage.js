@@ -29,7 +29,7 @@ export async function save({ note, noteSavedId }) {
             if (oldNote.content !== note.content) {
                 differences++;
             }
-            if (oldNote.hasOwnProperty("pwd") && note.hasOwnProperty("pwd") && oldNote.pwd !== note.pwd) {
+            if (note.hasOwnProperty("pwd") && oldNote.pwd !== note.pwd) {
                 differences++;
             }
             if (oldNote.hasOwnProperty("color") && note.hasOwnProperty("color") && oldNote.color !== note.color) {
