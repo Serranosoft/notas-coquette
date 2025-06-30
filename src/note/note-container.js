@@ -34,6 +34,9 @@ export default function NoteContainer() {
     const [focused, setFocused] = useState(false);
     const [editorHeight, setEditorHeight] = useState(600);
 
+    const [isDrawing, setIsDrawing] = useState(false);
+    
+
     useEffect(() => {
         async function getNote() {
 
@@ -171,7 +174,7 @@ export default function NoteContainer() {
     return (
         <>
             <Stack.Screen options={{
-                header: () => <HeaderNoteContainer {...{ note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText }} />
+                header: () => <HeaderNoteContainer {...{ isDrawing, setIsDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText }} />
             }} />
 
             <Note {...
@@ -196,6 +199,7 @@ export default function NoteContainer() {
                     setColor,
                     editorHeight,
                     setEditorHeight,
+                    isDrawing
                 }
             } />
         </>

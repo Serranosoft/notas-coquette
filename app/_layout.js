@@ -42,7 +42,6 @@ export default function Layout() {
     async function startNotesMigration() {
 
         let migrated = await AsyncStorage.getItem(storage.MIGRATED);
-        console.log(migrated);
         if (!migrated) {
             let notes = await AsyncStorage.getItem(storage.NOTES) || [];
             if (notes.length > 0) {

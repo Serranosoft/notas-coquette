@@ -14,7 +14,6 @@ export default function FooterEditor({
     openSeparators
 }) {
     return (
-        richText.current !== null &&
         <View style={{ paddingTop: padding.bigTop, height: readingMode ? 0 : "auto" }}>
             <RichToolbar
                 style={[editor.richBar, editor.footer, padding.smallHorizontal, { height: "auto" }]}

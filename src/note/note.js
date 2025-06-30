@@ -8,8 +8,9 @@ import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LangContext } from "../utils/Context";
+import SketchPad from "../components/sketchpad";
 
 export default function Note(
     {
@@ -33,10 +34,12 @@ export default function Note(
         setColor,
         editorHeight,
         setEditorHeight,
+        isDrawing,
     }) {
 
     const windowHeight = Dimensions.get('window').height;
     const { language } = useContext(LangContext);
+
 
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
@@ -71,7 +74,10 @@ export default function Note(
                         style={{ flex: 1 }}
                     >
                         <View style={[layout.flex, layout.zIndex]}>
-                            <ScrollView style={layout.zIndex} ref={scrollRef} onTouchEnd={handleFocusContent}>
+                            <ScrollView style={layout.zIndex} ref={scrollRef} scrollEnabled={!isDrawing} onTouchEnd={handleFocusContent}>
+                                
+                                <SketchPad isDrawing={isDrawing} note_id={note.id} />
+                                
                                 <RichEditor
                                     useContainer={true}
                                     ref={richText}
