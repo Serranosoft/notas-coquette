@@ -9,6 +9,7 @@ import useBackHandler from "../components/use-back-handler";
 import { Alert, Keyboard, Platform, ToastAndroid } from "react-native";
 import { save, storage } from "../utils/storage";
 import { LangContext } from "../utils/Context";
+import { getNoteFromId } from "../utils/sqlite";
 
 export default function NoteContainer() {
 
@@ -35,15 +36,11 @@ export default function NoteContainer() {
 
     useEffect(() => {
         async function getNote() {
-            let notes = await AsyncStorage.getItem(storage.NOTES) || [];
-            if (notes.length > 0) {
-                notes = JSON.parse(notes);
-            }
 
-            let note = notes.find((note) => note.id === id);
+            const note = await getNoteFromId(id);
 
             if (note) {
-                if (!note.hasOwnProperty("color")) note.color = "#000"; // Compatibilidad con versiones antiguas
+                if (!note.color) note.color = "#000"; // Compatibilidad con versiones antiguas
                 setNote(note);
                 setColor(note.color);
                 setNoteSavedId(note.id)
@@ -112,7 +109,7 @@ export default function NoteContainer() {
 
     async function saveNote() {
         richText.current.dismissKeyboard();
-        const isSaved = await save({ ...{ note, noteSavedId, setNoteSavedId } });
+        const isSaved = await save({ ...{ note, noteSavedId } });
         isSaved && onSave();
     }
 

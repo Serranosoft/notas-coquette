@@ -9,6 +9,7 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { Platform } from "react-native";
 import { storage } from "../utils/storage";
+import { getAllNotes } from "../utils/sqlite";
 
 export default function HomeContainer() {
     const [notes, setNotes] = useState([]);
@@ -35,10 +36,7 @@ export default function HomeContainer() {
     }, [])
 
     async function getNotes() {
-        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
-        if (notes.length > 0) {
-            notes = JSON.parse(notes);
-        }
+        const notes = await getAllNotes();
         setNotes([...notes].sort((a, b) => b.date - a.date));
     }
 

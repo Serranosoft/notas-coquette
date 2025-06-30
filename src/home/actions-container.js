@@ -1,34 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Actions from "./actions";
-import { storage } from "../utils/storage";
+import { deleteNoteFromId, getAllNotes } from "../utils/sqlite";
 
 
 export default function ActionsContainer({ selected, setSelected, setNotes }) {
-    // Se obtiene todas las notas
-    async function get() {
-        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
-        if (notes.length > 0) {
-            notes = JSON.parse(notes);
-        }
-        return notes;
-    }
-
     // Se obtiene las notas y se eliminan aquellas seleccionadas por el usuario
     async function remove() {
-        let notes = await get();
-
-        const newNotes = notes.filter(note => !selected.includes(note.id));
-
-        await add(newNotes);
-    }
-
-    // Se añade el nuevo array de notas actualizado y se actualiza el front con la nueva información
-    async function add(newNotes) {
-        await AsyncStorage.setItem(storage.NOTES, JSON.stringify(newNotes));
-
+        selected.forEach(async (item) => {
+            await deleteNoteFromId(item);
+        })
+        const notes = await getAllNotes();
+        setNotes(notes);
         setSelected([])
-        setNotes(newNotes);
     }
 
-    return <Actions {...{remove}} />
+    return <Actions {...{ remove }} />
 }

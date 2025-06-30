@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { addNote, getNoteFromId } from "./sqlite";
 
 
 export const storage = {
@@ -9,18 +10,14 @@ export const storage = {
     AUTOSAVE: "autosave",
     FIRST_LAUNCH_APP: "FIRST_LAUNCH_APP",
     COLOR: "color",
+    MIGRATED: "migration",
 }
 
 
 
 export async function save({ note, noteSavedId }) {
     if (note.content.length > 0) {
-        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
-        if (notes.length > 0) {
-            notes = JSON.parse(notes);
-        }
-    
-        const oldNote = notes.find((oldNote) => oldNote.id === noteSavedId);
+        const oldNote = await getNoteFromId(noteSavedId);
 
         // Si existe una oldNote, debo saber si debo actualizarla o no.
         if (oldNote) {
@@ -45,11 +42,9 @@ export async function save({ note, noteSavedId }) {
                 return false;
             }
         } else {
-            notes.push(note);
+            console.log(note);
+            addNote(note.content, note.pwd, note.color, note.date)
         }
-
-        const jsonValue = JSON.stringify(notes);
-        await AsyncStorage.setItem(storage.NOTES, jsonValue);
 
         return true;
     }

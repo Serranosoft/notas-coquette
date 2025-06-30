@@ -25,14 +25,14 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
             <GridBackground />
             <View>
                 {
-                    note.hasOwnProperty("pwd") && note.pwd.length > 0 ?
+                    note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0 ?
                         <View style={styles.screenBlock}>
                             <Image source={require("../../assets/lock-home.png")} />
                         </View>
                         :
                         <>
                             <View style={styles.header}>
-                                <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(note.date).toLocaleDateString()}</Text>
+                                <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(parseInt(note.date)).toLocaleDateString()}</Text>
                             </View>
                             <View style={styles.htmlPadding}>
                                 <RenderHTML

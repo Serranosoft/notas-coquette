@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import HeaderNoteOptions from "./header-note-options";
 import LockScreenModal from "../modals/lock-screen-modal";
 import { storage } from "../utils/storage";
+import { deleteNoteFromId } from "../utils/sqlite";
 
 export default function HeaderNoteOptionsContainer({ note, setReadingMode, readingMode, noteSavedId }) {
 
@@ -36,20 +37,14 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
     }
     
     async function remove() {
-        let notes = await AsyncStorage.getItem(storage.NOTES) || [];
-        if (notes.length > 0) {
-            notes = JSON.parse(notes);
-        }
-
-        const newNotes = notes.filter((note) => note.id !== noteSavedId);
-        await AsyncStorage.setItem(storage.NOTES, JSON.stringify(newNotes));
+        await deleteNoteFromId(note.id);
         router.push("/");
         hideMenu();
     }
 
 
     useEffect(() => {
-        if (note && note.hasOwnProperty("pwd") && note.pwd.length > 0) {
+        if (note && note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
             setNoteLocked(true);
             setPwd(note.pwd);
         } else {

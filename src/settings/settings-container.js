@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import HeaderSettingsContainer from "./header-settings-container";
 import { storage } from "../utils/storage";
 import { LangContext } from "../utils/Context";
+import { deleteAllNotes } from "../utils/sqlite";
 
 export default function SettingsContainer() {
 
@@ -55,7 +56,7 @@ export default function SettingsContainer() {
     }
 
     async function removeAll() {
-        await AsyncStorage.setItem(storage.NOTES, JSON.stringify([]));
+        await deleteAllNotes();
         router.push("/");
         if (Platform.OS === "android") {
             ToastAndroid.showWithGravityAndOffset(language.t("_toastAllNotesDeleted"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);

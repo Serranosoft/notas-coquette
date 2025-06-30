@@ -9,9 +9,9 @@ import { I18n } from 'i18n-js'
 import { translations } from "../src/utils/localizations";
 import { AdsContext, LangContext } from "../src/utils/Context";
 import AdsHandler from "../src/utils/AdsHandler";
-import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { storage } from "../src/utils/storage";
+import { addNote, initDb } from "../src/utils/sqlite";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,6 +25,41 @@ export default function Layout() {
         "oswald": require("../assets/fonts/Oswald.ttf"),
         "ojuju": require("../assets/fonts/Ojuju.ttf"),
     });
+
+
+    // Migration progress.
+    // Esta migración se debe a que anteriormente las notas y su contenido se almacenaban en el AsyncStorage del dispositivo
+    // y ahora se está persistiendo a una base de datos SQLite.
+    useEffect(() => {
+        init();
+        startNotesMigration();
+    }, [])
+
+    async function init() {
+        await initDb();
+    }
+
+    async function startNotesMigration() {
+
+        let migrated = await AsyncStorage.getItem(storage.MIGRATED);
+        console.log(migrated);
+        if (!migrated) {
+            let notes = await AsyncStorage.getItem(storage.NOTES) || [];
+            if (notes.length > 0) {
+                // Obtener notas.
+                notes = JSON.parse(notes);
+                // Para cada nota, crear un nuevo registro en sqlite.
+                notes.forEach(async (note) => {
+                    await addNote(note.content, note.pwd, note.color, note.date);
+                })
+                // Notificar que ya se ha realizado la migración para no volver a repetirla.
+                await AsyncStorage.setItem(storage.MIGRATED, "true");
+                // No borrar el AsyncStorage por si debo recuperar los registros en el próximo despliegue. 
+            }
+        }
+    }
+
+
 
     // Idioma
     const [language, setLanguage] = useState(getLocales()[0].languageCode || "es");
@@ -55,8 +90,8 @@ export default function Layout() {
 
     useEffect(() => {
         if (adTrigger > 4) {
-            adsHandlerRef.current.showIntersitialAd();
-            setAdTrigger(0);
+            // adsHandlerRef.current.showIntersitialAd();
+            // setAdTrigger(0);
         }
     }, [adTrigger])
 
@@ -82,7 +117,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        paddingTop: Constants.statusBarHeight,
+        // paddingTop: Constants.statusBarHeight,
         backgroundColor: colors.light
     },
     wrapper: {
