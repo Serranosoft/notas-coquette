@@ -1,6 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addNote, getNoteFromId } from "./sqlite";
-
+import { addNote, editNote, getNoteFromId } from "./sqlite";
 
 export const storage = {
     NOTES: "notes",
@@ -13,12 +11,9 @@ export const storage = {
     MIGRATED: "migration",
 }
 
-
-
 export async function save({ note, noteSavedId }) {
     if (note.content.length > 0) {
         const oldNote = await getNoteFromId(noteSavedId);
-
         // Si existe una oldNote, debo saber si debo actualizarla o no.
         if (oldNote) {
             let differences = 0;
@@ -32,18 +27,13 @@ export async function save({ note, noteSavedId }) {
             if (oldNote.hasOwnProperty("color") && note.hasOwnProperty("color") && oldNote.color !== note.color) {
                 differences++;
             }
-
             if (differences > 0) {
-                oldNote.content = note.content;
-                oldNote.date = new Date().getTime();
-                oldNote.pwd = note.pwd;
-                oldNote.color = note.color;
+                editNote(note.id, note.content, note.pwd, note.color, note.date)
             } else {
                 return false;
             }
         } else {
-            console.log(note);
-            addNote(note.content, note.pwd, note.color, note.date)
+            addNote(note.id, note.content, note.pwd, note.color, note.date);
         }
 
         return true;
