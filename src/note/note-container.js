@@ -37,9 +37,9 @@ export default function NoteContainer() {
     const sketchPadRef = useRef();
     const [drawing, setDrawing] = useState({
         isDrawing: false,
-        color: "#000",
+        color: "rgb(85, 172, 238)",
         width: 3,
-        mode: "free"
+        mode: "scroll" // "scroll" | "free" | "line" | "eraser" 
     })
 
 
@@ -109,6 +109,12 @@ export default function NoteContainer() {
         };
     }, []);
 
+    useEffect(() => {
+        if (drawing.isDrawing) {
+            richText.current.dismissKeyboard();
+        }
+    }, [drawing])
+
     async function back() {
         if (autoSave) {
             await saveNote();
@@ -170,10 +176,12 @@ export default function NoteContainer() {
     }, [separator])
 
     function handleFocusContent() {
-        setFontSize(null);
-        if (!focused) {
-            setFocused(true);
-            richText.current.focusContentEditor();
+        if (!drawing.isDrawing && !readingMode) {
+            setFontSize(null);
+            if (!focused) {
+                setFocused(true);
+                richText.current.focusContentEditor();
+            }
         }
     }
 
@@ -213,7 +221,7 @@ export default function NoteContainer() {
                             setEditorHeight,
                             drawing,
                             setDrawing,
-                            sketchPadRef
+                            sketchPadRef,
                         }
                     } />
                 </>

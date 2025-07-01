@@ -8,7 +8,7 @@ import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { LangContext } from "../utils/Context";
 import SketchPad from "../components/sketchpad";
 import Drawing from "../rich-editor/drawing/drawing";
@@ -37,12 +37,11 @@ export default function Note(
         setEditorHeight,
         drawing,
         setDrawing,
-        sketchPadRef
+        sketchPadRef,
     }) {
 
     const windowHeight = Dimensions.get('window').height;
     const { language } = useContext(LangContext);
-
 
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
@@ -78,11 +77,11 @@ export default function Note(
                         style={{ flex: 1 }}
                     >
                         <View style={[layout.flex, layout.zIndex]}>
-                            <ScrollView style={layout.zIndex} ref={scrollRef} scrollEnabled={!drawing.isDrawing} onTouchEnd={handleFocusContent}>
+                            <ScrollView style={layout.zIndex} /* contentContainerStyle={{ height: drawing.mode !== "scroll" ? "100%" : "auto" }} */ ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
                                 
                                 <SketchPad
                                     ref={sketchPadRef}
-                                    drawing={drawing} 
+                                    drawing={drawing}
                                     note_id={note.id}
                                 />
                                 
@@ -94,7 +93,7 @@ export default function Note(
                                     style={{ zIndex: 999 }}
                                     editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
                                     initialContentHTML={note.content && note.content}
-                                    disabled={readingMode}
+                                    disabled={readingMode || drawing.isDrawing}
                                     onCursorPosition={handleCursorPosition}
                                     onBlur={() => {
                                         setOpenFontSize(false);

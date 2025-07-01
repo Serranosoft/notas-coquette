@@ -216,7 +216,7 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
             <Path
                 key={i}
                 path={skPath}
-                color={drawing.color}
+                color={p.color}
                 style="stroke"
                 strokeWidth={p.width}
             />
@@ -263,7 +263,7 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
 
     return (
         paths &&
-        <View style={[styles.container, { zIndex: drawing.isDrawing ? 1000 : 998 }]} >
+        <View style={[styles.container, { zIndex: drawing.mode === "scroll" || !drawing.isDrawing ? 998 : 1000 }]} >
             <View style={styles.canvasContainer} {...panResponder.panHandlers}>
                 <Canvas style={styles.canvas}>
                     {renderPaths}
@@ -288,5 +288,4 @@ const styles = StyleSheet.create({
     container: { flex: 1, position: "absolute", width: "100%", height: "100%" },
     canvasContainer: { flex: 1 },
     canvas: { flex: 1 },
-    buttons: { flexDirection: 'row', justifyContent: 'space-around', padding: 10 }
 });

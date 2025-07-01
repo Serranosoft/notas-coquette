@@ -21,11 +21,11 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
             <View style={components.row}>
                 { richText.current && <HeaderLeftEditor {...{ richText, readingMode }} /> }
 
-                <TouchableOpacity onPress={() => setDrawing(prev => ({ ...prev, isDrawing: !drawing.isDrawing }))}>
-                    <Image style={header.img} source={require("../../assets/save.png")}></Image>
+                <TouchableOpacity style={{ paddingRight: 4 }} onPress={() => setDrawing(prev => ({ ...prev, isDrawing: !drawing.isDrawing }))}>
+                    <Image style={[header.img]} source={require("../../assets/highlighter.png")}></Image>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={saveNote}>
-                    <Image style={header.img} source={require("../../assets/save.png")}></Image>
+                <TouchableOpacity style={{ paddingLeft: 4 }} onPress={saveNote}>
+                    <Image style={[header.img]} source={require("../../assets/save.png")}></Image>
                 </TouchableOpacity>
                 <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId }} />
             </View>

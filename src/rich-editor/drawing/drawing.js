@@ -1,9 +1,10 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
-import { colors, editor} from "../../utils/styles";
+import { colors, editor } from "../../utils/styles";
 import ColorPicker, { HueSlider } from "reanimated-color-picker";
 import { ScrollView } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
+import { useEffect } from "react";
 
 export default function Drawing({ drawing, setDrawing }) {
 
@@ -16,14 +17,14 @@ export default function Drawing({ drawing, setDrawing }) {
         runOnJS(updateDrawingColor)(hex);
     };
 
-
     return (
         <View style={[editor.footer, styles.container, { height: "auto" }]}>
             <ScrollView contentContainerStyle={{ gap: 8 }}>
                 <View style={styles.items}>
-                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "free" }))}><View style={[styles.iconWrapper, {backgroundColor: drawing.mode === "free" ? colors.light : "#fff"}]}><Image source={require("../../../assets/free.png")} style={styles.icon} /></View></TouchableOpacity>
-                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "line" }))}><View style={[styles.iconWrapper, {backgroundColor: drawing.mode === "line" ? colors.light : "#fff"}]}><Image source={require("../../../assets/line.png")} style={styles.icon} /></View></TouchableOpacity>
-                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "rubber" }))}><View style={[styles.iconWrapper, {backgroundColor: drawing.mode === "rubber" ? colors.light : "#fff"}]}><Image source={require("../../../assets/eraser.png")} style={styles.icon} /></View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "scroll" }))}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "scroll" ? colors.light : "#fff" }]}><Image source={require("../../../assets/tap.png")} style={styles.icon} /></View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "free" }))}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "free" ? colors.light : "#fff" }]}><Image source={require("../../../assets/free.png")} style={styles.icon} /></View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "line" }))}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "line" ? colors.light : "#fff" }]}><Image source={require("../../../assets/line.png")} style={styles.icon} /></View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "rubber" }))}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "rubber" ? colors.light : "#fff" }]}><Image source={require("../../../assets/eraser.png")} style={styles.icon} /></View></TouchableOpacity>
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.items}>
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     },
 
     sliderStyle: {
-        height: 175,
+        height: 155,
         borderRadius: 20,
     },
 
