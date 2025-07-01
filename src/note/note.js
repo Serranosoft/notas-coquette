@@ -11,6 +11,7 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { useContext, useState } from "react";
 import { LangContext } from "../utils/Context";
 import SketchPad from "../components/sketchpad";
+import Drawing from "../rich-editor/drawing/drawing";
 
 export default function Note(
     {
@@ -34,7 +35,9 @@ export default function Note(
         setColor,
         editorHeight,
         setEditorHeight,
-        isDrawing,
+        drawing,
+        setDrawing,
+        sketchPadRef
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -65,6 +68,7 @@ export default function Note(
                     {openFontSize && !readingMode && <FontSizeContainer {...{ setFontSize, fontSize, openSeparators }} />}
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
                     {openColors && !readingMode && <Colors {...{ note, setColor }} />}
+                    {drawing.isDrawing && !readingMode && <Drawing {...{ drawing, setDrawing }} />}
                     <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
 
 
@@ -74,9 +78,13 @@ export default function Note(
                         style={{ flex: 1 }}
                     >
                         <View style={[layout.flex, layout.zIndex]}>
-                            <ScrollView style={layout.zIndex} ref={scrollRef} scrollEnabled={!isDrawing} onTouchEnd={handleFocusContent}>
+                            <ScrollView style={layout.zIndex} ref={scrollRef} scrollEnabled={!drawing.isDrawing} onTouchEnd={handleFocusContent}>
                                 
-                                <SketchPad isDrawing={isDrawing} note_id={note.id} />
+                                <SketchPad
+                                    ref={sketchPadRef}
+                                    drawing={drawing} 
+                                    note_id={note.id}
+                                />
                                 
                                 <RichEditor
                                     useContainer={true}

@@ -9,7 +9,7 @@ import useBackHandler from "../components/use-back-handler";
 import { Alert, Keyboard, Platform, ToastAndroid } from "react-native";
 import { save, storage } from "../utils/storage";
 import { LangContext } from "../utils/Context";
-import { getNoteFromId } from "../utils/sqlite";
+import { addDraw, getNoteFromId } from "../utils/sqlite";
 
 export default function NoteContainer() {
 
@@ -20,7 +20,7 @@ export default function NoteContainer() {
     const richText = useRef(null);
     const scrollRef = useRef(null);
 
-    const [note, setNote] = useState({});
+    const [note, setNote] = useState(null);
     const [fontSize, setFontSize] = useState(null);
     const [separator, setSeparator] = useState(null);
     const [openFontSize, setOpenFontSize] = useState(false);
@@ -34,8 +34,14 @@ export default function NoteContainer() {
     const [focused, setFocused] = useState(false);
     const [editorHeight, setEditorHeight] = useState(600);
 
-    const [isDrawing, setIsDrawing] = useState(false);
-    
+    const sketchPadRef = useRef();
+    const [drawing, setDrawing] = useState({
+        isDrawing: false,
+        color: "#000",
+        width: 3,
+        mode: "free"
+    })
+
 
     useEffect(() => {
         async function getNote() {
@@ -111,8 +117,10 @@ export default function NoteContainer() {
     }
 
     async function saveNote() {
+        console.log("save note");
         richText.current.dismissKeyboard();
         const isSaved = await save({ ...{ note, noteSavedId } });
+        sketchPadRef.current.save(); // Guardar los paths
         isSaved && onSave();
     }
 
@@ -173,35 +181,43 @@ export default function NoteContainer() {
 
     return (
         <>
-            <Stack.Screen options={{
-                header: () => <HeaderNoteContainer {...{ isDrawing, setIsDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText }} />
-            }} />
+            {
+                note &&
+                <>
+ 
+                    <Stack.Screen options={{
+                        header: () => <HeaderNoteContainer {...{ drawing, setDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText }} />
+                    }} />
 
-            <Note {...
-                {
-                    note,
-                    readingMode,
-                    setFontSize,
-                    openFontSize,
-                    setOpenFontSize,
-                    openSeparators,
-                    setOpenSeparators,
-                    openColors,
-                    setOpenColors,
-                    fontSize,
-                    richText,
-                    setSeparator,
-                    handleCursorPosition,
-                    handleFocusContent,
-                    scrollRef,
-                    font,
-                    color,
-                    setColor,
-                    editorHeight,
-                    setEditorHeight,
-                    isDrawing
-                }
-            } />
+                    <Note {...
+                        {
+                            note,
+                            readingMode,
+                            setFontSize,
+                            openFontSize,
+                            setOpenFontSize,
+                            openSeparators,
+                            setOpenSeparators,
+                            openColors,
+                            setOpenColors,
+                            fontSize,
+                            richText,
+                            setSeparator,
+                            handleCursorPosition,
+                            handleFocusContent,
+                            scrollRef,
+                            font,
+                            color,
+                            setColor,
+                            editorHeight,
+                            setEditorHeight,
+                            drawing,
+                            setDrawing,
+                            sketchPadRef
+                        }
+                    } />
+                </>
+            }
         </>
     )
 }

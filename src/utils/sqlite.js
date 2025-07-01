@@ -5,7 +5,7 @@ const db = SQLite.openDatabaseSync("notas-coquette");
 export async function initDb() {
     await db.execAsync('PRAGMA foreign_keys = ON');
     await db.execAsync(`
-        DROP TABLE IF NOT EXISTS drawings;
+        DROP TABLE IF EXISTS drawings;
         CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY NOT NULL, content TEXT, pwd TEXT, color TEXT, date TEXT);
         CREATE TABLE IF NOT EXISTS drawings (id TEXT PRIMARY KEY NOT NULL, note_id TEXT, data TEXT);
     `);
@@ -42,9 +42,17 @@ export async function getNoteFromId(id) {
 }
 
 export async function addDraw(note_id, data) {
-    const id = uuid.v4();
-    db.runAsync("INSERT INTO drawings (id, note_id, data) VALUES (?, ?, ?)", id, note_id, data);
-    return id;
+    const existing = await db.getFirstAsync(
+        "SELECT id FROM drawings WHERE note_id = ? AND data = ?",
+        note_id,
+        data
+    );
+
+    if (!existing) {
+        const id = uuid.v4();
+        db.runAsync("INSERT INTO drawings (id, note_id, data) VALUES (?, ?, ?)", id, note_id, data);
+        return id;
+    }
 }
 
 export async function getDrawingsFromId(note_id) {
