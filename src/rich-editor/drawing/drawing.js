@@ -23,6 +23,7 @@ export default function Drawing({ drawing, setDrawing }) {
                 <View style={styles.items}>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "free" }))}><View style={[styles.iconWrapper, {backgroundColor: drawing.mode === "free" ? colors.light : "#fff"}]}><Image source={require("../../../assets/free.png")} style={styles.icon} /></View></TouchableOpacity>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "line" }))}><View style={[styles.iconWrapper, {backgroundColor: drawing.mode === "line" ? colors.light : "#fff"}]}><Image source={require("../../../assets/line.png")} style={styles.icon} /></View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "rubber" }))}><View style={[styles.iconWrapper, {backgroundColor: drawing.mode === "rubber" ? colors.light : "#fff"}]}><Image source={require("../../../assets/eraser.png")} style={styles.icon} /></View></TouchableOpacity>
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.items}>

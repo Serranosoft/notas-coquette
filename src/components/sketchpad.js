@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { View, StyleSheet, PanResponder } from 'react-native';
-import { Canvas, Path, Skia } from '@shopify/react-native-skia';
-import { addDraw, getDrawingsFromId } from '../utils/sqlite';
+import { Canvas, Path, Skia, Circle } from '@shopify/react-native-skia';
+import { addDraw, deleteAllDrawsFromNote, getDrawingsFromId } from '../utils/sqlite';
 
 const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
     const [paths, setPaths] = useState([]);
@@ -9,8 +9,8 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
     const currentPoints = useRef([]);
     const pathsRef = useRef(paths);
     const drawingRef = useRef(drawing);
-    const [selectedPathIndex, setSelectedPathIndex] = useState(null);
-
+    const [rubberPos, setRubberPos] = useState(null);
+    
     useEffect(() => {
         loadFromDB();
     }, [note_id]);
@@ -25,13 +25,36 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
 
     // Función para detectar si un punto está cerca de un path
     const isPointNearPath = (point, pathPoints, tolerance = 15) => {
-        return pathPoints.some(p => {
-            const dx = p.x - point.x;
-            const dy = p.y - point.y;
-            return dx * dx + dy * dy <= tolerance * tolerance;
-        });
+        if (pathPoints.length < 2) return false;
+
+        for (let i = 0; i < pathPoints.length - 1; i++) {
+            const p1 = pathPoints[i];
+            const p2 = pathPoints[i + 1];
+
+            if (isPointNearLineSegment(point, p1, p2, tolerance)) {
+                return true;
+            }
+        }
+
+        return false;
     };
 
+    const isPointNearLineSegment = (p, a, b, tolerance) => {
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+
+        if (dx === 0 && dy === 0) {
+            const distSq = (p.x - a.x) ** 2 + (p.y - a.y) ** 2;
+            return distSq <= tolerance ** 2;
+        }
+
+        const t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy)));
+        const closestX = a.x + t * dx;
+        const closestY = a.y + t * dy;
+        const distSq = (p.x - closestX) ** 2 + (p.y - closestY) ** 2;
+
+        return distSq <= tolerance ** 2;
+    };
     const panResponder = useRef(
         PanResponder.create({
             onStartShouldSetPanResponder: () => true,
@@ -40,12 +63,6 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                 const { locationX, locationY } = evt.nativeEvent;
 
                 hasMoved.current = false; // ← Flag para detectar si se ha arrastrado
-
-                if (drawingRef.current.isDrawing) {
-                    console.log("pathsRef en tap", pathsRef.current.length, pathsRef.current);
-                    const foundIndex = pathsRef.current.findIndex(p => isPointNearPath({ x: locationX, y: locationY }, p.points));
-                    setSelectedPathIndex(foundIndex !== -1 ? foundIndex : null);
-                }
 
                 // Iniciar buffer de puntos
                 currentPoints.current = [{ x: locationX, y: locationY }];
@@ -77,9 +94,10 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                 }
 
                 if (hasMoved.current) {
+                    const point = { x: locationX, y: locationY };
+
                     if (drawingRef.current.mode === "free") {
-                        // FREE MODE - añadir punto tras punto
-                        currentPoints.current.push({ x: locationX, y: locationY });
+                        currentPoints.current.push(point);
 
                         setPaths(prev => {
                             const updated = [...prev];
@@ -98,10 +116,10 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                             };
                             return updated;
                         });
+
                     } else if (drawingRef.current.mode === "line") {
-                        // LINE MODE - solo actualizar segundo punto
                         const start = currentPoints.current[0];
-                        const end = { x: locationX, y: locationY };
+                        const end = point;
                         const linePoints = [start, end];
 
                         setPaths(prev => {
@@ -137,6 +155,16 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                             }
                             return updated;
                         });
+
+                    } else if (drawingRef.current.mode === "rubber") {
+                        // Eliminar paths cercanos al dedo
+                        setRubberPos({ x: locationX, y: locationY }); // Actualiza posición del círculo
+                        const newList = pathsRef.current.filter(p => !isPointNearPath(point, p.points));
+                        if (newList.length !== pathsRef.current.length) {
+                            pathsRef.current = newList;
+                            setPaths(newList);
+                            setNewPaths(newList);
+                        }
                     }
                 }
             },
@@ -147,7 +175,7 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                     currentPoints.current = [];
                     return;
                 }
-
+                setRubberPos(null); // Oculta el círculo cuando termina el gesto
                 // Confirmar línea en modo "line"
                 if (drawingRef.current.mode === "line") {
                     const start = currentPoints.current[0];
@@ -184,12 +212,11 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                 skPath.lineTo(p.points[j].x, p.points[j].y);
             }
         }
-        const color = i === selectedPathIndex ? "red" : p.color;
         return (
             <Path
                 key={i}
                 path={skPath}
-                color={color}
+                color={drawing.color}
                 style="stroke"
                 strokeWidth={p.width}
             />
@@ -202,10 +229,11 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
     }, [newPaths])
 
     const save = async () => {
-        const json = JSON.stringify(newPaths);
-        if (newPaths.length > 0) {
+        await deleteAllDrawsFromNote(note_id);
+        paths.forEach(async (path) => {
+            let json = JSON.stringify(path);
             await addDraw(note_id, json);
-        }
+        })
     };
 
     const loadFromDB = async () => {
@@ -239,6 +267,14 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
             <View style={styles.canvasContainer} {...panResponder.panHandlers}>
                 <Canvas style={styles.canvas}>
                     {renderPaths}
+                    {rubberPos && (
+                        <Circle
+                            cx={rubberPos.x}
+                            cy={rubberPos.y}
+                            r={45}
+                            color="rgba(204, 82, 122,0.3)"
+                        />
+                    )}
                 </Canvas>
             </View>
         </View>

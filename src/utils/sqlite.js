@@ -59,3 +59,10 @@ export async function getDrawingsFromId(note_id) {
     const x = await db.getAllAsync('SELECT data FROM drawings WHERE note_id = ?', note_id);
     return x;
 }
+
+export async function deleteAllDrawsFromNote(note_id) {
+    const drawings = await db.getAllAsync('SELECT id FROM drawings WHERE note_id = ?', note_id);
+    drawings.map((path) => {
+        db.runAsync("DELETE FROM drawings WHERE id = ?", path.id);
+    })
+}
