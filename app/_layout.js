@@ -12,6 +12,7 @@ import AdsHandler from "../src/utils/AdsHandler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { storage } from "../src/utils/storage";
 import { addNote, initDb } from "../src/utils/sqlite";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -100,15 +101,17 @@ export default function Layout() {
     }
 
     return (
-        <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, setShowOpenAd: setShowOpenAd }}>
-            <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} setShowOpenAd={setShowOpenAd} />
-            <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
-                <View style={styles.container}>
-                    <Stack />
-                    <StatusBar style="light" />
-                </View>
-            </LangContext.Provider >
-        </AdsContext.Provider>
+        <GestureHandlerRootView style={styles.wrapper}>
+            <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, setShowOpenAd: setShowOpenAd }}>
+                <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} setShowOpenAd={setShowOpenAd} />
+                <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
+                    <View style={styles.container}>
+                        <Stack />
+                        <StatusBar style="light" />
+                    </View>
+                </LangContext.Provider >
+            </AdsContext.Provider>
+        </GestureHandlerRootView>
     )
 }
 const styles = StyleSheet.create({
