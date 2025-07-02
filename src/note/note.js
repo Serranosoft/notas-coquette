@@ -12,6 +12,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { LangContext } from "../utils/Context";
 import SketchPad from "../components/sketchpad";
 import Drawing from "../rich-editor/drawing/drawing";
+import Stickers from "../rich-editor/stickers/stickers";
 
 export default function Note(
     {
@@ -38,6 +39,10 @@ export default function Note(
         drawing,
         setDrawing,
         sketchPadRef,
+        setOpenStickers,
+        openStickers,
+        setSticker,
+        sticker
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -68,6 +73,7 @@ export default function Note(
                     {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
                     {openColors && !readingMode && <Colors {...{ note, setColor }} />}
                     {drawing.isDrawing && !readingMode && <Drawing {...{ drawing, setDrawing }} />}
+                    {openStickers && !readingMode && <Stickers {...{ setSticker }} />}
                     <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
 
 
@@ -99,13 +105,14 @@ export default function Note(
                                         setOpenFontSize(false);
                                         setOpenColors(false);
                                         setOpenSeparators(false);
+                                        setOpenStickers(false);
                                     }}
                                     initialHeight={600}
                                     onHeightChange={(height) => setEditorHeight(height)}
                                 />
                                 <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                             </ScrollView>
-                            <FooterEditor {...{ richText, readingMode, setOpenFontSize, openFontSize, setOpenColors, openColors, openSeparators, setOpenSeparators }} />
+                            <FooterEditor {...{ richText, readingMode, setOpenFontSize, openFontSize, setOpenColors, openColors, openSeparators, setOpenSeparators, setOpenStickers, openStickers, sticker }} />
                         </View>
                     </KeyboardAvoidingView>
                 </>

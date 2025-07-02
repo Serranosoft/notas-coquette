@@ -33,6 +33,8 @@ export default function NoteContainer() {
     const [noteSavedId, setNoteSavedId] = useState(null);
     const [focused, setFocused] = useState(false);
     const [editorHeight, setEditorHeight] = useState(600);
+    const [openStickers, setOpenStickers] = useState(false);
+    const [sticker, setSticker] = useState(null);
 
     const sketchPadRef = useRef();
     const [drawing, setDrawing] = useState({
@@ -175,6 +177,11 @@ export default function NoteContainer() {
         setSeparator(null);
     }, [separator])
 
+    useEffect(() => {
+        richText.current?.insertImage(sticker);
+        setSticker(null)
+    }, [sticker])
+
     function handleFocusContent() {
         if (!drawing.isDrawing && !readingMode) {
             setFontSize(null);
@@ -222,6 +229,10 @@ export default function NoteContainer() {
                             drawing,
                             setDrawing,
                             sketchPadRef,
+                            setOpenStickers,
+                            openStickers,
+                            setSticker,
+                            sticker,
                         }
                     } />
                 </>
