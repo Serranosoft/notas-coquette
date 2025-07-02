@@ -30,10 +30,10 @@ export default function FooterEditor({
                 iconTint={"transparent"}
                 onPressAddImage={onPressAddImage}
                 actions={[
-                    actions.insertImage,
                     actions.setBold,
                     actions.setItalic,
                     actions.setUnderline,
+                    actions.insertImage,
                     actions.alignLeft,
                     actions.alignCenter,
                     actions.alignRight,
