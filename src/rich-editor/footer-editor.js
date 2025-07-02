@@ -7,20 +7,15 @@ import { useCallback, useEffect } from "react";
 export default function FooterEditor({
     richText,
     readingMode,
-    setOpenFontSize,
-    openFontSize,
-    setOpenColors,
-    openColors,
-    setOpenSeparators,
-    openSeparators,
-    setOpenStickers,
-    openStickers,
-    drawing
+    drawing,
+    activeOption,
+    setActiveOption
 }) {
 
     const onPressAddImage = useCallback(() => {
-        setOpenStickers(!openStickers);
-    }, [openStickers]);
+        console.log(activeOption);
+        setActiveOption(activeOption === "stickers" ? null : "stickers");
+    }, [activeOption]);
 
     useEffect(() => {
         console.log(drawing);
@@ -63,9 +58,9 @@ export default function FooterEditor({
                     colors: colorsLabel,
                     separator: separatorsLabel,
                 }}
-                fontSize={() => setOpenFontSize(!openFontSize)}
-                separator={() => setOpenSeparators(!openSeparators)}
-                colors={() => setOpenColors(!openColors)}
+                fontSize={() => setActiveOption(activeOption === "fontSize" ? null : "fontSize")}
+                separator={() => setActiveOption(activeOption === "separators" ? null : "separators")}
+                colors={() => setActiveOption(activeOption === "colors" ? null : "colors")}
             />
         </View>
 

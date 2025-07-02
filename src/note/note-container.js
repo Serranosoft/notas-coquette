@@ -23,9 +23,6 @@ export default function NoteContainer() {
     const [note, setNote] = useState(null);
     const [fontSize, setFontSize] = useState(null);
     const [separator, setSeparator] = useState(null);
-    const [openFontSize, setOpenFontSize] = useState(false);
-    const [openSeparators, setOpenSeparators] = useState(false);
-    const [openColors, setOpenColors] = useState(false);
     const [readingMode, setReadingMode] = useState(false);
     const [font, setFont] = useState(null);
     const [color, setColor] = useState(null);
@@ -35,6 +32,7 @@ export default function NoteContainer() {
     const [editorHeight, setEditorHeight] = useState(600);
     const [openStickers, setOpenStickers] = useState(false);
     const [sticker, setSticker] = useState(null);
+    const [activeOption, setActiveOption] = useState(null);
 
     const sketchPadRef = useRef();
     const [drawing, setDrawing] = useState({
@@ -78,7 +76,7 @@ export default function NoteContainer() {
     );
 
     // Asegurar el cierre de todos los dropdown de opciones antes de permitir salir de la nota
-    useBackHandler(() => {
+    /* useBackHandler(() => {
         if (!openColors && !openFontSize && !openSeparators) {
             back();
         }
@@ -97,9 +95,9 @@ export default function NoteContainer() {
 
         return true;
 
-    }, [openColors, openFontSize, openSeparators])
+    }, [openColors, openFontSize, openSeparators]) */
 
-    useEffect(() => {
+    /* useEffect(() => {
         const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
             setOpenFontSize(false);
             setOpenColors(false);
@@ -110,7 +108,7 @@ export default function NoteContainer() {
             keyboardDidHideListener.remove();
         };
     }, []);
-
+ */
     useEffect(() => {
         if (drawing.isDrawing) {
             richText.current.dismissKeyboard();
@@ -200,7 +198,7 @@ export default function NoteContainer() {
                 <>
  
                     <Stack.Screen options={{
-                        header: () => <HeaderNoteContainer {...{ drawing, setDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText }} />
+                        header: () => <HeaderNoteContainer {...{ drawing, setDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText, setActiveOption, activeOption }} />
                     }} />
 
                     <Note {...
@@ -208,12 +206,6 @@ export default function NoteContainer() {
                             note,
                             readingMode,
                             setFontSize,
-                            openFontSize,
-                            setOpenFontSize,
-                            openSeparators,
-                            setOpenSeparators,
-                            openColors,
-                            setOpenColors,
                             fontSize,
                             richText,
                             setSeparator,
@@ -232,6 +224,8 @@ export default function NoteContainer() {
                             openStickers,
                             setSticker,
                             sticker,
+                            setActiveOption,
+                            activeOption,
                         }
                     } />
                 </>

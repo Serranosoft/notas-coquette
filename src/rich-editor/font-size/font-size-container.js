@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import FontSize from "./font-size";
 
 
-export default function FontSizeContainer({ setFontSize, fontSize, openSeparators }) {
+export default function FontSizeContainer({ setFontSize, fontSize }) {
 
     const [selected, setSelected] = useState(null);
 
@@ -16,6 +16,6 @@ export default function FontSizeContainer({ setFontSize, fontSize, openSeparator
     }, [fontSize])
 
     return (
-        <FontSize {...{ selected, openSeparators, handleFontSize }}/>
+        <FontSize {...{ selected, handleFontSize }}/>
     )
 }

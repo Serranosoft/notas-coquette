@@ -19,12 +19,6 @@ export default function Note(
         note,
         readingMode,
         setFontSize,
-        openFontSize,
-        setOpenFontSize,
-        openSeparators,
-        setOpenSeparators,
-        openColors,
-        setOpenColors,
         fontSize,
         richText,
         setSeparator,
@@ -39,10 +33,10 @@ export default function Note(
         drawing,
         setDrawing,
         sketchPadRef,
-        setOpenStickers,
-        openStickers,
         setSticker,
-        sticker
+        sticker,
+        activeOption,
+        setActiveOption
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -69,11 +63,25 @@ export default function Note(
                         />
                     </View> */}
 
-                    {openFontSize && !readingMode && <FontSizeContainer {...{ setFontSize, fontSize, openSeparators }} />}
-                    {openSeparators && !readingMode && <Separators {...{ setSeparator }} />}
-                    {openColors && !readingMode && <Colors {...{ note, setColor }} />}
-                    {drawing.isDrawing && !readingMode && <Drawing {...{ drawing, setDrawing }} />}
-                    {openStickers && !readingMode && <Stickers {...{ setSticker }} />}
+                    {activeOption === 'fontSize' && !readingMode && (
+                        <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
+                    )}
+
+                    {activeOption === 'separators' && !readingMode && (
+                        <Separators setSeparator={setSeparator} />
+                    )}
+
+                    {activeOption === 'colors' && !readingMode && (
+                        <Colors note={note} setColor={setColor} />
+                    )}
+
+                    {activeOption === 'drawing' && !readingMode && (
+                        <Drawing drawing={drawing} setDrawing={setDrawing} />
+                    )}
+
+                    {activeOption === 'stickers' && !readingMode && (
+                        <Stickers setSticker={setSticker} />
+                    )}
                     <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
 
 
@@ -84,13 +92,13 @@ export default function Note(
                     >
                         <View style={[layout.flex, layout.zIndex]}>
                             <ScrollView style={layout.zIndex} /* contentContainerStyle={{ height: drawing.mode !== "scroll" ? "100%" : "auto" }} */ ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
-                                
+
                                 <SketchPad
                                     ref={sketchPadRef}
                                     drawing={drawing}
                                     note_id={note.id}
                                 />
-                                
+
                                 <RichEditor
                                     useContainer={true}
                                     ref={richText}
@@ -102,17 +110,14 @@ export default function Note(
                                     disabled={readingMode || drawing.isDrawing}
                                     onCursorPosition={handleCursorPosition}
                                     onBlur={() => {
-                                        setOpenFontSize(false);
-                                        setOpenColors(false);
-                                        setOpenSeparators(false);
-                                        setOpenStickers(false);
+                                        setActiveOption(null);
                                     }}
                                     initialHeight={600}
                                     onHeightChange={(height) => setEditorHeight(height)}
                                 />
                                 <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                             </ScrollView>
-                            <FooterEditor {...{ richText, readingMode, setOpenFontSize, openFontSize, setOpenColors, openColors, openSeparators, setOpenSeparators, setOpenStickers, openStickers, sticker, drawing }} />
+                            <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption }} />
                         </View>
                     </KeyboardAvoidingView>
                 </>
