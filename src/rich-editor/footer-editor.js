@@ -2,7 +2,7 @@ import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
 import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, underlineLabel } from "../utils/labels";
 import { View } from "react-native";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 export default function FooterEditor({
     richText,
@@ -15,13 +15,20 @@ export default function FooterEditor({
     openSeparators,
     setOpenStickers,
     openStickers,
+    drawing
 }) {
 
     const onPressAddImage = useCallback(() => {
         setOpenStickers(!openStickers);
     }, [openStickers]);
 
+    useEffect(() => {
+        console.log(drawing);
+    }, [drawing])
+
     return (
+
+        !drawing.isDrawing &&
         <View style={{ paddingTop: padding.bigTop, height: readingMode ? 0 : "auto" }}>
             <RichToolbar
                 style={[editor.richBar, editor.footer, padding.smallHorizontal, { height: "auto" }]}
@@ -61,5 +68,6 @@ export default function FooterEditor({
                 colors={() => setOpenColors(!openColors)}
             />
         </View>
+
     )
 }

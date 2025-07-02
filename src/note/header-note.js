@@ -19,7 +19,7 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
             </View>
 
             <View style={components.row}>
-                { richText.current && <HeaderLeftEditor {...{ richText, readingMode }} /> }
+                { richText.current && !drawing.isDrawing && <HeaderLeftEditor {...{ richText, readingMode }} /> }
 
                 <TouchableOpacity style={{ paddingRight: 4 }} onPress={() => setDrawing(prev => ({ ...prev, isDrawing: !drawing.isDrawing }))}>
                     <Image style={[header.img]} source={require("../../assets/highlighter.png")}></Image>

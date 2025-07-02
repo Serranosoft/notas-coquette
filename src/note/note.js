@@ -112,7 +112,7 @@ export default function Note(
                                 />
                                 <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                             </ScrollView>
-                            <FooterEditor {...{ richText, readingMode, setOpenFontSize, openFontSize, setOpenColors, openColors, openSeparators, setOpenSeparators, setOpenStickers, openStickers, sticker }} />
+                            <FooterEditor {...{ richText, readingMode, setOpenFontSize, openFontSize, setOpenColors, openColors, openSeparators, setOpenSeparators, setOpenStickers, openStickers, sticker, drawing }} />
                         </View>
                     </KeyboardAvoidingView>
                 </>
