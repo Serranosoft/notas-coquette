@@ -125,7 +125,6 @@ export default function NoteContainer() {
     }
 
     async function saveNote() {
-        console.log("save note");
         richText.current.dismissKeyboard();
         const isSaved = await save({ ...{ note, noteSavedId } });
         sketchPadRef.current.save(); // Guardar los paths

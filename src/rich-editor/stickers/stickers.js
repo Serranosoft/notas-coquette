@@ -31,7 +31,7 @@ export default function Stickers({ setSticker }) {
         "https://mollydigital.manu-scholz.com/wp-content/uploads/2025/07/scrunchie-1.png",
         "https://mollydigital.manu-scholz.com/wp-content/uploads/2025/07/hair-tie-1.png",
     ]
-    console.log("asd");
+
     return (
         <View style={[editor.footer, styles.container, { height: "auto", maxHeight: 400 }]}>
                 <ScrollView>

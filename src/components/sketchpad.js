@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 're
 import { View, StyleSheet, PanResponder } from 'react-native';
 import { Canvas, Path, Skia, Circle } from '@shopify/react-native-skia';
 import { addDraw, deleteAllDrawsFromNote, getDrawingsFromId } from '../utils/sqlite';
+import simplify from 'simplify-js';
 
 const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
     const [paths, setPaths] = useState([]);
@@ -79,16 +80,17 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                     hasMoved.current = true;
 
                     if (drawingRef.current.mode === "free") {
+                        const simplified = simplify(currentPoints.current, 1, true);
                         // FREE MODE - inicia con primer punto
                         setPaths(prev => [...prev, {
                             color: drawingRef.current.color,
                             width: drawingRef.current.width,
-                            points: [...currentPoints.current]
+                            points: simplified
                         }]);
                         setNewPaths(prev => [...prev, {
                             color: drawingRef.current.color,
                             width: drawingRef.current.width,
-                            points: [...currentPoints.current]
+                            points: simplified
                         }]);
                     }
                 }
@@ -240,7 +242,6 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
         setPaths([]); // Limpia antes de cargar
 
         const drawings = await getDrawingsFromId(note_id);
-        console.log(drawings.length);
         const allPaths = drawings
             .map((d) => {
                 try {
