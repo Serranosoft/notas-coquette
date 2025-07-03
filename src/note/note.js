@@ -109,9 +109,9 @@ export default function Note(
                                     initialContentHTML={note.content && note.content}
                                     disabled={readingMode || drawing.isDrawing}
                                     onCursorPosition={handleCursorPosition}
-                                    onBlur={() => {
+                                    /* onBlur={() => {
                                         setActiveOption(null);
-                                    }}
+                                    }} */
                                     initialHeight={600}
                                     onHeightChange={(height) => setEditorHeight(height)}
                                 />
