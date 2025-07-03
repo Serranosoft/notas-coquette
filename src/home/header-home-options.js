@@ -19,7 +19,7 @@ export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeL
                 </TouchableWithoutFeedback>
             )}>
             <MenuItem onPress={changeLayout}>
-                <View style={[components.row, padding.smallHorizontal]}>
+                <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/grid.png")} />
                     <Text>{language.t("_headerDropdownOption1")}</Text>
                 </View>
@@ -29,7 +29,7 @@ export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeL
                 router.push("settings");
                 hideMenu();
             }}>
-                <View style={[components.row, padding.smallHorizontal]}>
+                <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/settings.png")} />
                     <Text>{language.t("_headerDropdownOption2")}</Text>
                 </View>

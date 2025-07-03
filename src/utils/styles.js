@@ -8,7 +8,7 @@ export const colors = {
 export const ui = {
     muted: {
         fontFamily: "Regular",
-        color: "#9c9c9c",
+        color: "#000",
         fontSize: 14
     },
     text: {
@@ -37,6 +37,11 @@ export const ui = {
         color: "#fff",
         fontSize: 22,
     },
+    h5: {
+        fontFamily: "Semibold",
+        color: "#fff",
+        fontSize: 19,
+    },
     black: {
         color: "#000",
     },
@@ -53,7 +58,7 @@ export const layout = {
     title: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 8
+        gap: 4
     },
 
     paddingHorizontal: {
