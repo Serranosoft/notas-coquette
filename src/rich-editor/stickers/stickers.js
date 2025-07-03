@@ -33,7 +33,7 @@ export default function Stickers({ setSticker }) {
     ]
 
     return (
-        <View style={[editor.footer, styles.container, { height: "auto", maxHeight: 400 }]}>
+        <View style={[editor.footer, styles.container, { height: "auto", maxHeight: 325 }]}>
                 <ScrollView>
                     {
                         stickers.map((item, index) => {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 
     container: {
         position: "absolute",
-        top: 16,
+        top: 70,
         right: 8,
         backgroundColor: "#fff",
         borderWidth: 4,
