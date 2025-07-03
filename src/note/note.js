@@ -92,32 +92,39 @@ export default function Note(
                     >
                         <View style={[layout.flex, layout.zIndex]}>
                             <ScrollView style={layout.zIndex} /* contentContainerStyle={{ height: drawing.mode !== "scroll" ? "100%" : "auto" }} */ ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
-
-                                <SketchPad
-                                    ref={sketchPadRef}
-                                    drawing={drawing}
-                                    note_id={note.id}
-                                />
-
-                                <RichEditor
-                                    useContainer={true}
-                                    ref={richText}
-                                    placeholder={language.t("_noteInputPlaceholder")}
-                                    onChange={(content) => note.content = content}
-                                    style={{ zIndex: 999 }}
-                                    editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
-                                    initialContentHTML={note.content && note.content}
-                                    disabled={readingMode || drawing.isDrawing}
-                                    onCursorPosition={handleCursorPosition}
-                                    /* onBlur={() => {
-                                        setActiveOption(null);
-                                    }} */
-                                    initialHeight={600}
-                                    onHeightChange={(height) => setEditorHeight(height)}
-                                />
+                                {
+                                    note && 
+                                    <>
+                                        <SketchPad
+                                            ref={sketchPadRef}
+                                            drawing={drawing}
+                                            note_id={note.id}
+                                        />
+        
+                                        <RichEditor
+                                            useContainer={true}
+                                            ref={richText}
+                                            placeholder={language.t("_noteInputPlaceholder")}
+                                            onChange={(content) => note.content = content}
+                                            style={{ zIndex: 999 }}
+                                            editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
+                                            initialContentHTML={note.content ? note.content : ""}
+                                            disabled={readingMode || drawing.isDrawing}
+                                            onCursorPosition={handleCursorPosition}
+                                            /* onBlur={() => {
+                                                setActiveOption(null);
+                                            }} */
+                                            initialHeight={600}
+                                            onHeightChange={(height) => setEditorHeight(height)}
+                                        />
+                                    </>
+                                }
                                 <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                             </ScrollView>
-                            <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption }} />
+                            {
+                                note && <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption }} />
+                            }
+                            
                         </View>
                     </KeyboardAvoidingView>
                 </>

@@ -193,43 +193,41 @@ export default function NoteContainer() {
 
     return (
         <>
-            {
-                note &&
-                <>
- 
-                    <Stack.Screen options={{
-                        header: () => <HeaderNoteContainer {...{ drawing, setDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText, setActiveOption, activeOption }} />
-                    }} />
 
-                    <Note {...
-                        {
-                            note,
-                            readingMode,
-                            setFontSize,
-                            fontSize,
-                            richText,
-                            setSeparator,
-                            handleCursorPosition,
-                            handleFocusContent,
-                            scrollRef,
-                            font,
-                            color,
-                            setColor,
-                            editorHeight,
-                            setEditorHeight,
-                            drawing,
-                            setDrawing,
-                            sketchPadRef,
-                            setOpenStickers,
-                            openStickers,
-                            setSticker,
-                            sticker,
-                            setActiveOption,
-                            activeOption,
-                        }
-                    } />
-                </>
-            }
+
+            <Stack.Screen options={{
+                header: () => <HeaderNoteContainer {...{ drawing, setDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText, setActiveOption, activeOption }} />
+            }} />
+
+            <Note {...
+                {
+                    note,
+                    readingMode,
+                    setFontSize,
+                    fontSize,
+                    richText,
+                    setSeparator,
+                    handleCursorPosition,
+                    handleFocusContent,
+                    scrollRef,
+                    font,
+                    color,
+                    setColor,
+                    editorHeight,
+                    setEditorHeight,
+                    drawing,
+                    setDrawing,
+                    sketchPadRef,
+                    setOpenStickers,
+                    openStickers,
+                    setSticker,
+                    sticker,
+                    setActiveOption,
+                    activeOption,
+                }
+            } />
         </>
+
+
     )
 }

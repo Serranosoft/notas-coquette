@@ -15,7 +15,7 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
                 <Pressable onPress={back}>
                     <Image style={header.img} source={require("../../assets/back.png")} />
                 </Pressable>
-                <Text style={[ui.h4, { color: "#000" }]}>{note.content ? language.t("_headerNoteTitleEdit") : language.t("_headerNoteTitleNew")}</Text>
+                <Text style={[ui.h4, { color: "#000" }]}>{note && note.content ? language.t("_headerNoteTitleEdit") : language.t("_headerNoteTitleNew")}</Text>
             </View>
 
             <View style={components.row}>
