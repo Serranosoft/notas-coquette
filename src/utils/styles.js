@@ -7,33 +7,33 @@ export const colors = {
 
 export const ui = {
     muted: {
-        fontFamily: "madimi",
+        fontFamily: "Regular",
         color: "#9c9c9c",
         fontSize: 14
     },
     text: {
-        fontFamily: "madimi",
+        fontFamily: "Regular",
         color: "#fff",
-        fontSize: 16.5,
+        fontSize: 17.25,
     },
     h1: {
         fontSize: 60,
-        fontFamily: "aroma",
+        fontFamily: "Semibold",
         lineHeight: 65,
     },
     h2: {
-        fontFamily: "aroma",
+        fontFamily: "Medium",
         color: "#fff",
         fontSize: 35,
         textAlign: "center"
     },
     h3: {
-        fontFamily: "aroma",
+        fontFamily: "Medium",
         color: "#fff",
         fontSize: 31,
     },
     h4: {
-        fontFamily: "aroma",
+        fontFamily: "Semibold",
         color: "#fff",
         fontSize: 22,
     },
@@ -69,8 +69,8 @@ export const layout = {
     },
 
     contentList: {
-        gap: 32, 
-        paddingTop: 16, 
+        gap: 32,
+        paddingTop: 16,
         paddingBottom: 100
     },
 
@@ -88,7 +88,7 @@ export const layout = {
 
     alignCenter: {
         alignItems: "center",
-    }    
+    }
 }
 
 export const editor = {
@@ -173,7 +173,7 @@ export const padding = {
     bigVertical: {
         paddingVertical: 16,
     },
-    
+
     smallTop: {
         paddingTop: 8,
     },
@@ -187,12 +187,12 @@ export const padding = {
 
 export const components = {
     header: [
-        layout.row, 
-        layout.justifyBetween, 
-        layout.alignCenter, 
-        layout.backgroundLight, 
+        layout.row,
+        layout.justifyBetween,
+        layout.alignCenter,
+        layout.backgroundLight,
         padding.mediumHorizontal,
-        padding.mediumVertical, 
+        padding.mediumVertical,
         gap.small
     ],
 
