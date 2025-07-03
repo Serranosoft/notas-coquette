@@ -13,13 +13,8 @@ export default function FooterEditor({
 }) {
 
     const onPressAddImage = useCallback(() => {
-        console.log(activeOption);
         setActiveOption(activeOption === "stickers" ? null : "stickers");
     }, [activeOption]);
-
-    useEffect(() => {
-        console.log(drawing);
-    }, [drawing])
 
     return (
 
