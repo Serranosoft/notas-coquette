@@ -1,8 +1,9 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Image } from "react-native";
 import { colors, editor } from "../../utils/styles";
 import { storage } from "../../utils/storage";
+import ColorPicker, { HueSlider, LuminanceSlider } from "reanimated-color-picker";
+import { runOnJS } from "react-native-reanimated";
 
 export default function Colors({ note, setColor }) {
 
@@ -12,60 +13,53 @@ export default function Colors({ note, setColor }) {
         await AsyncStorage.setItem(storage.COLOR, color);
     }
 
+    const onSelectColor = ({ hex }) => {
+        'worklet';
+        runOnJS(handleColor)(hex);
+    };
+
     return (
         <View style={[editor.footer, styles.container, { height: "auto" }]}>
-            <View style={styles.sizeList}>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("#000")}><View style={[styles.color, { backgroundColor: "#000" }]}>{note.color === "#000" && <Image source={require("../../../assets/tick-white.png")} style={styles.tick} />}</View></TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("#DF216E")}><View style={[styles.color, { backgroundColor: "#DF216E" }]}>{note.color === "#DF216E" && <Image source={require("../../../assets/tick-white.png")} style={styles.tick} />}</View></TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("#C1889B")}><View style={[styles.color, { backgroundColor: "#C1889B" }]}>{note.color === "#C1889B" && <Image source={require("../../../assets/tick-white.png")} style={styles.tick} />}</View></TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("#c2a1cf")}><View style={[styles.color, { backgroundColor: "#c2a1cf" }]}>{note.color === "#c2a1cf" && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("#9bb6c7")}><View style={[styles.color, { backgroundColor: "#9bb6c7" }]}>{note.color === "#9bb6c7" && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("#99c9b9")}><View style={[styles.color, { backgroundColor: "#99c9b9" }]}>{note.color === "#99c9b9" && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => handleColor("goldenrod")}><View style={[styles.color, { backgroundColor: "goldenrod" }]}>{note.color === "goldenrod" && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
-            </View>
+            <ColorPicker
+                value={"rgb(85, 172, 238)"}
+                onComplete={onSelectColor}
+                sliderThickness={25}
+                thumbSize={24}
+                thumbShape="circle"
+                style={styles.row}
+            >
+                <HueSlider vertical={true} style={styles.sliderStyle} />
+                <LuminanceSlider vertical={true} style={styles.sliderStyle} />
+            </ColorPicker>
         </View>
     )
 
 }
 
 const styles = StyleSheet.create({
-    color: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: 40,
-        height: 40,
-        borderRadius: 100,
-        borderWidth: 2,
-    },
-
-    tick: {
-        position: "absolute",
-        width: 48,
-        height: 48,
-    },
 
     container: {
         position: "absolute",
-        top: 55,
+        top: 70,
         right: 8,
         backgroundColor: "#fff",
         borderWidth: 4,
         borderColor: colors.light,
         zIndex: 99,
-        borderRadius: 100,
         paddingVertical: 0,
         overflow: "hidden",
         width: "auto",
+        borderRadius: 20,
     },
 
-    item: {
-        textAlign: "center",
-        paddingVertical: 6,
-        paddingHorizontal: 6,
+    sliderStyle: {
+        height: 250,
+        borderRadius: 8,
     },
 
-    sizeList: {
-        overflow: "hidden"
+    row: {
+        flexDirection: "row",
+        gap: 4,
     }
 
 })
