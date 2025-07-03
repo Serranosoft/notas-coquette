@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import LangListItem from "./lang-list-item";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { LangContext } from "../utils/Context";
 import { colors } from "../utils/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,6 +18,12 @@ export default function LangList() {
         { title: language.t("_langListGerman"), acronym: "de" },
         { title: language.t("_langListFrench"), acronym: "fr" },
         { title: language.t("_langListHindi"), acronym: "hi" },
+        { title: language.t("_langListIndonesian"), acronym: "id" },
+        { title: language.t("_langListPortuguese"), acronym: "pt" },
+        { title: language.t("_langListRussian"), acronym: "ru" },
+        { title: language.t("_langListPolish"), acronym: "pl" },
+        { title: language.t("_langListVietnamese"), acronym: "vi" },
+        { title: language.t("_langListTurkish"), acronym: "tr" }
     ]
 
     async function updateLanguage(acronym) {

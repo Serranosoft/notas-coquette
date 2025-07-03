@@ -53,7 +53,6 @@ const translations = {
         _lockError: "PIN incorrecto"
 
     },
-
     en: {
         // Header Home
         _headerTitle: "My notes",
@@ -308,7 +307,334 @@ const translations = {
         _lockNoteTitle: "पिन कोड दर्ज करें",
         _lockInfo: "यह नोट लॉक है, इसे एक्सेस करने के लिए पिन कोड दर्ज करें",
         _lockError: "गलत पिन"
-    }
+    },
+    id: {
+
+        // Header Home
+        _headerTitle: "Catatan saya",
+        _headerDropdownOption1: "Ubah kisi",
+        _headerDropdownOption2: "Pengaturan",
+
+        // Header Note
+        _headerNoteTitleNew: "Tambah catatan",
+        _headerNoteTitleEdit: "Edit catatan",
+        _headerNoteDropdownOption1: "Mode edit",
+        _headerNoteDropdownOption2: "Mode baca",
+        _headerNoteDropdownOption3: "Hapus catatan",
+        _headerNoteDropdownOption4: "Buka kunci catatan",
+        _headerNoteDropdownOption5: "Kunci catatan",
+        _headerNoteDropdownOption6: "Pengaturan",
+
+        // Home
+        _homeButton: "Tambah catatan",
+        _homeEmptyList: "Anda belum memiliki catatan",
+
+        // Lista de idiomas
+        _langListSpanish: "Spanyol",
+        _langListEnglish: "Inggris",
+        _langListArabic: "Arab",
+        _langListGerman: "Jerman",
+        _langListFrench: "Prancis",
+        _langListHindi: "Hindi",
+
+        // Pantalla de settings
+        _settingsApp: "Pengaturan aplikasi",
+        _settingsLang: "Bahasa aplikasi",
+        _settingsEditor: "Pengaturan editor",
+        _settingsSave: "Simpan otomatis",
+        _settingsTypo: "Tipografi",
+        _settingsTypoWarning: "Saat mengubah tipografi, Anda akan diarahkan ke beranda untuk memuat font baru",
+        _settingsResetAll: "Setel ulang semua",
+        _settingsRemoveAll: "Hapus semua catatan",
+        _settingsRemoveAllWarning: "PERINGATAN! Menekan tombol berikut akan menghapus semua catatan yang tersimpan",
+
+        // 26-03-2025: Faltaban las siguientes variables por traducir
+        _settingTitle: "Pengaturan",
+        _noteInputPlaceholder: "Tulis catatan Anda...",
+        _toastNoteSaved: "Catatan disimpan",
+        _toastTypoSaved: "Tipografi disimpan",
+        _toastAutoSave: "Simpan otomatis",
+        _toastActivated: "Diaktifkan",
+        _toastDeactivated: "Dinonaktifkan",
+        _toastAllNotesDeleted: "Semua catatan telah dihapus",
+        _lockNoteTitle: "Masukkan kode PIN",
+        _lockInfo: "Catatan ini dikunci, masukkan kode PIN untuk membukanya",
+        _lockError: "PIN salah"
+
+    },
+    pt: {
+
+        // Header Home
+        _headerTitle: "Minhas notas",
+        _headerDropdownOption1: "Alterar grade",
+        _headerDropdownOption2: "Configurações",
+
+        // Header Note
+        _headerNoteTitleNew: "Adicionar nota",
+        _headerNoteTitleEdit: "Editar nota",
+        _headerNoteDropdownOption1: "Modo de edição",
+        _headerNoteDropdownOption2: "Modo de leitura",
+        _headerNoteDropdownOption3: "Excluir nota",
+        _headerNoteDropdownOption4: "Desbloquear nota",
+        _headerNoteDropdownOption5: "Bloquear nota",
+        _headerNoteDropdownOption6: "Configurações",
+
+        // Home
+        _homeButton: "Adicionar nota",
+        _homeEmptyList: "Você ainda não tem nenhuma nota",
+
+        // Lista de idiomas
+        _langListSpanish: "Espanhol",
+        _langListEnglish: "Inglês",
+        _langListArabic: "Árabe",
+        _langListGerman: "Alemão",
+        _langListFrench: "Francês",
+        _langListHindi: "Hindi",
+
+        // Tela de configurações
+        _settingsApp: "Configurações do aplicativo",
+        _settingsLang: "Idioma do aplicativo",
+        _settingsEditor: "Configurações do editor",
+        _settingsSave: "Salvamento automático",
+        _settingsTypo: "Tipografia",
+        _settingsTypoWarning: "Ao alterar a tipografia, você será redirecionado para a tela inicial para carregar a nova fonte",
+        _settingsResetAll: "Redefinir tudo",
+        _settingsRemoveAll: "Excluir todas as notas",
+        _settingsRemoveAllWarning: "CUIDADO! Ao clicar no botão a seguir, todas as notas salvas serão excluídas",
+
+        // 26-03-2025: Variáveis que faltavam traduzir
+        _settingTitle: "Configurações",
+        _noteInputPlaceholder: "Escreva sua nota...",
+        _toastNoteSaved: "Nota salva",
+        _toastTypoSaved: "Tipografia salva",
+        _toastAutoSave: "Salvamento automático",
+        _toastActivated: "Ativado",
+        _toastDeactivated: "Desativado",
+        _toastAllNotesDeleted: "Todas as notas foram excluídas",
+        _lockNoteTitle: "Digite o código PIN",
+        _lockInfo: "Esta nota está bloqueada, digite o código PIN para acessá-la",
+        _lockError: "PIN incorreto"
+
+    },
+    ru: {
+
+        // Header Home
+        _headerTitle: "Мои заметки",
+        _headerDropdownOption1: "Изменить сетку",
+        _headerDropdownOption2: "Настройки",
+
+        // Header Note
+        _headerNoteTitleNew: "Добавить заметку",
+        _headerNoteTitleEdit: "Редактировать заметку",
+        _headerNoteDropdownOption1: "Режим редактирования",
+        _headerNoteDropdownOption2: "Режим чтения",
+        _headerNoteDropdownOption3: "Удалить заметку",
+        _headerNoteDropdownOption4: "Разблокировать заметку",
+        _headerNoteDropdownOption5: "Заблокировать заметку",
+        _headerNoteDropdownOption6: "Настройки",
+
+        // Home
+        _homeButton: "Добавить заметку",
+        _homeEmptyList: "У вас нет созданных заметок",
+
+        // Список языков
+        _langListSpanish: "Испанский",
+        _langListEnglish: "Английский",
+        _langListArabic: "Арабский",
+        _langListGerman: "Немецкий",
+        _langListFrench: "Французский",
+        _langListHindi: "Хинди",
+
+        // Экран настроек
+        _settingsApp: "Настройки приложения",
+        _settingsLang: "Язык приложения",
+        _settingsEditor: "Настройки редактора",
+        _settingsSave: "Автосохранение",
+        _settingsTypo: "Шрифт",
+        _settingsTypoWarning: "При смене шрифта вы будете перенаправлены на главный экран для загрузки нового шрифта",
+        _settingsResetAll: "Сбросить всё",
+        _settingsRemoveAll: "Удалить все заметки",
+        _settingsRemoveAllWarning: "ВНИМАНИЕ! Нажав следующую кнопку, вы удалите все сохранённые заметки",
+
+        // 26-03-2025: Перевод недостающих переменных
+        _settingTitle: "Настройки",
+        _noteInputPlaceholder: "Напишите свою заметку...",
+        _toastNoteSaved: "Заметка сохранена",
+        _toastTypoSaved: "Шрифт сохранён",
+        _toastAutoSave: "Автосохранение",
+        _toastActivated: "Активировано",
+        _toastDeactivated: "Отключено",
+        _toastAllNotesDeleted: "Все заметки удалены",
+        _lockNoteTitle: "Введите PIN-код",
+        _lockInfo: "Эта заметка заблокирована. Введите PIN-код для доступа",
+        _lockError: "Неверный PIN-код"
+
+    },
+    pl: {
+
+        // Header Home
+        _headerTitle: "Moje notatki",
+        _headerDropdownOption1: "Zmień siatkę",
+        _headerDropdownOption2: "Ustawienia",
+
+        // Header Note
+        _headerNoteTitleNew: "Dodaj notatkę",
+        _headerNoteTitleEdit: "Edytuj notatkę",
+        _headerNoteDropdownOption1: "Tryb edycji",
+        _headerNoteDropdownOption2: "Tryb czytania",
+        _headerNoteDropdownOption3: "Usuń notatkę",
+        _headerNoteDropdownOption4: "Odblokuj notatkę",
+        _headerNoteDropdownOption5: "Zablokuj notatkę",
+        _headerNoteDropdownOption6: "Ustawienia",
+
+        // Home
+        _homeButton: "Dodaj notatkę",
+        _homeEmptyList: "Nie masz jeszcze żadnych notatek",
+
+        // Lista języków
+        _langListSpanish: "Hiszpański",
+        _langListEnglish: "Angielski",
+        _langListArabic: "Arabski",
+        _langListGerman: "Niemiecki",
+        _langListFrench: "Francuski",
+        _langListHindi: "Hindi",
+
+        // Ekran ustawień
+        _settingsApp: "Ustawienia aplikacji",
+        _settingsLang: "Język aplikacji",
+        _settingsEditor: "Ustawienia edytora",
+        _settingsSave: "Automatyczne zapisywanie",
+        _settingsTypo: "Typografia",
+        _settingsTypoWarning: "Po zmianie typografii zostaniesz przekierowany na ekran główny, aby załadować nową czcionkę",
+        _settingsResetAll: "Zresetuj wszystko",
+        _settingsRemoveAll: "Usuń wszystkie notatki",
+        _settingsRemoveAllWarning: "UWAGA! Naciśnięcie poniższego przycisku spowoduje usunięcie wszystkich zapisanych notatek",
+
+        // 26-03-2025: Brakujące tłumaczenia
+        _settingTitle: "Ustawienia",
+        _noteInputPlaceholder: "Napisz swoją notatkę...",
+        _toastNoteSaved: "Notatka zapisana",
+        _toastTypoSaved: "Typografia zapisana",
+        _toastAutoSave: "Automatyczne zapisywanie",
+        _toastActivated: "Aktywowane",
+        _toastDeactivated: "Dezaktywowane",
+        _toastAllNotesDeleted: "Wszystkie notatki zostały usunięte",
+        _lockNoteTitle: "Wprowadź kod PIN",
+        _lockInfo: "Ta notatka jest zablokowana. Wprowadź kod PIN, aby uzyskać dostęp",
+        _lockError: "Nieprawidłowy kod PIN"
+
+    },
+    vi: {
+
+        // Header Home
+        _headerTitle: "Ghi chú của tôi",
+        _headerDropdownOption1: "Thay đổi lưới",
+        _headerDropdownOption2: "Cài đặt",
+
+        // Header Note
+        _headerNoteTitleNew: "Thêm ghi chú",
+        _headerNoteTitleEdit: "Chỉnh sửa ghi chú",
+        _headerNoteDropdownOption1: "Chế độ chỉnh sửa",
+        _headerNoteDropdownOption2: "Chế độ đọc",
+        _headerNoteDropdownOption3: "Xoá ghi chú",
+        _headerNoteDropdownOption4: "Mở khóa ghi chú",
+        _headerNoteDropdownOption5: "Khóa ghi chú",
+        _headerNoteDropdownOption6: "Cài đặt",
+
+        // Home
+        _homeButton: "Thêm ghi chú",
+        _homeEmptyList: "Bạn chưa có ghi chú nào",
+
+        // Danh sách ngôn ngữ
+        _langListSpanish: "Tiếng Tây Ban Nha",
+        _langListEnglish: "Tiếng Anh",
+        _langListArabic: "Tiếng Ả Rập",
+        _langListGerman: "Tiếng Đức",
+        _langListFrench: "Tiếng Pháp",
+        _langListHindi: "Tiếng Hindi",
+
+        // Màn hình cài đặt
+        _settingsApp: "Cài đặt ứng dụng",
+        _settingsLang: "Ngôn ngữ ứng dụng",
+        _settingsEditor: "Cài đặt trình chỉnh sửa",
+        _settingsSave: "Tự động lưu",
+        _settingsTypo: "Phông chữ",
+        _settingsTypoWarning: "Khi thay đổi phông chữ, bạn sẽ được chuyển về màn hình chính để tải phông mới",
+        _settingsResetAll: "Đặt lại tất cả",
+        _settingsRemoveAll: "Xoá tất cả ghi chú",
+        _settingsRemoveAllWarning: "CẢNH BÁO! Nhấn nút dưới đây sẽ xoá toàn bộ ghi chú đã lưu",
+
+        // 26-03-2025: Biến còn thiếu
+        _settingTitle: "Cài đặt",
+        _noteInputPlaceholder: "Viết ghi chú của bạn...",
+        _toastNoteSaved: "Đã lưu ghi chú",
+        _toastTypoSaved: "Đã lưu phông chữ",
+        _toastAutoSave: "Tự động lưu",
+        _toastActivated: "Đã bật",
+        _toastDeactivated: "Đã tắt",
+        _toastAllNotesDeleted: "Đã xoá tất cả ghi chú",
+        _lockNoteTitle: "Nhập mã PIN",
+        _lockInfo: "Ghi chú này đã bị khóa, hãy nhập mã PIN để truy cập",
+        _lockError: "Sai mã PIN"
+
+    },
+    tr: {
+
+        // Header Home
+        _headerTitle: "Notlarım",
+        _headerDropdownOption1: "Izgarayı değiştir",
+        _headerDropdownOption2: "Ayarlar",
+
+        // Header Note
+        _headerNoteTitleNew: "Not ekle",
+        _headerNoteTitleEdit: "Notu düzenle",
+        _headerNoteDropdownOption1: "Düzenleme modu",
+        _headerNoteDropdownOption2: "Okuma modu",
+        _headerNoteDropdownOption3: "Notu sil",
+        _headerNoteDropdownOption4: "Notun kilidini aç",
+        _headerNoteDropdownOption5: "Notu kilitle",
+        _headerNoteDropdownOption6: "Ayarlar",
+
+        // Home
+        _homeButton: "Not ekle",
+        _homeEmptyList: "Henüz oluşturulmuş bir notunuz yok",
+
+        // Dil listesi
+        _langListSpanish: "İspanyolca",
+        _langListEnglish: "İngilizce",
+        _langListArabic: "Arapça",
+        _langListGerman: "Almanca",
+        _langListFrench: "Fransızca",
+        _langListHindi: "Hintçe",
+
+        // Ayarlar ekranı
+        _settingsApp: "Uygulama ayarları",
+        _settingsLang: "Uygulama dili",
+        _settingsEditor: "Editör ayarları",
+        _settingsSave: "Otomatik kaydet",
+        _settingsTypo: "Yazı tipi",
+        _settingsTypoWarning: "Yazı tipi değiştirildiğinde yeni fontu yüklemek için ana ekrana yönlendirileceksiniz",
+        _settingsResetAll: "Tümünü sıfırla",
+        _settingsRemoveAll: "Tüm notları sil",
+        _settingsRemoveAllWarning: "DİKKAT! Aşağıdaki butona bastığınızda tüm kaydedilmiş notlar silinecektir",
+
+        // 26-03-2025: Eksik çeviriler
+        _settingTitle: "Ayarlar",
+        _noteInputPlaceholder: "Notunuzu yazın...",
+        _toastNoteSaved: "Not kaydedildi",
+        _toastTypoSaved: "Yazı tipi kaydedildi",
+        _toastAutoSave: "Otomatik kaydetme",
+        _toastActivated: "Etkinleştirildi",
+        _toastDeactivated: "Devre dışı bırakıldı",
+        _toastAllNotesDeleted: "Tüm notlar silindi",
+        _lockNoteTitle: "PIN kodunu girin",
+        _lockInfo: "Bu not kilitli, erişmek için PIN kodunu girin",
+        _lockError: "Hatalı PIN"
+
+    },
+
+
+
 }
 
 export { translations };
