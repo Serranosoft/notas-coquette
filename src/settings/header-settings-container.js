@@ -5,13 +5,8 @@ import HeaderSettings from "./header-settings";
 export default function HeaderSettingsContainer({ forceHome }) {
 
     useBackHandler(() => {
-        if (forceHome) {
-            router.push("/");
-            return true;
-        } else {
-            router.back();
-            return true;
-        }
+        router.back();
+        return true;
     });
 
     return (

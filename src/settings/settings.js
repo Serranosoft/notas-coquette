@@ -47,7 +47,7 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
                             </TouchableOpacity>
                         )}
                     />
-                    <Text style={ui.muted}>{language.t("_settingsTypoWarning")}</Text>
+                    {/* <Text style={ui.muted}>{language.t("_settingsTypoWarning")}</Text> */}
 
                 </View>
 

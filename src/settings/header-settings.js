@@ -4,14 +4,14 @@ import { components, header, layout, padding, ui } from "../utils/styles";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 
-export default function HeaderSettings({ forceHome }) {
+export default function HeaderSettings() {
 
     const { language } = useContext(LangContext);
     
     return (
         <View style={components.header}>
             <View style={layout.title}>
-                <Pressable onPress={() => forceHome ? router.push("/") : router.back()}>
+                <Pressable onPress={() => router.back()}>
                     <Image style={header.img} source={require("../../assets/back.png")} />
                 </Pressable>
                 <Text style={[ui.h4, { color: "#000" }]}>{language.t("_headerNoteTitleNew")}</Text>
