@@ -2,7 +2,7 @@ import Note from "./note";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Stack, router, useFocusEffect, useLocalSearchParams } from "expo-router";
-import { madimi, ojuju, oswald, roboto } from "../utils/fonts";
+import { ancizar, madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
@@ -147,9 +147,10 @@ export default function NoteContainer() {
         let font = {};
         font.fontFamily = await AsyncStorage.getItem(storage.FONT);
         if (!font.fontFamily) {
-            font.fontFamily = "roboto";
+            font.fontFamily = "ancizar";
         }
         switch (font.fontFamily) {
+            case "ancizar": font.fontFace = ancizar; break;
             case "roboto": font.fontFace = roboto; break;
             case "madimi": font.fontFace = madimi; break;
             case "oswald": font.fontFace = oswald; break;
