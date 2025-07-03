@@ -28,11 +28,12 @@ export default function UpdatesModal() {
         <Modal visible={visible} transparent animationType="slide">
             <View style={styles.overlay}>
                 <View style={styles.modal}>
-                    <Text style={ui.h2}>🆕 Novedades</Text>
-                    <Text style={ui.text}>• ¡Nuevo! Dibuja, subraya y pinta libremente en tus notas ⭐</Text>
-                    <Text style={ui.text}>• Añade un toque único con stickers decorativos de estilo coquette 💖</Text>
-                    <Text style={ui.text}>• Traduce tus notas al instante con la nueva función automática 🌺</Text>
-                    <Text style={ui.text}>😊 Esperamos que disfrutes de todas estas novedades 😊</Text>
+                    <Text style={[ui.h3, { color: "#000"}]}>🆕 Novedades</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• Dibuja, subraya y pinta libremente en tus notas ⭐</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• Añade un toque único con stickers decorativos 💖</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• Disfruta de una nueva fuente para tus notas ✍️</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• Traduce tus notas al instante 🌺</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>😊 Esperamos que disfrutes de todas estas novedades 😊</Text>
                     <Button text={"Cerrar"} onClick={closeModal} />
                 </View>
             </View>

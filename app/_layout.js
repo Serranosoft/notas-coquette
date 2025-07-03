@@ -13,6 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { storage } from "../src/utils/storage";
 import { addNote, initDb } from "../src/utils/sqlite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import UpdatesModal from "../src/modals/updates-modal";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,11 +21,9 @@ export default function Layout() {
 
     // Carga de fuentes.
     const [fontsLoaded] = useFonts({
-        "aroma": require("../assets/fonts/Aroma.ttf"),
-        "roboto": require("../assets/fonts/Roboto.ttf"),
-        "madimi": require("../assets/fonts/Madimi.ttf"),
-        "oswald": require("../assets/fonts/Oswald.ttf"),
-        "ojuju": require("../assets/fonts/Ojuju.ttf"),
+        "Regular": require("../assets/fonts/AncizarSans-Regular.ttf"),
+        "Medium": require("../assets/fonts/AncizarSans-Medium.ttf"),
+        "Semibold": require("../assets/fonts/AncizarSans-Bold.ttf"),
     });
 
 
@@ -109,6 +108,7 @@ export default function Layout() {
                         <Stack />
                         <StatusBar style="light" />
                     </View>
+                    <UpdatesModal />
                 </LangContext.Provider >
             </AdsContext.Provider>
         </GestureHandlerRootView>
