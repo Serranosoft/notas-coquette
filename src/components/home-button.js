@@ -38,11 +38,10 @@ const styles = StyleSheet.create({
 
     img: {
         position: "absolute",
-        top: -75,
-        left: -10,
+        top: -85,
+        left: -24,
         width: 140,
         height: 140,
         transform: [{ rotate: "-15deg" }],
-        zIndex: 1
     },
 })

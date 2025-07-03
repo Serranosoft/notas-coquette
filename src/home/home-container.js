@@ -9,7 +9,7 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { Platform } from "react-native";
 import { storage } from "../utils/storage";
-import { getAllNotes } from "../utils/sqlite";
+import { deleteNoteFromId, getAllNotes } from "../utils/sqlite";
 
 export default function HomeContainer() {
     const [notes, setNotes] = useState([]);
@@ -47,10 +47,21 @@ export default function HomeContainer() {
         }
     }
 
+    async function deleteNotes() {
+        selected.forEach(async (note) => await deleteNoteFromId(note));
+        emptySelected();
+        getNotes();
+
+    }
+
+    async function emptySelected() {
+        setSelected([]);
+    }
+
     return (
         <>
             <Stack.Screen options={{ header: () => <HeaderHome {...{setColumnNumber, columnNumber}} /> }} />
-            <Home {...{ columnNumber, notes, setNotes, selected, setSelected}} />
+            <Home {...{ columnNumber, notes, deleteNotes, selected, setSelected, emptySelected}} />
             <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     )

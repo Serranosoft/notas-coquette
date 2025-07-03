@@ -3,11 +3,11 @@ import HomeButton from "../../src/components/home-button";
 import { gap, layout, sizes, ui } from "../../src/utils/styles";
 import { FlatList, Text, View } from "react-native";
 import NoteItemContainer from "./note-item-container";
-import ActionsContainer from "./actions-container";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
+import GridDeleteWrapper from "./grid-delete-wrapper";
 
-export default function Home({columnNumber, notes, setNotes, selected, setSelected}) {
+export default function Home({columnNumber, notes, emptySelected, selected, setSelected, deleteNotes}) {
     
     
     const { language } = useContext(LangContext);
@@ -32,7 +32,8 @@ export default function Home({columnNumber, notes, setNotes, selected, setSelect
                     }
                 </View>
             </View>
-            { selected.length > 0 && <ActionsContainer {...{selected, setNotes, setSelected}} /> }
+            {/* { selected.length > 0 && <ActionsContainer {...{selected, setNotes, setSelected}} /> } */}
+            { selected.length > 0 && <GridDeleteWrapper {...{ selected, emptySelected, deleteNotes }} /> }
         </>
     )
 }
