@@ -5,7 +5,6 @@ const db = SQLite.openDatabaseSync("notas-coquette");
 export async function initDb() {
     await db.execAsync('PRAGMA foreign_keys = ON');
     await db.execAsync(`
-        DROP TABLE IF EXISTS drawings;
         CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY NOT NULL, content TEXT, pwd TEXT, color TEXT, date TEXT);
         CREATE TABLE IF NOT EXISTS drawings (id TEXT PRIMARY KEY NOT NULL, note_id TEXT, data TEXT);
     `);

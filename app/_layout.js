@@ -27,17 +27,24 @@ export default function Layout() {
         "Semibold": require("../assets/fonts/AncizarSans-Bold.ttf"),
     });
 
+    // Idioma
+    const [language, setLanguage] = useState(getLocales()[0].languageCode || "es");
+    const i18n = new I18n(translations);
+    i18n.locale = language;
+    i18n.enableFallback = true
+    i18n.defaultLocale = "es";
 
-    // Migration progress.
-    // Esta migración se debe a que anteriormente las notas y su contenido se almacenaban en el AsyncStorage del dispositivo
-    // y ahora se está persistiendo a una base de datos SQLite.
     useEffect(() => {
         init();
-        startNotesMigration();
     }, [])
-
+    
     async function init() {
         await initDb();
+        await setInitialNote(language);
+        // Migration progress.
+        // Esta migración se debe a que anteriormente las notas y su contenido se almacenaban en el AsyncStorage del dispositivo
+        // y ahora se está persistiendo a una base de datos SQLite.
+        await startNotesMigration();
     }
 
     async function startNotesMigration() {
@@ -59,30 +66,11 @@ export default function Layout() {
         }
     }
 
-
-
-    // Idioma
-    const [language, setLanguage] = useState(getLocales()[0].languageCode || "es");
-    const i18n = new I18n(translations);
-    i18n.locale = language;
-    i18n.enableFallback = true
-    i18n.defaultLocale = "es";
-
     useEffect(() => {
         if (fontsLoaded) {
             SplashScreen.hideAsync();
         }
     }, [fontsLoaded])
-
-    useEffect(() => {
-        getLanguage();
-        setInitialNote();
-    }, [])
-
-    async function getLanguage() {
-        const language = await AsyncStorage.getItem(storage.LANGUAGE);
-        setLanguage(language || "es");
-    }
 
     const [adTrigger, setAdTrigger] = useState(0);
     const [showOpenAd, setShowOpenAd] = useState(true);
