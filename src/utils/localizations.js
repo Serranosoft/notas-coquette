@@ -27,6 +27,12 @@ const translations = {
         _langListGerman: "Alemán",
         _langListFrench: "Francés",
         _langListHindi: "Hindu",
+        _langListIndonesian: "Indonesio",
+        _langListPortuguese: "Portugués",
+        _langListRussian: "Ruso",
+        _langListPolish: "Polaco",
+        _langListVietnamese: "Vietnamita",
+        _langListTurkish: "Turco",
 
         // Pantalla de settings
         _settingsApp: "Ajustes de la aplicación",
@@ -50,7 +56,16 @@ const translations = {
         _toastAllNotesDeleted: "Se han eliminado todas las notas",
         _lockNoteTitle: "Introduce el código PIN",
         _lockInfo: "Esta nota está bloqueada, introduce el código PIN para poder acceder a ella",
-        _lockError: "PIN incorrecto"
+        _lockError: "PIN incorrecto",
+
+        // 04-07-2025: Se agregan nuevas traducciones para nuevos textos
+        _elementsSelected: "elementos seleccionados",
+        _updatesModalNews: "Novedades",
+        _updatesModalV1_1: "Dibuja, subraya y pinta libremente en tus notas ⭐",
+        _updatesModalV1_2: "Añade un toque único con stickers decorativos 💖",
+        _updatesModalV1_3: "Nueva tipografía y otros cambios 🌹",
+        _updatesModalV1_4: "Disfruta de una nueva fuente para tus notas ✍️",
+        _updatesModalV1_5: "😊 Esperamos que disfrutes de todas estas novedades 😊",
 
     },
     en: {
@@ -76,10 +91,16 @@ const translations = {
         // Lista de idiomas
         _langListSpanish: "Spanish",
         _langListEnglish: "English",
-        _langListArabic: "Arab",
+        _langListArabic: "Arabic",
         _langListGerman: "German",
         _langListFrench: "French",
-        _langListHindi: "Hindu",
+        _langListHindi: "Hindi",
+        _langListIndonesian: "Indonesian",
+        _langListPortuguese: "Portuguese",
+        _langListRussian: "Russian",
+        _langListPolish: "Polish",
+        _langListVietnamese: "Vietnamese",
+        _langListTurkish: "Turkish",
 
         // Pantalla de settings
         _settingsApp: "Application settings",
@@ -102,7 +123,16 @@ const translations = {
         _toastAllNotesDeleted: "All notes have been deleted",
         _lockNoteTitle: "Enter the PIN code",
         _lockInfo: "This note is locked, enter the PIN code to access it",
-        _lockError: "Incorrect PIN"
+        _lockError: "Incorrect PIN",
+
+        _elementsSelected: "elements selected",
+        _updatesModalNews: "News",
+        _updatesModalV1_1: "Draw, underline and freely paint in your notes ⭐",
+        _updatesModalV1_2: "Add a unique touch with decorative stickers 💖",
+        _updatesModalV1_3: "New typography and other changes 🌹",
+        _updatesModalV1_4: "Enjoy a new font for your notes ✍️",
+        _updatesModalV1_5: "😊 We hope you enjoy all these new features 😊",
+
     },
     ar: {
         // Header Home
@@ -125,12 +155,19 @@ const translations = {
         _homeEmptyList: "ليس لديك أي ملاحظات",
 
         // Lista de idiomas
-        _langListSpanish: "الإسبانية",
-        _langListEnglish: "الإنجليزية",
-        _langListArabic: "العربية",
-        _langListGerman: "الألمانية",
+        _langListSpanish: "إسباني",
+        _langListEnglish: "إنجليزي",
+        _langListArabic: "عربي",
+        _langListGerman: "ألماني",
         _langListFrench: "فرنسي",
-        _langListHindi: "هندوسي",
+        _langListHindi: "هندي",
+        _langListIndonesian: "إندونيسي",
+        _langListPortuguese: "برتغالي",
+        _langListRussian: "روسي",
+        _langListPolish: "بولندي",
+        _langListVietnamese: "فيتنامي",
+        _langListTurkish: "تركي",
+
 
         // Pantalla de settings
         _settingsApp: "إعدادات التطبيق",
@@ -153,7 +190,16 @@ const translations = {
         _toastAllNotesDeleted: "تم حذف جميع الملاحظات",
         _lockNoteTitle: "أدخل رمز PIN",
         _lockInfo: "هذه الملاحظة مقفلة، أدخل رمز PIN للوصول إليها",
-        _lockError: "رمز PIN غير صحيح"
+        _lockError: "رمز PIN غير صحيح",
+
+        _elementsSelected: "عناصر محددة",
+        _updatesModalNews: "أخبار",
+        _updatesModalV1_1: "ارسم، ضع خطًا تحت، وملّ بحرية في ملاحظاتك ⭐",
+        _updatesModalV1_2: "أضف لمسة فريدة مع ملصقات زخرفية 💖",
+        _updatesModalV1_3: "طباعة جديدة وتغييرات أخرى 🌹",
+        _updatesModalV1_4: "استمتع بخط جديد لملاحظاتك ✍️",
+        _updatesModalV1_5: "😊 نأمل أن تستمتع بكل هذه الميزات الجديدة 😊",
+
     },
     fr: {
         // Header Home
@@ -204,7 +250,16 @@ const translations = {
         _toastAllNotesDeleted: "Toutes les notes ont été supprimées",
         _lockNoteTitle: "Entrez le code PIN",
         _lockInfo: "Cette note est verrouillée, entrez le code PIN pour y accéder",
-        _lockError: "Code PIN incorrect"
+        _lockError: "Code PIN incorrect",
+
+        _elementsSelected: "éléments sélectionnés",
+        _updatesModalNews: "Nouveautés",
+        _updatesModalV1_1: "Dessine, souligne et peins librement dans tes notes ⭐",
+        _updatesModalV1_2: "Ajoute une touche unique avec des autocollants décoratifs 💖",
+        _updatesModalV1_3: "Nouvelle typographie et autres changements 🌹",
+        _updatesModalV1_4: "Profite d'une nouvelle police pour tes notes ✍️",
+        _updatesModalV1_5: "😊 Nous espérons que tu apprécieras toutes ces nouveautés 😊",
+
     },
     de: {
         // Header Home
@@ -229,10 +284,16 @@ const translations = {
         // Lista de idiomas
         _langListSpanish: "Spanisch",
         _langListEnglish: "Englisch",
-        _langListArabic: "Araber",
+        _langListArabic: "Arabisch",
         _langListGerman: "Deutsch",
         _langListFrench: "Französisch",
-        _langListHindi: "Hindu",
+        _langListHindi: "Hindi",
+        _langListIndonesian: "Indonesisch",
+        _langListPortuguese: "Portugiesisch",
+        _langListRussian: "Russisch",
+        _langListPolish: "Polnisch",
+        _langListVietnamese: "Vietnamesisch",
+        _langListTurkish: "Türkisch",
 
         // Pantalla de settings
         _settingsApp: "App-Einstellungen",
@@ -255,7 +316,16 @@ const translations = {
         _toastAllNotesDeleted: "Alle Notizen wurden gelöscht",
         _lockNoteTitle: "Geben Sie den PIN-Code ein",
         _lockInfo: "Diese Notiz ist gesperrt, geben Sie den PIN-Code ein, um darauf zuzugreifen",
-        _lockError: "Falscher PIN"
+        _lockError: "Falscher PIN",
+
+        _elementsSelected: "ausgewählte Elemente",
+        _updatesModalNews: "Neuigkeiten",
+        _updatesModalV1_1: "Zeichne, unterstreiche und male frei in deinen Notizen ⭐",
+        _updatesModalV1_2: "Füge mit dekorativen Stickern eine einzigartige Note hinzu 💖",
+        _updatesModalV1_3: "Neue Typografie und weitere Änderungen 🌹",
+        _updatesModalV1_4: "Genieße eine neue Schriftart für deine Notizen ✍️",
+        _updatesModalV1_5: "😊 Wir hoffen, du genießt all diese neuen Funktionen 😊",
+
     },
     hi: {
         // Header Home
@@ -279,11 +349,17 @@ const translations = {
 
         // Lista de idiomas
         _langListSpanish: "स्पेनिश",
-        _langListEnglish: "अंग्रेज़ी",
+        _langListEnglish: "अंग्रेजी",
         _langListArabic: "अरबी",
         _langListGerman: "जर्मन",
-        _langListFrench: "फ़्रेंच",
-        _langListHindi: "हिंदू",
+        _langListFrench: "फ्रेंच",
+        _langListHindi: "हिंदी",
+        _langListIndonesian: "इंडोनेशियाई",
+        _langListPortuguese: "पुर्तगाली",
+        _langListRussian: "रूसी",
+        _langListPolish: "पोलिश",
+        _langListVietnamese: "वियतनामी",
+        _langListTurkish: "तुर्की",
 
         // Pantalla de settings
         _settingsApp: "एप्लिकेशन सेटिंग्स",
@@ -306,7 +382,16 @@ const translations = {
         _toastAllNotesDeleted: "सभी नोट हटा दिए गए हैं",
         _lockNoteTitle: "पिन कोड दर्ज करें",
         _lockInfo: "यह नोट लॉक है, इसे एक्सेस करने के लिए पिन कोड दर्ज करें",
-        _lockError: "गलत पिन"
+        _lockError: "गलत पिन",
+
+        _elementsSelected: "चयनित तत्व",
+        _updatesModalNews: "समाचार",
+        _updatesModalV1_1: "अपने नोट्स में स्वतंत्र रूप से ड्रॉ करें, रेखांकित करें और रंग भरें ⭐",
+        _updatesModalV1_2: "सजावटी स्टिकर्स के साथ एक अनूठा स्पर्श जोड़ें 💖",
+        _updatesModalV1_3: "नई टाइपोग्राफी और अन्य बदलाव 🌹",
+        _updatesModalV1_4: "अपने नोट्स के लिए नई फॉन्ट का आनंद लें ✍️",
+        _updatesModalV1_5: "😊 हमें उम्मीद है कि आप इन सभी नए फीचर्स का आनंद लेंगे 😊",
+
     },
     id: {
 
@@ -336,6 +421,12 @@ const translations = {
         _langListGerman: "Jerman",
         _langListFrench: "Prancis",
         _langListHindi: "Hindi",
+        _langListIndonesian: "Bahasa Indonesia",
+        _langListPortuguese: "Bahasa Portugis",
+        _langListRussian: "Bahasa Rusia",
+        _langListPolish: "Bahasa Polandia",
+        _langListVietnamese: "Tiếng Việt",
+        _langListTurkish: "Türkçe",
 
         // Pantalla de settings
         _settingsApp: "Pengaturan aplikasi",
@@ -359,7 +450,16 @@ const translations = {
         _toastAllNotesDeleted: "Semua catatan telah dihapus",
         _lockNoteTitle: "Masukkan kode PIN",
         _lockInfo: "Catatan ini dikunci, masukkan kode PIN untuk membukanya",
-        _lockError: "PIN salah"
+        _lockError: "PIN salah",
+
+        _elementsSelected: "elemen terpilih",
+        _updatesModalNews: "Berita",
+        _updatesModalV1_1: "Gambar, garis bawahi dan warnai bebas di catatanmu ⭐",
+        _updatesModalV1_2: "Tambahkan sentuhan unik dengan stiker dekoratif 💖",
+        _updatesModalV1_3: "Tipografi baru dan perubahan lainnya 🌹",
+        _updatesModalV1_4: "Nikmati font baru untuk catatanmu ✍️",
+        _updatesModalV1_5: "😊 Semoga kamu menikmati semua fitur baru ini 😊",
+
 
     },
     pt: {
@@ -390,6 +490,12 @@ const translations = {
         _langListGerman: "Alemão",
         _langListFrench: "Francês",
         _langListHindi: "Hindi",
+        _langListIndonesian: "Indonésio",
+        _langListPortuguese: "Português",
+        _langListRussian: "Russo",
+        _langListPolish: "Polonês",
+        _langListVietnamese: "Vietnamita",
+        _langListTurkish: "Turco",
 
         // Tela de configurações
         _settingsApp: "Configurações do aplicativo",
@@ -413,7 +519,16 @@ const translations = {
         _toastAllNotesDeleted: "Todas as notas foram excluídas",
         _lockNoteTitle: "Digite o código PIN",
         _lockInfo: "Esta nota está bloqueada, digite o código PIN para acessá-la",
-        _lockError: "PIN incorreto"
+        _lockError: "PIN incorreto",
+
+        _elementsSelected: "elementos selecionados",
+        _updatesModalNews: "Novidades",
+        _updatesModalV1_1: "Desenhe, sublinhe e pinte livremente em suas notas ⭐",
+        _updatesModalV1_2: "Adicione um toque único com adesivos decorativos 💖",
+        _updatesModalV1_3: "Nova tipografia e outras mudanças 🌹",
+        _updatesModalV1_4: "Desfrute de uma nova fonte para suas notas ✍️",
+        _updatesModalV1_5: "😊 Esperamos que você aproveite todos esses novos recursos 😊",
+
 
     },
     ru: {
@@ -444,6 +559,12 @@ const translations = {
         _langListGerman: "Немецкий",
         _langListFrench: "Французский",
         _langListHindi: "Хинди",
+        _langListIndonesian: "Индонезийский",
+        _langListPortuguese: "Португальский",
+        _langListRussian: "Русский",
+        _langListPolish: "Польский",
+        _langListVietnamese: "Вьетнамский",
+        _langListTurkish: "Турецкий",
 
         // Экран настроек
         _settingsApp: "Настройки приложения",
@@ -467,7 +588,16 @@ const translations = {
         _toastAllNotesDeleted: "Все заметки удалены",
         _lockNoteTitle: "Введите PIN-код",
         _lockInfo: "Эта заметка заблокирована. Введите PIN-код для доступа",
-        _lockError: "Неверный PIN-код"
+        _lockError: "Неверный PIN-код",
+
+        _elementsSelected: "выбранные элементы",
+        _updatesModalNews: "Новости",
+        _updatesModalV1_1: "Рисуй, подчеркивай и свободно раскрашивай свои заметки ⭐",
+        _updatesModalV1_2: "Добавь уникальный штрих с декоративными стикерами 💖",
+        _updatesModalV1_3: "Новая типографика и другие изменения 🌹",
+        _updatesModalV1_4: "Наслаждайся новым шрифтом для своих заметок ✍️",
+        _updatesModalV1_5: "😊 Надеемся, вам понравятся все эти новшества 😊",
+
 
     },
     pl: {
@@ -497,7 +627,13 @@ const translations = {
         _langListArabic: "Arabski",
         _langListGerman: "Niemiecki",
         _langListFrench: "Francuski",
-        _langListHindi: "Hindi",
+        _langListHindi: "Hinduski",
+        _langListIndonesian: "Indonezyjski",
+        _langListPortuguese: "Portugalski",
+        _langListRussian: "Rosyjski",
+        _langListPolish: "Polski",
+        _langListVietnamese: "Wietnamski",
+        _langListTurkish: "Turecki",
 
         // Ekran ustawień
         _settingsApp: "Ustawienia aplikacji",
@@ -521,7 +657,16 @@ const translations = {
         _toastAllNotesDeleted: "Wszystkie notatki zostały usunięte",
         _lockNoteTitle: "Wprowadź kod PIN",
         _lockInfo: "Ta notatka jest zablokowana. Wprowadź kod PIN, aby uzyskać dostęp",
-        _lockError: "Nieprawidłowy kod PIN"
+        _lockError: "Nieprawidłowy kod PIN",
+
+        _elementsSelected: "wybrane elementy",
+        _updatesModalNews: "Nowości",
+        _updatesModalV1_1: "Rysuj, podkreślaj i swobodnie maluj w swoich notatkach ⭐",
+        _updatesModalV1_2: "Dodaj wyjątkowy akcent za pomocą dekoracyjnych naklejek 💖",
+        _updatesModalV1_3: "Nowa typografia i inne zmiany 🌹",
+        _updatesModalV1_4: "Ciesz się nową czcionką w swoich notatkach ✍️",
+        _updatesModalV1_5: "😊 Mamy nadzieję, że spodoba Ci się wszystkie te nowości 😊",
+
 
     },
     vi: {
@@ -552,6 +697,12 @@ const translations = {
         _langListGerman: "Tiếng Đức",
         _langListFrench: "Tiếng Pháp",
         _langListHindi: "Tiếng Hindi",
+        _langListIndonesian: "Tiếng Indonesia",
+        _langListPortuguese: "Tiếng Bồ Đào Nha",
+        _langListRussian: "Tiếng Nga",
+        _langListPolish: "Tiếng Ba Lan",
+        _langListVietnamese: "Tiếng Việt",
+        _langListTurkish: "Tiếng Thổ Nhĩ Kỳ",
 
         // Màn hình cài đặt
         _settingsApp: "Cài đặt ứng dụng",
@@ -575,7 +726,16 @@ const translations = {
         _toastAllNotesDeleted: "Đã xoá tất cả ghi chú",
         _lockNoteTitle: "Nhập mã PIN",
         _lockInfo: "Ghi chú này đã bị khóa, hãy nhập mã PIN để truy cập",
-        _lockError: "Sai mã PIN"
+        _lockError: "Sai mã PIN",
+
+        _elementsSelected: "các phần tử đã chọn",
+        _updatesModalNews: "Tin tức",
+        _updatesModalV1_1: "Vẽ, gạch chân và thoải mái tô màu trong ghi chú của bạn ⭐",
+        _updatesModalV1_2: "Thêm phong cách độc đáo với nhãn dán trang trí 💖",
+        _updatesModalV1_3: "Phông chữ mới và các thay đổi khác 🌹",
+        _updatesModalV1_4: "Thưởng thức font mới cho ghi chú của bạn ✍️",
+        _updatesModalV1_5: "😊 Hy vọng bạn sẽ thích tất cả những tính năng mới này 😊",
+
 
     },
     tr: {
@@ -606,7 +766,13 @@ const translations = {
         _langListGerman: "Almanca",
         _langListFrench: "Fransızca",
         _langListHindi: "Hintçe",
-
+        _langListIndonesian: "Endonezce",
+        _langListPortuguese: "Portekizce",
+        _langListRussian: "Rusça",
+        _langListPolish: "Lehçe",
+        _langListVietnamese: "Vietnamca",
+        _langListTurkish: "Türkçe",
+        
         // Ayarlar ekranı
         _settingsApp: "Uygulama ayarları",
         _settingsLang: "Uygulama dili",
@@ -629,7 +795,16 @@ const translations = {
         _toastAllNotesDeleted: "Tüm notlar silindi",
         _lockNoteTitle: "PIN kodunu girin",
         _lockInfo: "Bu not kilitli, erişmek için PIN kodunu girin",
-        _lockError: "Hatalı PIN"
+        _lockError: "Hatalı PIN",
+
+        _elementsSelected: "seçilen öğeler",
+        _updatesModalNews: "Yenilikler",
+        _updatesModalV1_1: "Notlarında özgürce çiz, altını çiz ve boya yap ⭐",
+        _updatesModalV1_2: "Dekoratif çıkartmalarla benzersiz bir dokunuş ekle 💖",
+        _updatesModalV1_3: "Yeni tipografi ve diğer değişiklikler 🌹",
+        _updatesModalV1_4: "Notların için yeni bir yazı tipi keyfini çıkar ✍️",
+        _updatesModalV1_5: "😊 Umarız bu yeni özelliklerin keyfini çıkarırsın 😊",
+
 
     },
 

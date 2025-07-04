@@ -35,7 +35,8 @@ export default function UpdatesModal() {
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_1")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_2")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_3")}</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>{language.t("_updatesModalV1_4")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_4")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>{language.t("_updatesModalV1_5")}</Text>
                     <Button text={"Cerrar"} onClick={closeModal} />
                 </View>
             </View>
