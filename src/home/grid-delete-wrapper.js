@@ -7,7 +7,7 @@ export default function GridDeleteWrapper({ selected, emptySelected, deleteNotes
             <TouchableOpacity onPress={() => emptySelected()}>
                 <Image style={styles.littleIcon} source={require("../../assets/cross-dark.png")} />
             </TouchableOpacity>
-            <Text style={[ui.h4, { textAlign: "center" }]}>{selected.length} elemento(s) seleccionados</Text>
+            <Text style={[ui.h4, { textAlign: "center" }]}>{selected.length} {language.t("_elementsSelected")}</Text>
             <TouchableOpacity onPress={() => deleteNotes()}>
                 <Image style={styles.icon} source={require("../../assets/trash-dark.png")} />
             </TouchableOpacity>

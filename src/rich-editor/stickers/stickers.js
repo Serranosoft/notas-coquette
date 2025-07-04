@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
-import { colors, editor, ui } from "../../utils/styles";
+import { colors, editor } from "../../utils/styles";
 
 export default function Stickers({ setSticker }) {
 

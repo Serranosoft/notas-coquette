@@ -4,7 +4,6 @@ import { colors, editor } from "../../utils/styles";
 import ColorPicker, { HueSlider } from "reanimated-color-picker";
 import { ScrollView } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
-import { useEffect } from "react";
 
 export default function Drawing({ drawing, setDrawing }) {
 

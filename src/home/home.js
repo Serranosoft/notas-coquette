@@ -32,7 +32,6 @@ export default function Home({columnNumber, notes, emptySelected, selected, setS
                     }
                 </View>
             </View>
-            {/* { selected.length > 0 && <ActionsContainer {...{selected, setNotes, setSelected}} /> } */}
             { selected.length > 0 && <GridDeleteWrapper {...{ selected, emptySelected, deleteNotes }} /> }
         </>
     )

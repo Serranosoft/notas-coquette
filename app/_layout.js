@@ -14,7 +14,7 @@ import { storage } from "../src/utils/storage";
 import { addNote, initDb } from "../src/utils/sqlite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import UpdatesModal from "../src/modals/updates-modal";
-import * as StoreReview from 'expo-store-review';
+// import * as StoreReview from 'expo-store-review';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -90,7 +90,7 @@ export default function Layout() {
 
     useEffect(() => {
         if (adTrigger > 3) {
-            askForReview();
+            // askForReview();
         } else if (adTrigger > 4) {
             adsHandlerRef.current.showIntersitialAd();
             setAdTrigger(0);

@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Modal, View, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ui } from '../utils/styles';
 import Button from '../components/button';
+import { LangContext } from '../utils/Context';
 
-const VERSION_MODAL = 'v1';
+const VERSION_MODAL = 'v2';
 
 export default function UpdatesModal() {
     const [visible, setVisible] = useState(false);
+    const { language } = useContext(LangContext);
+    
 
     useEffect(() => {
         const checkIfSeen = async () => {
@@ -28,12 +31,11 @@ export default function UpdatesModal() {
         <Modal visible={visible} transparent animationType="slide">
             <View style={styles.overlay}>
                 <View style={styles.modal}>
-                    <Text style={[ui.h3, { color: "#000"}]}>🆕 Novedades</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>• Dibuja, subraya y pinta libremente en tus notas ⭐</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>• Añade un toque único con stickers decorativos 💖</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>• Disfruta de una nueva fuente para tus notas ✍️</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>• Traduce tus notas al instante 🌺</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>😊 Esperamos que disfrutes de todas estas novedades 😊</Text>
+                    <Text style={[ui.h3, { color: "#000"}]}>🆕 {language.t("_updatesModalNews")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_1")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_2")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_3")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>{language.t("_updatesModalV1_4")}</Text>
                     <Button text={"Cerrar"} onClick={closeModal} />
                 </View>
             </View>

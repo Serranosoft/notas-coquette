@@ -2,7 +2,7 @@ import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
 import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, underlineLabel } from "../utils/labels";
 import { View } from "react-native";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 export default function FooterEditor({
     richText,
