@@ -125,6 +125,7 @@ export default function NoteContainer() {
     async function saveNote() {
         richText.current.dismissKeyboard();
         setActiveOption(null);
+        setDrawing(prev => ({ ...prev, isDrawing: false }));
 
         const isSaved = await save({ ...{ note, noteSavedId } });
         sketchPadRef.current.save(); // Guardar los paths
