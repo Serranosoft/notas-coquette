@@ -1,7 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors, ui } from "../utils/styles";
+import { useContext } from "react";
+import { LangContext } from "../utils/Context";
 
 export default function GridDeleteWrapper({ selected, emptySelected, deleteNotes }) {
+
+    const { language } = useContext(LangContext);
+
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => emptySelected()}>
