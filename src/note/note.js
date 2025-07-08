@@ -92,7 +92,7 @@ export default function Note(
                         style={{ flex: 1 }}
                     >
                         <View style={[layout.flex, layout.zIndex]}>
-                            <ScrollView style={layout.zIndex} contentContainerStyle={{ height: drawing.mode !== "scroll" && drawing.isDrawing ? "100%" : "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
+                            <ScrollView style={layout.zIndex} contentContainerStyle={{ height: "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
                                 {
                                     note && 
                                     <>
@@ -116,7 +116,7 @@ export default function Note(
                                             /* onBlur={() => {
                                                 setActiveOption(null);
                                             }} */
-                                            initialHeight={600}
+                                            initialHeight={800}
                                             onHeightChange={(height) => handleHeightChange(height)}
                                         />
                                     </>
