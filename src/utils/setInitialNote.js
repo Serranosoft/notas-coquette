@@ -63,8 +63,6 @@ style="">Cambia de <b>color</b></font></li><li style="text-align: left;"><font s
             pwd: null
         }
 
-        console.log(newNote);
-
         await addNote(id, newNote.content, newNote.pwd, newNote.color, newNote.date)
         await AsyncStorage.setItem(storage.FIRST_LAUNCH_APP, "true");
     }
