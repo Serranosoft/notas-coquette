@@ -129,7 +129,7 @@ export default function NoteContainer() {
 
         const isSaved = await save({ ...{ note, noteSavedId } });
         sketchPadRef.current.save(); // Guardar los paths
-        
+
         isSaved && onSave();
     }
 
@@ -196,6 +196,11 @@ export default function NoteContainer() {
 
     const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
 
+    const handleHeightChange = (height) => {
+        const limitedHeight = height > 3500 ? 3500 : height;
+        setEditorHeight(limitedHeight);
+    };
+
     return (
         <>
 
@@ -229,6 +234,7 @@ export default function NoteContainer() {
                     sticker,
                     setActiveOption,
                     activeOption,
+                    handleHeightChange
                 }
             } />
         </>

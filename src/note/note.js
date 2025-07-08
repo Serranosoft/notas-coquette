@@ -36,7 +36,8 @@ export default function Note(
         setSticker,
         sticker,
         activeOption,
-        setActiveOption
+        setActiveOption,
+        handleHeightChange
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -96,6 +97,7 @@ export default function Note(
                                     note && 
                                     <>
                                         <SketchPad
+                                            key={note.id}
                                             ref={sketchPadRef}
                                             drawing={drawing}
                                             note_id={note.id}
@@ -115,7 +117,7 @@ export default function Note(
                                                 setActiveOption(null);
                                             }} */
                                             initialHeight={600}
-                                            onHeightChange={(height) => setEditorHeight(height)}
+                                            onHeightChange={(height) => handleHeightChange(height)}
                                         />
                                     </>
                                 }

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState, useRef, useEffect, forwardRef, useImperativeHandle, useMemo } from 'react';
 import { View, StyleSheet, PanResponder } from 'react-native';
 import { Canvas, Path, Skia, Circle } from '@shopify/react-native-skia';
 import { addDraw, deleteAllDrawsFromNote, getDrawingsFromId } from '../utils/sqlite';
@@ -11,7 +11,7 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
     const pathsRef = useRef(paths);
     const drawingRef = useRef(drawing);
     const [rubberPos, setRubberPos] = useState(null);
-    
+
     useEffect(() => {
         loadFromDB();
     }, [note_id]);
@@ -206,24 +206,22 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
     const hasMoved = useRef(false);
 
     // Renderizado de paths, coloreando el seleccionado en rojo
-    const renderPaths = paths.map((p, i) => {
-        const skPath = Skia.Path.Make();
-        if (p.points.length > 0) {
-            skPath.moveTo(p.points[0].x, p.points[0].y);
-            for (let j = 1; j < p.points.length; j++) {
-                skPath.lineTo(p.points[j].x, p.points[j].y);
+    const renderPaths = useMemo(() => {
+        return paths.map((p) => {
+            const path = Skia.Path.Make();
+            if (p.points.length > 0) {
+                path.moveTo(p.points[0].x, p.points[0].y);
+                for (let j = 1; j < p.points.length; j++) {
+                    path.lineTo(p.points[j].x, p.points[j].y);
+                }
             }
-        }
-        return (
-            <Path
-                key={i}
-                path={skPath}
-                color={p.color}
-                style="stroke"
-                strokeWidth={p.width}
-            />
-        );
-    });
+            return {
+                path,
+                color: p.color,
+                width: p.width,
+            };
+        });
+    }, [paths]);
 
 
     useEffect(() => {
@@ -267,7 +265,15 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
         <View style={[styles.container, { zIndex: drawing.mode === "scroll" || !drawing.isDrawing ? 998 : 1000 }]} >
             <View style={styles.canvasContainer} {...panResponder.panHandlers}>
                 <Canvas style={styles.canvas}>
-                    {renderPaths}
+                    {renderPaths.map((p, i) => (
+                        <Path
+                            key={i}
+                            path={p.path}
+                            color={p.color}
+                            style="stroke"
+                            strokeWidth={p.width}
+                        />
+                    ))}
                     {rubberPos && (
                         <Circle
                             cx={rubberPos.x}
