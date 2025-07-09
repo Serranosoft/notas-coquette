@@ -79,7 +79,9 @@ export default function Layout() {
     useEffect(() => {
         if (adTrigger > 3) {
             askForReview();
-        } else if (adTrigger > 4) {
+        }
+        
+        if (adTrigger > 4) {
             adsHandlerRef.current.showIntersitialAd();
             setAdTrigger(0);
         }
