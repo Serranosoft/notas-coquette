@@ -1,6 +1,4 @@
 import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
-import { RichEditor } from "react-native-pell-rich-editor";
-import GridBackground from "../../src/components/grid";
 import { layout } from "../../src/utils/styles";
 import FooterEditor from "../rich-editor/footer-editor";
 import FontSizeContainer from "../rich-editor/font-size/font-size-container";
@@ -8,11 +6,11 @@ import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { LangContext } from "../utils/Context";
-import SketchPad from "../components/sketchpad";
 import Drawing from "../rich-editor/drawing/drawing";
 import Stickers from "../rich-editor/stickers/stickers";
+import NoteContent from "./note-content";
 
 export default function Note(
     {
@@ -29,7 +27,6 @@ export default function Note(
         color,
         setColor,
         editorHeight,
-        setEditorHeight,
         drawing,
         setDrawing,
         sketchPadRef,
@@ -48,22 +45,6 @@ export default function Note(
             {
                 font &&
                 <>
-                    {/* <View style={[layout.row, layout.justifyBetween, layout.backgroundLight]}>
-                        <HeaderLeftEditor {...{ richText, readingMode }} />
-                        <HeaderRightEditor
-                            {...{
-                                richText,
-                                setOpenFontSize,
-                                setOpenSeparators,
-                                openSeparators,
-                                openFontSize,
-                                setOpenColors,
-                                openColors,
-                                readingMode
-                            }}
-                        />
-                    </View> */}
-
                     {activeOption === 'fontSize' && !readingMode && (
                         <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
                     )}
@@ -93,40 +74,28 @@ export default function Note(
                     >
                         <View style={[layout.flex, layout.zIndex]}>
                             <ScrollView style={layout.zIndex} contentContainerStyle={{ height: "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
-                                {
-                                    note && 
-                                    <>
-                                        <SketchPad
-                                            key={note.id}
-                                            ref={sketchPadRef}
-                                            drawing={drawing}
-                                            note_id={note.id}
-                                        />
-        
-                                        <RichEditor
-                                            useContainer={true}
-                                            ref={richText}
-                                            placeholder={language.t("_noteInputPlaceholder")}
-                                            onChange={(content) => note.content = content}
-                                            style={{ zIndex: 999 }}
-                                            editorStyle={{ initialCSSText: `${font.fontFace}`, backgroundColor: "transparent", contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`, color: color }}
-                                            initialContentHTML={note.content ? note.content : ""}
-                                            disabled={readingMode || drawing.isDrawing}
-                                            onCursorPosition={handleCursorPosition}
-                                            /* onBlur={() => {
-                                                setActiveOption(null);
-                                            }} */
-                                            initialHeight={800}
-                                            onHeightChange={(height) => handleHeightChange(height)}
-                                        />
-                                    </>
+                                {note &&
+                                    <NoteContent
+                                        key={note.id}
+                                        note={note}
+                                        font={font}
+                                        drawing={drawing}
+                                        color={color}
+                                        readingMode={readingMode}
+                                        sketchPadRef={sketchPadRef}
+                                        richText={richText}
+                                        setActiveOption={setActiveOption}
+                                        handleCursorPosition={handleCursorPosition}
+                                        handleHeightChange={handleHeightChange}
+                                        editorHeight={editorHeight}
+                                        windowHeight={windowHeight}
+                                    />
                                 }
-                                <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
                             </ScrollView>
                             {
                                 note && <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption }} />
                             }
-                            
+
                         </View>
                     </KeyboardAvoidingView>
                 </>
