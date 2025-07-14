@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
 import { colors, editor } from "../../utils/styles";
-import ColorPicker, { HueSlider } from "reanimated-color-picker";
+import ColorPicker, { BrightnessSlider, HueSlider } from "reanimated-color-picker";
 import { ScrollView } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
 
@@ -18,7 +18,7 @@ export default function Drawing({ drawing, setDrawing }) {
 
     return (
         <View style={[editor.footer, styles.container, { height: "auto" }]}>
-            <ScrollView contentContainerStyle={{ gap: 8 }}>
+            <ScrollView contentContainerStyle={{ gap: 6 }}>
                 <View style={styles.items}>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "scroll" }))}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "scroll" ? colors.light : "#fff" }]}><Image source={require("../../../assets/tap.png")} style={styles.icon} /></View></TouchableOpacity>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing(prev => ({ ...prev, mode: "free" }))}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "free" ? colors.light : "#fff" }]}><Image source={require("../../../assets/free.png")} style={styles.icon} /></View></TouchableOpacity>
@@ -41,6 +41,7 @@ export default function Drawing({ drawing, setDrawing }) {
                         thumbShape="circle"
                     >
                         <HueSlider vertical={true} style={styles.sliderStyle} />
+                        <BrightnessSlider vertical={true} style={[styles.sliderStyle, { height: 65 }]} />
                     </ColorPicker>
                 </View>
             </ScrollView>
@@ -62,13 +63,13 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         paddingVertical: 0,
         width: "auto",
-        paddingVertical: 8,
+        paddingTop: 8,
     },
 
     item: {
         textAlign: "center",
         paddingHorizontal: 6,
-        paddingVertical: 4,
+        paddingVertical: 2,
     },
 
     separator: {
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
     items: {
         justifyContent: "center",
         alignItems: "center",
-        // gap: 8
     },
 
     color: {
@@ -115,8 +115,9 @@ const styles = StyleSheet.create({
     },
 
     sliderStyle: {
-        height: 155,
+        height: 130,
         borderRadius: 20,
+        marginBottom: 12,
     },
 
 })
