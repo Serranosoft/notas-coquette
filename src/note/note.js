@@ -1,4 +1,4 @@
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, Image } from "react-native";
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { layout } from "../../src/utils/styles";
 import FooterEditor from "../rich-editor/footer-editor";
 import FontSizeContainer from "../rich-editor/font-size/font-size-container";
@@ -73,7 +73,7 @@ export default function Note(
                         style={{ flex: 1 }}
                     >
                         <View style={[layout.flex, layout.zIndex]}>
-                            {/* <ScrollView style={layout.zIndex} contentContainerStyle={{ height: "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
+                            <ScrollView style={layout.zIndex} contentContainerStyle={{ height: "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
                                 {note &&
                                     <NoteContent
                                         key={note.id}
@@ -91,9 +91,7 @@ export default function Note(
                                         windowHeight={windowHeight}
                                     />
                                 }
-                            </ScrollView> */}
-                            <Image style={{ width: "100%", flex: 1 }} source={require("../../assets/h2o.jpg")} />
-
+                            </ScrollView>
                             {
                                 note && <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption }} />
                             }
