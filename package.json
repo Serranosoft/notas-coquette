@@ -46,7 +46,8 @@
     "react-native-uuid": "^2.0.1",
     "react-native-webview": "13.12.5",
     "reanimated-color-picker": "^4.1.0",
-    "simplify-js": "^1.2.4"
+    "simplify-js": "^1.2.4",
+    "expo-build-properties": "~0.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0"

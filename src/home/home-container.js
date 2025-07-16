@@ -2,7 +2,7 @@ import Home from "./home";
 import useBackHandler from "../components/use-back-handler";
 import { Stack } from "expo-router";
 import { useFocusEffect } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderHome from "./header-home";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
@@ -10,11 +10,14 @@ import { bannerId, bannerIdIOS } from "../utils/constants";
 import { Platform } from "react-native";
 import { storage } from "../utils/storage";
 import { deleteNoteFromId, getAllNotes } from "../utils/sqlite";
+import { AdsContext } from "../utils/Context";
 
 export default function HomeContainer() {
     const [notes, setNotes] = useState([]);
     const [selected, setSelected] = useState([]);
     const [columnNumber, setColumnNumber] = useState(2);
+
+    const { adsLoaded } = useContext(AdsContext);
 
     useBackHandler(() => {
         if (selected.length > 0) {
@@ -62,7 +65,7 @@ export default function HomeContainer() {
         <>
             <Stack.Screen options={{ header: () => <HeaderHome {...{setColumnNumber, columnNumber}} /> }} />
             <Home {...{ columnNumber, notes, deleteNotes, selected, setSelected, emptySelected}} />
-            <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
         </>
     )
 }

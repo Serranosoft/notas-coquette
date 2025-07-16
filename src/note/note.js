@@ -7,7 +7,7 @@ import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { useContext } from "react";
-import { LangContext } from "../utils/Context";
+import { AdsContext } from "../utils/Context";
 import Drawing from "../rich-editor/drawing/drawing";
 import Stickers from "../rich-editor/stickers/stickers";
 import NoteContent from "./note-content";
@@ -38,8 +38,8 @@ export default function Note(
     }) {
 
     const windowHeight = Dimensions.get('window').height;
-    const { language } = useContext(LangContext);
-
+    const { adsLoaded } = useContext(AdsContext);
+        console.log(adsLoaded);
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
             {
@@ -64,7 +64,7 @@ export default function Note(
                     {activeOption === 'stickers' && !readingMode && (
                         <Stickers setSticker={setSticker} />
                     )}
-                    <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+                    { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
 
 
                     <KeyboardAvoidingView

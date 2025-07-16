@@ -37,7 +37,7 @@ export default function Layout() {
     useEffect(() => {
         init();
     }, [])
-    
+
     async function init() {
         await initDb();
         await setInitialNote(language);
@@ -72,6 +72,8 @@ export default function Layout() {
         }
     }, [fontsLoaded])
 
+    // Gestión de anuncios
+    const [adsLoaded, setAdsLoaded] = useState(false);
     const [adTrigger, setAdTrigger] = useState(0);
     const [showOpenAd, setShowOpenAd] = useState(true);
     const adsHandlerRef = createRef();
@@ -80,10 +82,11 @@ export default function Layout() {
         if (adTrigger > 3) {
             askForReview();
         }
-        
-        if (adTrigger > 4) {
-            adsHandlerRef.current.showIntersitialAd();
-            setAdTrigger(0);
+        if (adsLoaded) {
+            if (adTrigger > 4) {
+                adsHandlerRef.current.showIntersitialAd();
+                setAdTrigger(0);
+            }
         }
     }, [adTrigger])
 
@@ -100,8 +103,8 @@ export default function Layout() {
 
     return (
         <GestureHandlerRootView style={styles.wrapper}>
-            <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, setShowOpenAd: setShowOpenAd }}>
-                <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} setShowOpenAd={setShowOpenAd} />
+            <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, adsLoaded: adsLoaded, setShowOpenAd: setShowOpenAd }}>
+                <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
                 <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
                     <View style={styles.container}>
                         <Stack />

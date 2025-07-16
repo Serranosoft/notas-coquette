@@ -6,11 +6,12 @@ import { bannerId, bannerIdIOS } from "../utils/constants";
 import { FONTS } from "../utils/fonts";
 import LangList from "../components/lang-list";
 import { useContext } from "react";
-import { LangContext } from "../utils/Context";
+import { AdsContext, LangContext } from "../utils/Context";
 
 export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSave, typo }) {
 
     const { language } = useContext(LangContext);
+    const { adsLoaded } = useContext(AdsContext);
 
     return (
         <View style={[layout.flex, layout.backgroundLight, padding.bigHorizontal]}>
@@ -64,7 +65,7 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
 
 
             </ScrollView>
-            <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
 
         </View>
     )
