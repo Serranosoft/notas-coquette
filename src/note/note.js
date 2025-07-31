@@ -39,7 +39,7 @@ export default function Note(
 
     const windowHeight = Dimensions.get('window').height;
     const { adsLoaded } = useContext(AdsContext);
-        console.log(adsLoaded);
+
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
             {

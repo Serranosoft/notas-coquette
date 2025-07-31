@@ -1,9 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import HeaderNoteOptions from "./header-note-options";
 import LockScreenModal from "../modals/lock-screen-modal";
-import { storage } from "../utils/storage";
 import { deleteNoteFromId } from "../utils/sqlite";
 
 export default function HeaderNoteOptionsContainer({ note, setReadingMode, readingMode, noteSavedId }) {
@@ -16,8 +14,10 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
     // Estados para abrir el modal de bloquear nota
     const [lockModal, setLockModal] = useState(false);
     const [pwd, setPwd] = useState("");
-
     const [noteLocked, setNoteLocked] = useState(false);
+
+    // Estado para conocer si una nota se encuentra en favoritos
+    const [isFavorite, setIsFavorite] = useState(null);
 
     function showLockModal() {
         setLockModal(true);
@@ -35,21 +35,40 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
         setNoteLocked(false);
         hideMenu();
     }
-    
+
     async function remove() {
         await deleteNoteFromId(note.id);
         router.push("/");
         hideMenu();
     }
 
+    async function handleFavorite() {
+        hideMenu();
+        setIsFavorite(!isFavorite);
+    }
 
     useEffect(() => {
-        if (note && note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
-            setNoteLocked(true);
-            setPwd(note.pwd);
+        if (isFavorite !== null) {
+            note.favorite = isFavorite;
+        }
+
+    }, [isFavorite])
+
+
+    useEffect(() => {
+        if (note) {
+            if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
+                setNoteLocked(true);
+                setPwd(note.pwd);
+            }
+
+            if (note.favorite) {
+                setIsFavorite(true);
+            }
         } else {
             setNoteLocked(false);
         }
+
         setMenuVisible(false);
     }, [note])
 
@@ -62,7 +81,7 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
 
     return (
         <>
-            <HeaderNoteOptions {...{ note, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked }} />
+            <HeaderNoteOptions {...{ isFavorite, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked, handleFavorite }} />
             <LockScreenModal {...{ note, isUnlock: false, lockModal, setLockModal, pwd, setPwd }} />
         </>
     )

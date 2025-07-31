@@ -81,8 +81,7 @@ function getSubstringUntilNthDiv(html, limit = 9) {
 
 const styles = StyleSheet.create({
     container: {
-        height: 205,
-        flex: 1 / 2,
+        flex: 1,
         backgroundColor: "#fff",
         position: "relative",
         elevation: 5,

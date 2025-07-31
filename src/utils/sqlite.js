@@ -8,6 +8,18 @@ export async function initDb() {
         CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY NOT NULL, content TEXT, pwd TEXT, color TEXT, date TEXT);
         CREATE TABLE IF NOT EXISTS drawings (id TEXT PRIMARY KEY NOT NULL, note_id TEXT, data TEXT);
     `);
+
+    // Update 31/07/2025 - Add new column to notes
+    await addFavNoteColumn();
+}
+
+export async function addFavNoteColumn() {
+    const result = await db.getAllAsync(`PRAGMA table_info(notes);`);
+    const hasFavorite = result.some(col => col.name === 'favorite');
+
+    if (!hasFavorite) {
+        await db.execAsync(`ALTER TABLE notes ADD COLUMN favorite BOOLEAN DEFAULT 0`);
+    }
 }
 
 export async function getAllNotes() {
@@ -19,10 +31,12 @@ export async function addNote(id, content, pwd, color, date) {
     db.runAsync("INSERT INTO notes (id, content, pwd, color, date) VALUES (?, ?, ?, ?, ?)", id, content, pwd, color, date);
     return id;
 }
-export async function editNote(id, content, pwd, color, date) {
+
+export async function editNote(id, content, pwd, color, favorite, date) {
     db.runAsync("UPDATE notes SET content = ? WHERE id = ?", content, id);
     db.runAsync("UPDATE notes SET pwd = ? WHERE id = ?", pwd, id);
     db.runAsync("UPDATE notes SET color = ? WHERE id = ?", color, id);
+    db.runAsync("UPDATE notes SET favorite = ? WHERE id = ?", favorite ? "1" : "0", id);
     db.runAsync("UPDATE notes SET date = ? WHERE id = ?", date, id);
 }
 

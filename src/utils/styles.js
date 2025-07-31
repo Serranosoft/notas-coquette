@@ -73,12 +73,6 @@ export const layout = {
         backgroundColor: "#fff",
     },
 
-    contentList: {
-        gap: 32,
-        paddingTop: 16,
-        paddingBottom: 100
-    },
-
     zIndex: {
         zIndex: 1,
     },

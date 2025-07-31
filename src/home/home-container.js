@@ -13,6 +13,8 @@ import { deleteNoteFromId, getAllNotes } from "../utils/sqlite";
 import { AdsContext } from "../utils/Context";
 
 export default function HomeContainer() {
+
+    const [favNotes, setFavNotes] = useState([]);
     const [notes, setNotes] = useState([]);
     const [selected, setSelected] = useState([]);
     const [columnNumber, setColumnNumber] = useState(2);
@@ -40,7 +42,8 @@ export default function HomeContainer() {
 
     async function getNotes() {
         const notes = await getAllNotes();
-        setNotes([...notes].sort((a, b) => b.date - a.date));
+        setNotes([...notes].filter((note) => !note.favorite).sort((a, b) => b.date - a.date));
+        setFavNotes([...notes].filter((note) => note.favorite).sort((a, b) => b.date - a.date));
     }
 
     async function getGridLayout() {
@@ -64,7 +67,7 @@ export default function HomeContainer() {
     return (
         <>
             <Stack.Screen options={{ header: () => <HeaderHome {...{setColumnNumber, columnNumber}} /> }} />
-            <Home {...{ columnNumber, notes, deleteNotes, selected, setSelected, emptySelected}} />
+            <Home {...{ columnNumber, notes, favNotes, deleteNotes, selected, setSelected, emptySelected}} />
             { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
         </>
     )
