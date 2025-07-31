@@ -6,7 +6,7 @@ import { ancizar, madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
-import { Alert, Keyboard, Platform, ToastAndroid } from "react-native";
+import { Alert, AppState, Keyboard, Platform, ToastAndroid } from "react-native";
 import { save, storage } from "../utils/storage";
 import { LangContext } from "../utils/Context";
 import { addDraw, getNoteFromId } from "../utils/sqlite";
@@ -20,6 +20,7 @@ export default function NoteContainer() {
     const richText = useRef(null);
     const scrollRef = useRef(null);
 
+    const [appStateChanged, setAppStateChanged] = useState(AppState.currentState);
     const [note, setNote] = useState(null);
     const [fontSize, setFontSize] = useState(null);
     const [separator, setSeparator] = useState(null);
@@ -41,6 +42,14 @@ export default function NoteContainer() {
         width: 3,
         mode: "scroll" // "scroll" | "free" | "line" | "eraser" 
     })
+
+    AppState.addEventListener("change", nextAppState => {
+        setAppStateChanged(nextAppState);
+    })
+
+    useEffect(() => {
+        saveNote();
+    }, [appStateChanged])
 
 
     useEffect(() => {
@@ -109,6 +118,8 @@ export default function NoteContainer() {
         };
     }, []);
  */
+
+
     useEffect(() => {
         if (drawing.isDrawing) {
             richText.current.dismissKeyboard();
