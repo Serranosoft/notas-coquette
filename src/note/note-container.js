@@ -84,41 +84,11 @@ export default function NoteContainer() {
         }, [])
     );
 
-    // Asegurar el cierre de todos los dropdown de opciones antes de permitir salir de la nota
-    /* useBackHandler(() => {
-        if (!openColors && !openFontSize && !openSeparators) {
-            back();
-        }
-
-        if (openColors) {
-            setOpenColors(false);
-        }
-
-        if (openFontSize) {
-            setOpenFontSize(false);
-        }
-
-        if (openSeparators) {
-            setOpenSeparators(false);
-        }
-
+    // Asegurar guardado antes de salir de la nota
+    useBackHandler(() => {
+        back();
         return true;
-
-    }, [openColors, openFontSize, openSeparators]) */
-
-    /* useEffect(() => {
-        const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
-            setOpenFontSize(false);
-            setOpenColors(false);
-            setOpenSeparators(false);
-        });
-
-        return () => {
-            keyboardDidHideListener.remove();
-        };
-    }, []);
- */
-
+    }, [])
 
     useEffect(() => {
         if (drawing.isDrawing) {
