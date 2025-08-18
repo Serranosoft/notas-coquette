@@ -6,6 +6,7 @@
         "orientation": "portrait",
         "icon": "./assets/icon-notes.png",
         "userInterfaceStyle": "light",
+        "newArchEnabled": false,
         "splash": {
             "image": "./assets/splash-notes-coquette.png",
             "resizeMode": "contain",
