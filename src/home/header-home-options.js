@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { Image, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
-import { components, header, padding } from "../utils/styles";
+import { components, header, padding, ui } from "../utils/styles";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 
@@ -21,7 +21,7 @@ export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeL
             <MenuItem onPress={changeLayout}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/grid.png")} />
-                    <Text>{language.t("_headerDropdownOption1")}</Text>
+                    <Text style={[ui.text, ui.black]}>{language.t("_headerDropdownOption1")}</Text>
                 </View>
             </MenuItem>
             <MenuDivider />
@@ -31,7 +31,7 @@ export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeL
             }}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/settings.png")} />
-                    <Text>{language.t("_headerDropdownOption2")}</Text>
+                    <Text style={[ui.text, ui.black]}>{language.t("_headerDropdownOption2")}</Text>
                 </View>
             </MenuItem>
         </Menu>
