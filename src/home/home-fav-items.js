@@ -1,6 +1,6 @@
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import { colors, gap, layout, ui } from "../utils/styles";
-import { HomeFlatListItem } from "./home";
+import { HomeFlatListItem } from "./home-flat-list-item";
 
 const { width } = Dimensions.get("screen");
 
