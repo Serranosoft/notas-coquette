@@ -14,8 +14,8 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
     const { adsLoaded } = useContext(AdsContext);
 
     return (
-        <View style={[layout.flex, layout.backgroundLight, padding.bigHorizontal]}>
-            <ScrollView style={{ flex: 1 }}>
+        <View style={[layout.flex, layout.backgroundLight]}>
+            <ScrollView style={{ flex: 1 }} contentContainerStyle={padding.bigHorizontal}>
                 <View style={styles.box}>
                     <Text style={[ui.h4, ui.black]}>{language.t("_settingsApp")}</Text>
                     <Text style={[ui.text, ui.black]}>{language.t("_settingsLang")}</Text>
