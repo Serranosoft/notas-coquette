@@ -7,13 +7,15 @@ const { width } = Dimensions.get("screen");
 
 export default function HomeFavItems({ favNotes, columnNumber, selected, setSelected }) {
 
+    const gapMultiplier = 16 * (columnNumber > 1 ? columnNumber - 1 : 0);
+
     return (
         <View style={styles.container}>
             <Text style={[ui.h4, ui.black]}>Mis favoritas</Text>
             <View style={styles.list}>
                 {favNotes.map((item, index) => (
-                    <View key={index} style={{
-                        width: (width - 16 - 32) / columnNumber,
+                    <View key={`${columnNumber}.${index}`} style={{
+                        width: (width - gapMultiplier - 32) / columnNumber,
                         height: 200,
                     }}>
                         <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />
