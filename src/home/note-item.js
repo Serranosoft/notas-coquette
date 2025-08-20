@@ -39,6 +39,7 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
                                     contentWidth={width}
                                     source={source}
                                     customHTMLElementModels={customHTMLElementModels}
+                                    baseStyle={{ color: "#3a3a3a", fontSize: 18 }}
                                 />
                             </View>
                         </>
