@@ -18,7 +18,7 @@ export default function Home({ columnNumber, notes, favNotes, emptySelected, sel
         <>
             <View style={[layout.flex, layout.backgroundLight, layout.paddingHorizontal]}>
                 <HomeButton {...{ language }} />
-                <ScrollView style={layout.flex}>
+                <ScrollView style={layout.flex} key={favNotes.length > 0 ? "with-fav" : "no-fav"}>
                     {favNotes.length > 0 && <HomeFavItems {...{ favNotes, columnNumber, selected, setSelected }} />}
                     {
                         notes.length > 0 ?
