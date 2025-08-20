@@ -170,7 +170,9 @@ export default function NoteContainer() {
             setFontSize(null);
             if (!focused) {
                 setFocused(true);
-                richText.current.focusContentEditor();
+                if (richText.current) {
+                    richText.current.focusContentEditor();
+                }
             }
         }
     }
