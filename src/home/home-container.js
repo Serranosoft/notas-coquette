@@ -14,8 +14,7 @@ import { AdsContext } from "../utils/Context";
 
 export default function HomeContainer() {
 
-    const [favNotes, setFavNotes] = useState([]);
-    const [notes, setNotes] = useState([]);
+    const [allNotes, setAllNotes] = useState({ notes: [], favNotes: [] });
     const [selected, setSelected] = useState([]);
     const [columnNumber, setColumnNumber] = useState(2);
 
@@ -42,23 +41,24 @@ export default function HomeContainer() {
 
     async function getNotes() {
         const notes = await getAllNotes();
-        setNotes([...notes].filter((note) => !note.favorite).sort((a, b) => b.date - a.date));
-        setFavNotes([...notes].filter((note) => note.favorite).sort((a, b) => b.date - a.date));
+        setAllNotes({
+            notes: notes.filter((n) => !n.favorite).sort((a, b) => b.date - a.date),
+            favNotes: notes.filter((n) => n.favorite).sort((a, b) => b.date - a.date)
+        });
     }
 
-    async function getGridLayout() {
+    const getGridLayout = useCallback(async () => {
         const grid = await AsyncStorage.getItem(storage.GRID);
         if (grid !== null) {
             setColumnNumber(parseInt(grid));
         }
-    }
+    })
 
-    async function deleteNotes() {
+    const deleteNotes = useCallback(async () => {
         selected.forEach(async (note) => await deleteNoteFromId(note));
         emptySelected();
         getNotes();
-
-    }
+    }, [selected]);
 
     async function emptySelected() {
         setSelected([]);
@@ -66,9 +66,9 @@ export default function HomeContainer() {
 
     return (
         <>
-            <Stack.Screen options={{ header: () => <HeaderHome {...{setColumnNumber, columnNumber}} /> }} />
-            <Home {...{ columnNumber, notes, favNotes, deleteNotes, selected, setSelected, emptySelected}} />
-            { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
+            <Stack.Screen options={{ header: () => <HeaderHome {...{ setColumnNumber, columnNumber }} /> }} />
+            <Home {...{ columnNumber, notes: allNotes.notes, favNotes: allNotes.favNotes, deleteNotes, selected, setSelected, emptySelected }} />
+            {adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />}
         </>
     )
 }

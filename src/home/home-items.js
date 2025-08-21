@@ -2,10 +2,11 @@ import { Dimensions, StyleSheet, View } from "react-native"
 import { gap } from "../utils/styles"
 import { FlatList } from "react-native"
 import { HomeFlatListItem } from "./home-flat-list-item";
+import { memo } from "react";
 
 const { width } = Dimensions.get("screen");
 
-export default function HomeItems({ notes, columnNumber, selected, setSelected }) {
+function HomeItems({ notes, columnNumber, selected, setSelected }) {
 
     const gapMultiplier = 16 * (columnNumber > 1 ? columnNumber - 1 : 0);
 
@@ -26,6 +27,8 @@ export default function HomeItems({ notes, columnNumber, selected, setSelected }
 
     )
 }
+
+export default memo(HomeItems); 
 
 const styles = StyleSheet.create({
     container: {
