@@ -23,7 +23,7 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
                 {
                     !readingMode && 
                         <TouchableOpacity style={{ paddingRight: 4 }} onPress={() => {
-                            setDrawing(prev => ({ ...prev, isDrawing: !drawing.isDrawing }));
+                            setDrawing({ ...drawing, isDrawing: !drawing.isDrawing });
                             setActiveOption(activeOption === "drawing" ? null : "drawing");
                         } }>
                             <Image style={[header.img]} source={require("../../assets/highlighter.png")}></Image>

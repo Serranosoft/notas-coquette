@@ -6,10 +6,10 @@ import { ancizar, madimi, ojuju, oswald, roboto } from "../utils/fonts";
 import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
-import { Alert, AppState, Keyboard, Platform, ToastAndroid } from "react-native";
+import { Alert, AppState, Platform, ToastAndroid } from "react-native";
 import { save, storage } from "../utils/storage";
 import { LangContext } from "../utils/Context";
-import { addDraw, getNoteFromId } from "../utils/sqlite";
+import { getNoteFromId } from "../utils/sqlite";
 
 export default function NoteContainer() {
 
@@ -21,31 +21,35 @@ export default function NoteContainer() {
     const scrollRef = useRef(null);
 
     const [appStateChanged, setAppStateChanged] = useState(AppState.currentState);
-    const [note, setNote] = useState(null);
-    const [fontSize, setFontSize] = useState(null);
-    const [separator, setSeparator] = useState(null);
-    const [readingMode, setReadingMode] = useState(false);
-    const [font, setFont] = useState(null);
-    const [color, setColor] = useState(null);
-    const [autoSave, setAutoSave] = useState(true);
-    const [noteSavedId, setNoteSavedId] = useState(null);
-    const [focused, setFocused] = useState(false);
-    const [editorHeight, setEditorHeight] = useState(600);
-    const [openStickers, setOpenStickers] = useState(false);
-    const [sticker, setSticker] = useState(null);
-    const [activeOption, setActiveOption] = useState(null);
+
+    const [noteState, setNoteState] = useState({
+        note: null,
+        fontSize: null,
+        separator: null,
+        readingMode: false,
+        font: null,
+        color: null,
+        autoSave: true,
+        noteSavedId: null,
+        focused: false,
+        editorHeight: 600,
+        openStickers: false,
+        sticker: null,
+        activeOption: null,
+        drawing: { isDrawing: false, color: "rgb(85,172,238)", width: 3, mode: "scroll" },
+    });
+
+    const { note, fontSize, separator, readingMode, font, color, autoSave,
+        noteSavedId, focused, editorHeight, openStickers, sticker,
+        activeOption, drawing } = noteState;
 
     const sketchPadRef = useRef();
-    const [drawing, setDrawing] = useState({
-        isDrawing: false,
-        color: "rgb(85, 172, 238)",
-        width: 3,
-        mode: "scroll" // "scroll" | "free" | "line" | "eraser" 
-    })
 
-    AppState.addEventListener("change", nextAppState => {
-        setAppStateChanged(nextAppState);
-    })
+
+    useEffect(() => {
+        const subscription = AppState.addEventListener("change", setAppStateChanged);
+        return () => subscription.remove();
+    }, []);
 
     useEffect(() => {
         saveNote();
@@ -57,17 +61,19 @@ export default function NoteContainer() {
 
             const note = await getNoteFromId(id);
 
+            let noteData;
             if (note) {
-                if (!note.color) note.color = "#000"; // Compatibilidad con versiones antiguas
-                setNote(note);
-                setColor(note.color);
-                setNoteSavedId(note.id)
+                noteData = note;
             } else {
-                const newNote = { id: uuid.v4(), content: "", date: new Date().getTime(), pwd: "", color: "#000" }
-                setNote(newNote);
-                setColor(newNote.color);
-                setNoteSavedId(newNote.id)
+                noteData = { id: uuid.v4(), content: "", date: Date.now(), pwd: "", color: "#000" };
             }
+
+            setNoteState(prev => ({
+                ...prev,
+                note: noteData,
+                color: noteData.color,
+                noteSavedId: noteData.id
+            }));
         }
 
         getNote();
@@ -78,7 +84,7 @@ export default function NoteContainer() {
     // sepa cual es el valor actual de ambos.
     useFocusEffect(
         useCallback(() => {
-            setFont(null);
+            setNoteState(prev => ({ ...prev, font: null }));
             getFont(); // Obtiene la fuente en el que va a instanciar el editor
             getAutoSave();
         }, [])
@@ -105,8 +111,11 @@ export default function NoteContainer() {
 
     async function saveNote() {
         richText.current.dismissKeyboard();
-        setActiveOption(null);
-        setDrawing(prev => ({ ...prev, isDrawing: false }));
+        setNoteState(prev => ({
+            ...prev,
+            activeOption: null,
+            drawing: { ...prev.drawing, isDrawing: false }
+        }));
 
         const isSaved = await save({ ...{ note, noteSavedId } });
         sketchPadRef.current.save(); // Guardar los paths
@@ -141,13 +150,13 @@ export default function NoteContainer() {
             case "oswald": font.fontFace = oswald; break;
             case "ojuju": font.fontFace = ojuju; break;
         }
-        setFont(font);
+        setNoteState(prev => ({ ...prev, font: font }));
     }
 
     async function getAutoSave() {
         const autoSave = await AsyncStorage.getItem(storage.AUTOSAVE);
         if (autoSave) {
-            setAutoSave(autoSave === "true" ? true : false);
+            setNoteState(prev => ({ ...prev, autoSave: autoSaveValue === "true" }));
         }
     }
 
@@ -157,69 +166,89 @@ export default function NoteContainer() {
 
     useEffect(() => {
         richText.current?.insertText(separator);
-        setSeparator(null);
+        setNoteState(prev => ({ ...prev, separator: null }));
     }, [separator])
 
     useEffect(() => {
         richText.current?.insertImage(sticker);
-        setSticker(null)
+        setNoteState(prev => ({ ...prev, sticker: null }))
     }, [sticker])
 
-    function handleFocusContent() {
+    const handleFocusContent = useCallback(() => {
         if (!drawing.isDrawing && !readingMode) {
-            setFontSize(null);
+            setNoteState(prev => ({ ...prev, fontSize: null }));
             if (!focused) {
-                setFocused(true);
+                setNoteState(prev => ({ ...prev, focused: true }));
                 if (richText.current) {
                     richText.current.focusContentEditor();
                 }
             }
         }
-    }
+    }, [drawing.isDrawing, readingMode, focused])
 
     const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
 
     const handleHeightChange = (height) => {
         const limitedHeight = height > 3500 ? 3500 : height;
-        setEditorHeight(limitedHeight);
+        setNoteState(prev => ({ ...prev, editorHeight: limitedHeight }));
     };
+
+    // Setters para actualizar los valores del estado de la nota
+    const setDrawing = useCallback((d) => setNoteState(prev => ({ ...prev, drawing: d })), []);
+    const setFontSize = useCallback((fs) => setNoteState(prev => ({ ...prev, fontSize: fs })), []);
+    const setSeparator = useCallback((s) => setNoteState(prev => ({ ...prev, separator: s })), []);
+    const setColor = useCallback((c) => setNoteState(prev => ({ ...prev, color: c })), []);
+    const setEditorHeight = useCallback((h) => setNoteState(prev => ({ ...prev, editorHeight: h })), []);
+    const setOpenStickers = useCallback((os) => setNoteState(prev => ({ ...prev, openStickers: os })), []);
+    const setSticker = useCallback((s) => setNoteState(prev => ({ ...prev, sticker: s })), []);
+    const setActiveOption = useCallback((ao) => setNoteState(prev => ({ ...prev, activeOption: ao })), []);
 
     return (
         <>
-
-
             <Stack.Screen options={{
-                header: () => <HeaderNoteContainer {...{ drawing, setDrawing, note, setReadingMode, readingMode, back, saveNote, noteSavedId, richText, setActiveOption, activeOption }} />
+                header: () => (
+                    <HeaderNoteContainer
+                        drawing={drawing}
+                        setDrawing={setDrawing}
+                        note={note}
+                        readingMode={readingMode}
+                        setReadingMode={(rm) => setNoteState(prev => ({ ...prev, readingMode: rm }))}
+                        back={back}
+                        saveNote={saveNote}
+                        noteSavedId={noteSavedId}
+                        richText={richText}
+                        activeOption={activeOption}
+                        setActiveOption={setActiveOption}
+                    />
+                )
             }} />
 
-            <Note {...
-                {
-                    note,
-                    readingMode,
-                    setFontSize,
-                    fontSize,
-                    richText,
-                    setSeparator,
-                    handleCursorPosition,
-                    handleFocusContent,
-                    scrollRef,
-                    font,
-                    color,
-                    setColor,
-                    editorHeight,
-                    setEditorHeight,
-                    drawing,
-                    setDrawing,
-                    sketchPadRef,
-                    setOpenStickers,
-                    openStickers,
-                    setSticker,
-                    sticker,
-                    setActiveOption,
-                    activeOption,
-                    handleHeightChange
-                }
-            } />
+            <Note note={note}
+                readingMode={readingMode}
+                fontSize={fontSize}
+                setFontSize={setFontSize}
+                richText={richText}
+                separator={separator}
+                setSeparator={setSeparator}
+                handleCursorPosition={handleCursorPosition}
+                handleFocusContent={handleFocusContent}
+                scrollRef={scrollRef}
+                font={font}
+                color={color}
+                setColor={setColor}
+                editorHeight={editorHeight}
+                setEditorHeight={setEditorHeight}
+                drawing={drawing}
+                setDrawing={setDrawing}
+                sketchPadRef={sketchPadRef}
+                openStickers={openStickers}
+                setOpenStickers={setOpenStickers}
+                sticker={sticker}
+                setSticker={setSticker}
+                activeOption={activeOption}
+                setActiveOption={setActiveOption}
+                handleHeightChange={handleHeightChange}
+            />
         </>
 
 

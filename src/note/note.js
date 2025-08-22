@@ -6,13 +6,13 @@ import Separators from "../rich-editor/separators/separators";
 import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { AdsContext } from "../utils/Context";
 import Drawing from "../rich-editor/drawing/drawing";
 import Stickers from "../rich-editor/stickers/stickers";
 import NoteContent from "./note-content";
 
-export default function Note(
+function Note(
     {
         note,
         readingMode,
@@ -84,7 +84,6 @@ export default function Note(
                                         readingMode={readingMode}
                                         sketchPadRef={sketchPadRef}
                                         richText={richText}
-                                        setActiveOption={setActiveOption}
                                         handleCursorPosition={handleCursorPosition}
                                         handleHeightChange={handleHeightChange}
                                         editorHeight={editorHeight}
@@ -105,3 +104,5 @@ export default function Note(
         </View>
     )
 }
+
+export default memo(Note);
