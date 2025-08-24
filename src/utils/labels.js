@@ -144,6 +144,19 @@ export const fontSizeLabel = () =>
             <Path d="M3 7V5h13v2M10 5v14M12 19H8M15 13v-1h6v1M18 12v7M17 19h2" />
         </Svg>
     </View>
+export const checkboxLabel = () =>
+    <View>
+        <Svg
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <Path
+                d="M19 2H5a3 3 0 00-3 3v14a3 3 0 003 3h14a3 3 0 003-3V5a3 3 0 00-3-3zm1 17a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1h14a1 1 0 011 1zM17.67 7.28a1 1 0 010 1.41l-7.46 7.94a1 1 0 01-.73.31 1 1 0 01-.73-.31L6.31 14a1 1 0 111.45-1.37l1.76 1.87 6.73-7.16a1 1 0 011.42-.06z"
+            />
+        </Svg>
+    </View>
 
 export const colorsLabel = () =>
     <View>

@@ -1,6 +1,6 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
-import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, underlineLabel } from "../utils/labels";
+import { alignCenterLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, underlineLabel } from "../utils/labels";
 import { View } from "react-native";
 import { useCallback } from "react";
 
@@ -9,7 +9,8 @@ export default function FooterEditor({
     readingMode,
     drawing,
     activeOption,
-    setActiveOption
+    setActiveOption,
+    insertCheckbox
 }) {
 
     const onPressAddImage = useCallback(() => {
@@ -31,6 +32,7 @@ export default function FooterEditor({
                     actions.setItalic,
                     actions.setUnderline,
                     actions.insertImage,
+                    "checkbox",
                     actions.alignLeft,
                     actions.alignCenter,
                     actions.alignRight,
@@ -52,10 +54,12 @@ export default function FooterEditor({
                     fontSize: fontSizeLabel,
                     colors: colorsLabel,
                     separator: separatorsLabel,
+                    checkbox: checkboxLabel,
                 }}
                 fontSize={() => setActiveOption(activeOption === "fontSize" ? null : "fontSize")}
                 separator={() => setActiveOption(activeOption === "separators" ? null : "separators")}
                 colors={() => setActiveOption(activeOption === "colors" ? null : "colors")}
+                checkbox={() => insertCheckbox()}
             />
         </View>
 

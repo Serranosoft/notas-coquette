@@ -34,7 +34,8 @@ function Note(
         sticker,
         activeOption,
         setActiveOption,
-        handleHeightChange
+        handleHeightChange,
+        insertCheckbox
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -92,7 +93,7 @@ function Note(
                                 }
                             </ScrollView>
                             {
-                                note && <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption }} />
+                                note && <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption, insertCheckbox }} />
                             }
 
                         </View>

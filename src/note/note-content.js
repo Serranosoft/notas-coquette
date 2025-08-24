@@ -14,7 +14,7 @@ export default function NoteContent({
     handleCursorPosition,
     handleHeightChange,
     editorHeight,
-    windowHeight
+    windowHeight,
 }) {
     const isFocused = useIsFocused();
     return (
@@ -35,7 +35,16 @@ export default function NoteContent({
                 onChange={(content) => note.content = content}
                 style={{ zIndex: 999 }}
                 editorStyle={{
-                    initialCSSText: `${font.fontFace}`,
+                    initialCSSText: `
+                        ${font.fontFace}
+                        input[type="checkbox"] {
+                            width: 24px;
+                            height: 24px;
+                            accent-color: pink;
+                            line-height: 1;
+                            margin-right: 4px;
+                        }
+                    `,
                     backgroundColor: "transparent",
                     contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`,
                     color: color

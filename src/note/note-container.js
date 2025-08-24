@@ -193,6 +193,9 @@ export default function NoteContainer() {
         setNoteState(prev => ({ ...prev, editorHeight: limitedHeight }));
     };
 
+    const insertCheckbox = () => richText.current.insertHTML(`<input type="checkbox" />`)
+    
+
     // Setters para actualizar los valores del estado de la nota
     const setDrawing = useCallback((d) => setNoteState(prev => ({ ...prev, drawing: d })), []);
     const setFontSize = useCallback((fs) => setNoteState(prev => ({ ...prev, fontSize: fs })), []);
@@ -248,6 +251,7 @@ export default function NoteContainer() {
                 activeOption={activeOption}
                 setActiveOption={setActiveOption}
                 handleHeightChange={handleHeightChange}
+                insertCheckbox={insertCheckbox}
             />
         </>
 

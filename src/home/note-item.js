@@ -14,7 +14,8 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
     const source = { html: getSubstringUntilNthDiv(note.content) }
 
     const customHTMLElementModels = {
-        'font': HTMLElementModel.fromCustomModel({ tagName: 'font', mixedUAStyles: { fontSize: 18 }, contentModel: HTMLContentModel.textual })
+        'font': HTMLElementModel.fromCustomModel({ tagName: 'font', mixedUAStyles: { fontSize: 18 }, contentModel: HTMLContentModel.textual }),
+        'input': HTMLElementModel.fromCustomModel({ tagName: 'input', contentModel: HTMLContentModel.textual })
     };
 
     const isSelected = selected.includes(note.id);
