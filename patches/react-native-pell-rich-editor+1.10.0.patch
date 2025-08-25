@@ -1,0 +1,51 @@
+diff --git a/node_modules/react-native-pell-rich-editor/src/editor.js b/node_modules/react-native-pell-rich-editor/src/editor.js
+index 6559109..feb2cad 100644
+--- a/node_modules/react-native-pell-rich-editor/src/editor.js
++++ b/node_modules/react-native-pell-rich-editor/src/editor.js
+@@ -11,9 +11,34 @@ function getContentCSS() {
+         .x-todo-box {position: relative; left: -24px;}
+         .x-todo-box input{position: absolute;}
+         blockquote{border-left: 6px solid #ddd;padding: 5px 0 5px 10px;margin: 15px 0 15px 15px;}
+-        hr{display: block;height: 0; border: 0;border-top: 1px solid #ccc; margin: 15px 0; padding: 0;}
+-        pre{padding: 10px 5px 10px 10px;margin: 15px 0;display: block;line-height: 18px;background: #F0F0F0;border-radius: 6px;font-size: 13px; font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace; word-break: break-all; word-wrap: break-word;overflow-x: auto;}
+-        pre code {display: block;font-size: inherit;white-space: pre-wrap;color: inherit;}
++        hr{display: block;height: 0; border: 0;border-top: 3px solid #FACCD6; margin: 15px 0; padding: 0;}
++        pre{
++            padding: 10px 5px 10px 10px;
++            margin: 15px 0;
++            display: block;
++            line-height: 18px;
++            background: #FACCD6;
++            border-radius: 6px;
++            font-size: 18px; 
++            word-break: break-all; 
++            word-wrap: break-word;
++            overflow-x: auto;
++            font-family: ancizar;
++            position: relative;
++            box-shadow: 0 8px 20px rgba(0,0,0,.08);
++            border: 2px solid #FACCD6;
++            background-color: #fff;
++        }
++        pre img {
++            position: absolute;
++            top: 0px;
++            right: 0px;
++            width: 72px;
++            height: 72px;
++            transform: rotate(36deg);
++            overflow: hidden;
++        }
++        pre code {display: block;font-size: inherit;white-space: pre-wrap;color: inherit;font-family: ancizar}
+     </style>
+     `;
+ }
+@@ -314,7 +339,7 @@ function createHTML(options = {}) {
+                 var node = anchorNode.nodeName === "PRE" ? anchorNode: anchorNode.parentNode;
+                 if (node.nodeName === 'PRE'){
+                     type && node.setAttribute("type", type);
+-                    node.innerHTML = "<code type='"+(type || '') +"'>" + node.innerHTML + "</code>";
++                    node.innerHTML = "<code type='"+(type || '') +"'>" + node.innerHTML + "</code><img src='https://mollydigital.manu-scholz.com/wp-content/uploads/2025/08/note-decoration.png' />";
+                     // var br = createElement("br");
+                     // node.parentNode.insertBefore(br, node.nextSibling);
+                     setTimeout(function (){

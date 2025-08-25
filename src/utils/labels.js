@@ -210,6 +210,17 @@ export const strikeThroughLabel = ({ tintColor }) =>
             />
         </Svg>
     </View>
+export const codeLabel = ({ tintColor }) =>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+        <Svg
+        width={24}
+        height={24}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <Path d="M19 2H5C3.34 2 2 3.68 2 5.75v12.5C2 20.32 3.34 22 5 22h10.59c.27 0 .52-.13.71-.37l5.41-6.77c.19-.23.29-.55.29-.88V5.75C22 3.68 20.66 2 19 2zM5 20.5c-.8 0-1.5-1.05-1.5-2.25V5.75c0-1.2.7-2.25 1.5-2.25h14c.8 0 1.5 1.05 1.5 2.25V13H17c-1.38 0-2.5 1.23-2.5 2.75v4.75zm11-.9v-3.85c0-.69.45-1.25 1-1.25h3.08z" />
+        </Svg>
+    </View>
 export const undoLabel = () => <View><Image style={common} source={require("../../assets/undo.png")} /></View>
 export const redoLabel = () => <View><Image style={common} source={require("../../assets/redo.png")} /></View>
 

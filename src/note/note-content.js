@@ -48,7 +48,13 @@ export default function NoteContent({
                     `,
                     backgroundColor: "transparent",
                     contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`,
-                    color: color
+                    color: color,
+                    cssText: `
+                        ${font.fontFace}
+                        pre, pre code {
+                            font-family: ${font.fontFamily};
+                        }
+                    `
                 }}
                 initialContentHTML={note.content ?? ""}
                 disabled={readingMode || drawing.isDrawing}
