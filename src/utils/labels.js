@@ -164,7 +164,20 @@ export const colorsLabel = () =>
     </View>
 export const stickersLabel = () =>
     <View>
-        <Image style={{ width: 20, height: 20 }} source={require("../../assets/collage.png")} />
+        <Svg
+            width={24}
+            height={24}
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            viewBox="0 0 24 24"
+            xmlSpace="preserve"
+            enableBackground="new 0 0 430.23 430.23"
+        >
+            <Path
+                d="M15 1.25H9C3.567 1.25 1.25 3.568 1.25 9v6c0 5.432 2.317 7.75 7.75 7.75h6c5.433 0 7.75-2.318 7.75-7.75V9c0-5.432-2.317-7.75-7.75-7.75zM21.25 15c0 4.614-1.636 6.25-6.25 6.25H9c-2.757 0-4.444-.591-5.361-2.045l4.373-2.934a1.492 1.492 0 011.733.084l.333.286a2.976 2.976 0 003.8 0l4.161-3.57a1.482 1.482 0 011.846 0l1.367 1.173zm0-2.733l-.391-.335a2.976 2.976 0 00-3.8 0L12.9 15.5a1.482 1.482 0 01-1.844 0l-.333-.286a2.982 2.982 0 00-3.546-.191L3.048 17.8a11.2 11.2 0 01-.3-2.8V9C2.75 4.386 4.386 2.75 9 2.75h6c4.614 0 6.25 1.636 6.25 6.25zM9 5.25A2.75 2.75 0 1011.75 8 2.752 2.752 0 009 5.25zm0 4A1.25 1.25 0 1110.25 8 1.252 1.252 0 019 9.25z"
+            />
+        </Svg>
     </View>
 export const undoLabel = () => <View><Image style={common} source={require("../../assets/undo.png")} /></View>
 export const redoLabel = () => <View><Image style={common} source={require("../../assets/redo.png")} /></View>
