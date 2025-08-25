@@ -104,7 +104,7 @@ export const editor = {
     },
 
     footer: {
-        width: "90%",
+        width: "100%",
         alignSelf: "center",
         justifyContent: "center",
         paddingVertical: 12,
