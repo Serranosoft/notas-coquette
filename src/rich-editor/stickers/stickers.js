@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
-import { colors, editor } from "../../utils/styles";
+import { editor } from "../../utils/styles";
 
 export default function Stickers({ setSticker }) {
 
@@ -33,39 +33,24 @@ export default function Stickers({ setSticker }) {
     ]
 
     return (
-        <View style={[editor.footer, styles.container, { height: "auto", maxHeight: 325 }]}>
-                <ScrollView>
-                    {
-                        stickers.map((item, index) => {
-                            return (
-                                <TouchableOpacity onPress={() => setSticker(item)} key={index} style={styles.item}>
-                                    <Image source={{ uri: item }} style={{ width: 48, height: 48 }} />
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
-                </ScrollView>
+        <View style={editor.option}>
+            <ScrollView>
+                {
+                    stickers.map((item, index) => {
+                        return (
+                            <TouchableOpacity onPress={() => setSticker(item)} key={index} style={styles.item}>
+                                <Image source={{ uri: item }} style={{ width: 32, height: 32 }} />
+                            </TouchableOpacity>
+                        )
+                    })
+                }
+            </ScrollView>
         </View>
     )
 
 }
 
 const styles = StyleSheet.create({
-
-
-    container: {
-        position: "absolute",
-        top: 70,
-        right: 8,
-        backgroundColor: "#fff",
-        borderWidth: 4,
-        borderColor: colors.light,
-        zIndex: 99,
-        borderRadius: 100,
-        paddingVertical: 0,
-        overflow: "hidden",
-        width: "auto",
-    },
     item: {
         paddingVertical: 8,
         paddingHorizontal: 8,

@@ -3,6 +3,9 @@ import { editor, padding } from "../utils/styles";
 import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
 import { useCallback } from "react";
+import Stickers from "./stickers/stickers";
+import Colors from "./colors/colors";
+import FontSizeContainer from "./font-size/font-size-container";
 
 export default function FooterEditor({
     richText,
@@ -10,7 +13,11 @@ export default function FooterEditor({
     drawing,
     activeOption,
     setActiveOption,
-    insertCheckbox
+    insertCheckbox,
+    setSticker,
+    setColor,
+    setFontSize,
+    fontSize
 }) {
 
     const onPressAddImage = useCallback(() => {
@@ -68,14 +75,28 @@ export default function FooterEditor({
                     colors={() => setActiveOption(activeOption === "colors" ? null : "colors")}
                     checkbox={() => insertCheckbox()}
                 />
-                
-                <View style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100 }]}>
+
+                <View style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100, borderTopLeftRadius: 16,borderBottomLeftRadius: 16, }]}>
                     <Image source={require("../../assets/left.png")} style={{ width: 20, height: 20 }} />
                 </View>
 
-                <View style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100 }]}>
+                <View style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100, borderTopLeftRadius: 16,borderBottomLeftRadius: 16, }]}>
                     <Image source={require("../../assets/right.png")} style={{ width: 20, height: 20 }} />
                 </View>
+                {
+                    activeOption &&
+                    <View style={styles.selectedOption}>
+                        { activeOption === "stickers" &&
+                            <Stickers setSticker={setSticker}/>
+                        }
+                        { activeOption === "colors" &&
+                            <Colors setColor={setColor}/>
+                        }
+                        { activeOption === "fontSize" &&
+                            <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
+                        }
+                    </View>
+                }
             </View>
         </View>
 
@@ -83,6 +104,14 @@ export default function FooterEditor({
 }
 
 const styles = StyleSheet.create({
+    selectedOption: {
+        position: "absolute",
+        bottom: (20 + 24 + 24),
+        right: 32,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        zIndex: 99,
+    },
     arrow: {
         position: "absolute",
         zIndex: 9,

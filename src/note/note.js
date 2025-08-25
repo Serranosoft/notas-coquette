@@ -1,15 +1,12 @@
 import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { layout } from "../../src/utils/styles";
 import FooterEditor from "../rich-editor/footer-editor";
-import FontSizeContainer from "../rich-editor/font-size/font-size-container";
 import Separators from "../rich-editor/separators/separators";
-import Colors from "../rich-editor/colors/colors";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { memo, useContext } from "react";
 import { AdsContext } from "../utils/Context";
 import Drawing from "../rich-editor/drawing/drawing";
-import Stickers from "../rich-editor/stickers/stickers";
 import NoteContent from "./note-content";
 
 function Note(
@@ -46,27 +43,15 @@ function Note(
             {
                 font &&
                 <>
-                    {activeOption === 'fontSize' && !readingMode && (
-                        <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
-                    )}
-
                     {activeOption === 'separators' && !readingMode && (
                         <Separators setSeparator={setSeparator} />
-                    )}
-
-                    {activeOption === 'colors' && !readingMode && (
-                        <Colors note={note} setColor={setColor} />
                     )}
 
                     {activeOption === 'drawing' && !readingMode && (
                         <Drawing drawing={drawing} setDrawing={setDrawing} />
                     )}
 
-                    {activeOption === 'stickers' && !readingMode && (
-                        <Stickers setSticker={setSticker} />
-                    )}
-                    { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
-
+                    {adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />}
 
                     <KeyboardAvoidingView
                         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -93,7 +78,24 @@ function Note(
                                 }
                             </ScrollView>
                             {
-                                note && <FooterEditor {...{ richText, readingMode, sticker, drawing, activeOption, setActiveOption, insertCheckbox }} />
+                                note &&
+                                <FooterEditor {...
+                                    {
+                                        richText,
+                                        readingMode,
+                                        sticker,
+                                        drawing,
+                                        activeOption,
+                                        setActiveOption,
+                                        insertCheckbox,
+                                        setSticker,
+                                        setSeparator,
+                                        setColor,
+                                        setFontSize,
+                                        fontSize
+                                    }
+                                }
+                                />
                             }
 
                         </View>

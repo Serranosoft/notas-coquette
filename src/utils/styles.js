@@ -119,6 +119,15 @@ export const editor = {
         elevation: 5,
         marginBottom: 20,
         zIndex: 1,
+    },
+    option: {
+        height: 225,
+        backgroundColor: "#fff",
+        borderWidth: 4,
+        borderBottomWidth: 0,
+        borderColor: colors.light,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
     }
 }
 

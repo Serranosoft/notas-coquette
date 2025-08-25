@@ -19,7 +19,7 @@ export default function Colors({ note, setColor }) {
     };
 
     return (
-        <View style={[editor.footer, styles.container, { height: "auto" }]}>
+        <View style={editor.option}>
             <ColorPicker
                 value={"rgb(85, 172, 238)"}
                 onComplete={onSelectColor}
@@ -38,22 +38,8 @@ export default function Colors({ note, setColor }) {
 
 const styles = StyleSheet.create({
 
-    container: {
-        position: "absolute",
-        top: 70,
-        right: 8,
-        backgroundColor: "#fff",
-        borderWidth: 4,
-        borderColor: colors.light,
-        zIndex: 99,
-        paddingVertical: 0,
-        overflow: "hidden",
-        width: "auto",
-        borderRadius: 20,
-    },
-
     sliderStyle: {
-        height: 250,
+        height: 220,
         borderRadius: 8,
     },
 
