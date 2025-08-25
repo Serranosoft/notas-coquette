@@ -142,8 +142,8 @@ export const separatorsLabel = ({ tintColor }) =>
             <Path d="M6 15h15M21 19H6M15 11h6M21 7h-6M9 9h1a1 1 0 11-1 1V7.5a2 2 0 012-2M3 9h1a1 1 0 11-1 1V7.5a2 2 0 012-2" />
         </Svg>
     </View>
-export const fontSizeLabel = () =>
-    <View>
+export const fontSizeLabel = (active) =>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -172,12 +172,12 @@ export const checkboxLabel = () =>
         </Svg>
     </View>
 
-export const colorsLabel = () =>
-    <View>
+export const colorsLabel = (active) =>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8 }}>
         <Image style={{ width: 20, height: 20 }} source={require("../../assets/text-color.png")} />
     </View>
-export const stickersLabel = () =>
-    <View>
+export const stickersLabel = (active) =>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8 }}>
         <Svg
             width={24}
             height={24}
