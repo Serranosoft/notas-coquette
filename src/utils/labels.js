@@ -96,6 +96,20 @@ export const alignRightLabel = ({ tintColor }) =>
             <Path d="M4 6h16M10 12h10M6 18h14" />
         </Svg>
     </View>
+export const alignFullLabel = ({ tintColor }) =>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+        <Svg
+            fill="none"
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <G fill="#000">
+                <Path d="M20.01 8.02h-16a1 1 0 110-2h16a1 1 0 010 2zM20.01 13.02h-16a1 1 0 110-2h16a1 1 0 010 2zM20.01 18.02h-16a1 1 0 110-2h16a1 1 0 010 2z" />
+            </G>
+        </Svg>
+    </View>
 export const listLabel = ({ tintColor }) =>
     <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
         <Svg
