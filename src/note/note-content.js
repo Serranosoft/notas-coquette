@@ -40,9 +40,10 @@ export default function NoteContent({
                         input[type="checkbox"] {
                             width: 24px;
                             height: 24px;
-                            accent-color: pink;
-                            line-height: 1;
+                            accent-color: #cc527a;
                             margin-right: 4px;
+                            margin-top: 16px;
+                            vertical-align: -8px;
                         }
                     `,
                     backgroundColor: "transparent",
