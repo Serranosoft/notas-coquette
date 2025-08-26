@@ -28,7 +28,7 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
             if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
                 setLockModal(true);
             } else {
-                router.navigate({ pathname: "/note", params: {id: note.id } });
+                router.push({ pathname: "/note", params: {id: note.id } });
             }
         }
 
@@ -37,7 +37,7 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
 
     useEffect(() => {
         if (unlocked === true) {
-            router.navigate({ pathname: "/note", params: {id: note.id } });
+            router.push({ pathname: "/note", params: {id: note.id } });
             onPush();
         }
         setPwd("");
