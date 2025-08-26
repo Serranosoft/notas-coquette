@@ -15,7 +15,7 @@ function HomeItems({ notes, columnNumber, selected, setSelected }) {
             <View style={styles.list}>
                 {
                     notes.map((item, index) => (
-                        <View key={`${columnNumber}-${index}`} style={{
+                        <View key={item.id} style={{
                             width: (width - gapMultiplier - 32) / columnNumber,
                             height: 200,
                         }}>

@@ -14,7 +14,7 @@ export default function HomeFavItems({ favNotes, columnNumber, selected, setSele
             <Text style={[ui.h4, ui.black]}>Mis favoritas</Text>
             <View style={styles.list}>
                 {favNotes.map((item, index) => (
-                    <View key={`${columnNumber}.${index}`} style={{
+                    <View key={item.id} style={{
                         width: (width - gapMultiplier - 32) / columnNumber,
                         height: 200,
                     }}>
