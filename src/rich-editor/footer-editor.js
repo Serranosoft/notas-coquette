@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
 import FontSizeContainer from "./font-size/font-size-container";
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 
 export default function FooterEditor({
     richText,
@@ -20,9 +21,39 @@ export default function FooterEditor({
     fontSize
 }) {
 
-    const onPressAddImage = useCallback(() => {
-        setActiveOption(activeOption === "stickers" ? null : "stickers");
-    }, [activeOption]);
+    const height = useSharedValue(0);
+
+    function handleOption(option) {
+        // No hay nada abierto, abro la opción
+        if (!activeOption) {
+            setActiveOption(option);
+            height.value = withTiming(200, { duration: 300 });
+        } else {
+
+            // Si había algo abierto, debo cerrar y luego abrir el siguiente
+            if (option && activeOption && activeOption !== option) {
+                height.value = withTiming(0, { duration: 500 }, (finished) => {
+                    if (finished) {
+                        runOnJS(setActiveOption)(option);
+                        height.value = withDelay(150, withTiming(200, { duration: 500 }));
+                    }
+                });
+            } else {
+                height.value = withTiming(0, { duration: 500 }, (finished) => {
+                    if (finished) {
+                        runOnJS(setActiveOption)(null);
+                    }
+                });
+    
+            }
+        }
+    }
+
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            height: height.value,
+        };
+    });
 
     return (
 
@@ -34,7 +65,7 @@ export default function FooterEditor({
                     editor={richText}
                     selectedIconTint={"rgba(255, 255, 255, 0.75)"}
                     iconTint={"transparent"}
-                    onPressAddImage={onPressAddImage}
+                    onPressAddImage={() => handleOption(activeOption === "stickers" ? null : "stickers")}
                     actions={[
                         actions.setBold,
                         actions.setItalic,
@@ -70,33 +101,30 @@ export default function FooterEditor({
                         separator: () => separatorsLabel(activeOption === "separators" ? true : false),
                         checkbox: checkboxLabel,
                     }}
-                    fontSize={() => setActiveOption(activeOption === "fontSize" ? null : "fontSize")}
-                    separator={() => setActiveOption(activeOption === "separators" ? null : "separators")}
-                    colors={() => setActiveOption(activeOption === "colors" ? null : "colors")}
+                    fontSize={() => handleOption(activeOption === "fontSize" ? null : "fontSize")}
+                    separator={() => handleOption(activeOption === "separators" ? null : "separators")}
+                    colors={() => handleOption(activeOption === "colors" ? null : "colors")}
                     checkbox={() => insertCheckbox()}
                 />
 
-                <View style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100, borderTopLeftRadius: 16,borderBottomLeftRadius: 16, }]}>
+                <View style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100, borderTopLeftRadius: 16, borderBottomLeftRadius: 16, }]}>
                     <Image source={require("../../assets/left.png")} style={{ width: 20, height: 20 }} />
                 </View>
 
-                <View style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100, borderTopLeftRadius: 16,borderBottomLeftRadius: 16, }]}>
+                <View style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100, borderTopLeftRadius: 16, borderBottomLeftRadius: 16, }]}>
                     <Image source={require("../../assets/right.png")} style={{ width: 20, height: 20 }} />
                 </View>
-                {
-                    activeOption &&
-                    <View style={styles.selectedOption}>
-                        { activeOption === "stickers" &&
-                            <Stickers setSticker={setSticker}/>
-                        }
-                        { activeOption === "colors" &&
-                            <Colors setColor={setColor}/>
-                        }
-                        { activeOption === "fontSize" &&
-                            <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
-                        }
-                    </View>
-                }
+                <Animated.View style={[styles.selectedOption, animatedStyle]}>
+                    {activeOption === "stickers" &&
+                        <Stickers setSticker={setSticker} />
+                    }
+                    {activeOption === "colors" &&
+                        <Colors setColor={setColor} />
+                    }
+                    {activeOption === "fontSize" &&
+                        <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
+                    }
+                </Animated.View>
             </View>
         </View>
 
@@ -111,6 +139,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         zIndex: 99,
+        overflow: "hidden",
     },
     arrow: {
         position: "absolute",
