@@ -18,7 +18,7 @@ export default function FooterEditor({
     setSticker,
     setColor,
     setFontSize,
-    fontSize
+    fontSize,
 }) {
 
     const height = useSharedValue(0);
@@ -114,17 +114,20 @@ export default function FooterEditor({
                 <View style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100, borderTopLeftRadius: 16, borderBottomLeftRadius: 16, }]}>
                     <Image source={require("../../assets/right.png")} style={{ width: 20, height: 20 }} />
                 </View>
-                <Animated.View style={[styles.selectedOption, animatedStyle]}>
-                    {activeOption === "stickers" &&
-                        <Stickers setSticker={setSticker} />
-                    }
-                    {activeOption === "colors" &&
-                        <Colors setColor={setColor} />
-                    }
-                    {activeOption === "fontSize" &&
-                        <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
-                    }
-                </Animated.View>
+                {
+                    !readingMode && 
+                        <Animated.View style={[styles.selectedOption, animatedStyle]}>
+                            {activeOption === "stickers" &&
+                                <Stickers setSticker={setSticker} />
+                            }
+                            {activeOption === "colors" &&
+                                <Colors setColor={setColor} />
+                            }
+                            {activeOption === "fontSize" &&
+                                <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />
+                            }
+                        </Animated.View>
+                }
             </View>
         </View>
 
