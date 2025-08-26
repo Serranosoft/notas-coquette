@@ -39,7 +39,7 @@ export default function Colors({ note, setColor }) {
 const styles = StyleSheet.create({
 
     sliderStyle: {
-        height: 220,
+        height: 190,
         borderRadius: 8,
     },
 

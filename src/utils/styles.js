@@ -121,13 +121,14 @@ export const editor = {
         zIndex: 1,
     },
     option: {
-        height: 225,
+        height: 200,
         backgroundColor: "#fff",
         borderWidth: 4,
         borderBottomWidth: 0,
         borderColor: colors.light,
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
+        paddingBottom: 8,
     }
 }
 
