@@ -92,8 +92,13 @@ export default function NoteContainer() {
 
     // Asegurar guardado antes de salir de la nota
     useBackHandler(() => {
-        back();
-        return true;
+        if (activeOption !== null) {
+            setActiveOption(null);
+            return true;
+        } else {
+            back();
+            return false;
+        }
     }, [])
 
     useEffect(() => {
