@@ -1,6 +1,4 @@
 import { Dimensions, StyleSheet, View } from "react-native"
-import { gap } from "../utils/styles"
-import { FlatList } from "react-native"
 import { HomeFlatListItem } from "./home-flat-list-item";
 import { memo } from "react";
 

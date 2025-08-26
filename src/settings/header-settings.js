@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { Image, Pressable, Text, View } from "react-native";
-import { components, header, layout, padding, ui } from "../utils/styles";
+import { components, header, layout, ui } from "../utils/styles";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 

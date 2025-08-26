@@ -1,5 +1,5 @@
 import NoteItem from "./note-item";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { router } from "expo-router";
 import LockScreenModal from "../modals/lock-screen-modal";
 import { AdsContext } from "../utils/Context";

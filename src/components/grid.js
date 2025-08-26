@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 
 export default function GridBackground({ contentHeight = 100 }) {

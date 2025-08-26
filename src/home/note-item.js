@@ -1,7 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors, ui } from "../utils/styles";
 import { Path, Svg } from "react-native-svg";
-import React from "react";
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import GridBackground from '../components/grid';
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';

@@ -1,5 +1,5 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
-import { editor, gap, padding } from "../utils/styles";
+import { editor } from "../utils/styles";
 import { redoLabel,  undoLabel } from "../utils/labels";
 
 

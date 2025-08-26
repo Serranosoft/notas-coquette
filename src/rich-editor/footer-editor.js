@@ -2,7 +2,6 @@ import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
 import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
-import { useCallback } from "react";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
 import FontSizeContainer from "./font-size/font-size-container";

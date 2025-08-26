@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 import MobileAds, { AdsConsent, useInterstitialAd } from "react-native-google-mobile-ads";
 import { intersitialId, intersitialIdIOS, loadId, loadIdIOS } from "../utils/constants";
 import { AdEventType, AppOpenAd } from "react-native-google-mobile-ads";

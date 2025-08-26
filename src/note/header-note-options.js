@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { Image, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Menu, MenuDivider, MenuItem } from "react-native-material-menu";
 import { Path, Svg } from "react-native-svg";
-import { components, header, padding, ui } from "../utils/styles";
+import { components, header, ui } from "../utils/styles";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 

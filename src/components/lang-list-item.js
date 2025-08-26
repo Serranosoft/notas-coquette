@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { colors, ui } from "../utils/styles";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
