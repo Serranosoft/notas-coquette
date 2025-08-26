@@ -1,16 +1,12 @@
 import { StyleSheet, View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { colors, editor } from "../../utils/styles";
-import { storage } from "../../utils/storage";
+import { editor } from "../../utils/styles";
 import ColorPicker, { HueSlider, LuminanceSlider } from "reanimated-color-picker";
 import { runOnJS } from "react-native-reanimated";
 
-export default function Colors({ note, setColor }) {
+export default function Colors({ setColor }) {
 
     async function handleColor(color) {
         setColor(color);
-        note.color = color;
-        await AsyncStorage.setItem(storage.COLOR, color);
     }
 
     const onSelectColor = ({ hex }) => {

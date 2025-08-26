@@ -168,6 +168,12 @@ export default function NoteContainer() {
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
     }, [fontSize])
+    
+    useEffect(() => {
+        if (color) {
+            setNoteState(prev => ({ ...prev, note: {...note, color: color }}));
+        }
+    }, [color])
 
     useEffect(() => {
         richText.current?.insertText(separator);
