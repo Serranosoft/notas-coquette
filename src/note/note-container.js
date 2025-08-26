@@ -197,7 +197,7 @@ export default function NoteContainer() {
         }
     }, [drawing.isDrawing, readingMode, focused])
 
-    const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 30, animated: true }), []);
+    const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 85, animated: true }), []);
 
     const handleHeightChange = (height) => {
         const limitedHeight = height > 3500 ? 3500 : height;
