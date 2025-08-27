@@ -61,10 +61,10 @@ const translations = {
         // 04-07-2025: Se agregan nuevas traducciones para nuevos textos
         _elementsSelected: "elementos seleccionados",
         _updatesModalNews: "Novedades",
-        _updatesModalV1_1: "Dibuja, subraya y pinta libremente en tus notas ⭐",
-        _updatesModalV1_2: "Añade un toque único con stickers decorativos 💖",
-        _updatesModalV1_3: "Nueva tipografía y otros cambios 🌹",
-        _updatesModalV1_4: "Disfruta de una nueva fuente para tus notas ✍️",
+        _updatesModalV1_1: "Añade Post-It en tus notas 📌",
+        _updatesModalV1_2: "Incluye casillas de verificación ✔️",
+        _updatesModalV1_3: "¡Ahora puedes tachar palabras! 📋",
+        _updatesModalV1_4: "¡Ahora puedes justificar el texto! 📑",
         _updatesModalV1_5: "😊 Esperamos que disfrutes de todas estas novedades 😊",
 
     },
@@ -127,10 +127,10 @@ const translations = {
 
         _elementsSelected: "elements selected",
         _updatesModalNews: "News",
-        _updatesModalV1_1: "Draw, underline and freely paint in your notes ⭐",
-        _updatesModalV1_2: "Add a unique touch with decorative stickers 💖",
-        _updatesModalV1_3: "New typography and other changes 🌹",
-        _updatesModalV1_4: "Enjoy a new font for your notes ✍️",
+        _updatesModalV1_1: "Add Post-It to your notes 📌",
+        _updatesModalV1_2: "Include checkboxes ✔️",
+        _updatesModalV1_3: "Now you can strikethrough words! 📋",
+        _updatesModalV1_4: "Now you can justify text! 📑",
         _updatesModalV1_5: "😊 We hope you enjoy all these new features 😊",
 
     },
@@ -194,10 +194,10 @@ const translations = {
 
         _elementsSelected: "عناصر محددة",
         _updatesModalNews: "أخبار",
-        _updatesModalV1_1: "ارسم، ضع خطًا تحت، وملّ بحرية في ملاحظاتك ⭐",
-        _updatesModalV1_2: "أضف لمسة فريدة مع ملصقات زخرفية 💖",
-        _updatesModalV1_3: "طباعة جديدة وتغييرات أخرى 🌹",
-        _updatesModalV1_4: "استمتع بخط جديد لملاحظاتك ✍️",
+        _updatesModalV1_1: "أضف الملاحظات اللاصقة إلى ملاحظاتك 📌",
+        _updatesModalV1_2: "أدرج مربعات اختيار ✔️",
+        _updatesModalV1_3: "الآن يمكنك شطب الكلمات! 📋",
+        _updatesModalV1_4: "الآن يمكنك محاذاة النص! 📑",
         _updatesModalV1_5: "😊 نأمل أن تستمتع بكل هذه الميزات الجديدة 😊",
 
     },
@@ -254,10 +254,10 @@ const translations = {
 
         _elementsSelected: "éléments sélectionnés",
         _updatesModalNews: "Nouveautés",
-        _updatesModalV1_1: "Dessine, souligne et peins librement dans tes notes ⭐",
-        _updatesModalV1_2: "Ajoute une touche unique avec des autocollants décoratifs 💖",
-        _updatesModalV1_3: "Nouvelle typographie et autres changements 🌹",
-        _updatesModalV1_4: "Profite d'une nouvelle police pour tes notes ✍️",
+        _updatesModalV1_1: "Ajoutez des Post-It à vos notes 📌",
+        _updatesModalV1_2: "Incluez des cases à cocher ✔️",
+        _updatesModalV1_3: "Vous pouvez maintenant barrer des mots ! 📋",
+        _updatesModalV1_4: "Vous pouvez maintenant justifier le texte ! 📑",
         _updatesModalV1_5: "😊 Nous espérons que tu apprécieras toutes ces nouveautés 😊",
 
     },
@@ -320,10 +320,10 @@ const translations = {
 
         _elementsSelected: "ausgewählte Elemente",
         _updatesModalNews: "Neuigkeiten",
-        _updatesModalV1_1: "Zeichne, unterstreiche und male frei in deinen Notizen ⭐",
-        _updatesModalV1_2: "Füge mit dekorativen Stickern eine einzigartige Note hinzu 💖",
-        _updatesModalV1_3: "Neue Typografie und weitere Änderungen 🌹",
-        _updatesModalV1_4: "Genieße eine neue Schriftart für deine Notizen ✍️",
+        _updatesModalV1_1: "Füge Post-Its zu deinen Notizen hinzu 📌",
+        _updatesModalV1_2: "Füge Kontrollkästchen hinzu ✔️",
+        _updatesModalV1_3: "Jetzt kannst du Wörter durchstreichen! 📋",
+        _updatesModalV1_4: "Jetzt kannst du den Text ausrichten! 📑",
         _updatesModalV1_5: "😊 Wir hoffen, du genießt all diese neuen Funktionen 😊",
 
     },
@@ -386,10 +386,10 @@ const translations = {
 
         _elementsSelected: "चयनित तत्व",
         _updatesModalNews: "समाचार",
-        _updatesModalV1_1: "अपने नोट्स में स्वतंत्र रूप से ड्रॉ करें, रेखांकित करें और रंग भरें ⭐",
-        _updatesModalV1_2: "सजावटी स्टिकर्स के साथ एक अनूठा स्पर्श जोड़ें 💖",
-        _updatesModalV1_3: "नई टाइपोग्राफी और अन्य बदलाव 🌹",
-        _updatesModalV1_4: "अपने नोट्स के लिए नई फॉन्ट का आनंद लें ✍️",
+        _updatesModalV1_1: "अपनी नोट्स में पोस्ट-इट जोड़ें 📌",
+        _updatesModalV1_2: "चेकबॉक्स शामिल करें ✔️",
+        _updatesModalV1_3: "अब आप शब्दों को काट सकते हैं! 📋",
+        _updatesModalV1_4: "अब आप टेक्स्ट को जस्टिफाई कर सकते हैं! 📑",
         _updatesModalV1_5: "😊 हमें उम्मीद है कि आप इन सभी नए फीचर्स का आनंद लेंगे 😊",
 
     },
@@ -454,10 +454,10 @@ const translations = {
 
         _elementsSelected: "elemen terpilih",
         _updatesModalNews: "Berita",
-        _updatesModalV1_1: "Gambar, garis bawahi dan warnai bebas di catatanmu ⭐",
-        _updatesModalV1_2: "Tambahkan sentuhan unik dengan stiker dekoratif 💖",
-        _updatesModalV1_3: "Tipografi baru dan perubahan lainnya 🌹",
-        _updatesModalV1_4: "Nikmati font baru untuk catatanmu ✍️",
+        _updatesModalV1_1: "Tambahkan Post-It ke catatanmu 📌",
+        _updatesModalV1_2: "Sertakan kotak centang ✔️",
+        _updatesModalV1_3: "Sekarang kamu bisa mencoret kata! 📋",
+        _updatesModalV1_4: "Sekarang kamu bisa meratakan teks! 📑",
         _updatesModalV1_5: "😊 Semoga kamu menikmati semua fitur baru ini 😊",
 
 
@@ -523,10 +523,10 @@ const translations = {
 
         _elementsSelected: "elementos selecionados",
         _updatesModalNews: "Novidades",
-        _updatesModalV1_1: "Desenhe, sublinhe e pinte livremente em suas notas ⭐",
-        _updatesModalV1_2: "Adicione um toque único com adesivos decorativos 💖",
-        _updatesModalV1_3: "Nova tipografia e outras mudanças 🌹",
-        _updatesModalV1_4: "Desfrute de uma nova fonte para suas notas ✍️",
+        _updatesModalV1_1: "Adicione Post-It às suas notas 📌",
+        _updatesModalV1_2: "Inclua caixas de seleção ✔️",
+        _updatesModalV1_3: "Agora você pode riscar palavras! 📋",
+        _updatesModalV1_4: "Agora você pode justificar o texto! 📑",
         _updatesModalV1_5: "😊 Esperamos que você aproveite todos esses novos recursos 😊",
 
 
@@ -592,10 +592,10 @@ const translations = {
 
         _elementsSelected: "выбранные элементы",
         _updatesModalNews: "Новости",
-        _updatesModalV1_1: "Рисуй, подчеркивай и свободно раскрашивай свои заметки ⭐",
-        _updatesModalV1_2: "Добавь уникальный штрих с декоративными стикерами 💖",
-        _updatesModalV1_3: "Новая типографика и другие изменения 🌹",
-        _updatesModalV1_4: "Наслаждайся новым шрифтом для своих заметок ✍️",
+        _updatesModalV1_1: "Добавляйте стикеры в свои заметки 📌",
+        _updatesModalV1_2: "Вставляйте флажки ✔️",
+        _updatesModalV1_3: "Теперь можно зачёркивать слова! 📋",
+        _updatesModalV1_4: "Теперь можно выравнивать текст! 📑",
         _updatesModalV1_5: "😊 Надеемся, вам понравятся все эти новшества 😊",
 
 
@@ -661,10 +661,10 @@ const translations = {
 
         _elementsSelected: "wybrane elementy",
         _updatesModalNews: "Nowości",
-        _updatesModalV1_1: "Rysuj, podkreślaj i swobodnie maluj w swoich notatkach ⭐",
-        _updatesModalV1_2: "Dodaj wyjątkowy akcent za pomocą dekoracyjnych naklejek 💖",
-        _updatesModalV1_3: "Nowa typografia i inne zmiany 🌹",
-        _updatesModalV1_4: "Ciesz się nową czcionką w swoich notatkach ✍️",
+        _updatesModalV1_1: "Dodaj karteczki Post-It do swoich notatek 📌",
+        _updatesModalV1_2: "Dodaj pola wyboru ✔️",
+        _updatesModalV1_3: "Teraz możesz przekreślać słowa! 📋",
+        _updatesModalV1_4: "Teraz możesz justować tekst! 📑",
         _updatesModalV1_5: "😊 Mamy nadzieję, że spodoba Ci się wszystkie te nowości 😊",
 
 
@@ -730,10 +730,10 @@ const translations = {
 
         _elementsSelected: "các phần tử đã chọn",
         _updatesModalNews: "Tin tức",
-        _updatesModalV1_1: "Vẽ, gạch chân và thoải mái tô màu trong ghi chú của bạn ⭐",
-        _updatesModalV1_2: "Thêm phong cách độc đáo với nhãn dán trang trí 💖",
-        _updatesModalV1_3: "Phông chữ mới và các thay đổi khác 🌹",
-        _updatesModalV1_4: "Thưởng thức font mới cho ghi chú của bạn ✍️",
+        _updatesModalV1_1: "Thêm Post-It vào ghi chú của bạn 📌",
+        _updatesModalV1_2: "Bao gồm hộp kiểm ✔️",
+        _updatesModalV1_3: "Bây giờ bạn có thể gạch ngang chữ! 📋",
+        _updatesModalV1_4: "Bây giờ bạn có thể căn đều văn bản! 📑",
         _updatesModalV1_5: "😊 Hy vọng bạn sẽ thích tất cả những tính năng mới này 😊",
 
 
@@ -772,7 +772,7 @@ const translations = {
         _langListPolish: "Lehçe",
         _langListVietnamese: "Vietnamca",
         _langListTurkish: "Türkçe",
-        
+
         // Ayarlar ekranı
         _settingsApp: "Uygulama ayarları",
         _settingsLang: "Uygulama dili",
@@ -799,10 +799,10 @@ const translations = {
 
         _elementsSelected: "seçilen öğeler",
         _updatesModalNews: "Yenilikler",
-        _updatesModalV1_1: "Notlarında özgürce çiz, altını çiz ve boya yap ⭐",
-        _updatesModalV1_2: "Dekoratif çıkartmalarla benzersiz bir dokunuş ekle 💖",
-        _updatesModalV1_3: "Yeni tipografi ve diğer değişiklikler 🌹",
-        _updatesModalV1_4: "Notların için yeni bir yazı tipi keyfini çıkar ✍️",
+        _updatesModalV1_1: "Notlarınıza Post-It ekleyin 📌",
+        _updatesModalV1_2: "Onay kutuları ekleyin ✔️",
+        _updatesModalV1_3: "Artık kelimeleri üstünü çizebilirsiniz! 📋",
+        _updatesModalV1_4: "Artık metni hizalayabilirsiniz! 📑",
         _updatesModalV1_5: "😊 Umarız bu yeni özelliklerin keyfini çıkarırsın 😊",
 
 
