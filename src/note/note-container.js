@@ -161,7 +161,7 @@ export default function NoteContainer() {
     async function getAutoSave() {
         const autoSave = await AsyncStorage.getItem(storage.AUTOSAVE);
         if (autoSave) {
-            setNoteState(prev => ({ ...prev, autoSave: autoSaveValue === "true" }));
+            setNoteState(prev => ({ ...prev, autoSave: autoSave === "true" }));
         }
     }
 
