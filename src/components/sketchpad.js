@@ -262,7 +262,7 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
 
     return (
         paths &&
-        <View style={[styles.container, { zIndex: drawing.mode === "scroll" || !drawing.isDrawing ? 998 : 1000 }]} >
+        <View style={[styles.container, { zIndex: 1000, pointerEvents: drawing.isDrawing ? "auto" : "none" }]} >
             <View style={styles.canvasContainer} {...panResponder.panHandlers}>
                 <Canvas style={styles.canvas}>
                     {renderPaths.map((p, i) => (
