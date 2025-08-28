@@ -185,6 +185,15 @@ export default function NoteContainer() {
         setNoteState(prev => ({ ...prev, sticker: null }))
     }, [sticker])
 
+    // No permitir dibujar en el caso de que readingMode es true
+    useEffect(() => {
+        if (readingMode) {
+            if (drawing.isDrawing) {
+                setNoteState(prev => ({ ...prev, drawing: { ...drawing, mode: "scroll" }}));
+            }
+        }
+    }, [readingMode])
+
     const handleFocusContent = useCallback(() => {
         if (!drawing.isDrawing && !readingMode) {
             setNoteState(prev => ({ ...prev, fontSize: null }));
