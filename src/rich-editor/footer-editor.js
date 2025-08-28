@@ -1,6 +1,6 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
-import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
+import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, orderedListLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
@@ -77,6 +77,7 @@ export default function FooterEditor({
                         actions.alignCenter,
                         actions.alignRight,
                         actions.alignFull,
+                        actions.insertOrderedList,
                         actions.insertBulletsList,
                         "fontSize",
                         "colors",
@@ -95,6 +96,7 @@ export default function FooterEditor({
                         [actions.alignRight]: alignRightLabel,
                         [actions.alignFull]: alignFullLabel,
                         [actions.insertBulletsList]: listLabel,
+                        [actions.insertOrderedList]: orderedListLabel,
                         fontSize: () => fontSizeLabel(activeOption === "fontSize" ? true : false),
                         colors: () => colorsLabel(activeOption === "colors" ? true : false),
                         separator: () => separatorsLabel(activeOption === "separators" ? true : false),

@@ -1,8 +1,17 @@
 diff --git a/node_modules/react-native-pell-rich-editor/src/editor.js b/node_modules/react-native-pell-rich-editor/src/editor.js
-index 6559109..fcf2405 100644
+index 6559109..9d7318f 100644
 --- a/node_modules/react-native-pell-rich-editor/src/editor.js
 +++ b/node_modules/react-native-pell-rich-editor/src/editor.js
-@@ -11,9 +11,43 @@ function getContentCSS() {
+@@ -1,6 +1,6 @@
+ function getContentCSS() {
+-  /*img {max-width: 98%;margin-left:auto;margin-right:auto;display: block;}*/
+-  return `
++    /*img {max-width: 98%;margin-left:auto;margin-right:auto;display: block;}*/
++    return `
+     <style>
+         video {max-width: 98%;margin-left:auto;margin-right:auto;display: block;}
+         img {max-width: 98%;vertical-align: middle;}
+@@ -11,42 +11,97 @@ function getContentCSS() {
          .x-todo-box {position: relative; left: -24px;}
          .x-todo-box input{position: absolute;}
          blockquote{border-left: 6px solid #ddd;padding: 5px 0 5px 10px;margin: 15px 0 15px 15px;}
@@ -43,9 +52,101 @@ index 6559109..fcf2405 100644
 +            top: 0px;
 +            right: 0px;
 +            overflow: hidden;
-+
-+}
++        }
 +        pre code {display: block;font-size: inherit;white-space: pre-wrap;color: inherit;font-family: ancizar}
++        ol {
++            list-style: none;
++            padding: 0;
++        }
++        ol li {
++            counter-increment: item;
++            margin: 8px 0;
++        }
++        ol li:before {
++            margin-right: 6px;
++            content: counter(item);
++            background: #cc527a;
++            border-radius: 100%;
++            color: #fff;
++            width: 20px;
++            height: 20px;
++            justify-content: center;
++            align-items: center;
++            text-align: center;
++            display: inline-flex;
++            font-weight: 700;
++        }
      </style>
      `;
  }
+ 
+ function createHTML(options = {}) {
+-  const {
+-    backgroundColor = '#FFF',
+-    color = '#000033',
+-    caretColor = '',
+-    placeholderColor = '#a9a9a9',
+-    contentCSSText = '',
+-    cssText = '',
+-    initialCSSText = '',
+-    pasteAsPlainText = false,
+-    pasteListener = false,
+-    keyDownListener = false,
+-    keyUpListener = false,
+-    inputListener = false,
+-    autoCapitalize = 'off',
+-    enterKeyHint = '',
+-    initialFocus = false,
+-    spellcheck = true,
+-    autoCorrect = false,
+-    defaultParagraphSeparator = 'div',
+-    // When first gaining focus, the cursor moves to the end of the text
+-    firstFocusEnd = true,
+-    useContainer = true,
+-    styleWithCSS = false,
+-    useCharacter = true,
+-    defaultHttps = true,
+-  } = options;
+-  //ERROR: HTML height not 100%;
+-  return `
++    const {
++        backgroundColor = '#FFF',
++        color = '#000033',
++        caretColor = '',
++        placeholderColor = '#a9a9a9',
++        contentCSSText = '',
++        cssText = '',
++        initialCSSText = '',
++        pasteAsPlainText = false,
++        pasteListener = false,
++        keyDownListener = false,
++        keyUpListener = false,
++        inputListener = false,
++        autoCapitalize = 'off',
++        enterKeyHint = '',
++        initialFocus = false,
++        spellcheck = true,
++        autoCorrect = false,
++        defaultParagraphSeparator = 'div',
++        // When first gaining focus, the cursor moves to the end of the text
++        firstFocusEnd = true,
++        useContainer = true,
++        styleWithCSS = false,
++        useCharacter = true,
++        defaultHttps = true,
++    } = options;
++    //ERROR: HTML height not 100%;
++    return `
+ <!DOCTYPE html>
+ <html>
+ <head>
+@@ -57,8 +112,7 @@ function createHTML(options = {}) {
+         * {outline: 0px solid transparent;-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-touch-callout: none;box-sizing: border-box;}
+         html, body { margin: 0; padding: 0;font-family: Arial, Helvetica, sans-serif; font-size:1em; height: 100%}
+         body { overflow-y: hidden; -webkit-overflow-scrolling: touch;background-color: ${backgroundColor};caret-color: ${caretColor};}
+-        .content {font-family: Arial, Helvetica, sans-serif;color: ${color}; width: 100%;${
+-          !useContainer ? 'height:100%;' : ''
++        .content {font-family: Arial, Helvetica, sans-serif;color: ${color}; width: 100%;${!useContainer ? 'height:100%;' : ''
+         }-webkit-overflow-scrolling: touch;padding-left: 0;padding-right: 0;}
+         .pell { height: 100%;} .pell-content { outline: 0; overflow-y: auto;padding: 10px;height: 100%;${contentCSSText}}
+     </style>
