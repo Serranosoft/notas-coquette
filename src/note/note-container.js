@@ -97,7 +97,7 @@ export default function NoteContainer() {
             return true;
         } else {
             back();
-            return false;
+            return true;
         }
     }, [])
 
