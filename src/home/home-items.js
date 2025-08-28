@@ -1,41 +1,25 @@
-import { Dimensions, StyleSheet, View } from "react-native"
+import { FlatList, View } from "react-native"
 import { HomeFlatListItem } from "./home-flat-list-item";
 import { memo } from "react";
-
-const { width } = Dimensions.get("screen");
+import { gap, layout } from "../utils/styles";
 
 function HomeItems({ notes, columnNumber, selected, setSelected }) {
 
-    const gapMultiplier = 16 * (columnNumber > 1 ? columnNumber - 1 : 0);
-
     return (
-        <View style={styles.container}>
-            <View style={styles.list}>
-                {
-                    notes.map((item, index) => (
-                        <View key={item.id} style={{
-                            width: (width - gapMultiplier - 32) / columnNumber,
-                            height: 200,
-                        }}>
-                            <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />
-                        </View>
-                    ))}
+        <View style={[layout.flex, layout.backgroundLight]}>
+            <View style={layout.flex}>
+                <FlatList
+                    key={columnNumber}
+                    numColumns={columnNumber}
+                    data={notes}
+                    contentContainerStyle={layout.contentList}
+                    columnWrapperStyle={columnNumber > 1 && gap.medium}
+                    renderItem={({ item, index }) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />}
+                />
             </View>
         </View>
 
     )
 }
 
-export default memo(HomeItems); 
-
-const styles = StyleSheet.create({
-    container: {
-        paddingTop: 16,
-    },
-    list: {
-        width: "100%",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 16,
-    },
-})
+export default memo(HomeItems);

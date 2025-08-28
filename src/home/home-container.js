@@ -14,7 +14,7 @@ import { AdsContext } from "../utils/Context";
 
 export default function HomeContainer() {
 
-    const [allNotes, setAllNotes] = useState({ notes: [], favNotes: [] });
+    const [notes, setNotes] = useState([]);
     const [selected, setSelected] = useState([]);
     const [columnNumber, setColumnNumber] = useState(2);
 
@@ -41,10 +41,11 @@ export default function HomeContainer() {
 
     async function getNotes() {
         const notes = await getAllNotes();
-        setAllNotes({
-            notes: notes.filter((n) => !n.favorite).sort((a, b) => b.date - a.date),
-            favNotes: notes.filter((n) => n.favorite).sort((a, b) => b.date - a.date)
-        });
+        const sorted = notes.sort((a, b) =>
+            (b.favorite - a.favorite) || (b.date - a.date)
+        );
+        setNotes(sorted);
+
     }
 
     const getGridLayout = useCallback(async () => {
@@ -67,7 +68,7 @@ export default function HomeContainer() {
     return (
         <>
             <Stack.Screen options={{ header: () => <HeaderHome {...{ setColumnNumber, columnNumber }} /> }} />
-            <Home {...{ columnNumber, notes: allNotes.notes, favNotes: allNotes.favNotes, deleteNotes, selected, setSelected, emptySelected }} />
+            <Home {...{ columnNumber, notes, deleteNotes, selected, setSelected, emptySelected }} />
             {adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />}
         </>
     )

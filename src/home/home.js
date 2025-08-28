@@ -7,7 +7,7 @@ import GridDeleteWrapper from "./grid-delete-wrapper";
 import HomeFavItems from "./home-fav-items";
 import HomeItems from "./home-items";
 
-function Home({ columnNumber, notes, favNotes, emptySelected, selected, setSelected, deleteNotes }) {
+function Home({ columnNumber, notes, emptySelected, selected, setSelected, deleteNotes }) {
 
     const { language } = useContext(LangContext);
 
@@ -15,15 +15,12 @@ function Home({ columnNumber, notes, favNotes, emptySelected, selected, setSelec
         <>
             <View style={[layout.flex, layout.backgroundLight, layout.paddingHorizontal]}>
                 <HomeButton {...{ language }} />
-                <ScrollView style={layout.flex} key={favNotes.length > 0 ? "with-fav" : "no-fav"}>
-                    {favNotes.length > 0 && <HomeFavItems {...{ favNotes, columnNumber, selected, setSelected }} />}
-                    {
-                        notes.length > 0 ?
-                            <HomeItems {...{ notes, columnNumber, selected, setSelected }} />
-                            :
-                            <Text style={[ui.muted, sizes.medium]}>{language.t("_homeEmptyList")}</Text>
-                    }
-                </ScrollView>
+                {
+                    notes.length > 0 ?
+                        <HomeItems {...{ notes, columnNumber, selected, setSelected }} />
+                        :
+                        <Text style={[ui.muted, sizes.medium]}>{language.t("_homeEmptyList")}</Text>
+                }
             </View>
             {selected.length > 0 && <GridDeleteWrapper {...{ selected, emptySelected, deleteNotes }} />}
         </>
