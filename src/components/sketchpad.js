@@ -4,7 +4,7 @@ import { Canvas, Path, Skia, Circle } from '@shopify/react-native-skia';
 import { addDraw, deleteAllDrawsFromNote, getDrawingsFromId } from '../utils/sqlite';
 import simplify from 'simplify-js';
 
-const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
+const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const [paths, setPaths] = useState([]);
     const [newPaths, setNewPaths] = useState([]);
     const currentPoints = useRef([]);
@@ -63,6 +63,7 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
             onPanResponderGrant: (evt, gestureState) => {
                 const { locationX, locationY } = evt.nativeEvent;
 
+                setDrawing({ ...drawingRef.current, visible: false });
                 hasMoved.current = false; // ← Flag para detectar si se ha arrastrado
 
                 // Iniciar buffer de puntos
@@ -198,6 +199,8 @@ const SketchPad = forwardRef(({ note_id, drawing }, ref) => {
                 }
 
                 currentPoints.current = [];
+                setDrawing({ ...drawingRef.current, visible: true });
+
             }
         })
     ).current;

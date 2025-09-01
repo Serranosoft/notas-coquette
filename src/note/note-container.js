@@ -36,7 +36,7 @@ export default function NoteContainer() {
         openStickers: false,
         sticker: null,
         activeOption: null,
-        drawing: { isDrawing: false, color: "rgb(85,172,238)", width: 3, mode: "scroll" },
+        drawing: { isDrawing: false, color: "rgb(85,172,238)", width: 3, mode: "scroll", visible: true },
     });
 
     const { note, fontSize, separator, readingMode, font, color, autoSave,

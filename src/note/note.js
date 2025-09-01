@@ -66,6 +66,7 @@ function Note(
                                         note={note}
                                         font={font}
                                         drawing={drawing}
+                                        setDrawing={setDrawing}
                                         color={color}
                                         readingMode={readingMode}
                                         sketchPadRef={sketchPadRef}

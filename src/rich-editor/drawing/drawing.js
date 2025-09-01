@@ -3,7 +3,8 @@ import { Image } from "react-native";
 import { colors, editor } from "../../utils/styles";
 import ColorPicker, { BrightnessSlider, HueSlider } from "reanimated-color-picker";
 import { ScrollView } from "react-native-gesture-handler";
-import { runOnJS } from "react-native-reanimated";
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useEffect } from "react";
 
 export default function Drawing({ drawing, setDrawing }) {
     const updateDrawingColor = (hex) => {
@@ -15,8 +16,26 @@ export default function Drawing({ drawing, setDrawing }) {
         runOnJS(updateDrawingColor)(hex);
     };
 
+    const opacity = useSharedValue(drawing.visible ? 1 : 0);
+    const translateX = useSharedValue(drawing.visible ? 0 : 50);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        opacity: opacity.value,
+        transform: [{ translateX: translateX.value }],
+    }));
+
+    useEffect(() => {
+        opacity.value = withTiming(drawing.visible ? 1 : 0, { duration: 200 });
+        translateX.value = withTiming(drawing.visible ? 0 : 50, { duration: 300 });
+    }, [drawing.visible]);
+
     return (
-        <View style={[editor.footer, styles.container, { height: "auto" }]}>
+        <Animated.View style={[
+            editor.footer,
+            styles.container,
+            { height: "auto", pointerEvents: drawing.visible ? "auto" : "none" },
+            animatedStyle
+        ]}>
             <ScrollView contentContainerStyle={{ gap: 6 }}>
                 <View style={styles.items}>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, mode: "scroll" })}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "scroll" ? colors.light : "#fff" }]}><Image source={require("../../../assets/tap.png")} style={styles.icon} /></View></TouchableOpacity>
@@ -44,7 +63,7 @@ export default function Drawing({ drawing, setDrawing }) {
                     </ColorPicker>
                 </View>
             </ScrollView>
-        </View>
+        </Animated.View>
     )
 }
 

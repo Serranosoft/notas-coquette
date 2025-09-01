@@ -7,6 +7,7 @@ export default function NoteContent({
     note,
     font,
     drawing,
+    setDrawing,
     color,
     readingMode,
     sketchPadRef,
@@ -24,6 +25,7 @@ export default function NoteContent({
                     key={note.id}
                     ref={sketchPadRef}
                     drawing={drawing}
+                    setDrawing={setDrawing}
                     note_id={note.id}
                 />
             )}
