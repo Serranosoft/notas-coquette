@@ -22,7 +22,7 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
                 { richText.current && !drawing.isDrawing && <HeaderLeftEditor {...{ richText, readingMode }} /> }
                 {
                     !readingMode && 
-                        <TouchableOpacity style={{ paddingRight: 4 }} onPress={() => {
+                        <TouchableOpacity style={{ paddingRight: 4, backgroundColor: drawing.isDrawing ? "#fff" : "transparent", borderRadius: 8 }} onPress={() => {
                             setDrawing({ ...drawing, isDrawing: !drawing.isDrawing });
                             setActiveOption(activeOption === "drawing" ? null : "drawing");
                         } }>
