@@ -61,6 +61,7 @@ const translations = {
         // 04-07-2025: Se agregan nuevas traducciones para nuevos textos
         _elementsSelected: "elementos seleccionados",
         _updatesModalNews: "Novedades",
+        _updatesModalV1_6: "¡Ahora puedes subrayar tus textos! 🖍️",
         _updatesModalV1_1: "Añade Post-It en tus notas 📌",
         _updatesModalV1_2: "Incluye casillas de verificación ✔️",
         _updatesModalV1_3: "¡Ahora puedes tachar palabras! 📋",
@@ -132,6 +133,7 @@ const translations = {
         _updatesModalV1_3: "Now you can strikethrough words! 📋",
         _updatesModalV1_4: "Now you can justify text! 📑",
         _updatesModalV1_5: "😊 We hope you enjoy all these new features 😊",
+        _updatesModalV1_6: "Now you can underline your texts! 🖍️"
 
     },
     ar: {
@@ -199,6 +201,7 @@ const translations = {
         _updatesModalV1_3: "الآن يمكنك شطب الكلمات! 📋",
         _updatesModalV1_4: "الآن يمكنك محاذاة النص! 📑",
         _updatesModalV1_5: "😊 نأمل أن تستمتع بكل هذه الميزات الجديدة 😊",
+        _updatesModalV1_6: "الآن يمكنك تسطير نصوصك! 🖍️"
 
     },
     fr: {
@@ -259,6 +262,7 @@ const translations = {
         _updatesModalV1_3: "Vous pouvez maintenant barrer des mots ! 📋",
         _updatesModalV1_4: "Vous pouvez maintenant justifier le texte ! 📑",
         _updatesModalV1_5: "😊 Nous espérons que tu apprécieras toutes ces nouveautés 😊",
+        _updatesModalV1_6: "Vous pouvez maintenant souligner vos textes ! 🖍️"
 
     },
     de: {
@@ -325,6 +329,7 @@ const translations = {
         _updatesModalV1_3: "Jetzt kannst du Wörter durchstreichen! 📋",
         _updatesModalV1_4: "Jetzt kannst du den Text ausrichten! 📑",
         _updatesModalV1_5: "😊 Wir hoffen, du genießt all diese neuen Funktionen 😊",
+        _updatesModalV1_6: "Jetzt kannst du deine Texte unterstreichen! 🖍️"
 
     },
     hi: {
@@ -391,6 +396,7 @@ const translations = {
         _updatesModalV1_3: "अब आप शब्दों को काट सकते हैं! 📋",
         _updatesModalV1_4: "अब आप टेक्स्ट को जस्टिफाई कर सकते हैं! 📑",
         _updatesModalV1_5: "😊 हमें उम्मीद है कि आप इन सभी नए फीचर्स का आनंद लेंगे 😊",
+        _updatesModalV1_6: "अब आप अपने पाठ को रेखांकित कर सकते हैं! 🖍️"
 
     },
     id: {
@@ -459,6 +465,7 @@ const translations = {
         _updatesModalV1_3: "Sekarang kamu bisa mencoret kata! 📋",
         _updatesModalV1_4: "Sekarang kamu bisa meratakan teks! 📑",
         _updatesModalV1_5: "😊 Semoga kamu menikmati semua fitur baru ini 😊",
+        _updatesModalV1_6: "Sekarang kamu bisa menggarisbawahi teksmu! 🖍️"
 
 
     },
@@ -528,7 +535,7 @@ const translations = {
         _updatesModalV1_3: "Agora você pode riscar palavras! 📋",
         _updatesModalV1_4: "Agora você pode justificar o texto! 📑",
         _updatesModalV1_5: "😊 Esperamos que você aproveite todos esses novos recursos 😊",
-
+        _updatesModalV1_6: "Agora você pode sublinhar seus textos! 🖍️"
 
     },
     ru: {
@@ -597,7 +604,7 @@ const translations = {
         _updatesModalV1_3: "Теперь можно зачёркивать слова! 📋",
         _updatesModalV1_4: "Теперь можно выравнивать текст! 📑",
         _updatesModalV1_5: "😊 Надеемся, вам понравятся все эти новшества 😊",
-
+        _updatesModalV1_6: "Теперь вы можете подчеркивать свои тексты! 🖍️"
 
     },
     pl: {
@@ -666,7 +673,7 @@ const translations = {
         _updatesModalV1_3: "Teraz możesz przekreślać słowa! 📋",
         _updatesModalV1_4: "Teraz możesz justować tekst! 📑",
         _updatesModalV1_5: "😊 Mamy nadzieję, że spodoba Ci się wszystkie te nowości 😊",
-
+        _updatesModalV1_6: "Teraz możesz podkreślać swoje teksty! 🖍️"
 
     },
     vi: {
@@ -735,7 +742,7 @@ const translations = {
         _updatesModalV1_3: "Bây giờ bạn có thể gạch ngang chữ! 📋",
         _updatesModalV1_4: "Bây giờ bạn có thể căn đều văn bản! 📑",
         _updatesModalV1_5: "😊 Hy vọng bạn sẽ thích tất cả những tính năng mới này 😊",
-
+        _updatesModalV1_6: "Bây giờ bạn có thể gạch chân văn bản của mình! 🖍️"
 
     },
     tr: {
@@ -804,7 +811,7 @@ const translations = {
         _updatesModalV1_3: "Artık kelimeleri üstünü çizebilirsiniz! 📋",
         _updatesModalV1_4: "Artık metni hizalayabilirsiniz! 📑",
         _updatesModalV1_5: "😊 Umarız bu yeni özelliklerin keyfini çıkarırsın 😊",
-
+        _updatesModalV1_6: "Artık metinlerinizi altını çizebilirsiniz! 🖍️"
 
     },
 

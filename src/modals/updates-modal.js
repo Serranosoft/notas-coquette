@@ -5,7 +5,7 @@ import { ui } from '../utils/styles';
 import Button from '../components/button';
 import { LangContext } from '../utils/Context';
 
-const VERSION_MODAL = 'v2';
+const VERSION_MODAL = 'v3';
 
 export default function UpdatesModal() {
     const [visible, setVisible] = useState(false);
@@ -32,6 +32,7 @@ export default function UpdatesModal() {
             <View style={styles.overlay}>
                 <View style={styles.modal}>
                     <Text style={[ui.h3, { color: "#000"}]}>🆕 {language.t("_updatesModalNews")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_6")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_1")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_2")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_3")}</Text>
