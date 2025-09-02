@@ -65,7 +65,8 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     };
     const panResponder = useRef(
         PanResponder.create({
-            onStartShouldSetPanResponder: () => true,
+            onStartShouldSetPanResponder: () => drawingRef.current.mode !== "scroll",
+            onMoveShouldSetPanResponder: () => drawingRef.current.mode !== "scroll",
 
             onPanResponderGrant: (evt, gestureState) => {
                 const { locationX, locationY } = evt.nativeEvent;
@@ -184,6 +185,8 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
 
             onPanResponderRelease: () => {
                 // Limpiar puntos y no guardar nada si fue solo un tap
+                setDrawing({ ...drawingRef.current, visible: true });
+                
                 if (!hasMoved.current) {
                     currentPoints.current = [];
                     return;
@@ -209,7 +212,6 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                 }
 
                 currentPoints.current = [];
-                setDrawing({ ...drawingRef.current, visible: true });
 
             }
         })
