@@ -72,10 +72,27 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                 const { locationX, locationY } = evt.nativeEvent;
 
                 setDrawing({ ...drawingRef.current, visible: false });
-                hasMoved.current = false; // ← Flag para detectar si se ha arrastrado
+                hasMoved.current = false;
 
-                // Iniciar buffer de puntos
                 currentPoints.current = [{ x: locationX, y: locationY }];
+
+                if (drawingRef.current.mode === "line" || drawingRef.current.mode === "marker") {
+                    const start = { x: locationX, y: locationY };
+
+                    setPaths(prev => [...prev, {
+                        color: drawingRef.current.color,
+                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
+                        alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
+                        points: [start, start]
+                    }]);
+
+                    setNewPaths(prev => [...prev, {
+                        color: drawingRef.current.color,
+                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
+                        alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
+                        points: [start, start]
+                    }]);
+                }
             },
 
             onPanResponderMove: async (evt, gestureState) => {
@@ -90,12 +107,13 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
 
                     if (drawingRef.current.mode === "free") {
                         const simplified = simplify(currentPoints.current, 1, true);
-                        // FREE MODE - inicia con primer punto
+
                         setPaths(prev => [...prev, {
                             color: drawingRef.current.color,
                             width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                             points: simplified
                         }]);
+
                         setNewPaths(prev => [...prev, {
                             color: drawingRef.current.color,
                             width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
@@ -137,7 +155,6 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                             if (updated.length === 0 || updated[updated.length - 1].points.length !== 2) {
                                 updated.push({
                                     color: drawingRef.current.color,
-                                    width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                                     alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                                     points: linePoints
                                 });
@@ -163,6 +180,7 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                             } else {
                                 updated[updated.length - 1] = {
                                     ...updated[updated.length - 1],
+                                    width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                                     alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                                     points: linePoints
                                 };
@@ -171,9 +189,11 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                         });
 
                     } else if (drawingRef.current.mode === "rubber") {
-                        // Eliminar paths cercanos al dedo
-                        setRubberPos({ x: locationX, y: locationY }); // Actualiza posición del círculo
+
+                        setRubberPos({ x: locationX, y: locationY });
+
                         const newList = pathsRef.current.filter(p => !isPointNearPath(point, p.points));
+
                         if (newList.length !== pathsRef.current.length) {
                             pathsRef.current = newList;
                             setPaths(newList);
@@ -184,15 +204,14 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
             },
 
             onPanResponderRelease: () => {
-                // Limpiar puntos y no guardar nada si fue solo un tap
                 setDrawing({ ...drawingRef.current, visible: true });
-                
+
                 if (!hasMoved.current) {
                     currentPoints.current = [];
                     return;
                 }
-                setRubberPos(null); // Oculta el círculo cuando termina el gesto
-                // Confirmar línea en modo "line"
+                setRubberPos(null);
+                
                 if (drawingRef.current.mode === "line" || drawingRef.current.mode === "marker") {
                     const start = currentPoints.current[0];
                     const end = currentPoints.current[1] || currentPoints.current[0];
@@ -217,10 +236,8 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
         })
     ).current;
 
-    // Este ref lo defines fuera del panResponder
     const hasMoved = useRef(false);
 
-    // Renderizado de paths, coloreando el seleccionado en rojo
     const renderPaths = useMemo(() => {
         return paths.map((p) => {
             const path = Skia.Path.Make();
@@ -253,7 +270,7 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     };
 
     const loadFromDB = async () => {
-        setPaths([]); // Limpia antes de cargar
+        setPaths([]);
 
         const drawings = await getDrawingsFromId(note_id);
         const allPaths = drawings
