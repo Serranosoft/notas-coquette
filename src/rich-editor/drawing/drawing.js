@@ -6,6 +6,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { useEffect } from "react";
 
+export const baseSize = { 1: 2, 2: 3, 3: 5 }
+
 export default function Drawing({ drawing, setDrawing }) {
     const updateDrawingColor = (hex) => {
         setDrawing({ ...drawing, color: hex });
@@ -39,15 +41,16 @@ export default function Drawing({ drawing, setDrawing }) {
             <ScrollView contentContainerStyle={{ gap: 6 }}>
                 <View style={styles.items}>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, mode: "scroll" })}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "scroll" ? colors.light : "#fff" }]}><Image source={require("../../../assets/tap.png")} style={styles.icon} /></View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, mode: "marker" })}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "marker" ? colors.light : "#fff" }]}><Image source={require("../../../assets/marker.png")} style={styles.icon} /></View></TouchableOpacity>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, mode: "free" })}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "free" ? colors.light : "#fff" }]}><Image source={require("../../../assets/free.png")} style={styles.icon} /></View></TouchableOpacity>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, mode: "line" })}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "line" ? colors.light : "#fff" }]}><Image source={require("../../../assets/line.png")} style={styles.icon} /></View></TouchableOpacity>
                     <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, mode: "rubber" })}><View style={[styles.iconWrapper, { backgroundColor: drawing.mode === "rubber" ? colors.light : "#fff" }]}><Image source={require("../../../assets/eraser.png")} style={styles.icon} /></View></TouchableOpacity>
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.items}>
-                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, width: 2 })}><View style={[styles.size, { backgroundColor: drawing.color, width: 27, height: 27 }]}>{drawing.width === 2 && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
-                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, width: 3 })}><View style={[styles.size, { backgroundColor: drawing.color, width: 32, height: 32 }]}>{drawing.width === 3 && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
-                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, width: 5 })}><View style={[styles.size, { backgroundColor: drawing.color, width: 37, height: 37 }]}>{drawing.width === 5 && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, width: 1 })}><View style={[styles.size, { backgroundColor: drawing.color, width: 27, height: 27 }]}>{drawing.width === 1 && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, width: 2 })}><View style={[styles.size, { backgroundColor: drawing.color, width: 32, height: 32 }]}>{drawing.width === 2 && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
+                    <TouchableOpacity style={styles.item} onPress={() => setDrawing({ ...drawing, width: 3 })}><View style={[styles.size, { backgroundColor: drawing.color, width: 37, height: 37 }]}>{drawing.width === 3 && <Image source={require("../../../assets/tick-black.png")} style={styles.tick} />}</View></TouchableOpacity>
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.items}>

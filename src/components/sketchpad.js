@@ -3,6 +3,7 @@ import { View, StyleSheet, PanResponder } from 'react-native';
 import { Canvas, Path, Skia, Circle } from '@shopify/react-native-skia';
 import { addDraw, deleteAllDrawsFromNote, getDrawingsFromId } from '../utils/sqlite';
 import simplify from 'simplify-js';
+import { baseSize } from '../rich-editor/drawing/drawing';
 
 const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const [paths, setPaths] = useState([]);
@@ -23,6 +24,12 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     useEffect(() => {
         pathsRef.current = paths;
     }, [paths]);
+
+    function getRealWidth(level, mode) {
+        const size = baseSize[level];
+        const result = mode === "marker" ? size * 5 : size;
+        return result
+    }
 
     // Función para detectar si un punto está cerca de un path
     const isPointNearPath = (point, pathPoints, tolerance = 15) => {
@@ -85,12 +92,12 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                         // FREE MODE - inicia con primer punto
                         setPaths(prev => [...prev, {
                             color: drawingRef.current.color,
-                            width: drawingRef.current.width,
+                            width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                             points: simplified
                         }]);
                         setNewPaths(prev => [...prev, {
                             color: drawingRef.current.color,
-                            width: drawingRef.current.width,
+                            width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                             points: simplified
                         }]);
                     }
@@ -120,22 +127,23 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                             return updated;
                         });
 
-                    } else if (drawingRef.current.mode === "line") {
+                    } else if (drawingRef.current.mode === "line" || drawingRef.current.mode === "marker") {
                         const start = currentPoints.current[0];
                         const end = point;
                         const linePoints = [start, end];
-
                         setPaths(prev => {
                             const updated = [...prev];
                             if (updated.length === 0 || updated[updated.length - 1].points.length !== 2) {
                                 updated.push({
                                     color: drawingRef.current.color,
-                                    width: drawingRef.current.width,
+                                    width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
+                                    alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                                     points: linePoints
                                 });
                             } else {
                                 updated[updated.length - 1] = {
                                     ...updated[updated.length - 1],
+                                    alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                                     points: linePoints
                                 };
                             }
@@ -147,12 +155,14 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                             if (updated.length === 0 || updated[updated.length - 1].points.length !== 2) {
                                 updated.push({
                                     color: drawingRef.current.color,
-                                    width: drawingRef.current.width,
+                                    width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
+                                    alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                                     points: linePoints
                                 });
                             } else {
                                 updated[updated.length - 1] = {
                                     ...updated[updated.length - 1],
+                                    alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                                     points: linePoints
                                 };
                             }
@@ -180,20 +190,20 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                 }
                 setRubberPos(null); // Oculta el círculo cuando termina el gesto
                 // Confirmar línea en modo "line"
-                if (drawingRef.current.mode === "line") {
+                if (drawingRef.current.mode === "line" || drawingRef.current.mode === "marker") {
                     const start = currentPoints.current[0];
                     const end = currentPoints.current[1] || currentPoints.current[0];
                     const finalLine = [start, end];
 
                     setPaths(prev => [...prev, {
                         color: drawingRef.current.color,
-                        width: drawingRef.current.width,
+                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                         points: finalLine
                     }]);
 
                     setNewPaths(prev => [...prev, {
                         color: drawingRef.current.color,
-                        width: drawingRef.current.width,
+                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
                         points: finalLine
                     }]);
                 }
@@ -222,13 +232,14 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                 path,
                 color: p.color,
                 width: p.width,
+                alpha: p.alpha
             };
         });
     }, [paths]);
 
 
     useEffect(() => {
-        console.log(newPaths.length);
+        // console.log(newPaths.length);
     }, [newPaths])
 
     const save = async () => {
@@ -275,6 +286,9 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                             color={p.color}
                             style="stroke"
                             strokeWidth={p.width}
+                            opacity={p.alpha}
+                            strokeCap={p.alpha === 0.5 ? "round" : "butt"}
+                            strokeJoin={p.alpha === 0.5 ? "round" : "mitter"}
                         />
                     ))}
                     {rubberPos && (
