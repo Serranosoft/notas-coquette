@@ -7,11 +7,11 @@ import { baseSize } from '../rich-editor/drawing/drawing';
 
 const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const [paths, setPaths] = useState([]);
-    const [newPaths, setNewPaths] = useState([]);
     const currentPoints = useRef([]);
     const pathsRef = useRef(paths);
     const drawingRef = useRef(drawing);
     const [rubberPos, setRubberPos] = useState(null);
+    const hasMoved = useRef(false);
 
     useEffect(() => {
         loadFromDB();
@@ -31,7 +31,9 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
         return result
     }
 
-    // Función para detectar si un punto está cerca de un path
+    // ---------------------------
+    // Helpers
+    // ---------------------------
     const isPointNearPath = (point, pathPoints, tolerance = 15) => {
         if (pathPoints.length < 2) return false;
 
@@ -63,12 +65,16 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
 
         return distSq <= tolerance ** 2;
     };
+
+    // ---------------------------
+    // PanResponder
+    // ---------------------------
     const panResponder = useRef(
         PanResponder.create({
             onStartShouldSetPanResponder: () => drawingRef.current.mode !== "scroll",
             onMoveShouldSetPanResponder: () => drawingRef.current.mode !== "scroll",
 
-            onPanResponderGrant: (evt, gestureState) => {
+            onPanResponderGrant: (evt) => {
                 const { locationX, locationY } = evt.nativeEvent;
 
                 setDrawing({ ...drawingRef.current, visible: false });
@@ -85,17 +91,10 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                         alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
                         points: [start, start]
                     }]);
-
-                    setNewPaths(prev => [...prev, {
-                        color: drawingRef.current.color,
-                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                        alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
-                        points: [start, start]
-                    }]);
                 }
             },
 
-            onPanResponderMove: async (evt, gestureState) => {
+            onPanResponderMove: (evt, gestureState) => {
                 const { locationX, locationY } = evt.nativeEvent;
 
                 const dx = Math.abs(gestureState.dx);
@@ -107,18 +106,14 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
 
                     if (drawingRef.current.mode === "free") {
                         const simplified = simplify(currentPoints.current, 1, true);
-
-                        setPaths(prev => [...prev, {
-                            color: drawingRef.current.color,
-                            width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                            points: simplified
-                        }]);
-
-                        setNewPaths(prev => [...prev, {
-                            color: drawingRef.current.color,
-                            width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                            points: simplified
-                        }]);
+                        setPaths((prev) => [
+                            ...prev,
+                            {
+                                color: drawingRef.current.color,
+                                width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
+                                points: simplified,
+                            },
+                        ]);
                     }
                 }
 
@@ -129,15 +124,6 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                         currentPoints.current.push(point);
 
                         setPaths(prev => {
-                            const updated = [...prev];
-                            updated[updated.length - 1] = {
-                                ...updated[updated.length - 1],
-                                points: [...currentPoints.current]
-                            };
-                            return updated;
-                        });
-
-                        setNewPaths(prev => {
                             const updated = [...prev];
                             updated[updated.length - 1] = {
                                 ...updated[updated.length - 1],
@@ -168,36 +154,12 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                             return updated;
                         });
 
-                        setNewPaths(prev => {
-                            const updated = [...prev];
-                            if (updated.length === 0 || updated[updated.length - 1].points.length !== 2) {
-                                updated.push({
-                                    color: drawingRef.current.color,
-                                    width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                                    alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
-                                    points: linePoints
-                                });
-                            } else {
-                                updated[updated.length - 1] = {
-                                    ...updated[updated.length - 1],
-                                    width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                                    alpha: drawingRef.current.mode !== "marker" ? 1 : 0.5,
-                                    points: linePoints
-                                };
-                            }
-                            return updated;
-                        });
-
                     } else if (drawingRef.current.mode === "rubber") {
-
                         setRubberPos({ x: locationX, y: locationY });
-
                         const newList = pathsRef.current.filter(p => !isPointNearPath(point, p.points));
 
                         if (newList.length !== pathsRef.current.length) {
-                            pathsRef.current = newList;
                             setPaths(newList);
-                            setNewPaths(newList);
                         }
                     }
                 }
@@ -217,27 +179,75 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                     const end = currentPoints.current[1] || currentPoints.current[0];
                     const finalLine = [start, end];
 
-                    setPaths(prev => [...prev, {
-                        color: drawingRef.current.color,
-                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                        points: finalLine
-                    }]);
-
-                    setNewPaths(prev => [...prev, {
-                        color: drawingRef.current.color,
-                        width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
-                        points: finalLine
-                    }]);
+                    setPaths((prev) => [
+                        ...prev,
+                        {
+                            color: drawingRef.current.color,
+                            width: getRealWidth(drawingRef.current.width, drawingRef.current.mode),
+                            points: finalLine,
+                        },
+                    ]);
                 }
 
                 currentPoints.current = [];
-
-            }
+                setDrawing({ ...drawingRef.current, visible: true });
+            },
         })
     ).current;
 
-    const hasMoved = useRef(false);
+    // ---------------------------
+    // Save & Load
+    // ---------------------------
+    const save = async () => {
+        try {
+            await deleteAllDrawsFromNote(note_id);
 
+            const json = JSON.stringify(paths);
+            await addDraw(note_id, json);
+
+        } catch (e) {
+            console.error("Error saving paths:", e);
+        }
+    };
+
+    const loadFromDB = async () => {
+        try {
+            const drawings = await getDrawingsFromId(note_id);
+
+            let loadedPaths = [];
+
+            drawings.forEach((d) => {
+                try {
+                    let parsed = JSON.parse(d.data);
+
+                    if (typeof parsed === "string") {
+                        parsed = JSON.parse(parsed);
+                    }
+
+                    if (Array.isArray(parsed)) {
+                        loadedPaths.push(...parsed);
+                    } else if (parsed && typeof parsed === "object" && parsed.points) {
+                        loadedPaths.push(parsed);
+                    }
+
+                } catch (err) {
+                    console.error("Error parsing path:", err);
+                }
+            });
+
+            setPaths(loadedPaths);
+            pathsRef.current = loadedPaths;
+
+        } catch (e) {
+            console.error("Error loading paths:", e);
+        }
+    };
+
+    useImperativeHandle(ref, () => ({ save }));
+
+    // ---------------------------
+    // Render
+    // ---------------------------
     const renderPaths = useMemo(() => {
         return paths.map((p) => {
             const path = Skia.Path.Make();
@@ -256,45 +266,7 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
         });
     }, [paths]);
 
-
-    useEffect(() => {
-        // console.log(newPaths.length);
-    }, [newPaths])
-
-    const save = async () => {
-        await deleteAllDrawsFromNote(note_id);
-        paths.forEach(async (path) => {
-            let json = JSON.stringify(path);
-            await addDraw(note_id, json);
-        })
-    };
-
-    const loadFromDB = async () => {
-        setPaths([]);
-
-        const drawings = await getDrawingsFromId(note_id);
-        const allPaths = drawings
-            .map((d) => {
-                try {
-                    let parsed = JSON.parse(d.data);
-                    if (typeof parsed === "string") parsed = JSON.parse(parsed);
-                    return parsed;
-                } catch (e) {
-                    console.error("Error parsing:", e);
-                    return null;
-                }
-            })
-            .filter(Boolean);
-
-        const mergedPaths = allPaths.flat(2);
-        pathsRef.current = mergedPaths;
-        setPaths(mergedPaths);
-    };
-
-    useImperativeHandle(ref, () => ({ save }));
-
     return (
-        paths &&
         <View style={[styles.container, { zIndex: 1000, pointerEvents: drawing.isDrawing ? "auto" : "none" }]} >
             <View style={styles.canvasContainer} {...panResponder.panHandlers}>
                 <Canvas style={styles.canvas}>
@@ -322,8 +294,8 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
             </View>
         </View>
     );
+});
 
-})
 
 export default SketchPad;
 
