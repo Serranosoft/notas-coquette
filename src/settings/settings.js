@@ -7,8 +7,18 @@ import { FONTS } from "../utils/fonts";
 import LangList from "../components/lang-list";
 import { useContext } from "react";
 import { AdsContext, LangContext } from "../utils/Context";
+import Slider from '@react-native-community/slider';
 
-export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSave, typo }) {
+export default function Settings({
+    removeAll,
+    updateAutoSave,
+    updateTypo,
+    autoSave,
+    typo,
+    updateLineSpacing,
+    setLineSpacing,
+    lineSpacing,
+}) {
 
     const { language } = useContext(LangContext);
     const { adsLoaded } = useContext(AdsContext);
@@ -33,6 +43,18 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
                             thumbColor={autoSave ? colors.dark : '#f4f3f4'}
                             onValueChange={updateAutoSave}
                             value={autoSave}
+                        />
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={[ui.text, ui.black]}>Cambiar interlineado</Text>
+                        <Slider
+                            style={{ width: 200, height: 40 }}
+                            minimumValue={0.5}
+                            maximumValue={1}
+                            minimumTrackTintColor="#FFFFFF"
+                            maximumTrackTintColor="#000000"
+                            step={0.5}
+                            
                         />
                     </View>
 
@@ -65,7 +87,7 @@ export default function Settings({ removeAll, updateAutoSave, updateTypo, autoSa
 
 
             </ScrollView>
-            { adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
+            {adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />}
 
         </View>
     )

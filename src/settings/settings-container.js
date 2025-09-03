@@ -15,10 +15,15 @@ export default function SettingsContainer() {
     const [autoSave, setAutoSave] = useState(true);
     const [typo, setTypo] = useState(null);
     const [forceHome, setForceHome] = useState(false);
+    const [lineSpacing, setLineSpacing] = useState(1);
 
     useEffect(() => {
         getData();
     }, []);
+
+    /* useEffect(() => {
+        updateLineSpacing();
+    }, [lineSpacing]) */
 
     async function updateTypo(typo) {
         setTypo(typo);
@@ -65,11 +70,34 @@ export default function SettingsContainer() {
         }
     }
 
+    async function updateLineSpacing(lineSpacing) {
+        console.log("update..");
+        setLineSpacing(lineSpacing)
+        await AsyncStorage.setItem(storage.LINE_SPACING, lineSpacing+"");
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset(`Se ha actualizado el interlineado de tus notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        } else {
+            Alert.alert(`Se ha actualizado el interlineado de tus notas`);
+        }
+    }
+
 
     return (
         <>
             <Stack.Screen options={{ header: () => <HeaderSettingsContainer forceHome={forceHome} /> }} />
-            <Settings {...{ removeAll, updateAutoSave, updateTypo, autoSave, typo }} />
+            <Settings {...
+                {
+                    removeAll, 
+                    updateAutoSave, 
+                    updateTypo, 
+                    autoSave, 
+                    typo,
+                    updateLineSpacing,
+                    lineSpacing,
+                    setLineSpacing,
+                }
+            }
+            />
         </>
     )
 }

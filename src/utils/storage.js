@@ -9,6 +9,7 @@ export const storage = {
     FIRST_LAUNCH_APP: "FIRST_LAUNCH_APP",
     COLOR: "color",
     MIGRATED: "migration",
+    LINE_SPACING: "line_spacing",
 }
 
 export async function save({ note, noteSavedId }) {
