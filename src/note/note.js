@@ -32,7 +32,11 @@ function Note(
         activeOption,
         setActiveOption,
         handleHeightChange,
-        insertCheckbox
+        insertCheckbox,
+        lineSpacing,
+        wordSpacing,
+        letterSpacing,
+        isReady,
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -41,7 +45,7 @@ function Note(
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
             {
-                font &&
+                isReady &&
                 <>
                     {activeOption === 'separators' && !readingMode && (
                         <Separators setSeparator={setSeparator} />
@@ -60,23 +64,26 @@ function Note(
                     >
                         <View style={[layout.flex, layout.zIndex]}>
                             <ScrollView style={layout.zIndex} contentContainerStyle={{ height: "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
-                                {note &&
-                                    <NoteContent
-                                        key={note.id}
-                                        note={note}
-                                        font={font}
-                                        drawing={drawing}
-                                        setDrawing={setDrawing}
-                                        color={color}
-                                        readingMode={readingMode}
-                                        sketchPadRef={sketchPadRef}
-                                        richText={richText}
-                                        handleCursorPosition={handleCursorPosition}
-                                        handleHeightChange={handleHeightChange}
-                                        editorHeight={editorHeight}
-                                        windowHeight={windowHeight}
-                                    />
-                                }
+
+                                <NoteContent
+                                    key={note.id}
+                                    note={note}
+                                    font={font}
+                                    drawing={drawing}
+                                    setDrawing={setDrawing}
+                                    color={color}
+                                    readingMode={readingMode}
+                                    sketchPadRef={sketchPadRef}
+                                    richText={richText}
+                                    handleCursorPosition={handleCursorPosition}
+                                    handleHeightChange={handleHeightChange}
+                                    editorHeight={editorHeight}
+                                    windowHeight={windowHeight}
+                                    lineSpacing={lineSpacing}
+                                    wordSpacing={wordSpacing}
+                                    letterSpacing={letterSpacing}
+                                />
+
                             </ScrollView>
                             {
                                 note &&

@@ -61,12 +61,10 @@ const translations = {
         // 04-07-2025: Se agregan nuevas traducciones para nuevos textos
         _elementsSelected: "elementos seleccionados",
         _updatesModalNews: "Novedades",
-        _updatesModalV1_6: "¡Ahora puedes subrayar tus textos! 🖍️",
-        _updatesModalV1_1: "Añade Post-It en tus notas 📌",
-        _updatesModalV1_2: "Incluye casillas de verificación ✔️",
-        _updatesModalV1_3: "¡Ahora puedes tachar palabras! 📋",
-        _updatesModalV1_4: "¡Ahora puedes justificar el texto! 📑",
-        _updatesModalV1_5: "😊 Esperamos que disfrutes de todas estas novedades 😊",
+        _updatesModalV1_1: "¡Ahora puedes subrayar tus textos! 🖍️",
+        _updatesModalV1_2: "Corregido error que causaba salto de línea al añadir un sticker 📑",
+        _updatesModalV1_3: "Se han mejorado las herramientas de dibujo 🔧",
+        _updatesModalV1_4: "😊 Esperamos que disfrutes de las novedades 😊",
 
     },
     en: {

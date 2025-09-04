@@ -30,6 +30,9 @@ export default function NoteContainer() {
         font: null,
         color: null,
         autoSave: true,
+        letterSpacing: null,
+        wordSpacing: null,
+        lineSpacing: null,
         noteSavedId: null,
         focused: false,
         editorHeight: 600,
@@ -39,9 +42,11 @@ export default function NoteContainer() {
         drawing: { isDrawing: false, color: "rgb(85,172,238)", width: 2, mode: "scroll", visible: true },
     });
 
+    const [isReady, setIsReady] = useState(false);
+
     const { note, fontSize, separator, readingMode, font, color, autoSave,
         noteSavedId, focused, editorHeight, openStickers, sticker,
-        activeOption, drawing } = noteState;
+        activeOption, drawing, letterSpacing, lineSpacing, wordSpacing } = noteState;
 
     const sketchPadRef = useRef();
 
@@ -107,6 +112,10 @@ export default function NoteContainer() {
         }
     }, [drawing])
 
+    useEffect(() => {
+        if (note && lineSpacing && letterSpacing && wordSpacing && font) setIsReady(true);
+    }, [note, lineSpacing, letterSpacing, wordSpacing])
+
     async function back() {
         if (autoSave) {
             await saveNote();
@@ -160,9 +169,14 @@ export default function NoteContainer() {
 
     async function getAutoSave() {
         const autoSave = await AsyncStorage.getItem(storage.AUTOSAVE);
-        if (autoSave) {
-            setNoteState(prev => ({ ...prev, autoSave: autoSave === "true" }));
-        }
+        if (autoSave) setNoteState(prev => ({ ...prev, autoSave: autoSave === "true" }));
+        
+        const lineSpacing = await AsyncStorage.getItem(storage.LINE_SPACING) || 1.2;
+        if (lineSpacing) setNoteState(prev => ({ ...prev, lineSpacing: lineSpacing }));
+        const wordSpacing = await AsyncStorage.getItem(storage.WORD_SPACING) || 0;
+        if (wordSpacing) setNoteState(prev => ({ ...prev, wordSpacing: wordSpacing }));
+        const letterSpacing = await AsyncStorage.getItem(storage.LETTER_SPACING) || 0;
+        if (letterSpacing) setNoteState(prev => ({ ...prev, letterSpacing: letterSpacing }));
     }
 
     useEffect(() => {
@@ -246,7 +260,9 @@ export default function NoteContainer() {
                 )
             }} />
 
-            <Note note={note}
+            <Note
+                isReady={isReady} 
+                note={note}
                 readingMode={readingMode}
                 fontSize={fontSize}
                 setFontSize={setFontSize}
@@ -272,6 +288,9 @@ export default function NoteContainer() {
                 setActiveOption={setActiveOption}
                 handleHeightChange={handleHeightChange}
                 insertCheckbox={insertCheckbox}
+                lineSpacing={lineSpacing}
+                wordSpacing={wordSpacing}
+                letterSpacing={letterSpacing}
             />
         </>
 

@@ -5,9 +5,11 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { FONTS } from "../utils/fonts";
 import LangList from "../components/lang-list";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AdsContext, LangContext } from "../utils/Context";
-import Slider from '@react-native-community/slider';
+import LineSpacingSlider from "./lineSpacingSlider";
+import LetterSpacingSlider from "./letterSpacingSlider";
+import WordSpacingSlider from "./wordSpacingSlider";
 
 export default function Settings({
     removeAll,
@@ -18,6 +20,12 @@ export default function Settings({
     updateLineSpacing,
     setLineSpacing,
     lineSpacing,
+    letterSpacing,
+    updateLetterSpacing,
+    setLetterSpacing,
+    wordSpacing,
+    updateWordSpacing,
+    setWordSpacing
 }) {
 
     const { language } = useContext(LangContext);
@@ -46,16 +54,16 @@ export default function Settings({
                         />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black]}>Cambiar interlineado</Text>
-                        <Slider
-                            style={{ width: 200, height: 40 }}
-                            minimumValue={0.5}
-                            maximumValue={1}
-                            minimumTrackTintColor="#FFFFFF"
-                            maximumTrackTintColor="#000000"
-                            step={0.5}
-                            
-                        />
+                        <Text style={[ui.text, ui.black, { width: 165 }]}>Espacio entre párrafos</Text>
+                        <LineSpacingSlider {...{ lineSpacing, updateLineSpacing, setLineSpacing }} />
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={[ui.text, ui.black, { width: 165 }]}>Espacio entre letras</Text>
+                        <LetterSpacingSlider {...{ letterSpacing, updateLetterSpacing, setLetterSpacing }} />
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={[ui.text, ui.black, { width: 165 }]}>Espacio entre palabras</Text>
+                        <WordSpacingSlider {...{ wordSpacing, updateWordSpacing, setWordSpacing }} />
                     </View>
 
                     <Text style={[ui.text, ui.black]}>{language.t("_settingsTypo")}</Text>

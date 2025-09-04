@@ -10,6 +10,8 @@ export const storage = {
     COLOR: "color",
     MIGRATED: "migration",
     LINE_SPACING: "line_spacing",
+    LETTER_SPACING: "letter_spacing",
+    WORD_SPACING: "word_spacing",
 }
 
 export async function save({ note, noteSavedId }) {

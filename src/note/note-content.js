@@ -2,6 +2,7 @@ import { RichEditor } from "react-native-pell-rich-editor";
 import SketchPad from "../components/sketchpad";
 import GridBackground from "../components/grid";
 import { useIsFocused } from '@react-navigation/native';
+import { useEffect } from "react";
 
 export default function NoteContent({
     note,
@@ -16,6 +17,9 @@ export default function NoteContent({
     handleHeightChange,
     editorHeight,
     windowHeight,
+    lineSpacing,
+    wordSpacing,
+    letterSpacing
 }) {
     const isFocused = useIsFocused();
     return (
@@ -49,7 +53,7 @@ export default function NoteContent({
                         }
                     `,
                     backgroundColor: "transparent",
-                    contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};`,
+                    contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};line-height: ${lineSpacing};word-spacing: ${wordSpacing}px;letter-spacing: ${letterSpacing}px;`,
                     color: color,
                     cssText: `
                         ${font.fontFace}
