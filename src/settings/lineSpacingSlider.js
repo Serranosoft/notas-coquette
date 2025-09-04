@@ -24,9 +24,9 @@ export default function LineSpacingSlider({ lineSpacing, updateLineSpacing, setL
             lowerLimit={0.6}
             upperLimit={2.4}
             value={lineSpacing}
-            onValueChange={(v) => updateLineSpacing(Number(v.toFixed(1)))}
+            onValueChange={(v) => setLineSpacing(Number(v.toFixed(1)))}
             StepMarker={renderStepMarker}
-            onSlidingComplete={(v) => setLineSpacing(Number(v.toFixed(1)))}
+            onSlidingComplete={(v) => updateLineSpacing(Number(v.toFixed(1)))}
 
         />
     )

@@ -24,9 +24,9 @@ export default function LetterSpacingSlider({ letterSpacing, updateLetterSpacing
             lowerLimit={-0.75}
             upperLimit={2.25}
             value={letterSpacing}
-            onValueChange={(v) => updateLetterSpacing(v)}
+            onValueChange={(v) => setLetterSpacing(v)}
             StepMarker={renderStepMarker}
-            onSlidingComplete={(v) => setLetterSpacing(v)}
+            onSlidingComplete={(v) => updateLetterSpacing(v)}
 
         />
     )

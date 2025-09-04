@@ -24,9 +24,9 @@ export default function WordSpacingSlider({ wordSpacing, updateWordSpacing, setW
             lowerLimit={-3}
             upperLimit={3}
             value={wordSpacing}
-            onValueChange={(v) => updateWordSpacing(v)}
+            onValueChange={(v) => setWordSpacing(v)}
             StepMarker={renderStepMarker}
-            onSlidingComplete={(v) => setWordSpacing(v)}
+            onSlidingComplete={(v) => updateWordSpacing(v)}
 
         />
     )
