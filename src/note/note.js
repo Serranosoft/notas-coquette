@@ -21,8 +21,6 @@ function Note(
         handleFocusContent,
         scrollRef,
         font,
-        color,
-        setColor,
         editorHeight,
         drawing,
         setDrawing,
@@ -37,6 +35,8 @@ function Note(
         wordSpacing,
         letterSpacing,
         isReady,
+        changeColor,
+        changeHiliteColor
     }) {
 
     const windowHeight = Dimensions.get('window').height;
@@ -71,7 +71,6 @@ function Note(
                                     font={font}
                                     drawing={drawing}
                                     setDrawing={setDrawing}
-                                    color={color}
                                     readingMode={readingMode}
                                     sketchPadRef={sketchPadRef}
                                     richText={richText}
@@ -98,9 +97,10 @@ function Note(
                                         insertCheckbox,
                                         setSticker,
                                         setSeparator,
-                                        setColor,
                                         setFontSize,
-                                        fontSize
+                                        fontSize,
+                                        changeColor,
+                                        changeHiliteColor
                                     }
                                 }
                                 />

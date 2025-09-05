@@ -1,8 +1,8 @@
 import { Image, View } from "react-native"
-import Svg, { G, Path } from "react-native-svg"
+import Svg, { G, Path, Rect } from "react-native-svg"
 
 export const boldLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -18,7 +18,7 @@ export const boldLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const italicLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -34,7 +34,7 @@ export const italicLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const underlineLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ export const underlineLabel = ({ tintColor }) =>
             <Path d="M7 5v5a5 5 0 0010 0V5M5 19h14" />
         </Svg></View>
 export const alignLeftLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ export const alignLeftLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const alignCenterLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -81,7 +81,7 @@ export const alignCenterLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const alignRightLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -97,7 +97,7 @@ export const alignRightLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const alignFullLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             fill="none"
             height={24}
@@ -111,7 +111,7 @@ export const alignFullLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const listLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -127,13 +127,13 @@ export const listLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const orderedListLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg width={20} height={20} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <Path d="M3.25 9h-1.5a.75.75 0 000 1.5h1.5a.25.25 0 01.25.25V11a.25.25 0 01-.25.25h-.5C1.785 11.25 1 12.035 1 13v1.25c0 .414.336.75.75.75h2.5a.75.75 0 000-1.5H2.5V13a.25.25 0 01.25-.25h.5C4.215 12.75 5 11.965 5 11v-.25C5 9.785 4.215 9 3.25 9zM3.25 17h-1.5a.75.75 0 000 1.5h1.5a.25.25 0 01.25.25V19a.25.25 0 01-.25.25h-1a.75.75 0 000 1.5h1a.25.25 0 01.25.25v.25a.25.25 0 01-.25.25h-1.5a.75.75 0 000 1.5h1.5C4.215 23 5 22.215 5 21.25V21c0-.372-.119-.716-.318-1 .199-.284.318-.628.318-1v-.25C5 17.785 4.215 17 3.25 17zM1.75 2.5h.75v3.75a.75.75 0 001.5 0v-4.5A.75.75 0 003.25 1h-1.5a.75.75 0 000 1.5zM8 5h15a1 1 0 100-2H8a1 1 0 100 2zM23 11H8a1 1 0 100 2h15a1 1 0 100-2zM23 19H8a1 1 0 100 2h15a1 1 0 100-2z" />
+            <Path d="M3.25 9h-1.5a.75.75 0 000 1.5h1.5a.25.25 0 01.25.25V11a.25.25 0 01-.25.25h-.5C1.785 11.25 1 12.035 1 13v1.25c0 .414.336.75.75.75h2.5a.75.75 0 000-1.5H2.5V13a.25.25 0 01.25-.25h.5C4.215 12.75 5 11.965 5 11v-.25C5 9.785 4.215 9 3.25 9zM3.25 17h-1.5a.75.75 0 000 1.5h1.5a.25.25 0 01.25.25V19a.25.25 0 01-.25.25h-1a.75.75 0 000 1.5h1a.25.25 0 01.25.25v.25a.25.25 0 01-.25.25h-1.5a.75.75 0 000 1.5h1.5C4.215 23 5 22.215 5 21.25V21c0-.372-.119-.716-.318-1 .199-.284.318-.628.318-1v-.25C5 17.785 4.215 17 3.25 17zM1.75 2.5h.75v3.75a.75.75 0 001.5 0v-4.5A.75.75 0 003.25 1h-1.5a.75.75 0 000 1.5zM8 5h15a1 1 0 100-2H8a1 1 0 100 2zM23 11H8a1 1 0 100 2h15a1 1 0 100-2zM23 19H8a1 1 0 100 2h15a1 1 0 100-2z" />
         </Svg>
     </View>
 export const separatorsLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -149,7 +149,7 @@ export const separatorsLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const fontSizeLabel = (active) =>
-    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8 }}>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8, padding: 2 }}>
         <Svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -179,11 +179,11 @@ export const checkboxLabel = () =>
     </View>
 
 export const colorsLabel = (active) =>
-    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8 }}>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8, padding: 2 }}>
         <Image style={{ width: 20, height: 20 }} source={require("../../assets/text-color.png")} />
     </View>
 export const stickersLabel = (active) =>
-    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8 }}>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8, padding: 2 }}>
         <Svg
             width={24}
             height={24}
@@ -200,7 +200,7 @@ export const stickersLabel = (active) =>
         </Svg>
     </View>
 export const strikeThroughLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             fill="none"
             height={24}
@@ -217,7 +217,7 @@ export const strikeThroughLabel = ({ tintColor }) =>
         </Svg>
     </View>
 export const codeLabel = ({ tintColor }) =>
-    <View style={{ backgroundColor: tintColor, borderRadius: 8 }}>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
         <Svg
             width={24}
             height={24}
@@ -226,6 +226,46 @@ export const codeLabel = ({ tintColor }) =>
         >
             <Path d="M19 2H5C3.34 2 2 3.68 2 5.75v12.5C2 20.32 3.34 22 5 22h10.59c.27 0 .52-.13.71-.37l5.41-6.77c.19-.23.29-.55.29-.88V5.75C22 3.68 20.66 2 19 2zM5 20.5c-.8 0-1.5-1.05-1.5-2.25V5.75c0-1.2.7-2.25 1.5-2.25h14c.8 0 1.5 1.05 1.5 2.25V13H17c-1.38 0-2.5 1.23-2.5 2.75v4.75zm11-.9v-3.85c0-.69.45-1.25 1-1.25h3.08z" />
         </Svg>
+    </View>
+export const foreColorLabel = (active) =>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8, padding: 2 }}>
+        <Svg
+            fill="none"
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <Path
+                d="M15.246 14H8.754l-1.6 4H5l6-15h2l6 15h-2.154zm-.8-2L12 5.885 9.554 12zM3 20h18v2H3z"
+                fill="#000"
+            />
+        </Svg>
+    </View>
+export const hiliteColorLabel = (active) =>
+    <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8, padding: 2 }}>
+         <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      enableBackground="new 0 0 512 512"
+    >
+      <Rect
+        width={24}
+        height={24}
+        rx={4.8}
+        ry={4.8}
+        fill="#cc527b6e"
+        transform="matrix(.95 0 0 .95 .6 .6)"
+      />
+      <Path
+        fill="#fff"
+        d="M15.246 14H8.754l-1.6 4H5l6-15h2l6 15h-2.154zm-.8-2L12 5.885 9.554 12zM3 20h18v2H3z"
+        data-original="#000000"
+        transform="matrix(.95 0 0 .95 .6 .625)"
+      />
+    </Svg>
     </View>
 
 export const undoLabel = () => <View><Image style={common} source={require("../../assets/undo.png")} /></View>

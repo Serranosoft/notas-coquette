@@ -102,7 +102,6 @@ export const editor = {
         backgroundColor: colors.light,
     },
     header: {
-        // height: 32,
         alignItems: "flex-start",
         paddingHorizontal: 8,
         zIndex: 99,
@@ -113,7 +112,7 @@ export const editor = {
         width: "100%",
         alignSelf: "center",
         justifyContent: "center",
-        paddingVertical: 12,
+        paddingVertical: 10,
         borderRadius: 100,
         shadowColor: "#000",
         shadowOffset: {

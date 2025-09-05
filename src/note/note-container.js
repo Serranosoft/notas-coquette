@@ -28,7 +28,6 @@ export default function NoteContainer() {
         separator: null,
         readingMode: false,
         font: null,
-        color: null,
         autoSave: true,
         letterSpacing: null,
         wordSpacing: null,
@@ -44,7 +43,7 @@ export default function NoteContainer() {
 
     const [isReady, setIsReady] = useState(false);
 
-    const { note, fontSize, separator, readingMode, font, color, autoSave,
+    const { note, fontSize, separator, readingMode, font, autoSave,
         noteSavedId, focused, editorHeight, openStickers, sticker,
         activeOption, drawing, letterSpacing, lineSpacing, wordSpacing } = noteState;
 
@@ -70,13 +69,12 @@ export default function NoteContainer() {
             if (note) {
                 noteData = note;
             } else {
-                noteData = { id: uuid.v4(), content: "", date: Date.now(), pwd: "", color: "#000" };
+                noteData = { id: uuid.v4(), content: "", date: Date.now(), pwd: "" };
             }
 
             setNoteState(prev => ({
                 ...prev,
                 note: noteData,
-                color: noteData.color,
                 noteSavedId: noteData.id
             }));
         }
@@ -182,12 +180,6 @@ export default function NoteContainer() {
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
     }, [fontSize])
-    
-    useEffect(() => {
-        if (color) {
-            setNoteState(prev => ({ ...prev, note: {...note, color: color }}));
-        }
-    }, [color])
 
     useEffect(() => {
         richText.current?.insertText(separator);
@@ -228,13 +220,13 @@ export default function NoteContainer() {
     };
 
     const insertCheckbox = () => richText.current.insertHTML(`<input type="checkbox" />`)
-    
+    const changeColor = (color) => richText.current.setForeColor(color);
+    const changeHiliteColor = (color) => richText.current.setHiliteColor(color);
 
     // Setters para actualizar los valores del estado de la nota
     const setDrawing = useCallback((d) => setNoteState(prev => ({ ...prev, drawing: d })), []);
     const setFontSize = useCallback((fs) => setNoteState(prev => ({ ...prev, fontSize: fs })), []);
     const setSeparator = useCallback((s) => setNoteState(prev => ({ ...prev, separator: s })), []);
-    const setColor = useCallback((c) => setNoteState(prev => ({ ...prev, color: c })), []);
     const setEditorHeight = useCallback((h) => setNoteState(prev => ({ ...prev, editorHeight: h })), []);
     const setOpenStickers = useCallback((os) => setNoteState(prev => ({ ...prev, openStickers: os })), []);
     const setSticker = useCallback((s) => setNoteState(prev => ({ ...prev, sticker: s })), []);
@@ -273,8 +265,8 @@ export default function NoteContainer() {
                 handleFocusContent={handleFocusContent}
                 scrollRef={scrollRef}
                 font={font}
-                color={color}
-                setColor={setColor}
+                changeColor={changeColor}
+                changeHiliteColor={changeHiliteColor}
                 editorHeight={editorHeight}
                 setEditorHeight={setEditorHeight}
                 drawing={drawing}

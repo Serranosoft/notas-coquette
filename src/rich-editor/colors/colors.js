@@ -3,10 +3,10 @@ import { editor } from "../../utils/styles";
 import ColorPicker, { HueSlider, LuminanceSlider } from "reanimated-color-picker";
 import { runOnJS } from "react-native-reanimated";
 
-export default function Colors({ setColor }) {
+export default function Colors({ changeColor, changeHiliteColor, isHiliteColor }) {
 
     async function handleColor(color) {
-        setColor(color);
+        isHiliteColor ? changeHiliteColor(color) : changeColor(color);
     }
 
     const onSelectColor = ({ hex }) => {

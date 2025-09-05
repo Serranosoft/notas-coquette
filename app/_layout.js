@@ -57,7 +57,7 @@ export default function Layout() {
                 notes = JSON.parse(notes);
                 // Para cada nota, crear un nuevo registro en sqlite.
                 notes.forEach(async (note) => {
-                    await addNote(note.id, note.content, note.pwd, note.color, note.date);
+                    await addNote(note.id, note.content, note.pwd, note.date);
                 })
                 // Notificar que ya se ha realizado la migración para no volver a repetirla.
                 await AsyncStorage.setItem(storage.MIGRATED, "true");

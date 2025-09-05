@@ -7,7 +7,6 @@ export const storage = {
     FONT: "font",
     AUTOSAVE: "autosave",
     FIRST_LAUNCH_APP: "FIRST_LAUNCH_APP",
-    COLOR: "color",
     MIGRATED: "migration",
     LINE_SPACING: "line_spacing",
     LETTER_SPACING: "letter_spacing",
@@ -27,19 +26,17 @@ export async function save({ note, noteSavedId }) {
             if (note.hasOwnProperty("pwd") && oldNote.pwd !== note.pwd) {
                 differences++;
             }
-            if (oldNote.hasOwnProperty("color") && note.hasOwnProperty("color") && oldNote.color !== note.color) {
-                differences++;
-            }
+            
             if (note.hasOwnProperty("favorite") && oldNote.favorite !== note.favorite) {
                 differences++;
             }
             if (differences > 0) {
-                editNote(note.id, note.content, note.pwd, note.color, note.favorite, note.date)
+                editNote(note.id, note.content, note.pwd, note.favorite, note.date)
             } else {
                 return false;
             }
         } else {
-            addNote(note.id, note.content, note.pwd, note.color, note.date);
+            addNote(note.id, note.content, note.pwd, note.date);
         }
 
         return true;

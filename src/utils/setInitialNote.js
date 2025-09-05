@@ -59,11 +59,10 @@ style="">Cambia de <b>color</b></font></li><li style="text-align: left;"><font s
             id: id,
             content: content,
             date: new Date().getTime(),
-            color: "#000",
             pwd: null
         }
 
-        await addNote(id, newNote.content, newNote.pwd, newNote.color, newNote.date)
+        await addNote(id, newNote.content, newNote.pwd, newNote.date)
         await AsyncStorage.setItem(storage.FIRST_LAUNCH_APP, "true");
     }
 }

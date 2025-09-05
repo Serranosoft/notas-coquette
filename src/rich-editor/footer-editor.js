@@ -1,11 +1,12 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
-import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, italicLabel, listLabel, orderedListLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
+import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, foreColorLabel, hiliteColorLabel, italicLabel, listLabel, orderedListLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
 import FontSizeContainer from "./font-size/font-size-container";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
+import { useEffect } from "react";
 
 export default function FooterEditor({
     richText,
@@ -15,9 +16,10 @@ export default function FooterEditor({
     setActiveOption,
     insertCheckbox,
     setSticker,
-    setColor,
     setFontSize,
     fontSize,
+    changeColor,
+    changeHiliteColor
 }) {
 
     const height = useSharedValue(0);
@@ -70,9 +72,11 @@ export default function FooterEditor({
                         actions.setItalic,
                         actions.setUnderline,
                         actions.setStrikethrough,
+                        actions.foreColor,
                         actions.code,
                         "checkbox",
                         actions.insertImage,
+                        actions.hiliteColor,
                         actions.alignLeft,
                         actions.alignCenter,
                         actions.alignRight,
@@ -80,11 +84,13 @@ export default function FooterEditor({
                         actions.insertOrderedList,
                         actions.insertBulletsList,
                         "fontSize",
-                        "colors",
                         "separator"
                     ]}
+                    
                     iconSize={30}
                     iconMap={{
+                        [actions.hiliteColor]: () => hiliteColorLabel(activeOption === "hiliteColors" ? true : false),
+                        [actions.foreColor]: () => foreColorLabel(activeOption === "colors" ? true : false),
                         [actions.setBold]: boldLabel,
                         [actions.setItalic]: italicLabel,
                         [actions.code]: codeLabel,
@@ -98,14 +104,14 @@ export default function FooterEditor({
                         [actions.insertBulletsList]: listLabel,
                         [actions.insertOrderedList]: orderedListLabel,
                         fontSize: () => fontSizeLabel(activeOption === "fontSize" ? true : false),
-                        colors: () => colorsLabel(activeOption === "colors" ? true : false),
                         separator: () => separatorsLabel(activeOption === "separators" ? true : false),
                         checkbox: checkboxLabel,
                     }}
                     fontSize={() => handleOption(activeOption === "fontSize" ? null : "fontSize")}
                     separator={() => handleOption(activeOption === "separators" ? null : "separators")}
-                    colors={() => handleOption(activeOption === "colors" ? null : "colors")}
+                    foreColor={() => handleOption(activeOption === "colors" ? null : "colors")}
                     checkbox={() => insertCheckbox()}
+                    hiliteColor={() => handleOption(activeOption === "hiliteColors" ? null : "hiliteColors")}
                 />
 
                 <View style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100, borderTopLeftRadius: 16, borderBottomLeftRadius: 16, }]}>
@@ -121,8 +127,12 @@ export default function FooterEditor({
                             {activeOption === "stickers" &&
                                 <Stickers setSticker={setSticker} />
                             }
-                            {activeOption === "colors" &&
-                                <Colors setColor={setColor} />
+                            {(activeOption === "colors" || activeOption === "hiliteColors") &&
+                                <Colors 
+                                    changeColor={changeColor} 
+                                    changeHiliteColor={changeHiliteColor}
+                                    isHiliteColor={activeOption === "hiliteColors" ? true : false}
+                                />
                             }
                             {activeOption === "fontSize" &&
                                 <FontSizeContainer setFontSize={setFontSize} fontSize={fontSize} />

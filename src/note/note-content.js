@@ -9,7 +9,6 @@ export default function NoteContent({
     font,
     drawing,
     setDrawing,
-    color,
     readingMode,
     sketchPadRef,
     richText,
@@ -54,7 +53,6 @@ export default function NoteContent({
                     `,
                     backgroundColor: "transparent",
                     contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};line-height: ${lineSpacing};word-spacing: ${wordSpacing}px;letter-spacing: ${letterSpacing}px;`,
-                    color: color,
                     cssText: `
                         ${font.fontFace}
                         pre, pre code {
