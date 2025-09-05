@@ -23,7 +23,9 @@ export default function LangList() {
         { title: language.t("_langListRussian"), acronym: "ru" },
         { title: language.t("_langListPolish"), acronym: "pl" },
         { title: language.t("_langListVietnamese"), acronym: "vi" },
-        { title: language.t("_langListTurkish"), acronym: "tr" }
+        { title: language.t("_langListTurkish"), acronym: "tr" },
+        { title: language.t("_langListItalian"), acronym: "it" },
+        { title: language.t("_langListFarsi"), acronym: "fa" }
     ]
 
     async function updateLanguage(acronym) {

@@ -35,7 +35,9 @@
             "ru": "./languages/russian.json",
             "pl": "./languages/polish.json",
             "vi": "./languages/vietnamese.json",
-            "tr": "./languages/turkish.json"
+            "tr": "./languages/turkish.json",
+            "it": "./languages/italian.json",
+            "fa": "./languages/farsi.json"
         },
         "android": {
             "adaptiveIcon": {
