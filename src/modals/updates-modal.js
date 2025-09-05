@@ -10,14 +10,14 @@ const VERSION_MODAL = 'v3';
 export default function UpdatesModal() {
     const [visible, setVisible] = useState(false);
     const { language } = useContext(LangContext);
-    
+
 
     useEffect(() => {
         const checkIfSeen = async () => {
             const viewed = await AsyncStorage.getItem('modalUpdatesVersion');
-            if (viewed !== VERSION_MODAL) {
+            //if (viewed !== VERSION_MODAL) {
                 setVisible(true);
-            }
+            //}
         };
         checkIfSeen();
     }, []);
@@ -31,13 +31,13 @@ export default function UpdatesModal() {
         <Modal visible={visible} transparent animationType="slide">
             <View style={styles.overlay}>
                 <View style={styles.modal}>
-                    <Text style={[ui.h3, { color: "#000"}]}>🆕 {language.t("_updatesModalNews")}</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_6")}</Text>
+                    <Text style={[ui.h3, { color: "#000" }]}>🆕 {language.t("_updatesModalNews")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_1")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_2")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_3")}</Text>
                     <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_4")}</Text>
-                    <Text style={[ui.text, { color: "#000" }]}>{language.t("_updatesModalV1_5")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_5")}</Text>
+                    <Text style={[ui.text, { color: "#000" }]}>• {language.t("_updatesModalV1_6")}</Text>
                     <Button text={"Cerrar"} onClick={closeModal} />
                 </View>
             </View>

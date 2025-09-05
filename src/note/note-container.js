@@ -171,9 +171,9 @@ export default function NoteContainer() {
         
         const lineSpacing = await AsyncStorage.getItem(storage.LINE_SPACING) || 1.2;
         if (lineSpacing) setNoteState(prev => ({ ...prev, lineSpacing: lineSpacing }));
-        const wordSpacing = await AsyncStorage.getItem(storage.WORD_SPACING) || 0;
+        const wordSpacing = await AsyncStorage.getItem(storage.WORD_SPACING) || "0";
         if (wordSpacing) setNoteState(prev => ({ ...prev, wordSpacing: wordSpacing }));
-        const letterSpacing = await AsyncStorage.getItem(storage.LETTER_SPACING) || 0;
+        const letterSpacing = await AsyncStorage.getItem(storage.LETTER_SPACING) || "0";
         if (letterSpacing) setNoteState(prev => ({ ...prev, letterSpacing: letterSpacing }));
     }
 

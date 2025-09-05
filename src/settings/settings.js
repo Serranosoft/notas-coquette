@@ -54,15 +54,15 @@ export default function Settings({
                         />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 165 }]}>Espacio entre párrafos</Text>
+                        <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsLineSpacing")}</Text>
                         <LineSpacingSlider {...{ lineSpacing, updateLineSpacing, setLineSpacing }} />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 165 }]}>Espacio entre letras</Text>
+                        <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsLetterSpacing")}</Text>
                         <LetterSpacingSlider {...{ letterSpacing, updateLetterSpacing, setLetterSpacing }} />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 165 }]}>Espacio entre palabras</Text>
+                        <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsWordSpacing")}</Text>
                         <WordSpacingSlider {...{ wordSpacing, updateWordSpacing, setWordSpacing }} />
                     </View>
 

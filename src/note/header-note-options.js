@@ -36,7 +36,7 @@ export default function HeaderNoteOptions({ isFavorite, showMenu, updateReadingM
             <MenuItem onPress={handleFavorite}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/star.png")} />
-                    <Text style={[ui.text, ui.black]}>{isFavorite ? "Eliminar de favoritos" : "Añadir a favoritos"}</Text>
+                    <Text style={[ui.text, ui.black]}>{isFavorite ? language.t("_headerNoteDropdownOption7") : language.t("_headerNoteDropdownOption8")}</Text>
                 </View>
             </MenuItem>
             {

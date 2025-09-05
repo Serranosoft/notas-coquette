@@ -81,27 +81,27 @@ export default function SettingsContainer() {
     async function updateLineSpacing(lineSpacing) {
         await AsyncStorage.setItem(storage.LINE_SPACING, lineSpacing+"");
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset(`Se ha actualizado el interlineado de tus notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(language.t("_toastLineSpacingUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert(`Se ha actualizado el interlineado de tus notas`);
+            Alert.alert(language.t("_toastLineSpacingUpdated"));
         }
     }
 
     async function updateLetterSpacing(letterSpacing) {
         await AsyncStorage.setItem(storage.LETTER_SPACING, letterSpacing+"");
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset(`Se ha actualizado el espacio entre letras de tus notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(language.t("_toastLetterSpacingUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert(`Se ha actualizado el interlineado de tus notas`);
+            Alert.alert(language.t("_toastLetterSpacingUpdated"));
         }
     }
 
     async function updateWordSpacing(wordSpacing) {
         await AsyncStorage.setItem(storage.WORD_SPACING, wordSpacing+"");
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset(`Se ha actualizado el espacio entre palabras de tus notas`, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(language.t("_toastWordSpacingUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert(`Se ha actualizado el interlineado de tus notas`);
+            Alert.alert(language.t("_toastWordSpacingUpdated"));
         }
     }
 
