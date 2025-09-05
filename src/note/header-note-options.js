@@ -6,7 +6,7 @@ import { components, header, ui } from "../utils/styles";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 
-export default function HeaderNoteOptions({ isFavorite, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked, handleFavorite }) {
+export default function HeaderNoteOptions({ isFavorite, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked, handleFavorite, setIsReady }) {
 
     const { language } = useContext(LangContext);
 
@@ -59,6 +59,7 @@ export default function HeaderNoteOptions({ isFavorite, showMenu, updateReadingM
             <MenuItem onPress={() => {
                 router.push({ pathname: "settings" });
                 hideMenu();
+                setIsReady(false);
             }}>
                 <View style={components.row}>
                     <Image style={header.img} source={require("../../assets/settings.png")} />

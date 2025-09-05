@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 import HeaderLeftEditor from "../rich-editor/header-left-editor";
 
-export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, setReadingMode, readingMode, noteSavedId, richText, activeOption, setActiveOption }) {
+export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, setReadingMode, readingMode, noteSavedId, richText, activeOption, setActiveOption, setIsReady }) {
 
     const { language } = useContext(LangContext);
     
@@ -32,7 +32,7 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
                 <TouchableOpacity style={{ paddingLeft: 4 }} onPress={saveNote}>
                     <Image style={[header.img]} source={require("../../assets/save.png")}></Image>
                 </TouchableOpacity>
-                <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId }} />
+                <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId, setIsReady }} />
             </View>
 
         </View>

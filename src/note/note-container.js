@@ -112,7 +112,7 @@ export default function NoteContainer() {
 
     useEffect(() => {
         if (note && lineSpacing && letterSpacing && wordSpacing && font) setIsReady(true);
-    }, [note, lineSpacing, letterSpacing, wordSpacing])
+    }, [note, lineSpacing, letterSpacing, wordSpacing, font])
 
     async function back() {
         if (autoSave) {
@@ -237,6 +237,7 @@ export default function NoteContainer() {
             <Stack.Screen options={{
                 header: () => (
                     <HeaderNoteContainer
+                        setIsReady={setIsReady}
                         drawing={drawing}
                         setDrawing={setDrawing}
                         note={note}

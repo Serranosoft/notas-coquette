@@ -4,7 +4,7 @@ import HeaderNoteOptions from "./header-note-options";
 import LockScreenModal from "../modals/lock-screen-modal";
 import { deleteNoteFromId } from "../utils/sqlite";
 
-export default function HeaderNoteOptionsContainer({ note, setReadingMode, readingMode, noteSavedId }) {
+export default function HeaderNoteOptionsContainer({ note, setReadingMode, readingMode, noteSavedId, setIsReady }) {
 
     // Estados para abrir el menu
     const [menuVisible, setMenuVisible] = useState(false);
@@ -81,7 +81,7 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
 
     return (
         <>
-            <HeaderNoteOptions {...{ isFavorite, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked, handleFavorite }} />
+            <HeaderNoteOptions {...{ isFavorite, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked, handleFavorite, setIsReady }} />
             <LockScreenModal {...{ note, isUnlock: false, lockModal, setLockModal, pwd, setPwd }} />
         </>
     )
