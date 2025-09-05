@@ -14,3 +14,7 @@
 ## Crashes
 
 - Ir desde una nota a settings y volver atrás provoca crash por variable font a null y es que parece ser que el estado isReady se mantiene como true aunque haya cambiado y debe provocar un setIsReady a false si se desplaza de la nota.
+
+## Errores
+
+- En algunos casos, al acceder a una nota se me guarda en favoritos
