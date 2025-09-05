@@ -15,9 +15,9 @@ export default function UpdatesModal() {
     useEffect(() => {
         const checkIfSeen = async () => {
             const viewed = await AsyncStorage.getItem('modalUpdatesVersion');
-            //if (viewed !== VERSION_MODAL) {
+            if (viewed !== VERSION_MODAL) {
                 setVisible(true);
-            //}
+            }
         };
         checkIfSeen();
     }, []);
