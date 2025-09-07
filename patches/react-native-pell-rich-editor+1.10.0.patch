@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-pell-rich-editor/src/editor.js b/node_modules/react-native-pell-rich-editor/src/editor.js
-index 6559109..c98bd55 100644
+index 6559109..4f58f27 100644
 --- a/node_modules/react-native-pell-rich-editor/src/editor.js
 +++ b/node_modules/react-native-pell-rich-editor/src/editor.js
 @@ -1,6 +1,6 @@
@@ -28,7 +28,7 @@ index 6559109..c98bd55 100644
 +            font-size: 18px; 
 +            word-break: break-all; 
 +            word-wrap: break-word;
-+            overflow-x: auto;
++            overflow-x: hidden;
 +            font-family: ancizar;
 +            position: relative;
 +            box-shadow: 0 8px 20px rgba(0,0,0,.08);
@@ -36,7 +36,6 @@ index 6559109..c98bd55 100644
 +            background-color: #fff;
 +        }
 +        pre img {
-+            
 +            overflow: hidden;
 +        }
 +        pre::after {
@@ -52,6 +51,7 @@ index 6559109..c98bd55 100644
 +            top: 0px;
 +            right: 0px;
 +            overflow: hidden;
++            opacity: 0.75;
 +        }
 +        pre code {display: block;font-size: inherit;white-space: pre-wrap;color: inherit;font-family: ancizar}
 +        ol {
