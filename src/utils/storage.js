@@ -13,8 +13,8 @@ export const storage = {
     WORD_SPACING: "word_spacing",
 }
 
-export async function save({ note, noteSavedId }) {
-    if (note.content.length > 0) {
+export async function save({ note, noteSavedId, hasDraws }) {
+    if (note.content.length > 0 || hasDraws) {
         const oldNote = await getNoteFromId(noteSavedId);
         // Si existe una oldNote, debo saber si debo actualizarla o no.
         if (oldNote) {

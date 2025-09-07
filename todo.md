@@ -9,7 +9,6 @@
 ## Errores
 
 - En algunos casos, al acceder a una nota se me guarda en favoritos
-- Si no escribes nada en una nota, pero pintas, la nota no se guarda
 - No aparece el toast de Nota guardada (_toastNoteSaved)
 - En el post-it hay scroll horizontal en cuánto escribes una palabra
 - La bola de selección de color de texto se corta en el valor más alto

@@ -129,7 +129,7 @@ export default function NoteContainer() {
             drawing: { ...prev.drawing, isDrawing: false }
         }));
 
-        const isSaved = await save({ ...{ note, noteSavedId } });
+        const isSaved = await save({ ...{ note, noteSavedId, hasDraws: sketchPadRef.current.hasDraws() } });
         sketchPadRef.current.save(); // Guardar los paths
 
         isSaved && onSave();

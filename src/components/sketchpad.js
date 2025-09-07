@@ -31,6 +31,14 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
         return result
     }
 
+    // Función auxiliar para saber si hay algún dibujo realizado
+    function hasDraws() {
+        if (paths.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
     // ---------------------------
     // Helpers
     // ---------------------------
@@ -243,7 +251,7 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
         }
     };
 
-    useImperativeHandle(ref, () => ({ save }));
+    useImperativeHandle(ref, () => ({ save, hasDraws }));
 
     // ---------------------------
     // Render
