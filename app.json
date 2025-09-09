@@ -2,7 +2,7 @@
     "expo": {
         "name": "Notas Coquette",
         "slug": "notas-coquette",
-        "version": "2.0.1",
+        "version": "2.1.0",
         "orientation": "portrait",
         "icon": "./assets/icon-notes.png",
         "userInterfaceStyle": "light",
@@ -44,7 +44,7 @@
                 "foregroundImage": "./assets/icon-notes.png",
                 "backgroundColor": "#FACCD6"
             },
-            "versionCode": 24,
+            "versionCode": 25,
             "package": "com.paulaymanu113.notascoquette"
         },
         "web": {
