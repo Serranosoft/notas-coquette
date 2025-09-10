@@ -244,28 +244,45 @@ export const foreColorLabel = (active) =>
     </View>
 export const hiliteColorLabel = (active) =>
     <View style={{ backgroundColor: active ? "#fff" : "transparent", borderRadius: 8, padding: 2 }}>
-         <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      enableBackground="new 0 0 512 512"
-    >
-      <Rect
-        width={24}
-        height={24}
-        rx={4.8}
-        ry={4.8}
-        fill="#cc527b6e"
-        transform="matrix(.95 0 0 .95 .6 .6)"
-      />
-      <Path
-        fill="#fff"
-        d="M15.246 14H8.754l-1.6 4H5l6-15h2l6 15h-2.154zm-.8-2L12 5.885 9.554 12zM3 20h18v2H3z"
-        data-original="#000000"
-        transform="matrix(.95 0 0 .95 .6 .625)"
-      />
-    </Svg>
+        <Svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={24}
+            height={24}
+            viewBox="0 0 24 24"
+            enableBackground="new 0 0 512 512"
+        >
+            <Rect
+                width={24}
+                height={24}
+                rx={4.8}
+                ry={4.8}
+                fill="#cc527b6e"
+                transform="matrix(.95 0 0 .95 .6 .6)"
+            />
+            <Path
+                fill="#fff"
+                d="M15.246 14H8.754l-1.6 4H5l6-15h2l6 15h-2.154zm-.8-2L12 5.885 9.554 12zM3 20h18v2H3z"
+                data-original="#000000"
+                transform="matrix(.95 0 0 .95 .6 .625)"
+            />
+        </Svg>
+    </View>
+export const removeFormatLabel = ({ tintColor }) =>
+    <View style={{ backgroundColor: tintColor, borderRadius: 8, padding: 2 }}>
+        <Svg
+            fill="none"
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <Path
+                clipRule="evenodd"
+                d="M5 4a1 1 0 011-1h12a1 1 0 110 2h-5v15a1 1 0 11-2 0V5H6a1 1 0 01-1-1zm10.293 11.293a1 1 0 011.414 0L18 16.586l1.293-1.293a1 1 0 011.414 1.414L19.414 18l1.293 1.293a1 1 0 01-1.414 1.414L18 19.414l-1.293 1.293a1 1 0 01-1.414-1.414L16.586 18l-1.293-1.293a1 1 0 010-1.414z"
+                fill="#000"
+                fillRule="evenodd"
+            />
+        </Svg>
     </View>
 
 export const undoLabel = () => <View><Image style={common} source={require("../../assets/undo.png")} /></View>

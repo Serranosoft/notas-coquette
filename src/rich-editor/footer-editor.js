@@ -1,12 +1,11 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding } from "../utils/styles";
-import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, foreColorLabel, hiliteColorLabel, italicLabel, listLabel, orderedListLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
+import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, foreColorLabel, hiliteColorLabel, italicLabel, listLabel, orderedListLabel, removeFormatLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
 import FontSizeContainer from "./font-size/font-size-container";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
-import { useEffect } from "react";
 
 export default function FooterEditor({
     richText,
@@ -77,6 +76,7 @@ export default function FooterEditor({
                         "checkbox",
                         actions.insertImage,
                         actions.hiliteColor,
+                        actions.removeFormat,
                         actions.alignLeft,
                         actions.alignCenter,
                         actions.alignRight,
@@ -89,6 +89,7 @@ export default function FooterEditor({
                     
                     iconSize={30}
                     iconMap={{
+                        [actions.removeFormat]: removeFormatLabel,
                         [actions.hiliteColor]: () => hiliteColorLabel(activeOption === "hiliteColors" ? true : false),
                         [actions.foreColor]: () => foreColorLabel(activeOption === "colors" ? true : false),
                         [actions.setBold]: boldLabel,
