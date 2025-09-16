@@ -2,11 +2,13 @@ import Settings from "./settings";
 import { Alert, Platform, ToastAndroid } from "react-native";
 import { Stack, router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import HeaderSettingsContainer from "./header-settings-container";
 import { storage } from "../utils/storage";
 import { LangContext } from "../utils/Context";
 import { deleteAllNotes } from "../utils/sqlite";
+import * as Speech from 'expo-speech';
+import { getLocales } from "expo-localization";
 
 export default function SettingsContainer() {
 
@@ -18,14 +20,21 @@ export default function SettingsContainer() {
     const [lineSpacing, setLineSpacing] = useState(1.2);
     const [letterSpacing, setLetterSpacing] = useState(0);
     const [wordSpacing, setWordSpacing] = useState(0);
+    const [voice, setVoice] = useState(null);
+    const [availableVoices, setAvailableVoices] = useState([]);
 
     useEffect(() => {
+        getVoices();
         getData();
     }, []);
 
-    /* useEffect(() => {
-        updateLineSpacing();
-    }, [lineSpacing]) */
+    async function getVoices() {
+        const language = getLocales()[0].languageTag;
+        let options = await Speech.getAvailableVoicesAsync();
+        options = options.filter((el) => el.language == language);
+        options.forEach((el, _index) => el.label = `Voz ${(_index + 1)}`);
+        setAvailableVoices(options);
+    }
 
     async function updateTypo(typo) {
         setTypo(typo);
@@ -55,6 +64,7 @@ export default function SettingsContainer() {
         const lineSpacing = await AsyncStorage.getItem(storage.LINE_SPACING);
         const wordSpacing = await AsyncStorage.getItem(storage.WORD_SPACING);
         const letterSpacing = await AsyncStorage.getItem(storage.LETTER_SPACING);
+        const voice = await AsyncStorage.getItem(storage.VOICE);
 
         if (font) {
             setTypo(font);
@@ -66,6 +76,7 @@ export default function SettingsContainer() {
         if (lineSpacing) setLineSpacing(parseFloat(lineSpacing));
         if (wordSpacing) setWordSpacing(parseFloat(wordSpacing));
         if (letterSpacing) setLetterSpacing(parseFloat(letterSpacing));
+        voice ? setVoice(voice) : setVoice(availableVoices[0].identifier);
     }
 
     async function removeAll() {
@@ -79,7 +90,7 @@ export default function SettingsContainer() {
     }
 
     async function updateLineSpacing(lineSpacing) {
-        await AsyncStorage.setItem(storage.LINE_SPACING, lineSpacing+"");
+        await AsyncStorage.setItem(storage.LINE_SPACING, lineSpacing + "");
         if (Platform.OS === "android") {
             ToastAndroid.showWithGravityAndOffset(language.t("_toastLineSpacingUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
@@ -88,7 +99,7 @@ export default function SettingsContainer() {
     }
 
     async function updateLetterSpacing(letterSpacing) {
-        await AsyncStorage.setItem(storage.LETTER_SPACING, letterSpacing+"");
+        await AsyncStorage.setItem(storage.LETTER_SPACING, letterSpacing + "");
         if (Platform.OS === "android") {
             ToastAndroid.showWithGravityAndOffset(language.t("_toastLetterSpacingUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
@@ -97,11 +108,22 @@ export default function SettingsContainer() {
     }
 
     async function updateWordSpacing(wordSpacing) {
-        await AsyncStorage.setItem(storage.WORD_SPACING, wordSpacing+"");
+        await AsyncStorage.setItem(storage.WORD_SPACING, wordSpacing + "");
         if (Platform.OS === "android") {
             ToastAndroid.showWithGravityAndOffset(language.t("_toastWordSpacingUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
             Alert.alert(language.t("_toastWordSpacingUpdated"));
+        }
+    }
+
+    async function updateVoice(voice) {
+        setVoice(voice);
+        Speech.speak("Esta es mi nota", { voice: voice })
+        await AsyncStorage.setItem(storage.VOICE, voice);
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset("Voz actualizada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+        } else {
+            Alert.alert("Voz actualizada");
         }
     }
 
@@ -111,10 +133,10 @@ export default function SettingsContainer() {
             <Stack.Screen options={{ header: () => <HeaderSettingsContainer forceHome={forceHome} /> }} />
             <Settings {...
                 {
-                    removeAll, 
-                    updateAutoSave, 
-                    updateTypo, 
-                    autoSave, 
+                    removeAll,
+                    updateAutoSave,
+                    updateTypo,
+                    autoSave,
                     typo,
                     updateLineSpacing,
                     lineSpacing,
@@ -124,7 +146,11 @@ export default function SettingsContainer() {
                     letterSpacing,
                     wordSpacing,
                     updateWordSpacing,
-                    setWordSpacing
+                    setWordSpacing,
+                    voice,
+                    updateVoice,
+                    setVoice,
+                    availableVoices
                 }
             }
             />

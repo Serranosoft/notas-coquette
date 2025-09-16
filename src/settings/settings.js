@@ -10,6 +10,7 @@ import { AdsContext, LangContext } from "../utils/Context";
 import LineSpacingSlider from "./lineSpacingSlider";
 import LetterSpacingSlider from "./letterSpacingSlider";
 import WordSpacingSlider from "./wordSpacingSlider";
+import VoiceSelector from "./voiceSelector";
 
 export default function Settings({
     removeAll,
@@ -25,7 +26,10 @@ export default function Settings({
     setLetterSpacing,
     wordSpacing,
     updateWordSpacing,
-    setWordSpacing
+    setWordSpacing,
+    voice,
+    updateVoice,
+    availableVoices
 }) {
 
     const { language } = useContext(LangContext);
@@ -52,6 +56,21 @@ export default function Settings({
                             onValueChange={updateAutoSave}
                             value={autoSave}
                         />
+                    </View>
+                    {
+                        voice &&
+                            <View style={styles.row}>
+                                <Text style={[ui.text, ui.black, { width: 110 }]}>Tipo de voz</Text>
+                                <VoiceSelector {...{ availableVoices, voice, updateVoice }}/>
+                            </View>
+                    }
+                    <View style={styles.row}>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>Tono de voz</Text>
+                        
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>Frecuencia de voz</Text>
+                        
                     </View>
                     <View style={styles.row}>
                         <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsLineSpacing")}</Text>
