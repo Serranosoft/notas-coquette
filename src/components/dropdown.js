@@ -9,13 +9,13 @@ export default function CustomDropdown({data, option, onChange, leftIcon}) {
     console.log(option);
     return (
         <Dropdown
-            style={[styles.dropdown, isFocus && styles.opened]}
+            style={[styles.dropdown, isFocus && styles.dropdownOpened]}
             placeholderStyle={ui.muted}
             selectedTextStyle={[ui.text, ui.black]}
             inputSearchStyle={[ui.text, ui.black]}
             itemTextStyle={[ui.text, ui.black]}
             iconStyle={styles.iconStyle}
-            containerStyle={styles.inner}
+            containerStyle={[styles.inner, isFocus && styles.innerOpened]}
             data={data}
             placeholder="Elige una voz"
             maxHeight={150}
@@ -37,22 +37,26 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 40,
         borderColor: colors.dark,
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 8,
         paddingHorizontal: 8,
     },
-    opened: {
+    dropdownOpened: {
         borderBottomWidth: 0,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
+        borderWidth: 1.5,
     },
     inner: {
         marginVertical: -2,
         borderColor: colors.dark,
-        borderWidth: 2,
+        borderWidth: 1,
         borderTopWidth: 0,
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8,
+    },
+    innerOpened: {
+        borderWidth: 1.5,
     },
     icon: {
         marginRight: 5,
