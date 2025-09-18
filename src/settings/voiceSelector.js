@@ -7,7 +7,7 @@ export default function VoiceSelector({ availableVoices, voice, updateVoice }) {
         <CustomDropdown
             data={availableVoices}
             option={voice}
-            onChange={(item) => updateVoice(item.identifier)}
+            onChange={(item) => updateVoice({ voice: item.identifier })}
             labelIdentifier={"label"}
             valueIdentifier={"identifier"}
             placeholder={"Elige una voz"}

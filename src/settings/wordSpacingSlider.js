@@ -1,7 +1,7 @@
 import Slider from "@react-native-community/slider";
 import { colors, ui } from "../utils/styles";
 import { useCallback } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 export default function WordSpacingSlider({ wordSpacing, updateWordSpacing, setWordSpacing }) {
 
@@ -13,21 +13,22 @@ export default function WordSpacingSlider({ wordSpacing, updateWordSpacing, setW
     }, []);
 
     return (
-        <Slider
-            style={{ flex: 1, }}
-            minimumValue={-4}
-            maximumValue={4}
-            minimumTrackTintColor={colors.dark}
-            maximumTrackTintColor={colors.light}
-            thumbTintColor={colors.dark}
-            step={1}
-            lowerLimit={-3}
-            upperLimit={3}
-            value={wordSpacing}
-            onValueChange={(v) => setWordSpacing(v)}
-            StepMarker={renderStepMarker}
-            onSlidingComplete={(v) => updateWordSpacing(v)}
-
-        />
+        <View style={{ flex: 1 }}>
+            <Slider
+                minimumValue={-4}
+                maximumValue={4}
+                minimumTrackTintColor={colors.dark}
+                maximumTrackTintColor={colors.light}
+                thumbTintColor={colors.dark}
+                step={1}
+                lowerLimit={-3}
+                upperLimit={3}
+                value={wordSpacing}
+                onValueChange={(v) => setWordSpacing(v)}
+                StepMarker={renderStepMarker}
+                onSlidingComplete={(v) => updateWordSpacing(v)}
+    
+            />
+        </View>
     )
 }

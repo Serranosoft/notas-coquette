@@ -19,15 +19,16 @@ export default function SettingsContainer() {
     const [lineSpacing, setLineSpacing] = useState(1.2);
     const [letterSpacing, setLetterSpacing] = useState(0);
     const [wordSpacing, setWordSpacing] = useState(0);
-    const [voice, setVoice] = useState(null);
+    const [voiceState, setVoiceState] = useState({ voice: null, pitch: 1.0, rate: 1.0 });
+    const [voiceHasChanged, setVoiceHasChanged] = useState(false);
     const [availableVoices, setAvailableVoices] = useState([]);
 
     useEffect(() => {
-        getVoices();
-        getData();
+        getPreferences(); // Obtener todas las preferencias persistidas
+        getAvailableVoices(); // Obtener todas las voces disponibles para renderizar en el selector
     }, []);
 
-    async function getVoices() {
+    async function getAvailableVoices() {
         const language = getLocales()[0].languageTag;
         let options = await Speech.getAvailableVoicesAsync();
         options = options.filter((el) => el.language == language);
@@ -46,13 +47,16 @@ export default function SettingsContainer() {
         }
     }
 
-    async function getData() {
+    async function getPreferences() {
         const font = await AsyncStorage.getItem(userPreferences.FONT);
         const lineSpacing = await AsyncStorage.getItem(userPreferences.LINE_SPACING);
         const wordSpacing = await AsyncStorage.getItem(userPreferences.WORD_SPACING);
         const letterSpacing = await AsyncStorage.getItem(userPreferences.LETTER_SPACING);
         const voice = await AsyncStorage.getItem(userPreferences.VOICE);
-
+        const rate = await AsyncStorage.getItem(userPreferences.RATE);
+        const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
+        console.log(rate);
+        console.log(pitch);
         if (font) {
             setTypo(font);
         } else {
@@ -62,7 +66,9 @@ export default function SettingsContainer() {
         if (lineSpacing) setLineSpacing(parseFloat(lineSpacing));
         if (wordSpacing) setWordSpacing(parseFloat(wordSpacing));
         if (letterSpacing) setLetterSpacing(parseFloat(letterSpacing));
-        if (voice) setVoice(voice);
+        if (voice) setVoiceState(prev => ({ ...prev, voice: voice }));
+        if (rate) setVoiceState(prev => ({ ...prev, rate: parseFloat(rate) }));
+        if (pitch) setVoiceState(prev => ({ ...prev, pitch: parseFloat(pitch) }));
     }
 
     async function removeAll() {
@@ -102,9 +108,14 @@ export default function SettingsContainer() {
         }
     }
 
-    async function updateVoice(voice) {
-        setVoice(voice);
-        Speech.speak("Esta es mi nota", { voice: voice })
+    async function updateVoice({ voice, rate, pitch }) {
+        
+        if (voice) setVoiceState(prev => ({ ...prev, voice: voice }));
+        if (rate) setVoiceState(prev => ({ ...prev, rate: rate }));
+        if (pitch) setVoiceState(prev => ({ ...prev, pitch: pitch }));
+
+        setVoiceHasChanged(true),
+
         await AsyncStorage.setItem(userPreferences.VOICE, voice);
         if (Platform.OS === "android") {
             ToastAndroid.showWithGravityAndOffset("Voz actualizada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
@@ -112,6 +123,15 @@ export default function SettingsContainer() {
             Alert.alert("Voz actualizada");
         }
     }
+
+    useEffect(() => {
+        console.log(voiceHasChanged);
+        if (voiceHasChanged) {
+            console.log(voiceState);
+            Speech.speak("Esta es mi nota", { voice: voiceState.voice, rate: voiceState.rate, pitch: voiceState.pitch });
+            setVoiceHasChanged(false);
+        }
+    }, [voiceHasChanged])
 
 
     return (
@@ -131,9 +151,9 @@ export default function SettingsContainer() {
                     wordSpacing,
                     updateWordSpacing,
                     setWordSpacing,
-                    voice,
+                    voiceState,
                     updateVoice,
-                    setVoice,
+                    setVoiceState,
                     availableVoices
                 }
             }

@@ -15,6 +15,7 @@ export default function CustomDropdown({
 }) {
 
     const [isFocus, setIsFocus] = useState(false);
+    
     return (
         <Dropdown
             style={[styles.dropdown, isFocus && styles.dropdownOpened]}

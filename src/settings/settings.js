@@ -11,6 +11,8 @@ import LineSpacingSlider from "./lineSpacingSlider";
 import LetterSpacingSlider from "./letterSpacingSlider";
 import WordSpacingSlider from "./wordSpacingSlider";
 import VoiceSelector from "./voiceSelector";
+import PitchVoiceSlider from "./pitchVoiceSlider";
+import RateVoiceSlider from "./rateVoiceSlider";
 
 export default function Settings({
     removeAll,
@@ -25,8 +27,9 @@ export default function Settings({
     wordSpacing,
     updateWordSpacing,
     setWordSpacing,
-    voice,
+    voiceState,
     updateVoice,
+    setVoiceState,
     availableVoices
 }) {
 
@@ -46,30 +49,30 @@ export default function Settings({
                 <View style={styles.box}>
                     <Text style={[ui.h4, ui.black]}>{language.t("_settingsEditor")}</Text>
                     {
-                        voice &&
+                        voiceState.voice &&
                             <View style={styles.row}>
                                 <Text style={[ui.text, ui.black, { width: 110 }]}>Tipo de voz</Text>
-                                <VoiceSelector {...{ availableVoices, voice, updateVoice }}/>
+                                <VoiceSelector {...{ availableVoices, voice: voiceState.voice, updateVoice }}/>
                             </View>
                     }
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 110 }]}>Tono de voz</Text>
-                        
-                    </View>
-                    <View style={styles.row}>
                         <Text style={[ui.text, ui.black, { width: 110 }]}>Frecuencia de voz</Text>
-                        
+                        <PitchVoiceSlider {...{ updateVoice, pitch: voiceState.pitch, setVoicePitch: (p) => setVoiceState(prev => ({ ...prev, pitch: p })) }} />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsLineSpacing")}</Text>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>Velocidad de voz</Text>
+                        <RateVoiceSlider {...{ updateVoice, rate: voiceState.rate, setVoiceRate: (r) => setVoiceState(prev => ({ ...prev, rate: r })) }} />
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsLineSpacing")}</Text>
                         <LineSpacingSlider {...{ lineSpacing, updateLineSpacing, setLineSpacing }} />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsLetterSpacing")}</Text>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsLetterSpacing")}</Text>
                         <LetterSpacingSlider {...{ letterSpacing, updateLetterSpacing, setLetterSpacing }} />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 165 }]}>{language.t("_settingsWordSpacing")}</Text>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsWordSpacing")}</Text>
                         <WordSpacingSlider {...{ wordSpacing, updateWordSpacing, setWordSpacing }} />
                     </View>
 
