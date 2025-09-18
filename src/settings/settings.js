@@ -16,7 +16,6 @@ export default function Settings({
     removeAll,
     updateAutoSave,
     updateTypo,
-    autoSave,
     typo,
     updateLineSpacing,
     setLineSpacing,
@@ -47,16 +46,6 @@ export default function Settings({
 
                 <View style={styles.box}>
                     <Text style={[ui.h4, ui.black]}>{language.t("_settingsEditor")}</Text>
-                    <View style={styles.row}>
-                        <Text style={[ui.text, ui.black]}>{language.t("_settingsSave")}</Text>
-                        <Switch
-                            style={styles.switch}
-                            trackColor={{ false: '#767577', true: colors.light }}
-                            thumbColor={autoSave ? colors.dark : '#f4f3f4'}
-                            onValueChange={updateAutoSave}
-                            value={autoSave}
-                        />
-                    </View>
                     {
                         voice &&
                             <View style={styles.row}>

@@ -3,7 +3,6 @@ export const userPreferences = {
     LANGUAGE: "language",
     GRID: "grid",
     FONT: "font",
-    AUTOSAVE: "autosave",
     FIRST_LAUNCH_APP: "FIRST_LAUNCH_APP",
     MIGRATED: "migration",
     LINE_SPACING: "line_spacing",

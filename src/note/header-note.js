@@ -8,7 +8,7 @@ import { pauseVoiceLabel, startVoiceLabel } from "../utils/labels";
 export default function HeaderNote({ drawing, setDrawing, note, back, setReadingMode, readingMode, noteSavedId, richText, activeOption, setActiveOption, setIsReady, handleNotePlaying, playing }) {
 
     const { language } = useContext(LangContext);
-    console.log("headerNote "+playing);
+
     return (
         <View style={components.header}>
             <View style={layout.title}>
@@ -30,7 +30,6 @@ export default function HeaderNote({ drawing, setDrawing, note, back, setReading
                         </TouchableOpacity>
                 }
                 <TouchableOpacity style={{ paddingLeft: 4 }} onPress={handleNotePlaying}>
-                    {/* <Image style={[header.img]} source={require("../../assets/save.png")}></Image> */}
                     { playing ? pauseVoiceLabel() : startVoiceLabel() }
                 </TouchableOpacity>
                 <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId, setIsReady }} />

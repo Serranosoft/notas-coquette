@@ -30,7 +30,6 @@ export default function NoteContainer() {
         separator: null,
         readingMode: false,
         font: null,
-        autoSave: true,
         letterSpacing: null,
         wordSpacing: null,
         lineSpacing: null,
@@ -47,10 +46,11 @@ export default function NoteContainer() {
     const [isReady, setIsReady] = useState(false);
     const [voiceState, setVoiceState] = useState(null);
 
-    const { note, fontSize, separator, readingMode, font, autoSave,
-        noteSavedId, focused, editorHeight, openStickers, sticker,
-        activeOption, drawing, letterSpacing, lineSpacing, wordSpacing,
-        playing } = noteState;
+    const { 
+        note, fontSize, separator, readingMode, font, noteSavedId, 
+        focused, editorHeight, openStickers, sticker, activeOption, drawing, 
+        letterSpacing, lineSpacing, wordSpacing, playing 
+    } = noteState;
 
     const sketchPadRef = useRef();
 
@@ -120,9 +120,7 @@ export default function NoteContainer() {
     }, [note, lineSpacing, letterSpacing, wordSpacing, font])
 
     async function back() {
-        if (autoSave) {
-            await saveNote();
-        }
+        await saveNote();
         router.back();
     }
 
@@ -226,55 +224,46 @@ export default function NoteContainer() {
     }, [drawing.isDrawing, readingMode, focused])
 
 
-    const playNote = async () => {
-        if (!note.content) return "";
-
-        const thingToSay = note.content
-            // Eliminamos imágenes
-            .replace(/<img[^>]*>/gi, "")
-            // Reemplazamos <li> por saltos de línea con viñeta opcional
-            .replace(/<li[^>]*>/gi, "\n• ")
-            .replace(/<\/li>/gi, "")
-            // Reemplazamos <br> y <div> por saltos de línea
-            .replace(/<br\s*\/?>/gi, "\n")
-            .replace(/<\/div>/gi, "\n")
-            // Quitamos todas las etiquetas restantes
-            .replace(/<[^>]+>/g, "")
-            // Decodificamos entidades comunes
-            .replace(/&nbsp;/g, " ")
-            .replace(/&amp;/g, "&")
-            .replace(/&quot;/g, '"')
-            .replace(/&#39;/g, "'")
-            // Limpiamos espacios extra
-            .replace(/\n{2,}/g, "\n")
-            .replace(/\s+/g, " ")
-            .trim();
-        console.log(voiceState);
-        Speech.speak(
-            thingToSay,
-            {
-                voice: voiceState.voice,
-                pitch: parseFloat(voiceState.pitch),
-                rate: parseFloat(voiceState.rate),
-                onPause: () => setNoteState(prev => ({ ...prev, playing: false })),
-                onStopped: () => setNoteState(prev => ({ ...prev, playing: false })),
-                onDone: () => setNoteState(prev => ({ ...prev, playing: false })),
-                onStart: () => { console.log("onstart"); setNoteState(prev => ({ ...prev, playing: true })) }
-            }
-        );
-
-    };
-
-    const pauseNote = () => {
-        Speech.stop();
-    }
-
+    // Encargado de reproducir una nota
     const handleNotePlaying = () => {
-        console.log("handle note playing "+playing);
         if (playing) {
-            pauseNote();
+            Speech.stop();
         } else {
-            playNote();
+            if (!note.content) return "";
+
+            const thingToSay = note.content
+                // Eliminamos imágenes
+                .replace(/<img[^>]*>/gi, "")
+                // Reemplazamos <li> por saltos de línea con viñeta opcional
+                .replace(/<li[^>]*>/gi, "\n• ")
+                .replace(/<\/li>/gi, "")
+                // Reemplazamos <br> y <div> por saltos de línea
+                .replace(/<br\s*\/?>/gi, "\n")
+                .replace(/<\/div>/gi, "\n")
+                // Quitamos todas las etiquetas restantes
+                .replace(/<[^>]+>/g, "")
+                // Decodificamos entidades comunes
+                .replace(/&nbsp;/g, " ")
+                .replace(/&amp;/g, "&")
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                // Limpiamos espacios extra
+                .replace(/\n{2,}/g, "\n")
+                .replace(/\s+/g, " ")
+                .trim();
+            console.log(voiceState);
+            Speech.speak(
+                thingToSay,
+                {
+                    voice: voiceState.voice,
+                    pitch: parseFloat(voiceState.pitch),
+                    rate: parseFloat(voiceState.rate),
+                    onPause: () => setNoteState(prev => ({ ...prev, playing: false })),
+                    onStopped: () => setNoteState(prev => ({ ...prev, playing: false })),
+                    onDone: () => setNoteState(prev => ({ ...prev, playing: false })),
+                    onStart: () => setNoteState(prev => ({ ...prev, playing: true }))
+                }
+            );
         }
     }
 
