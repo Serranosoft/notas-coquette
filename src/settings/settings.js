@@ -5,7 +5,7 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { FONTS } from "../utils/fonts";
 import LangList from "../components/lang-list";
-import { useCallback, useContext } from "react";
+import { useContext } from "react";
 import { AdsContext, LangContext } from "../utils/Context";
 import LineSpacingSlider from "./lineSpacingSlider";
 import LetterSpacingSlider from "./letterSpacingSlider";
@@ -14,7 +14,6 @@ import VoiceSelector from "./voiceSelector";
 
 export default function Settings({
     removeAll,
-    updateAutoSave,
     updateTypo,
     typo,
     updateLineSpacing,

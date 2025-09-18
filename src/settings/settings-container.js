@@ -120,7 +120,6 @@ export default function SettingsContainer() {
             <Settings {...
                 {
                     removeAll,
-                    updateAutoSave,
                     updateTypo,
                     typo,
                     updateLineSpacing,
