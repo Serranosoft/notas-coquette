@@ -1,15 +1,14 @@
-import { ScrollView, StyleSheet, View } from "react-native";
-import LangListItem from "./lang-list-item";
-import { useContext, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 import { colors } from "../utils/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { userPreferences } from "../utils/user-preferences";
+import CustomDropdown from "./dropdown";
 
 export default function LangList() {
 
     const { language, setLanguage } = useContext(LangContext);
-    const [selected, setSelected] = useState(language._locale);
 
     const languages = [
         { title: language.t("_langListSpanish"), acronym: "es" },
@@ -28,29 +27,27 @@ export default function LangList() {
         { title: language.t("_langListFarsi"), acronym: "fa" }
     ]
 
-    async function updateLanguage(acronym) {
-        setLanguage(acronym);
+    async function updateLanguage(language) {
+        setLanguage(language.acronym);
         await AsyncStorage.setItem(userPreferences.LANGUAGE, acronym);
     }
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.scroll} nestedScrollEnabled={true}>
-                {
-                    languages.map((language, index) => {
-                        return (
-                            <LangListItem key={index} title={language.title} acronym={language.acronym} updateLanguage={updateLanguage} selected={selected} setSelected={setSelected} />
-                        )
-                    })
-                }
-            </ScrollView>
+            <CustomDropdown
+                data={languages}
+                option={language._locale}
+                labelIdentifier={"title"}
+                valueIdentifier={"acronym"}
+                onChange={updateLanguage}
+                placeholder={"Elige un idioma"}
+            />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: 130,
         width: "100%",
     },
 

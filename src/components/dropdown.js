@@ -3,10 +3,18 @@ import { colors, ui } from "../utils/styles";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 
-export default function CustomDropdown({data, option, onChange, leftIcon}) {
+export default function CustomDropdown({
+    data, 
+    option, 
+    onChange, 
+    placeholder,
+    labelIdentifier,
+    valueIdentifier,
+    leftIcon,
+    maxHeight = 150
+}) {
 
     const [isFocus, setIsFocus] = useState(false);
-    console.log(option);
     return (
         <Dropdown
             style={[styles.dropdown, isFocus && styles.dropdownOpened]}
@@ -17,17 +25,16 @@ export default function CustomDropdown({data, option, onChange, leftIcon}) {
             iconStyle={styles.iconStyle}
             containerStyle={[styles.inner, isFocus && styles.innerOpened]}
             data={data}
-            placeholder="Elige una voz"
-            maxHeight={150}
-            labelField="label"
-            valueField="identifier"
+            placeholder={placeholder}
+            maxHeight={maxHeight}
+            labelField={labelIdentifier}
+            valueField={valueIdentifier}
             value={option}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={item => {
                 onChange(item);
             }}
-            // renderLeftIcon={() => leftIcon()}
         />
     )
 }
@@ -36,8 +43,8 @@ const styles = StyleSheet.create({
     dropdown: {
         flex: 1,
         height: 40,
-        borderColor: colors.dark,
-        borderWidth: 1,
+        borderColor: colors.light,
+        borderWidth: 2,
         borderRadius: 8,
         paddingHorizontal: 8,
     },
@@ -45,18 +52,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
-        borderWidth: 1.5,
+        // borderColor: colors.dark
     },
     inner: {
         marginVertical: -2,
-        borderColor: colors.dark,
-        borderWidth: 1,
+        borderColor: colors.light,
+        borderWidth: 2,
         borderTopWidth: 0,
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8,
     },
     innerOpened: {
-        borderWidth: 1.5,
+        // borderColor: colors.dark
     },
     icon: {
         marginRight: 5,

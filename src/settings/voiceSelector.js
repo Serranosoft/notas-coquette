@@ -8,14 +8,9 @@ export default function VoiceSelector({ availableVoices, voice, updateVoice }) {
             data={availableVoices}
             option={voice}
             onChange={(item) => updateVoice(item.identifier)}
-            leftIcon={() => (
-                <AntDesign
-                    style={styles.icon}
-                    color={'black'}
-                    name="Safety"
-                    size={20}
-                />
-            )}
+            labelIdentifier={"label"}
+            valueIdentifier={"identifier"}
+            placeholder={"Elige una voz"}
         />
     )
 }
