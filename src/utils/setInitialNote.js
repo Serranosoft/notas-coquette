@@ -1,10 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
-import { storage } from "./storage";
+import { userPreferences } from "./user-preferences";
 import { addNote } from "./sqlite";
 
 export async function setInitialNote(language) {
-    const value = await AsyncStorage.getItem(storage.FIRST_LAUNCH_APP);
+    const value = await AsyncStorage.getItem(userPreferences.FIRST_LAUNCH_APP);
     if (!value) {
         const id = uuid.v4();
 
@@ -63,6 +63,6 @@ style="">Cambia de <b>color</b></font></li><li style="text-align: left;"><font s
         }
 
         await addNote(id, newNote.content, newNote.pwd, newNote.date)
-        await AsyncStorage.setItem(storage.FIRST_LAUNCH_APP, "true");
+        await AsyncStorage.setItem(userPreferences.FIRST_LAUNCH_APP, "true");
     }
 }

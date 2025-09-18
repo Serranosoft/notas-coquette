@@ -288,6 +288,32 @@ export const removeFormatLabel = ({ tintColor }) =>
 export const undoLabel = () => <View><Image style={common} source={require("../../assets/undo.png")} /></View>
 export const redoLabel = () => <View><Image style={common} source={require("../../assets/redo.png")} /></View>
 
+export const startVoiceLabel = () =>
+    <Svg
+        height={24}
+        viewBox="0 0 32 32"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+        data-name="Layer 1"
+    >
+        <Path d="M16 2a1 1 0 00-1 1v26a1 1 0 002 0V3a1 1 0 00-1-1zM20 9a1 1 0 00-1 1v13a1 1 0 002 0V10a1 1 0 00-1-1zM24 6a1 1 0 00-1 1v19a1 1 0 002 0V7a1 1 0 00-1-1zM28 12a1 1 0 00-1 1v7a1 1 0 002 0v-7a1 1 0 00-1-1zM12 9a1 1 0 00-1 1v13a1 1 0 002 0V10a1 1 0 00-1-1zM8 6a1 1 0 00-1 1v19a1 1 0 002 0V7a1 1 0 00-1-1zM4 12a1 1 0 00-1 1v7a1 1 0 002 0v-7a1 1 0 00-1-1z" />
+    </Svg>
+
+export const pauseVoiceLabel = () =>
+    <Svg
+        fill="none"
+        height={24}
+        viewBox="0 0 24 24"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <Path
+            clipRule="evenodd"
+            d="M8 4a1 1 0 011 1v14a1 1 0 11-2 0V5a1 1 0 011-1zm8 0a1 1 0 011 1v14a1 1 0 11-2 0V5a1 1 0 011-1z"
+            fill="#000"
+            fillRule="evenodd"
+        />
+    </Svg>
 
 const common = {
     width: 25,

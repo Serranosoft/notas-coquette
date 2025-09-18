@@ -1,5 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 import uuid from 'react-native-uuid';
+import * as Speech from 'expo-speech';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { userPreferences } from './user-preferences';
 
 const db = SQLite.openDatabaseSync("notas-coquette");
 export async function initDb() {
@@ -11,17 +14,29 @@ export async function initDb() {
 
     // Update 31/07/2025 - Add new column to notes
     await addFavNoteColumn();
-    // Update 05/09/2025 - Remove 'color' from notes. Now you can set color per selection
-    await removeColorColumn();
+    // Update 17/09/2025 - Refactor to add initial values to user preferences
+    await setInitialUserPreferences();
 }
 
-export async function removeColorColumn() {
-    const result = await db.getAllAsync(`PRAGMA table_info(notes);`);
-    const hasColor = result.some(col => col.name === 'color');
+async function setInitialUserPreferences() {
 
-    if (hasColor) {
-        await db.execAsync(`ALTER TABLE notes REMOVE COLUMN color`);
-    }
+    // Voice
+    const availableVoices = await Speech.getAvailableVoicesAsync();
+    const voice = await AsyncStorage.getItem(userPreferences.VOICE);
+    const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
+    const rate = await AsyncStorage.getItem(userPreferences.RATE);
+    if (!voice) await AsyncStorage.setItem(userPreferences.VOICE, availableVoices[0].identifier);
+    if (!pitch) await AsyncStorage.setItem(userPreferences.PITCH, "1");
+    if (!rate) await AsyncStorage.setItem(userPreferences.RATE, "1");
+    // Letter Spacing
+    const letterSpacing = await AsyncStorage.getItem(userPreferences.LETTER_SPACING);
+    if (!letterSpacing) await AsyncStorage.setItem(userPreferences.LETTER_SPACING, "1.2");
+    // Word Spacing
+    const lineSpacing = await AsyncStorage.getItem(userPreferences.LINE_SPACING);
+    if (!lineSpacing) await AsyncStorage.setItem(userPreferences.LINE_SPACING, "0");
+    // Line Spacing
+    const wordSpacing = await AsyncStorage.getItem(userPreferences.WORD_SPACING);
+    if (!wordSpacing) await AsyncStorage.setItem(userPreferences.WORD_SPACING, "0");
 }
 
 export async function addFavNoteColumn() {

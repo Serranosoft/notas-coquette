@@ -10,11 +10,11 @@ import { translations } from "../src/utils/localizations";
 import { AdsContext, LangContext } from "../src/utils/Context";
 import AdsHandler from "../src/utils/AdsHandler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { storage } from "../src/utils/storage";
 import { addNote, initDb } from "../src/utils/sqlite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import UpdatesModal from "../src/modals/updates-modal";
 import * as StoreReview from 'expo-store-review';
+import { userPreferences } from "../src/utils/user-preferences";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -39,6 +39,7 @@ export default function Layout() {
     }, [])
 
     async function init() {
+        console.log("que pasa");
         await initDb();
         await setInitialNote(language);
         // Migration progress.
@@ -49,9 +50,9 @@ export default function Layout() {
 
     async function startNotesMigration() {
 
-        let migrated = await AsyncStorage.getItem(storage.MIGRATED);
+        let migrated = await AsyncStorage.getItem(userPreferences.MIGRATED);
         if (!migrated) {
-            let notes = await AsyncStorage.getItem(storage.NOTES) || [];
+            let notes = await AsyncStorage.getItem(userPreferences.NOTES) || [];
             if (notes.length > 0) {
                 // Obtener notas.
                 notes = JSON.parse(notes);
@@ -60,7 +61,7 @@ export default function Layout() {
                     await addNote(note.id, note.content, note.pwd, note.date);
                 })
                 // Notificar que ya se ha realizado la migración para no volver a repetirla.
-                await AsyncStorage.setItem(storage.MIGRATED, "true");
+                await AsyncStorage.setItem(userPreferences.MIGRATED, "true");
                 // No borrar el AsyncStorage por si debo recuperar los registros en el próximo despliegue. 
             }
         }

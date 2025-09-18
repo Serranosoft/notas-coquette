@@ -1,7 +1,7 @@
 import { useState } from "react";
 import HeaderHomeOptions from "./header-home-options";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { storage } from "../utils/storage";
+import { userPreferences } from "../utils/user-preferences";
 
 export default function HeaderHomeOptionsContainer({ columnNumber, setColumnNumber }) {
 
@@ -20,7 +20,7 @@ export default function HeaderHomeOptionsContainer({ columnNumber, setColumnNumb
         setColumnNumber(grid);
         hideMenu();
 
-        await AsyncStorage.setItem(storage.GRID, grid.toString());
+        await AsyncStorage.setItem(userPreferences.GRID, grid.toString());
     }
 
     return (

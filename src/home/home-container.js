@@ -8,7 +8,7 @@ import HeaderHome from "./header-home";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { Platform } from "react-native";
-import { storage } from "../utils/storage";
+import { userPreferences } from "../utils/user-preferences";
 import { deleteNoteFromId, getAllNotes } from "../utils/sqlite";
 import { AdsContext } from "../utils/Context";
 
@@ -49,7 +49,7 @@ export default function HomeContainer() {
     }
 
     const getGridLayout = useCallback(async () => {
-        const grid = await AsyncStorage.getItem(storage.GRID);
+        const grid = await AsyncStorage.getItem(userPreferences.GRID);
         if (grid !== null) {
             setColumnNumber(parseInt(grid));
         }

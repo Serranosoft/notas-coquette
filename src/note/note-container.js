@@ -7,9 +7,11 @@ import HeaderNoteContainer from "./header-note-container";
 import uuid from 'react-native-uuid';
 import useBackHandler from "../components/use-back-handler";
 import { Alert, AppState, Platform, ToastAndroid } from "react-native";
-import { save, storage } from "../utils/storage";
+import { save } from "../utils/storage";
 import { LangContext } from "../utils/Context";
 import { getNoteFromId } from "../utils/sqlite";
+import * as Speech from 'expo-speech';
+import { userPreferences } from "../utils/user-preferences";
 
 export default function NoteContainer() {
 
@@ -38,14 +40,17 @@ export default function NoteContainer() {
         openStickers: false,
         sticker: null,
         activeOption: null,
+        playing: false,
         drawing: { isDrawing: false, color: "rgb(85,172,238)", width: 2, mode: "scroll", visible: true },
     });
 
     const [isReady, setIsReady] = useState(false);
+    const [voiceState, setVoiceState] = useState(null);
 
     const { note, fontSize, separator, readingMode, font, autoSave,
         noteSavedId, focused, editorHeight, openStickers, sticker,
-        activeOption, drawing, letterSpacing, lineSpacing, wordSpacing } = noteState;
+        activeOption, drawing, letterSpacing, lineSpacing, wordSpacing,
+        playing } = noteState;
 
     const sketchPadRef = useRef();
 
@@ -88,8 +93,8 @@ export default function NoteContainer() {
     useFocusEffect(
         useCallback(() => {
             setNoteState(prev => ({ ...prev, font: null }));
-            getFont(); // Obtiene la fuente en el que va a instanciar el editor
-            getAutoSave();
+            // getFont(); // Obtiene la fuente en el que va a instanciar el editor
+            getUserPreferences();
         }, [])
     );
 
@@ -149,12 +154,13 @@ export default function NoteContainer() {
         }
     }
 
-    async function getFont() {
+    async function getUserPreferences() {
+
+        // Font
         let font = {};
-        font.fontFamily = await AsyncStorage.getItem(storage.FONT);
-        if (!font.fontFamily) {
-            font.fontFamily = "ancizar";
-        }
+        font.fontFamily = await AsyncStorage.getItem(userPreferences.FONT);
+        if (!font.fontFamily) font.fontFamily = "ancizar";
+
         switch (font.fontFamily) {
             case "ancizar": font.fontFace = ancizar; break;
             case "roboto": font.fontFace = roboto; break;
@@ -163,19 +169,26 @@ export default function NoteContainer() {
             case "ojuju": font.fontFace = ojuju; break;
         }
         setNoteState(prev => ({ ...prev, font: font }));
+
+        // Line spacing
+        const lineSpacing = await AsyncStorage.getItem(userPreferences.LINE_SPACING);
+        setNoteState(prev => ({ ...prev, lineSpacing: lineSpacing }));
+
+        // Word spacing
+        const wordSpacing = await AsyncStorage.getItem(userPreferences.WORD_SPACING);
+        setNoteState(prev => ({ ...prev, wordSpacing: wordSpacing }));
+
+        // Letter spacing
+        const letterSpacing = await AsyncStorage.getItem(userPreferences.LETTER_SPACING);
+        setNoteState(prev => ({ ...prev, letterSpacing: letterSpacing }));
+
+        // Voice
+        const voice = await AsyncStorage.getItem(userPreferences.VOICE);
+        const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
+        const rate = await AsyncStorage.getItem(userPreferences.RATE);
+        setVoiceState({ voice: voice, pitch: pitch, rate: rate })
     }
 
-    async function getAutoSave() {
-        const autoSave = await AsyncStorage.getItem(storage.AUTOSAVE);
-        if (autoSave) setNoteState(prev => ({ ...prev, autoSave: autoSave === "true" }));
-        
-        const lineSpacing = await AsyncStorage.getItem(storage.LINE_SPACING) || 1.2;
-        if (lineSpacing) setNoteState(prev => ({ ...prev, lineSpacing: lineSpacing }));
-        const wordSpacing = await AsyncStorage.getItem(storage.WORD_SPACING) || "0";
-        if (wordSpacing) setNoteState(prev => ({ ...prev, wordSpacing: wordSpacing }));
-        const letterSpacing = await AsyncStorage.getItem(storage.LETTER_SPACING) || "0";
-        if (letterSpacing) setNoteState(prev => ({ ...prev, letterSpacing: letterSpacing }));
-    }
 
     useEffect(() => {
         richText.current?.setFontSize(fontSize);
@@ -195,7 +208,7 @@ export default function NoteContainer() {
     useEffect(() => {
         if (readingMode) {
             if (drawing.isDrawing) {
-                setNoteState(prev => ({ ...prev, drawing: { ...drawing, mode: "scroll" }}));
+                setNoteState(prev => ({ ...prev, drawing: { ...drawing, mode: "scroll" } }));
             }
         }
     }, [readingMode])
@@ -211,6 +224,59 @@ export default function NoteContainer() {
             }
         }
     }, [drawing.isDrawing, readingMode, focused])
+
+
+    const playNote = async () => {
+        if (!note.content) return "";
+
+        const thingToSay = note.content
+            // Eliminamos imágenes
+            .replace(/<img[^>]*>/gi, "")
+            // Reemplazamos <li> por saltos de línea con viñeta opcional
+            .replace(/<li[^>]*>/gi, "\n• ")
+            .replace(/<\/li>/gi, "")
+            // Reemplazamos <br> y <div> por saltos de línea
+            .replace(/<br\s*\/?>/gi, "\n")
+            .replace(/<\/div>/gi, "\n")
+            // Quitamos todas las etiquetas restantes
+            .replace(/<[^>]+>/g, "")
+            // Decodificamos entidades comunes
+            .replace(/&nbsp;/g, " ")
+            .replace(/&amp;/g, "&")
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            // Limpiamos espacios extra
+            .replace(/\n{2,}/g, "\n")
+            .replace(/\s+/g, " ")
+            .trim();
+        console.log(voiceState);
+        Speech.speak(
+            thingToSay,
+            {
+                voice: voiceState.voice,
+                pitch: parseFloat(voiceState.pitch),
+                rate: parseFloat(voiceState.rate),
+                onPause: () => setNoteState(prev => ({ ...prev, playing: false })),
+                onStopped: () => setNoteState(prev => ({ ...prev, playing: false })),
+                onDone: () => setNoteState(prev => ({ ...prev, playing: false })),
+                onStart: () => { console.log("onstart"); setNoteState(prev => ({ ...prev, playing: true })) }
+            }
+        );
+
+    };
+
+    const pauseNote = () => {
+        Speech.stop();
+    }
+
+    const handleNotePlaying = () => {
+        console.log("handle note playing "+playing);
+        if (playing) {
+            pauseNote();
+        } else {
+            playNote();
+        }
+    }
 
     const handleCursorPosition = useCallback((scrollY) => scrollRef.current.scrollTo({ y: scrollY - 85, animated: true }), []);
 
@@ -249,12 +315,14 @@ export default function NoteContainer() {
                         richText={richText}
                         activeOption={activeOption}
                         setActiveOption={setActiveOption}
+                        handleNotePlaying={handleNotePlaying}
+                        playing={playing}
                     />
                 )
             }} />
 
             <Note
-                isReady={isReady} 
+                isReady={isReady}
                 note={note}
                 readingMode={readingMode}
                 fontSize={fontSize}

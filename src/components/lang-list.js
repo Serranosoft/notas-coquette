@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { LangContext } from "../utils/Context";
 import { colors } from "../utils/styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { storage } from "../utils/storage";
+import { userPreferences } from "../utils/user-preferences";
 
 export default function LangList() {
 
@@ -30,7 +30,7 @@ export default function LangList() {
 
     async function updateLanguage(acronym) {
         setLanguage(acronym);
-        await AsyncStorage.setItem(storage.LANGUAGE, acronym);
+        await AsyncStorage.setItem(userPreferences.LANGUAGE, acronym);
     }
 
     return (

@@ -4,11 +4,11 @@ import HeaderNoteOptionsContainer from "./header-note-options-container";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 import HeaderLeftEditor from "../rich-editor/header-left-editor";
-
-export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, setReadingMode, readingMode, noteSavedId, richText, activeOption, setActiveOption, setIsReady }) {
+import { pauseVoiceLabel, startVoiceLabel } from "../utils/labels";
+export default function HeaderNote({ drawing, setDrawing, note, back, setReadingMode, readingMode, noteSavedId, richText, activeOption, setActiveOption, setIsReady, handleNotePlaying, playing }) {
 
     const { language } = useContext(LangContext);
-    
+    console.log("headerNote "+playing);
     return (
         <View style={components.header}>
             <View style={layout.title}>
@@ -29,8 +29,9 @@ export default function HeaderNote({ drawing, setDrawing, note, saveNote, back, 
                             <Image style={[header.img]} source={require("../../assets/highlighter.png")}></Image>
                         </TouchableOpacity>
                 }
-                <TouchableOpacity style={{ paddingLeft: 4 }} onPress={saveNote}>
-                    <Image style={[header.img]} source={require("../../assets/save.png")}></Image>
+                <TouchableOpacity style={{ paddingLeft: 4 }} onPress={handleNotePlaying}>
+                    {/* <Image style={[header.img]} source={require("../../assets/save.png")}></Image> */}
+                    { playing ? pauseVoiceLabel() : startVoiceLabel() }
                 </TouchableOpacity>
                 <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId, setIsReady }} />
             </View>
