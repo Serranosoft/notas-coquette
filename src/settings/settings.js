@@ -48,6 +48,7 @@ export default function Settings({
 
                 <View style={styles.box}>
                     <Text style={[ui.h4, ui.black]}>{language.t("_settingsEditor")}</Text>
+                    <Text style={[ui.h5, ui.black]}>Configuración de la voz</Text>
                     {
                         voiceState.voice &&
                             <View style={styles.row}>
@@ -63,6 +64,7 @@ export default function Settings({
                         <Text style={[ui.text, ui.black, { width: 110 }]}>Velocidad de voz</Text>
                         <RateVoiceSlider {...{ updateVoice, rate: voiceState.rate, setVoiceRate: (r) => setVoiceState(prev => ({ ...prev, rate: r })) }} />
                     </View>
+                    <Text style={[ui.h5, ui.black]}>Configuración de la nota</Text>
                     <View style={styles.row}>
                         <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsLineSpacing")}</Text>
                         <LineSpacingSlider {...{ lineSpacing, updateLineSpacing, setLineSpacing }} />

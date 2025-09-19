@@ -14,7 +14,7 @@ export default function HeaderSettings() {
                 <Pressable onPress={() => router.back()}>
                     <Image style={header.img} source={require("../../assets/back.png")} />
                 </Pressable>
-                <Text style={[ui.h4, { color: "#000" }]}>{language.t("_headerNoteTitleNew")}</Text>
+                <Text style={[ui.h4, { color: "#000" }]}>Ajustes</Text>
             </View>
         </View>
     )
