@@ -120,7 +120,11 @@ export default function NoteContainer() {
     }, [note, lineSpacing, letterSpacing, wordSpacing, font])
 
     async function back() {
+        // Cerrar reproductor de voz si se está reproduciendo
+        if (playing) Speech.stop();
+        // Guardar nota
         await saveNote();
+        // Volver a la pantalla anterior
         router.back();
     }
 
@@ -251,7 +255,7 @@ export default function NoteContainer() {
                 .replace(/\n{2,}/g, "\n")
                 .replace(/\s+/g, " ")
                 .trim();
-            console.log(voiceState);
+
             Speech.speak(
                 thingToSay,
                 {
