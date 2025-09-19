@@ -39,7 +39,6 @@ export default function Layout() {
     }, [])
 
     async function init() {
-        console.log("que pasa");
         await initDb();
         await setInitialNote(language);
         // Migration progress.

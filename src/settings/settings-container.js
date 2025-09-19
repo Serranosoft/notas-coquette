@@ -55,8 +55,7 @@ export default function SettingsContainer() {
         const voice = await AsyncStorage.getItem(userPreferences.VOICE);
         const rate = await AsyncStorage.getItem(userPreferences.RATE);
         const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
-        console.log(rate);
-        console.log(pitch);
+
         if (font) {
             setTypo(font);
         } else {
@@ -125,9 +124,7 @@ export default function SettingsContainer() {
     }
 
     useEffect(() => {
-        console.log(voiceHasChanged);
         if (voiceHasChanged) {
-            console.log(voiceState);
             Speech.speak("Esta es mi nota", { voice: voiceState.voice, rate: voiceState.rate, pitch: voiceState.pitch });
             setVoiceHasChanged(false);
         }
