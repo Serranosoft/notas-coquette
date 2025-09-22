@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ui } from '../utils/styles';
 import Button from '../components/button';
 import { LangContext } from '../utils/Context';
+import { APP, userPreferences } from '../utils/user-preferences';
 
-const VERSION_MODAL = '2.1.0';
 
 export default function UpdatesModal() {
     const [visible, setVisible] = useState(false);
@@ -14,8 +14,8 @@ export default function UpdatesModal() {
 
     useEffect(() => {
         const checkIfSeen = async () => {
-            const viewed = await AsyncStorage.getItem('modalUpdatesVersion');
-            if (viewed !== VERSION_MODAL) {
+            const version = await AsyncStorage.getItem(userPreferences.CHANGELOG_VERSION);
+            if (version !== APP.currentVersion) {
                 setVisible(true);
             }
         };
@@ -24,7 +24,7 @@ export default function UpdatesModal() {
 
     const closeModal = async () => {
         setVisible(false);
-        await AsyncStorage.setItem('modalUpdatesVersion', VERSION_MODAL);
+        await AsyncStorage.setItem(userPreferences.CHANGELOG_VERSION, APP.currentVersion);
     };
 
     return (

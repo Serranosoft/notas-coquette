@@ -1,40 +1,107 @@
-import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { components, header, layout, ui } from "../utils/styles";
 import HeaderNoteOptionsContainer from "./header-note-options-container";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 import HeaderLeftEditor from "../rich-editor/header-left-editor";
 import { pauseVoiceLabel, startVoiceLabel } from "../utils/labels";
-export default function HeaderNote({ drawing, setDrawing, note, back, setReadingMode, readingMode, noteSavedId, richText, activeOption, setActiveOption, setIsReady, handleNotePlaying, playing }) {
+import Tooltip from 'react-native-walkthrough-tooltip';
+
+export default function HeaderNote({
+    note,
+    richText,
+    readingMode,
+    setReadingMode,
+    drawing,
+    setDrawing,
+    activeOption,
+    setActiveOption,
+    showOnboarding,
+    setShowOnboarding,
+    handleNotePlaying,
+    playing,
+    noteSavedId,
+    setIsReady,
+    back
+}) {
 
     const { language } = useContext(LangContext);
 
+    const toggleDrawing = () => {
+        setDrawing(prev => ({ ...prev, isDrawing: !prev.isDrawing }));
+        setActiveOption(activeOption === "drawing" ? null : "drawing");
+    };
+
+    const Title = () => (
+        <View style={layout.title}>
+            <Pressable onPress={back}>
+                <Image style={header.img} source={require("../../assets/back.png")} />
+            </Pressable>
+            <Text style={[ui.h5, { color: "#000" }]}>
+                {note && note.content ? language.t("_headerNoteTitleEdit") : language.t("_headerNoteTitleNew")}
+            </Text>
+        </View>
+    );
+
+    const DrawingToggle = () => (
+        !readingMode && (
+            <TouchableOpacity
+                style={{
+                    backgroundColor: drawing.isDrawing ? "#fff" : "transparent",
+                    borderRadius: 8,
+                }}
+                onPress={toggleDrawing}
+            >
+                <Image style={header.img} source={require("../../assets/highlighter.png")} />
+            </TouchableOpacity>
+        )
+    );
+
+    const VoiceIcon = () => (
+        <Tooltip
+            isVisible={showOnboarding}
+            placement="bottom"
+            onClose={() => setShowOnboarding()}
+            content={
+                <View style={styles.tooltip}>
+                    <Text style={[ui.h5, ui.black]}>Lectura en voz alta</Text>
+                    <Text style={[ui.text, ui.black]}>La app leerá esta nota en voz alta.</Text>
+                    <Text style={[ui.text, ui.black]}>Ajusta la voz y la velocidad desde configuración.</Text>
+                </View>
+            }
+        >
+            <TouchableOpacity onPress={handleNotePlaying}>
+                {playing ? pauseVoiceLabel() : startVoiceLabel()}
+            </TouchableOpacity>
+        </Tooltip>
+    );
+
+
+
     return (
         <View style={components.header}>
-            <View style={layout.title}>
-                <Pressable onPress={back}>
-                    <Image style={header.img} source={require("../../assets/back.png")} />
-                </Pressable>
-                <Text style={[ui.h5, { color: "#000" }]}>{note && note.content ? language.t("_headerNoteTitleEdit") : language.t("_headerNoteTitleNew")}</Text>
-            </View>
+            <Title />
 
             <View style={components.row}>
-                { richText.current && !drawing.isDrawing && <HeaderLeftEditor {...{ richText, readingMode }} /> }
-                {
-                    !readingMode && 
-                        <TouchableOpacity style={{ paddingRight: 4, backgroundColor: drawing.isDrawing ? "#fff" : "transparent", borderRadius: 8 }} onPress={() => {
-                            setDrawing({ ...drawing, isDrawing: !drawing.isDrawing });
-                            setActiveOption(activeOption === "drawing" ? null : "drawing");
-                        } }>
-                            <Image style={[header.img]} source={require("../../assets/highlighter.png")}></Image>
-                        </TouchableOpacity>
-                }
-                <TouchableOpacity style={{ paddingLeft: 4 }} onPress={handleNotePlaying}>
-                    { playing ? pauseVoiceLabel() : startVoiceLabel() }
-                </TouchableOpacity>
-                <HeaderNoteOptionsContainer {...{ note, setReadingMode, readingMode, noteSavedId, setIsReady }} />
+                {richText.current && !drawing.isDrawing && (
+                    <HeaderLeftEditor {...{ richText, readingMode }} />
+                )}
+                <DrawingToggle />
+                <VoiceIcon />
+                <HeaderNoteOptionsContainer
+                    {...{ note, setReadingMode, readingMode, noteSavedId, setIsReady }}
+                />
             </View>
-
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+    tooltip: {
+        maxWidth: 200,
+        gap: 16,
+        padding: 8,
+        textAlign: "center"
+    }
+})

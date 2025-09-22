@@ -11,4 +11,10 @@ export const userPreferences = {
     VOICE: "voice",
     RATE: "rate",
     PITCH: "pitch",
+    CHANGELOG_VERSION: "changelog_version",
+    TOOLTIP_VERSION: "tooltip_version"
+}
+
+export const APP = {
+    currentVersion: "2.1.2"
 }
