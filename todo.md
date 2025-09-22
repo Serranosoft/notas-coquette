@@ -6,6 +6,12 @@
     - *header-settings.js* (Título de la cabecera)
     - *settings-container.js* (Los toasts informativos al actualizar las opciones de voz y el speech al cambiar de voz)
     - *settings.js* (Las nuevas opciones de voz)
+    - *header-note.js* (Tooltip que se muestra en el icono de reproducir nota al acceder por primera vez en una nota)
+    - *updates-modal* (El modal va a salir de nuevo en esta versión, hay que eliminar las features antiguas e indicar las nuevas):
+        - Reproducir una nota con voz
+        - Elegir la voz
+        - Configurar el tono de la voz
+        - Configurar el ritmo de la voz
 
 ## Crashes
 
