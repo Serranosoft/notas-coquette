@@ -28,7 +28,6 @@ export default function HeaderNoteContainer({
 
     async function handleOnboarding() {
         const version = await AsyncStorage.getItem(userPreferences.TOOLTIP_VERSION);
-        console.log(version);
         if (!version || version !== APP.currentVersion) {
             setShowOnboarding(true);
             await AsyncStorage.setItem(userPreferences.TOOLTIP_VERSION, APP.currentVersion);
