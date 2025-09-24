@@ -29,10 +29,10 @@ export default function SettingsContainer() {
     }, []);
 
     async function getAvailableVoices() {
-        const language = getLocales()[0].languageTag;
+        const languageTag = getLocales()[0].languageTag;
         let options = await Speech.getAvailableVoicesAsync();
-        options = options.filter((el) => el.language == language);
-        options.forEach((el, _index) => el.label = `Voz ${(_index + 1)}`);
+        options = options.filter((el) => el.language == languageTag);
+        options.forEach((el, _index) => el.label = `${language.t("_voice")} ${(_index + 1)}`);
         setAvailableVoices(options);
     }
 
@@ -117,15 +117,15 @@ export default function SettingsContainer() {
 
         await AsyncStorage.setItem(userPreferences.VOICE, voice);
         if (Platform.OS === "android") {
-            ToastAndroid.showWithGravityAndOffset("Voz actualizada", ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+            ToastAndroid.showWithGravityAndOffset(language.t("_toastVoiceUpdated"), ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
         } else {
-            Alert.alert("Voz actualizada");
+            Alert.alert(language.t("_toastVoiceUpdated"));
         }
     }
 
     useEffect(() => {
         if (voiceHasChanged) {
-            Speech.speak("Esta es mi nota", { voice: voiceState.voice, rate: voiceState.rate, pitch: voiceState.pitch });
+            Speech.speak(language.t("_settingsTestVoice"), { voice: voiceState.voice, rate: voiceState.rate, pitch: voiceState.pitch });
             setVoiceHasChanged(false);
         }
     }, [voiceHasChanged])

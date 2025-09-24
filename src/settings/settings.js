@@ -52,19 +52,19 @@ export default function Settings({
                     {
                         voiceState.voice &&
                             <View style={styles.row}>
-                                <Text style={[ui.text, ui.black, { width: 110 }]}>Tipo de voz</Text>
-                                <VoiceSelector {...{ availableVoices, voice: voiceState.voice, updateVoice }}/>
+                                <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsVoiceType")}</Text>
+                                <VoiceSelector {...{ availableVoices, voice: voiceState.voice, updateVoice, language }}/>
                             </View>
                     }
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 110 }]}>Frecuencia de voz</Text>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsVoiceFrequency")}</Text>
                         <PitchVoiceSlider {...{ updateVoice, pitch: voiceState.pitch, setVoicePitch: (p) => setVoiceState(prev => ({ ...prev, pitch: p })) }} />
                     </View>
                     <View style={styles.row}>
-                        <Text style={[ui.text, ui.black, { width: 110 }]}>Velocidad de voz</Text>
+                        <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsVoiceSpeed")}</Text>
                         <RateVoiceSlider {...{ updateVoice, rate: voiceState.rate, setVoiceRate: (r) => setVoiceState(prev => ({ ...prev, rate: r })) }} />
                     </View>
-                    <Text style={[ui.h5, ui.black]}>Configuración de la nota</Text>
+                    <Text style={[ui.h5, ui.black]}>{language.t("_settingsNote")}</Text>
                     <View style={styles.row}>
                         <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsLineSpacing")}</Text>
                         <LineSpacingSlider {...{ lineSpacing, updateLineSpacing, setLineSpacing }} />

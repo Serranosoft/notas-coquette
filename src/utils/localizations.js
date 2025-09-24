@@ -9,6 +9,13 @@ const translations = {
         // Header Note
         _headerNoteTitleNew: "Añadir nota",
         _headerNoteTitleEdit: "Editar nota",
+        
+        _tooltipVoiceTitle: "Lectura en voz alta",
+        _tooltipVoiceText1: "La app leerá esta nota en voz alta.",
+        _tooltipVoiceText2: "Ajusta la voz y la velocidad desde configuración.",
+
+
+        // Header Dropdown
         _headerNoteDropdownOption1: "Modo edición",
         _headerNoteDropdownOption2: "Modo lectura",
         _headerNoteDropdownOption3: "Eliminar nota",
@@ -17,6 +24,14 @@ const translations = {
         _headerNoteDropdownOption6: "Configuración",
         _headerNoteDropdownOption7: "Añadir a favoritos",
         _headerNoteDropdownOption8: "Eliminar de favoritos",
+
+        //Note 
+        noteInputPlaceholder: "Escribe tu nota...",
+        _toastNoteSaved: "Nota guardada",
+
+        _lockNoteTitle: "Introduce el código PIN",
+        _lockInfo: "Esta nota está bloqueada, introduce el código PIN para poder acceder a ella",
+        _lockError: "PIN incorrecto",
 
         // Home
         _homeButton: "Añadir nota",
@@ -40,43 +55,46 @@ const translations = {
         _langListFarsi: "Farsi",
 
         // Pantalla de settings
+        _settingTitle: "Ajustes",
         _settingsApp: "Ajustes de la aplicación",
         _settingsLang: "Idioma de la aplicación",
+
+        // Ajustes de voz
         _settingsEditor: "Ajustes del editor",
-        _settingsSave: "Guardado automático",
+        _settingsVoice: "Configuración de la voz",
+        _settingsVoiceType: "Tipo de voz",
+        _voice: "Voz",
+        _settingsChooseVoice: "Elige una voz",
+        _toastVoiceUpdated: "Voz actualizada",
+        _settingsTestVoice: "Esta es mi nota",
+        _settingsVoiceFrequency: "Frecuencia de voz",
+        _settingsVoiceSpeed: "Velocidad de voz",
+
+        // Ajustes del texto
+        _settingsNote: "Configuración de la nota",
+        _settingsLineSpacing: "Espacio entre párrafos",
+        _toastLineSpacingUpdated: "Se ha actualizado el interlineado de tus notas",
+        _settingsLetterSpacing: "Espacio entre letras",
+        _toastLetterSpacingUpdated: "Se ha actualizado el espacio entre letras de tus notas",
+        _settingsWordSpacing: "Espacio entre palabras",
+        _toastWordSpacingUpdated: "Se ha actualizado el espacio entre palabras de tus notas",
         _settingsTypo: "Tipografia",
+        _toastTypoSaved: "Tipografía guardada",
         _settingsTypoWarning: "Al cambiar de tipografía se le enviará a la pantalla de inicio para cargar la nueva fuente",
+
+        // Ajustes --> Restablecer
         _settingsResetAll: "Reestablecer todo",
         _settingsRemoveAll: "Eliminar todas las notas",
         _settingsRemoveAllWarning: "¡CUIDADO! Al pulsar en el siguiente botón se eliminarán todas las notas guardadas",
-        _settingsLineSpacing: "Espacio entre párrafos",
-        _settingsLetterSpacing: "Espacio entre letras",
-        _settingsWordSpacing: "Espacio entre palabras",
-
-
-        // 05-09-2025: Faltaban las siguientes variables por traducir
-        _settingTitle: "Configuración",
-        _noteInputPlaceholder: "Escribe tu nota...",
-        _toastNoteSaved: "Nota guardada",
-        _toastTypoSaved: "Tipografía guardada",
-        _toastAutoSave: "Guardado automatico",
-        _toastActivated: "Activado",
-        _toastDeactivated: "Desactivado",
         _toastAllNotesDeleted: "Se han eliminado todas las notas",
-        _lockNoteTitle: "Introduce el código PIN",
-        _lockInfo: "Esta nota está bloqueada, introduce el código PIN para poder acceder a ella",
-        _lockError: "PIN incorrecto",
-        _toastLineSpacingUpdated: "Se ha actualizado el interlineado de tus notas",
-        _toastLetterSpacingUpdated: "Se ha actualizado el espacio entre letras de tus notas",
-        _toastWordSpacingUpdated: "Se ha actualizado el espacio entre palabras de tus notas",
 
         // Modal de updates
         _updatesModalNews: "Novedades",
-        _updatesModalV1_1: "¡Ahora puedes resaltar tus textos! 🖌️",
-        _updatesModalV1_2: "Añadido un nuevo pincel de dibujo: Subrayador 🖍️",
-        _updatesModalV1_3: "Se han mejorado las herramientas de dibujo 🔧",
-        _updatesModalV1_4: "Personaliza el color de cada palabra 🎨",
-        _updatesModalV1_5: "Edita el espacio entre párrafos, letras y palabras ↔️",
+        _updatesModalV1_1: "¡Ahora puedes reproducir una nota con voz! 🖌️",
+        _updatesModalV1_2: "Elige entre diferentes voces",
+        _updatesModalV1_3: "Personaliza el tono de la voz",
+        _updatesModalV1_4: "Personaliza el ritmo de la voz",
+        _updatesModalV1_5: "Disfruta de la aplicación en Italiano y Persa",
         _updatesModalV1_6: "😊 Esperamos que disfrutes de las novedades 😊",
 
     },

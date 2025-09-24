@@ -64,9 +64,9 @@ export default function HeaderNote({
             onClose={() => setShowOnboarding()}
             content={
                 <View style={styles.tooltip}>
-                    <Text style={[ui.h5, ui.black]}>Lectura en voz alta</Text>
-                    <Text style={[ui.text, ui.black]}>La app leerá esta nota en voz alta.</Text>
-                    <Text style={[ui.text, ui.black]}>Ajusta la voz y la velocidad desde configuración.</Text>
+                    <Text style={[ui.h5, ui.black]}>{language.t("_tooltipVoiceTitle")}</Text>
+                    <Text style={[ui.text, ui.black]}>{language.t("_tooltipVoiceText1")}</Text>
+                    <Text style={[ui.text, ui.black]}>{language.t("_tooltipVoiceText2")}</Text>
                 </View>
             }
         >
