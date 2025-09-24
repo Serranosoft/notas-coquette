@@ -20,7 +20,6 @@ export default function HeaderNote({
     setShowOnboarding,
     handleNotePlaying,
     playing,
-    noteSavedId,
     setIsReady,
     back
 }) {
@@ -28,7 +27,7 @@ export default function HeaderNote({
     const { language } = useContext(LangContext);
 
     const toggleDrawing = () => {
-        setDrawing(prev => ({ ...prev, isDrawing: !prev.isDrawing }));
+        setDrawing({ ...drawing, isDrawing: !drawing.isDrawing });
         setActiveOption(activeOption === "drawing" ? null : "drawing");
     };
 
@@ -89,7 +88,7 @@ export default function HeaderNote({
                 <DrawingToggle />
                 <VoiceIcon />
                 <HeaderNoteOptionsContainer
-                    {...{ note, setReadingMode, readingMode, noteSavedId, setIsReady }}
+                    {...{ note, setReadingMode, readingMode, setIsReady }}
                 />
             </View>
         </View>
