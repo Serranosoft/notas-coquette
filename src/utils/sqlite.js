@@ -3,6 +3,7 @@ import uuid from 'react-native-uuid';
 import * as Speech from 'expo-speech';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userPreferences } from './user-preferences';
+import { getLocales } from 'expo-localization';
 
 const db = SQLite.openDatabaseSync("notas-coquette");
 export async function initDb() {
@@ -19,21 +20,22 @@ export async function initDb() {
 }
 
 async function setInitialUserPreferences() {
-
     // Voice
     const availableVoices = await Speech.getAvailableVoicesAsync();
+    const language = getLocales()[0].languageTag;
+    const defaultVoice = availableVoices.filter((el) => el.language == language)[0].name;
     const voice = await AsyncStorage.getItem(userPreferences.VOICE);
     const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
     const rate = await AsyncStorage.getItem(userPreferences.RATE);
-    if (!voice) await AsyncStorage.setItem(userPreferences.VOICE, availableVoices[0].identifier);
+    if (!voice) await AsyncStorage.setItem(userPreferences.VOICE, defaultVoice);
     if (!pitch) await AsyncStorage.setItem(userPreferences.PITCH, "1");
     if (!rate) await AsyncStorage.setItem(userPreferences.RATE, "1");
     // Letter Spacing
     const letterSpacing = await AsyncStorage.getItem(userPreferences.LETTER_SPACING);
-    if (!letterSpacing) await AsyncStorage.setItem(userPreferences.LETTER_SPACING, "1.2");
+    if (!letterSpacing) await AsyncStorage.setItem(userPreferences.LETTER_SPACING, "0");
     // Word Spacing
     const lineSpacing = await AsyncStorage.getItem(userPreferences.LINE_SPACING);
-    if (!lineSpacing) await AsyncStorage.setItem(userPreferences.LINE_SPACING, "0");
+    if (!lineSpacing) await AsyncStorage.setItem(userPreferences.LINE_SPACING, "1.2");
     // Line Spacing
     const wordSpacing = await AsyncStorage.getItem(userPreferences.WORD_SPACING);
     if (!wordSpacing) await AsyncStorage.setItem(userPreferences.WORD_SPACING, "0");
