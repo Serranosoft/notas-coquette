@@ -304,7 +304,6 @@ export default function NoteContainer() {
                         setReadingMode={(rm) => setNoteState(prev => ({ ...prev, readingMode: rm }))}
                         back={back}
                         saveNote={saveNote}
-                        noteSavedId={noteSavedId}
                         richText={richText}
                         activeOption={activeOption}
                         setActiveOption={setActiveOption}

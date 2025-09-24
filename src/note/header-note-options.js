@@ -5,6 +5,7 @@ import { Path, Svg } from "react-native-svg";
 import { components, header, ui } from "../utils/styles";
 import { useContext } from "react";
 import { LangContext } from "../utils/Context";
+import * as Speech from 'expo-speech';
 
 export default function HeaderNoteOptions({ isFavorite, showMenu, updateReadingMode, readingMode, menuVisible, hideMenu, remove, showLockModal, unlock, noteLocked, handleFavorite, setIsReady }) {
 
@@ -58,7 +59,11 @@ export default function HeaderNoteOptions({ isFavorite, showMenu, updateReadingM
             <MenuDivider />
             <MenuItem onPress={() => {
                 router.push({ pathname: "settings" });
+                // Cerrar reproductor de voz si se está reproduciendo
+                Speech.stop();
+                // Esconder menú
                 hideMenu();
+                // Reiniciar nota
                 setIsReady(false);
             }}>
                 <View style={components.row}>
