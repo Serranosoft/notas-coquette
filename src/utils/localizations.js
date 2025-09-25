@@ -90,7 +90,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Novedades",
-        _updatesModalV1_1: "¡Ahora puedes reproducir una nota con voz! 🖌️",
+        _updatesModalV1_1: "¡Ahora puedes reproducir una nota con voz! ",
         _updatesModalV1_2: "Elige entre diferentes voces",
         _updatesModalV1_3: "Personaliza el tono de la voz",
         _updatesModalV1_4: "Personaliza el ritmo de la voz",
@@ -187,7 +187,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "What’s new",
-        _updatesModalV1_1: "Now you can play a note with voice! 🖌️",
+        _updatesModalV1_1: "Now you can play a note with voice! ",
         _updatesModalV1_2: "Choose from different voices",
         _updatesModalV1_3: "Customize the voice tone",
         _updatesModalV1_4: "Customize the voice speed",
@@ -284,7 +284,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Nouveautés",
-        _updatesModalV1_1: "Vous pouvez maintenant lire une note à voix haute ! 🖌️",
+        _updatesModalV1_1: "Vous pouvez maintenant lire une note à voix haute ! ",
         _updatesModalV1_2: "Choisissez parmi différentes voix",
         _updatesModalV1_3: "Personnalisez le ton de la voix",
         _updatesModalV1_4: "Personnalisez le rythme de la voix",
@@ -381,7 +381,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Neuigkeiten",
-        _updatesModalV1_1: "Jetzt kannst du eine Notiz mit Stimme wiedergeben! 🖌️",
+        _updatesModalV1_1: "Jetzt kannst du eine Notiz mit Stimme wiedergeben! ",
         _updatesModalV1_2: "Wähle zwischen verschiedenen Stimmen",
         _updatesModalV1_3: "Passe den Stimmton an",
         _updatesModalV1_4: "Passe das Sprechrhythmus an",
@@ -478,7 +478,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "التحديثات",
-        _updatesModalV1_1: "يمكنك الآن تشغيل الملاحظة بالصوت! 🖌️",
+        _updatesModalV1_1: "يمكنك الآن تشغيل الملاحظة بالصوت! ",
         _updatesModalV1_2: "اختر من بين أصوات مختلفة",
         _updatesModalV1_3: "خصص نبرة الصوت",
         _updatesModalV1_4: "خصص سرعة الصوت",
@@ -575,7 +575,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "नया क्या है",
-        _updatesModalV1_1: "अब आप नोट को आवाज़ के साथ चला सकते हैं! 🖌️",
+        _updatesModalV1_1: "अब आप नोट को आवाज़ के साथ चला सकते हैं! ",
         _updatesModalV1_2: "विभिन्न आवाज़ों में से चुनें",
         _updatesModalV1_3: "आवाज़ का टोन अनुकूलित करें",
         _updatesModalV1_4: "आवाज़ की गति अनुकूलित करें",
@@ -672,7 +672,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Có gì mới",
-        _updatesModalV1_1: "Bây giờ bạn có thể phát ghi chú bằng giọng đọc! 🖌️",
+        _updatesModalV1_1: "Bây giờ bạn có thể phát ghi chú bằng giọng đọc! ",
         _updatesModalV1_2: "Chọn trong số nhiều giọng đọc khác nhau",
         _updatesModalV1_3: "Tùy chỉnh tông giọng",
         _updatesModalV1_4: "Tùy chỉnh nhịp giọng",
@@ -769,7 +769,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Nowości",
-        _updatesModalV1_1: "Teraz możesz odtworzyć notatkę głosowo! 🖌️",
+        _updatesModalV1_1: "Teraz możesz odtworzyć notatkę głosowo! ",
         _updatesModalV1_2: "Wybierz spośród różnych głosów",
         _updatesModalV1_3: "Dostosuj ton głosu",
         _updatesModalV1_4: "Dostosuj tempo głosu",
@@ -866,7 +866,7 @@ const translations = {
 
         // Modal de atualizações
         _updatesModalNews: "Novidades",
-        _updatesModalV1_1: "Agora você pode reproduzir uma nota em voz alta! 🖌️",
+        _updatesModalV1_1: "Agora você pode reproduzir uma nota em voz alta! ",
         _updatesModalV1_2: "Escolha entre diferentes vozes",
         _updatesModalV1_3: "Personalize o tom da voz",
         _updatesModalV1_4: "Personalize o ritmo da voz",
@@ -963,7 +963,7 @@ const translations = {
 
         // Güncelleme modali
         _updatesModalNews: "Yenilikler",
-        _updatesModalV1_1: "Artık bir notu sesli olarak dinleyebilirsiniz! 🖌️",
+        _updatesModalV1_1: "Artık bir notu sesli olarak dinleyebilirsiniz! ",
         _updatesModalV1_2: "Farklı sesler arasından seçim yapın",
         _updatesModalV1_3: "Ses tonunu özelleştirin",
         _updatesModalV1_4: "Ses hızını özelleştirin",
@@ -1060,7 +1060,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Apa yang baru",
-        _updatesModalV1_1: "Sekarang kamu bisa memutar catatan dengan suara! 🖌️",
+        _updatesModalV1_1: "Sekarang kamu bisa memutar catatan dengan suara! ",
         _updatesModalV1_2: "Pilih dari berbagai suara",
         _updatesModalV1_3: "Sesuaikan nada suara",
         _updatesModalV1_4: "Sesuaikan ritme suara",
@@ -1157,7 +1157,7 @@ const translations = {
 
         // Модальное окно обновлений
         _updatesModalNews: "Новости",
-        _updatesModalV1_1: "Теперь вы можете прослушать заметку вслух! 🖌️",
+        _updatesModalV1_1: "Теперь вы можете прослушать заметку вслух! ",
         _updatesModalV1_2: "Выбирайте из разных голосов",
         _updatesModalV1_3: "Настройте тон голоса",
         _updatesModalV1_4: "Настройте ритм голоса",
@@ -1254,7 +1254,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Novità",
-        _updatesModalV1_1: "Ora puoi riprodurre una nota con la voce! 🖌️",
+        _updatesModalV1_1: "Ora puoi riprodurre una nota con la voce! ",
         _updatesModalV1_2: "Scegli tra voci diverse",
         _updatesModalV1_3: "Personalizza il tono della voce",
         _updatesModalV1_4: "Personalizza la velocità della voce",
@@ -1351,7 +1351,7 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "اخبار جدید",
-        _updatesModalV1_1: "اکنون می‌توانید یک یادداشت را با صدا پخش کنید! 🖌️",
+        _updatesModalV1_1: "اکنون می‌توانید یک یادداشت را با صدا پخش کنید! ",
         _updatesModalV1_2: "از بین صداهای مختلف انتخاب کنید",
         _updatesModalV1_3: "تن صدای خود را شخصی‌سازی کنید",
         _updatesModalV1_4: "ریتم صدا را شخصی‌سازی کنید",
