@@ -10,7 +10,7 @@ export default function HeaderNoteContainer({
     setReadingMode,
     readingMode,
     updatePwd,
-    saveNote,
+    isNew,
     back,
     richText,
     activeOption,
@@ -39,7 +39,6 @@ export default function HeaderNoteContainer({
                 drawing,
                 setDrawing,
                 note,
-                saveNote,
                 back,
                 setReadingMode,
                 readingMode,
@@ -51,7 +50,8 @@ export default function HeaderNoteContainer({
                 handleNotePlaying,
                 playing,
                 setShowOnboarding,
-                showOnboarding
+                showOnboarding,
+                isNew
             }}
         />
     )

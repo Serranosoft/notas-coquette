@@ -40,16 +40,17 @@ export default function NoteContainer() {
         sticker: null,
         activeOption: null,
         playing: false,
+        isNew: true,
         drawing: { isDrawing: false, color: "rgb(85,172,238)", width: 2, mode: "scroll", visible: true },
     });
 
     const [isReady, setIsReady] = useState(false);
     const [voiceState, setVoiceState] = useState(null);
 
-    const { 
+    const {
         note, fontSize, separator, readingMode, font, noteSavedId, 
         focused, editorHeight, openStickers, sticker, activeOption, drawing, 
-        letterSpacing, lineSpacing, wordSpacing, playing 
+        letterSpacing, lineSpacing, wordSpacing, playing, isNew
     } = noteState;
 
     const sketchPadRef = useRef();
@@ -61,6 +62,7 @@ export default function NoteContainer() {
     }, []);
 
     useEffect(() => {
+        console.log("app state changed");
         saveNote();
     }, [appStateChanged])
 
@@ -73,6 +75,7 @@ export default function NoteContainer() {
             let noteData;
             if (note) {
                 noteData = note;
+                setNoteState(prev => ({ ...prev, isNew: false }));
             } else {
                 noteData = { id: uuid.v4(), content: "", date: Date.now(), pwd: "" };
             }
@@ -123,6 +126,7 @@ export default function NoteContainer() {
         // Cerrar reproductor de voz si se está reproduciendo
         if (playing) Speech.stop();
         // Guardar nota
+        console.log("back()");
         await saveNote();
         // Volver a la pantalla anterior
         router.back();
@@ -303,12 +307,12 @@ export default function NoteContainer() {
                         readingMode={readingMode}
                         setReadingMode={(rm) => setNoteState(prev => ({ ...prev, readingMode: rm }))}
                         back={back}
-                        saveNote={saveNote}
                         richText={richText}
                         activeOption={activeOption}
                         setActiveOption={setActiveOption}
                         handleNotePlaying={handleNotePlaying}
                         playing={playing}
+                        isNew={isNew}
                     />
                 )
             }} />

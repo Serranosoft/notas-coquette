@@ -21,7 +21,8 @@ export default function HeaderNote({
     handleNotePlaying,
     playing,
     setIsReady,
-    back
+    back,
+    isNew
 }) {
 
     const { language } = useContext(LangContext);
@@ -37,7 +38,7 @@ export default function HeaderNote({
                 <Image style={header.img} source={require("../../assets/back.png")} />
             </Pressable>
             <Text style={[ui.h5, { color: "#000" }]}>
-                {note && note.content ? language.t("_headerNoteTitleEdit") : language.t("_headerNoteTitleNew")}
+                {isNew ? language.t("_headerNoteTitleNew") : language.t("_headerNoteTitleEdit") }
             </Text>
         </View>
     );
