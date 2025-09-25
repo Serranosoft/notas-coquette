@@ -16,3 +16,4 @@
 ## Crashes
 
 ## Errores
+- El header de una nota nueva solo cambia de añadir nota a editar nota cuándo escribes un texto y le das al intro
