@@ -62,7 +62,6 @@ export default function NoteContainer() {
     }, []);
 
     useEffect(() => {
-        console.log("app state changed");
         saveNote();
     }, [appStateChanged])
 
@@ -126,7 +125,6 @@ export default function NoteContainer() {
         // Cerrar reproductor de voz si se está reproduciendo
         if (playing) Speech.stop();
         // Guardar nota
-        console.log("back()");
         await saveNote();
         // Volver a la pantalla anterior
         router.back();
