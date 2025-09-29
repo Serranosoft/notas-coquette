@@ -42,7 +42,7 @@ export default function NoteContent({
                 style={{ zIndex: 999 }}
                 editorStyle={{
                     initialCSSText: `
-                        ${font.fontFace}
+                        ${font && font.fontFace}
                         input[type="checkbox"] {
                             width: 24px;
                             height: 24px;

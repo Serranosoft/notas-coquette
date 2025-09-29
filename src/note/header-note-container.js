@@ -17,7 +17,8 @@ export default function HeaderNoteContainer({
     setActiveOption,
     setIsReady,
     handleNotePlaying,
-    playing
+    playing,
+    voiceState
 }) {
 
     const [showOnboarding, setShowOnboarding] = useState(false);
@@ -51,7 +52,8 @@ export default function HeaderNoteContainer({
                 playing,
                 setShowOnboarding,
                 showOnboarding,
-                isNew
+                isNew,
+                voiceState
             }}
         />
     )

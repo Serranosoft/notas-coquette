@@ -23,11 +23,11 @@ async function setInitialUserPreferences() {
     // Voice
     const availableVoices = await Speech.getAvailableVoicesAsync();
     const language = getLocales()[0].languageTag;
-    const defaultVoice = availableVoices.filter((el) => el.language == language)[0].name;
+    const defaultVoice = availableVoices.filter((el) => el.language == language)[0]?.name || "0";
     const voice = await AsyncStorage.getItem(userPreferences.VOICE);
     const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
     const rate = await AsyncStorage.getItem(userPreferences.RATE);
-    if (!voice) await AsyncStorage.setItem(userPreferences.VOICE, defaultVoice);
+    if (!voice || voice === "0") await AsyncStorage.setItem(userPreferences.VOICE, defaultVoice);
     if (!pitch) await AsyncStorage.setItem(userPreferences.PITCH, "1");
     if (!rate) await AsyncStorage.setItem(userPreferences.RATE, "1");
     // Letter Spacing

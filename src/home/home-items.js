@@ -15,6 +15,7 @@ function HomeItems({ notes, columnNumber, selected, setSelected }) {
                     contentContainerStyle={layout.contentList}
                     columnWrapperStyle={columnNumber > 1 && gap.medium}
                     renderItem={({ item, index }) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} index={index} />}
+                    keyExtractor={(item) => item.id}
                 />
             </View>
         </View>

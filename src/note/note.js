@@ -45,7 +45,7 @@ function Note(
     return (
         <View style={[layout.flex, layout.backgroundWhite]}>
             {
-                isReady &&
+                isReady && font &&
                 <>
                     {activeOption === 'separators' && !readingMode && (
                         <Separators setSeparator={setSeparator} />

@@ -48,8 +48,8 @@ export default function NoteContainer() {
     const [voiceState, setVoiceState] = useState(null);
 
     const {
-        note, fontSize, separator, readingMode, font, noteSavedId, 
-        focused, editorHeight, openStickers, sticker, activeOption, drawing, 
+        note, fontSize, separator, readingMode, font, noteSavedId,
+        focused, editorHeight, openStickers, sticker, activeOption, drawing,
         letterSpacing, lineSpacing, wordSpacing, playing, isNew
     } = noteState;
 
@@ -118,7 +118,16 @@ export default function NoteContainer() {
     }, [drawing])
 
     useEffect(() => {
-        if (note && lineSpacing && letterSpacing && wordSpacing && font) setIsReady(true);
+        if (
+            note &&
+            lineSpacing !== null &&
+            letterSpacing !== null &&
+            wordSpacing !== null &&
+            font
+        ) {
+            setIsReady(true);
+        }
+
     }, [note, lineSpacing, letterSpacing, wordSpacing, font])
 
     async function back() {
@@ -185,7 +194,7 @@ export default function NoteContainer() {
         // Letter spacing
         const letterSpacing = await AsyncStorage.getItem(userPreferences.LETTER_SPACING);
         setNoteState(prev => ({ ...prev, letterSpacing: letterSpacing }));
-
+        
         // Voice
         const voice = await AsyncStorage.getItem(userPreferences.VOICE);
         const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
@@ -310,6 +319,7 @@ export default function NoteContainer() {
                         setActiveOption={setActiveOption}
                         handleNotePlaying={handleNotePlaying}
                         playing={playing}
+                        voiceState={voiceState}
                         isNew={isNew}
                     />
                 )

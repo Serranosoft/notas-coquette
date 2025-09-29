@@ -22,7 +22,8 @@ export default function HeaderNote({
     playing,
     setIsReady,
     back,
-    isNew
+    isNew,
+    voiceState
 }) {
 
     const { language } = useContext(LangContext);
@@ -77,7 +78,6 @@ export default function HeaderNote({
     );
 
 
-
     return (
         <View style={components.header}>
             <Title />
@@ -87,7 +87,7 @@ export default function HeaderNote({
                     <HeaderLeftEditor {...{ richText, readingMode }} />
                 )}
                 <DrawingToggle />
-                <VoiceIcon />
+                { voiceState && voiceState.voice !== "0" && <VoiceIcon /> }
                 <HeaderNoteOptionsContainer
                     {...{ note, setReadingMode, readingMode, setIsReady }}
                 />
