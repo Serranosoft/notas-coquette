@@ -88,6 +88,10 @@ const translations = {
         _settingsRemoveAllWarning: "¡CUIDADO! Al pulsar en el siguiente botón se eliminarán todas las notas guardadas",
         _toastAllNotesDeleted: "Se han eliminado todas las notas",
 
+        // Notificaciones
+        _notificationsTitle: "Shhh... Guardamos tus secretos 🤏",
+        _notificationsBody: "Bloquea tus notas antes de que te descubran",
+
         // Modal de updates
         _updatesModalNews: "Novedades",
         _updatesModalV1_1: "¡Ahora puedes reproducir una nota con voz! ",
@@ -184,6 +188,11 @@ const translations = {
         _settingsRemoveAll: "Delete all notes",
         _settingsRemoveAllWarning: "WARNING! By pressing the following button all saved notes will be deleted",
         _toastAllNotesDeleted: "All notes have been deleted",
+
+        // Notificaciones
+        _notificationsTitle: "Shhh... We keep your secrets 🤏",
+        _notificationsBody: "Lock your notes before they get discovered",
+
 
         // Modal de updates
         _updatesModalNews: "What’s new",
@@ -282,6 +291,11 @@ const translations = {
         _settingsRemoveAllWarning: "ATTENTION ! En appuyant sur le bouton suivant, toutes les notes sauvegardées seront supprimées",
         _toastAllNotesDeleted: "Toutes les notes ont été supprimées",
 
+        // Notificaciones
+        _notificationsTitle: "Chut... Nous gardons tes secrets 🤏",
+        _notificationsBody: "Verrouille tes notes avant qu’on les découvre",
+
+
         // Modal de updates
         _updatesModalNews: "Nouveautés",
         _updatesModalV1_1: "Vous pouvez maintenant lire une note à voix haute ! ",
@@ -378,6 +392,11 @@ const translations = {
         _settingsRemoveAll: "Alle Notizen löschen",
         _settingsRemoveAllWarning: "ACHTUNG! Beim Drücken des nächsten Buttons werden alle gespeicherten Notizen gelöscht",
         _toastAllNotesDeleted: "Alle Notizen wurden gelöscht",
+
+        // Notificaciones
+        _notificationsTitle: "Pssst... Wir bewahren deine Geheimnisse 🤏",
+        _notificationsBody: "Sperre deine Notizen, bevor sie entdeckt werden",
+
 
         // Modal de updates
         _updatesModalNews: "Neuigkeiten",
@@ -476,6 +495,10 @@ const translations = {
         _settingsRemoveAllWarning: "تحذير! عند الضغط على الزر التالي سيتم حذف جميع الملاحظات المحفوظة",
         _toastAllNotesDeleted: "تم حذف جميع الملاحظات",
 
+        // Notificaciones
+        _notificationsTitle: "شش... نحن نحفظ أسرارك 🤏",
+        _notificationsBody: "اقفل ملاحظاتك قبل أن يكتشفها أحد",
+
         // Modal de updates
         _updatesModalNews: "التحديثات",
         _updatesModalV1_1: "يمكنك الآن تشغيل الملاحظة بالصوت! ",
@@ -572,6 +595,11 @@ const translations = {
         _settingsRemoveAll: "सभी नोट्स हटाएँ",
         _settingsRemoveAllWarning: "सावधान! अगले बटन को दबाने पर सभी सहेजे गए नोट्स हटा दिए जाएंगे",
         _toastAllNotesDeleted: "सभी नोट्स हटा दिए गए हैं",
+
+        // Notificaciones
+        _notificationsTitle: "श्श... हम तुम्हारे राज़ रखते हैं 🤏",
+        _notificationsBody: "पता चलने से पहले अपनी नोट्स लॉक करें",
+
 
         // Modal de updates
         _updatesModalNews: "नया क्या है",
@@ -670,6 +698,10 @@ const translations = {
         _settingsRemoveAllWarning: "CẢNH BÁO! Nhấn nút tiếp theo sẽ xóa tất cả ghi chú đã lưu",
         _toastAllNotesDeleted: "Tất cả ghi chú đã bị xóa",
 
+        // Notificaciones
+        _notificationsTitle: "Suỵt... Chúng tôi giữ bí mật của bạn 🤏",
+        _notificationsBody: "Khóa ghi chú của bạn trước khi bị phát hiện",
+
         // Modal de updates
         _updatesModalNews: "Có gì mới",
         _updatesModalV1_1: "Bây giờ bạn có thể phát ghi chú bằng giọng đọc! ",
@@ -766,6 +798,10 @@ const translations = {
         _settingsRemoveAll: "Usuń wszystkie notatki",
         _settingsRemoveAllWarning: "UWAGA! Kliknięcie następnego przycisku spowoduje usunięcie wszystkich zapisanych notatek",
         _toastAllNotesDeleted: "Wszystkie notatki zostały usunięte",
+
+        // Notificaciones
+        _notificationsTitle: "Ciii... Zachowujemy twoje sekrety 🤏",
+        _notificationsBody: "Zablokuj swoje notatki, zanim ktoś je odkryje",
 
         // Modal de updates
         _updatesModalNews: "Nowości",
@@ -864,6 +900,10 @@ const translations = {
         _settingsRemoveAllWarning: "ATENÇÃO! Ao clicar no botão a seguir, todas as notas salvas serão excluídas",
         _toastAllNotesDeleted: "Todas as notas foram excluídas",
 
+        // Notificaciones
+        _notificationsTitle: "Shhh... Guardamos os teus segredos 🤏",
+        _notificationsBody: "Bloqueia as tuas notas antes que sejam descobertas",
+
         // Modal de atualizações
         _updatesModalNews: "Novidades",
         _updatesModalV1_1: "Agora você pode reproduzir uma nota em voz alta! ",
@@ -960,6 +1000,10 @@ const translations = {
         _settingsRemoveAll: "Tüm notları sil",
         _settingsRemoveAllWarning: "DİKKAT! Sonraki düğmeye tıkladığınızda tüm kayıtlı notlar silinecektir",
         _toastAllNotesDeleted: "Tüm notlar silindi",
+
+        // Notificaciones
+        _notificationsTitle: "Şşşt... Sırlarını saklıyoruz 🤏",
+        _notificationsBody: "Notlarını fark edilmeden önce kilitle",
 
         // Güncelleme modali
         _updatesModalNews: "Yenilikler",
@@ -1058,6 +1102,10 @@ const translations = {
         _settingsRemoveAllWarning: "PERINGATAN! Menekan tombol berikut akan menghapus semua catatan yang tersimpan",
         _toastAllNotesDeleted: "Semua catatan dihapus",
 
+        // Notificaciones
+        _notificationsTitle: "Shhh... Kami simpan rahasiamu 🤏",
+        _notificationsBody: "Kunci catatanmu sebelum ada yang menemukannya",
+
         // Modal de updates
         _updatesModalNews: "Apa yang baru",
         _updatesModalV1_1: "Sekarang kamu bisa memutar catatan dengan suara! ",
@@ -1154,6 +1202,11 @@ const translations = {
         _settingsRemoveAll: "Удалить все заметки",
         _settingsRemoveAllWarning: "ВНИМАНИЕ! При нажатии на следующую кнопку все сохранённые заметки будут удалены",
         _toastAllNotesDeleted: "Все заметки удалены",
+
+        // Notificaciones
+        _notificationsTitle: "Тссс... Мы храним твои секреты 🤏",
+        _notificationsBody: "Заблокируй свои заметки, пока их не нашли",
+
 
         // Модальное окно обновлений
         _updatesModalNews: "Новости",
@@ -1252,6 +1305,10 @@ const translations = {
         _settingsRemoveAllWarning: "ATTENZIONE! Premendo il pulsante successivo verranno eliminate tutte le note salvate",
         _toastAllNotesDeleted: "Tutte le note sono state eliminate",
 
+        // Notificaciones
+        _notificationsTitle: "Shhh... Conserviamo i tuoi segreti 🤏",
+        _notificationsBody: "Blocca le tue note prima che vengano scoperte",
+
         // Modal de updates
         _updatesModalNews: "Novità",
         _updatesModalV1_1: "Ora puoi riprodurre una nota con la voce! ",
@@ -1348,6 +1405,10 @@ const translations = {
         _settingsRemoveAll: "حذف همه یادداشت‌ها",
         _settingsRemoveAllWarning: "هشدار! با فشار دادن دکمه بعدی تمام یادداشت‌های ذخیره‌شده حذف خواهند شد",
         _toastAllNotesDeleted: "تمام یادداشت‌ها حذف شدند",
+
+        // Notificaciones
+        _notificationsTitle: "هیس... ما رازهایت را نگه می‌داریم 🤏",
+        _notificationsBody: "یادداشت‌هایت را قبل از اینکه کشف شوند قفل کن",
 
         // Modal de updates
         _updatesModalNews: "اخبار جدید",
