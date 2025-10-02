@@ -52,7 +52,8 @@
     "react-native-walkthrough-tooltip": "^1.6.0",
     "react-native-webview": "13.13.5",
     "reanimated-color-picker": "^4.1.0",
-    "simplify-js": "^1.2.4"
+    "simplify-js": "^1.2.4",
+    "expo-notifications": "~0.31.4"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0"

@@ -15,6 +15,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import UpdatesModal from "../src/modals/updates-modal";
 import * as StoreReview from 'expo-store-review';
 import { userPreferences } from "../src/utils/user-preferences";
+import * as Notifications from 'expo-notifications';
+import { scheduleWeeklyNotification } from "../src/utils/notifications";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,15 +30,51 @@ export default function Layout() {
     });
 
     // Idioma
-    const [language, setLanguage] = useState(getLocales()[0].languageCode || "es");
+    const [language, setLanguage] = useState(null);
     const i18n = new I18n(translations);
-    i18n.locale = language;
+    if (language) i18n.locale = language;
     i18n.enableFallback = true
     i18n.defaultLocale = "es";
 
+    // Gestión de anuncios
+    const [adsLoaded, setAdsLoaded] = useState(false);
+    const [adTrigger, setAdTrigger] = useState(0);
+    const [showOpenAd, setShowOpenAd] = useState(true);
+    const adsHandlerRef = createRef();
+
+    // Arrancar base de datos, configurar notificaciones y cargar preferencias de usuario
     useEffect(() => {
         init();
+        configureNotifications();
+        getUserPreferences();
     }, [])
+
+    // Al terminar de configurar el idioma se lanza notificación
+    useEffect(() => {
+        if (language) {
+            scheduleWeeklyNotification(i18n);
+        }
+    }, [language])
+
+    // Ocultar SplashScreen cuando la fuente y el idioma se ha cargado.
+    useEffect(() => {
+        if (fontsLoaded && language) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, language]);
+
+    // Gestión de anuncios
+    useEffect(() => {
+        if (adTrigger > 3) {
+            askForReview();
+        }
+        if (adsLoaded) {
+            if (adTrigger > 4) {
+                adsHandlerRef.current.showIntersitialAd();
+                setAdTrigger(0);
+            }
+        }
+    }, [adTrigger])
 
     async function init() {
         await initDb();
@@ -66,29 +104,22 @@ export default function Layout() {
         }
     }
 
-    useEffect(() => {
-        if (fontsLoaded) {
-            SplashScreen.hideAsync();
-        }
-    }, [fontsLoaded])
+    async function getUserPreferences() {
+        // Language
+        const language = await AsyncStorage.getItem(userPreferences.LANGUAGE);
+        setLanguage(language || getLocales()[0].languageCode);
+    }
 
-    // Gestión de anuncios
-    const [adsLoaded, setAdsLoaded] = useState(false);
-    const [adTrigger, setAdTrigger] = useState(0);
-    const [showOpenAd, setShowOpenAd] = useState(true);
-    const adsHandlerRef = createRef();
-
-    useEffect(() => {
-        if (adTrigger > 3) {
-            askForReview();
-        }
-        if (adsLoaded) {
-            if (adTrigger > 4) {
-                adsHandlerRef.current.showIntersitialAd();
-                setAdTrigger(0);
-            }
-        }
-    }, [adTrigger])
+    async function configureNotifications() {
+        Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+                shouldShowBanner: true,
+                shouldShowList: true,
+                shouldPlaySound: false,
+                shouldSetBadge: false,
+            }),
+        });
+    }
 
     async function askForReview() {
         if (await StoreReview.hasAction()) {
