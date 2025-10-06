@@ -206,7 +206,7 @@ export const components = {
         layout.alignCenter,
         layout.backgroundLight,
         padding.mediumHorizontal,
-        padding.mediumVertical,
+        padding.bigVertical,
         gap.small
     ],
 

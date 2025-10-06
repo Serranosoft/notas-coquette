@@ -15,7 +15,9 @@ export default function HeaderHomeOptions({ visible, hideMenu, showMenu, changeL
             onRequestClose={hideMenu}
             anchor={(
                 <TouchableWithoutFeedback onPress={showMenu}>
-                    <Image source={require("../../assets/more.png")} style={header.img} />
+                    <View style={{ padding: 12 }}>
+                        <Image source={require("../../assets/more.png")} style={header.img} />
+                    </View>
                 </TouchableWithoutFeedback>
             )}>
             <MenuItem onPress={changeLayout}>
