@@ -8,10 +8,20 @@ import { baseSize } from '../rich-editor/drawing/drawing';
 const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const [paths, setPaths] = useState([]);
     const currentPoints = useRef([]);
+    const canvasRef = useRef();
     const pathsRef = useRef(paths);
     const drawingRef = useRef(drawing);
     const [rubberPos, setRubberPos] = useState(null);
     const hasMoved = useRef(false);
+
+    // Limpiar canvas si el componente se desmonta
+    useEffect(() => {
+        return () => {
+            if (canvasRef.current?.dispose) {
+                canvasRef.current.dispose();
+            }
+        };
+    }, []);
 
     useEffect(() => {
         loadFromDB();
@@ -181,7 +191,7 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
                     return;
                 }
                 setRubberPos(null);
-                
+
                 if (drawingRef.current.mode === "line" || drawingRef.current.mode === "marker") {
                     const start = currentPoints.current[0];
                     const end = currentPoints.current[1] || currentPoints.current[0];
@@ -277,7 +287,7 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     return (
         <View style={[styles.container, { zIndex: 1000, pointerEvents: drawing.isDrawing ? "auto" : "none" }]} >
             <View style={styles.canvasContainer} {...panResponder.panHandlers}>
-                <Canvas style={styles.canvas}>
+                <Canvas ref={canvasRef} style={styles.canvas}>
                     {renderPaths.map((p, i) => (
                         <Path
                             key={i}
