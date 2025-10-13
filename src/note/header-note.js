@@ -87,7 +87,7 @@ export default function HeaderNote({
                     <HeaderLeftEditor {...{ richText, readingMode }} />
                 )}
                 <DrawingToggle />
-                { voiceState && voiceState.voice !== "0" && <VoiceIcon /> }
+                { voiceState && voiceState.voice && voiceState.voice !== "0" && <VoiceIcon /> }
                 <HeaderNoteOptionsContainer
                     {...{ note, setReadingMode, readingMode, setIsReady }}
                 />
