@@ -63,7 +63,7 @@ export default function SettingsContainer() {
         } else {
             setTypo("roboto")
         }
-        console.log(voice);
+
         if (lineSpacing) setLineSpacing(parseFloat(lineSpacing));
         if (wordSpacing) setWordSpacing(parseFloat(wordSpacing));
         if (letterSpacing) setLetterSpacing(parseFloat(letterSpacing));
@@ -110,8 +110,6 @@ export default function SettingsContainer() {
     }
 
     async function updateVoice({ voice, rate, pitch }) {
-        console.log("update voice");
-        console.log(voice);
         if (voice) setVoiceState(prev => ({ ...prev, voice: voice }));
         if (rate) setVoiceState(prev => ({ ...prev, rate: rate }));
         if (pitch) setVoiceState(prev => ({ ...prev, pitch: pitch }));
