@@ -51,7 +51,7 @@ export default function Settings({
                     {
                         voiceState.voice &&
                         <>
-                        <Text style={[ui.h5, ui.black]}>Configuración de la voz</Text>
+                        <Text style={[ui.h5, ui.black]}>{language.t("_settingsVoice")}</Text>
                             <View style={styles.row}>
                                 <Text style={[ui.text, ui.black, { width: 110 }]}>{language.t("_settingsVoiceType")}</Text>
                                 <VoiceSelector {...{ availableVoices, voice: voiceState.voice, updateVoice, language }} />
