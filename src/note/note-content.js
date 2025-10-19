@@ -38,7 +38,7 @@ export default function NoteContent({
                 useContainer={true}
                 ref={richText}
                 placeholder="..."
-                onChange={(content) => note.content = content}
+                onChange={(content) => {note.content = content; console.log(content);}}
                 style={{ zIndex: 999 }}
                 editorStyle={{
                     initialCSSText: `

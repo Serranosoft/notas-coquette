@@ -194,7 +194,7 @@ export default function NoteContainer() {
         // Letter spacing
         const letterSpacing = await AsyncStorage.getItem(userPreferences.LETTER_SPACING);
         setNoteState(prev => ({ ...prev, letterSpacing: letterSpacing }));
-        
+
         // Voice
         const voice = await AsyncStorage.getItem(userPreferences.VOICE);
         const pitch = await AsyncStorage.getItem(userPreferences.PITCH);
@@ -213,8 +213,10 @@ export default function NoteContainer() {
     }, [separator])
 
     useEffect(() => {
-        richText.current?.insertImage(sticker);
-        setNoteState(prev => ({ ...prev, sticker: null }))
+        if (sticker) {
+            richText.current?.insertImage(sticker);
+            setNoteState(prev => ({ ...prev, sticker: null }))
+        }
     }, [sticker])
 
     // No permitir dibujar en el caso de que readingMode es true
