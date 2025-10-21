@@ -1,5 +1,5 @@
 import { SplashScreen, Stack } from "expo-router";
-import { View, StatusBar, StyleSheet } from "react-native";
+import { View, StatusBar, StyleSheet, Platform } from "react-native";
 import { createRef, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { colors } from "../src/utils/styles";
@@ -17,6 +17,7 @@ import * as StoreReview from 'expo-store-review';
 import { userPreferences } from "../src/utils/user-preferences";
 import * as Notifications from 'expo-notifications';
 import { scheduleWeeklyNotification } from "../src/utils/notifications";
+import Constants from "expo-constants";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -137,7 +138,7 @@ export default function Layout() {
             <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, adsLoaded: adsLoaded, setShowOpenAd: setShowOpenAd }}>
                 <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
                 <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
-                    <View style={styles.container}>
+                    <View style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
                         <Stack />
                         <StatusBar style="light" />
                     </View>
@@ -152,8 +153,10 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        // paddingTop: Constants.statusBarHeight,
         backgroundColor: colors.light
+    },
+    iosWrapper: {
+        paddingTop: Constants.statusBarHeight,
     },
     wrapper: {
         flex: 1,
