@@ -1,81 +1,82 @@
 {
-    "expo": {
-        "name": "Notas Coquette",
-        "slug": "notas-coquette",
-        "version": "2.1.5",
-        "orientation": "portrait",
-        "icon": "./assets/icon-notes.png",
-        "userInterfaceStyle": "light",
-        "newArchEnabled": false,
-        "splash": {
-            "image": "./assets/splash-notes-coquette.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#FACCD6"
-        },
-        "scheme": "notas-coquette",
-        "assetBundlePatterns": [
-            "**/*"
-        ],
-        "ios": {
-            "supportsTablet": true,
-            "buildNumber": "3",
-            "bundleIdentifier": "com.paulaymanu113.notascoquette",
-            "infoPlist": {
-                "ITSAppUsesNonExemptEncryption": false
-            }
-        },
-        "locales": {
-            "en": "./languages/english.json",
-            "ar": "./languages/arab.json",
-            "de": "./languages/deutsch.json",
-            "hi": "./languages/hindi.json",
-            "fr": "./languages/french.json",
-            "id": "./languages/indonesian.json",
-            "pt": "./languages/portuguese.json",
-            "ru": "./languages/russian.json",
-            "pl": "./languages/polish.json",
-            "vi": "./languages/vietnamese.json",
-            "tr": "./languages/turkish.json",
-            "it": "./languages/italian.json",
-            "fa": "./languages/farsi.json"
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/icon-notes.png",
-                "backgroundColor": "#FACCD6"
-            },
-            "versionCode": 32,
-            "package": "com.paulaymanu113.notascoquette"
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "extra": {
-            "eas": {
-                "projectId": "c19b7487-3441-46c9-aaef-1b2d4f52c873"
-            }
-        },
-        "plugins": [
-            "expo-font",
-            "expo-router",
-            "expo-localization",
-            [
-                "react-native-google-mobile-ads",
-                {
-                    "androidAppId": "ca-app-pub-3738413299329691~3051293801",
-                    "iosAppId": "ca-app-pub-3738413299329691~4908502313",
-                    "delayAppMeasurementInit": true,
-                    "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
-                }
-            ],
-            [
-                "expo-build-properties",
-                {
-                    "android": {
-                        "extraProguardRules": "-keep class com.google.android.gms.internal.consent_sdk.** { *; }"
-                    }
-                }
-            ]
-        ]
-    }
+  "expo": {
+    "name": "Notas Coquette",
+    "slug": "notas-coquette",
+    "version": "2.1.5",
+    "orientation": "portrait",
+    "icon": "./assets/icon-notes.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash-notes-coquette.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FACCD6"
+    },
+    "scheme": "notas-coquette",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "buildNumber": "3",
+      "bundleIdentifier": "com.paulaymanu113.notascoquette",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "locales": {
+      "en": "./languages/english.json",
+      "ar": "./languages/arab.json",
+      "de": "./languages/deutsch.json",
+      "hi": "./languages/hindi.json",
+      "fr": "./languages/french.json",
+      "id": "./languages/indonesian.json",
+      "pt": "./languages/portuguese.json",
+      "ru": "./languages/russian.json",
+      "pl": "./languages/polish.json",
+      "vi": "./languages/vietnamese.json",
+      "tr": "./languages/turkish.json",
+      "it": "./languages/italian.json",
+      "fa": "./languages/farsi.json"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon-notes.png",
+        "backgroundColor": "#FACCD6"
+      },
+      "versionCode": 33,
+      "package": "com.paulaymanu113.notascoquette"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c19b7487-3441-46c9-aaef-1b2d4f52c873"
+      }
+    },
+    "plugins": [
+      "expo-font",
+      "expo-router",
+      "expo-localization",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3738413299329691~3051293801",
+          "iosAppId": "ca-app-pub-3738413299329691~4908502313",
+          "delayAppMeasurementInit": true,
+          "userTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraProguardRules": "-keep class com.google.android.gms.internal.consent_sdk.** { *; }"
+          }
+        }
+      ],
+      "expo-asset"
+    ]
+  }
 }

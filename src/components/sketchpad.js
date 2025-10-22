@@ -15,11 +15,27 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const hasMoved = useRef(false);
 
     // Limpiar canvas si el componente se desmonta
+    const disposed = useRef(false);
+
     useEffect(() => {
         return () => {
-            if (canvasRef.current?.dispose) {
-                canvasRef.current.dispose();
-            }
+            if (disposed.current) return;
+            disposed.current = true;
+
+            // Liberar después de un frame completo
+            requestAnimationFrame(() => {
+                // Y añadir un micro-delay para asegurar que HWUI terminó
+                setTimeout(() => {
+                    try {
+                        // Seguridad: verificar que sigue existiendo el contexto
+                        if (canvasRef.current?._nativeId) {
+                            canvasRef.current.dispose?.();
+                        }
+                    } catch (err) {
+                        console.warn("Error liberando canvas:", err);
+                    }
+                }, 100);
+            });
         };
     }, []);
 
