@@ -78,7 +78,6 @@ export default function Layout() {
     }, [adTrigger])
 
     async function init() {
-        SplashScreen.preventAutoHideAsync().catch(() => {});
         await initDb();
         await setInitialNote(language);
         // Migration progress.
