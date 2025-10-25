@@ -60,7 +60,7 @@ export default function Layout() {
     // Ocultar SplashScreen cuando la fuente y el idioma se ha cargado.
     useEffect(() => {
         if (fontsLoaded && language) {
-            SplashScreen.hideAsync().catch(() => {});
+            SplashScreen.hideAsync();
         }
     }, [fontsLoaded, language]);
 
@@ -78,7 +78,6 @@ export default function Layout() {
     }, [adTrigger])
 
     async function init() {
-        SplashScreen.preventAutoHideAsync().catch(() => {});
         await initDb();
         await setInitialNote(language);
         // Migration progress.
