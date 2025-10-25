@@ -14,12 +14,21 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const [rubberPos, setRubberPos] = useState(null);
     const hasMoved = useRef(false);
 
-    // Limpiar canvas si el componente se desmonta
+    const disposed = useRef(false);
+
     useEffect(() => {
         return () => {
-            if (canvasRef.current?.dispose) {
-                canvasRef.current.dispose();
-            }
+            if (disposed.current) return;
+            disposed.current = true;
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    try {
+                        if (canvasRef.current?._nativeId)canvasRef.current.dispose?.();
+                    } catch (err) {
+                        console.warn("Error liberando canvas:", err);
+                    }
+                }, 100);
+            });
         };
     }, []);
 
