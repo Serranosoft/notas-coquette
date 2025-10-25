@@ -138,7 +138,7 @@ export default function Layout() {
             <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, adsLoaded: adsLoaded, setShowOpenAd: setShowOpenAd }}>
                 <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
                 <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
-                    <View style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
+                    <View style={[styles.container, Platform.OS === "ios" ? styles.iosWrapper : null]}>
                         <Stack />
                         <StatusBar style="light" />
                     </View>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light
     },
     iosWrapper: {
-        paddingTop: Constants.statusBarHeight,
+        paddingTop: Constants.statusBarHeight || 0,
     },
     wrapper: {
         flex: 1,
