@@ -1,7 +1,6 @@
-import { SplashScreen, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { View, StatusBar, StyleSheet, Platform } from "react-native";
 import { createRef, useEffect, useState } from "react";
-import { useFonts } from "expo-font";
 import { colors } from "../src/utils/styles";
 import { setInitialNote } from "../src/utils/setInitialNote";
 import { getLocales } from 'expo-localization';
@@ -19,19 +18,11 @@ import * as Notifications from 'expo-notifications';
 import { scheduleWeeklyNotification } from "../src/utils/notifications";
 import Constants from "expo-constants";
 
-SplashScreen.preventAutoHideAsync();
-
 export default function Layout() {
 
-    // Carga de fuentes.
-    const [fontsLoaded] = useFonts({
-        "Regular": require("../assets/fonts/AncizarSans-Regular.ttf"),
-        "Medium": require("../assets/fonts/AncizarSans-Medium.ttf"),
-        "Semibold": require("../assets/fonts/AncizarSans-Bold.ttf"),
-    });
-
     // Idioma
-    const [language, setLanguage] = useState(null);
+    const [langRdy, setLangRdy] = useState(false);
+    const [language, setLanguage] = useState(getLocales()[0].languageCode);
     const i18n = new I18n(translations);
     if (language) i18n.locale = language;
     i18n.enableFallback = true
@@ -45,24 +36,17 @@ export default function Layout() {
 
     // Arrancar base de datos, configurar notificaciones y cargar preferencias de usuario
     useEffect(() => {
-        init();
-        configureNotifications();
         getUserPreferences();
+        configureNotifications();
+        init();
     }, [])
 
     // Al terminar de configurar el idioma se lanza notificación
     useEffect(() => {
-        if (language) {
+        if (langRdy) {
             scheduleWeeklyNotification(i18n);
         }
-    }, [language])
-
-    // Ocultar SplashScreen cuando la fuente y el idioma se ha cargado.
-    useEffect(() => {
-        if (fontsLoaded && language) {
-            SplashScreen.hideAsync().catch(() => {});
-        }
-    }, [fontsLoaded, language]);
+    }, [language, langRdy])
 
     // Gestión de anuncios
     useEffect(() => {
@@ -109,6 +93,7 @@ export default function Layout() {
         // Language
         const language = await AsyncStorage.getItem(userPreferences.LANGUAGE);
         setLanguage(language || getLocales()[0].languageCode);
+        setLangRdy(true);
     }
 
     async function configureNotifications() {
@@ -126,11 +111,6 @@ export default function Layout() {
         if (await StoreReview.hasAction()) {
             StoreReview.requestReview()
         }
-    }
-
-    // Esperar hasta que las fuentes se carguen
-    if (!fontsLoaded) {
-        return null;
     }
 
     return (

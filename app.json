@@ -56,7 +56,79 @@
             }
         },
         "plugins": [
-            "expo-font",
+            [
+                "expo-font",
+                {
+                    "android": {
+                        "fonts": [
+                            {
+                                "fontFamily": "Regular",
+                                "fontDefinitions": [
+                                    {
+                                        "path": "./assets/fonts/AncizarSans-Regular.ttf",
+                                        "weight": "400",
+                                        "style": "normal"
+                                    }
+                                ]
+                            },
+                            {
+                                "fontFamily": "Medium",
+                                "fontDefinitions": [
+                                    {
+                                        "path": "./assets/fonts/AncizarSans-Medium.ttf",
+                                        "weight": "500",
+                                        "style": "normal"
+                                    }
+                                ]
+                            },
+                            {
+                                "fontFamily": "Semibold",
+                                "fontDefinitions": [
+                                    {
+                                        "path": "./assets/fonts/AncizarSans-Bold.ttf",
+                                        "weight": "600",
+                                        "style": "normal"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "ios": {
+                        "fonts": [
+                            {
+                                "fontFamily": "Regular",
+                                "fontDefinitions": [
+                                    {
+                                        "path": "./assets/fonts/AncizarSans-Regular.ttf",
+                                        "weight": "400",
+                                        "style": "normal"
+                                    }
+                                ]
+                            },
+                            {
+                                "fontFamily": "Medium",
+                                "fontDefinitions": [
+                                    {
+                                        "path": "./assets/fonts/AncizarSans-Medium.ttf",
+                                        "weight": "500",
+                                        "style": "normal"
+                                    }
+                                ]
+                            },
+                            {
+                                "fontFamily": "Semibold",
+                                "fontDefinitions": [
+                                    {
+                                        "path": "./assets/fonts/AncizarSans-Bold.ttf",
+                                        "weight": "600",
+                                        "style": "normal"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
             "expo-router",
             "expo-localization",
             [
@@ -74,6 +146,12 @@
                     "android": {
                         "extraProguardRules": "-keep class com.google.android.gms.internal.consent_sdk.** { *; }"
                     }
+                }
+            ],
+            [
+                "expo-notifications",
+                {
+                    "icon": "./assets/icon-notes.png"
                 }
             ]
         ]
