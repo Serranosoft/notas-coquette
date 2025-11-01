@@ -29,7 +29,7 @@ export default function LangList() {
 
     async function updateLanguage(language) {
         setLanguage(language.acronym);
-        await AsyncStorage.setItem(userPreferences.LANGUAGE, acronym);
+        await AsyncStorage.setItem(userPreferences.LANGUAGE, language.acronym);
     }
 
     return (
