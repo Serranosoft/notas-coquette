@@ -99,6 +99,7 @@ export default function Layout() {
     async function configureNotifications() {
         const { granted } = await Notifications.requestPermissionsAsync();
         if (granted) {
+            await AsyncStorage.setItem(userPreferences.NOTIFICATION_PERMISSION, "true");
             Notifications.setNotificationHandler({
                 handleNotification: async () => ({
                     shouldShowBanner: true,
