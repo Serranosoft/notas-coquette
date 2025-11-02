@@ -44,7 +44,7 @@
                 "foregroundImage": "./assets/icon-notes.png",
                 "backgroundColor": "#FACCD6"
             },
-            "versionCode": 42,
+            "versionCode": 43,
             "package": "com.paulaymanu113.notascoquette"
         },
         "web": {
@@ -151,7 +151,7 @@
             [
                 "expo-notifications",
                 {
-                    "icon": "./assets/icon-notes.png"
+                    "icon": "./assets/notification.png"
                 }
             ]
         ]

@@ -1,7 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
+import { userPreferences } from "./user-preferences";
 
 export async function scheduleWeeklyNotification(language) {
     try {
+
+        const granted = await AsyncStorage.getItem(userPreferences.NOTIFICATION_PERMISSION);
+        if (granted !== "true") {
+            return;
+        }
 
         // Obtener la lista de notificaciones programadas
         const scheduledNotifications = await Notifications.getAllScheduledNotificationsAsync();
@@ -23,8 +30,10 @@ export async function scheduleWeeklyNotification(language) {
                 body: language.t("_notificationsBody"),
             },
             trigger: {
-                seconds: 604800, // cada 7 días
-                repeats: true,
+                type: "weekly",
+                weekday: 4,
+                hour: 12,
+                minute: 0,
             },
         };
 

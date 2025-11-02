@@ -12,7 +12,8 @@ export const userPreferences = {
     RATE: "rate",
     PITCH: "pitch",
     CHANGELOG_VERSION: "changelog_version",
-    TOOLTIP_VERSION: "tooltip_version"
+    TOOLTIP_VERSION: "tooltip_version",
+    NOTIFICATION_PERMISSION: "notification_permission"
 }
 
 export const APP = {
