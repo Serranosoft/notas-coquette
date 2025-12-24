@@ -103,6 +103,7 @@ const translations = {
         _updatesModalV1_4: "Personaliza el ritmo de la voz",
         _updatesModalV1_5: "Disfruta de la aplicación en Italiano y Persa",
         _updatesModalV1_6: "😊 Esperamos que disfrutes de las novedades 😊",
+        _closeUpdatesModal: "Cerrar",
     },
     en: {
         // Header Home
