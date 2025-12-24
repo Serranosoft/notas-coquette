@@ -7,21 +7,61 @@ import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-ren
 
 const { height } = Dimensions.get('window');
 
-export default function NoteItem({ note, selected, onPress, highlight }) {
+// Mapeo de tamaños para indicar a renderHTML el tamaño a renderizar de cada tag <font />
+const FONT_SIZE_MAP = {
+    "1": 10,
+    "2": 10,
+    "3": 13,
+    "4": 18,
+    "5": 20,
+    "6": 24,
+    "7": 40
+};
+
+// Custom renderer para detectar etiquetas <font /> en la librería renderHTML
+const FontRenderer = ({ TDefaultRenderer, ...props }) => {
+    const sizeAttribute = props.tnode.attributes.size;
+    const fontSize = sizeAttribute ? FONT_SIZE_MAP[sizeAttribute] : undefined;
+
+    const style = fontSize ? { fontSize } : {};
+
+    return (
+        <TDefaultRenderer
+            {...props}
+            style={{ ...props.style, ...style }}
+        />
+    );
+};
+
+const renderers = {
+    font: FontRenderer
+};
+export default function NoteItem({ note, selected, onPress, highlight, isTemplate }) {
 
     const { width } = useWindowDimensions();
     const source = { html: getSubstringUntilNthDiv(note.content) }
 
     const customHTMLElementModels = {
-        'font': HTMLElementModel.fromCustomModel({ tagName: 'font', mixedUAStyles: { fontSize: 18 }, contentModel: HTMLContentModel.textual }),
-        'input': HTMLElementModel.fromCustomModel({ tagName: 'input', contentModel: HTMLContentModel.textual })
+        'font': HTMLElementModel.fromCustomModel({
+            tagName: 'font',
+            contentModel: HTMLContentModel.textual
+        }),
+        'input': HTMLElementModel.fromCustomModel({
+            tagName: 'input',
+            contentModel: HTMLContentModel.textual
+        })
     };
+
+    // Sanitizamos el html para reemplazar los inputs por un emoji representativo
+    function sanitizeHTML(html) {
+        return html.replace(/<input[^>]*>/g, '☐ ');
+    }
 
     const isSelected = selected.includes(note.id);
 
     return (
 
-        <TouchableOpacity style={[styles.container, isSelected && styles.selected]} onLongPress={highlight} onPress={onPress}>
+        <TouchableOpacity style={[styles.container, isSelected && styles.selected, isTemplate && styles.template]} onLongPress={highlight} onPress={onPress}>
             <GridBackground />
             <View>
                 {
@@ -47,14 +87,17 @@ export default function NoteItem({ note, selected, onPress, highlight }) {
                                     :
                                     <Text></Text>
                                 }
-                                <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(parseInt(note.date)).toLocaleDateString()}</Text>
+                                {note.date && <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(parseInt(note.date)).toLocaleDateString()}</Text>}
+                                {note.title && <Text style={[ui.muted, { color: "#8a8a8a" }]}>{note.title}</Text>}
                             </View>
                             <View style={styles.htmlPadding}>
                                 <RenderHTML
                                     contentWidth={width}
-                                    source={source}
+                                    source={{ html: sanitizeHTML(note.content) }}
                                     customHTMLElementModels={customHTMLElementModels}
-                                    baseStyle={{ color: "#3a3a3a", fontSize: 18 }}
+                                    baseStyle={{ color: "#3a3a3a", fontSize: 16 }}
+                                    renderers={renderers}
+                                    enableUserAgentStyles={true}
                                 />
                             </View>
                         </>
@@ -91,27 +134,42 @@ function getSubstringUntilNthDiv(html, limit = 9) {
         }
     }
 
-    return html.substring(0, lastIndex);
+    let truncated = html.substring(0, lastIndex);
+
+    // Si el HTML cortado tiene un div abierto pero no cerrado, lo cerramos
+    const openDivs = (truncated.match(/<div/g) || []).length;
+    const closeDivs = (truncated.match(/<\/div>/g) || []).length;
+    
+    for (let i = 0; i < (openDivs - closeDivs); i++) {
+        truncated += '</div>';
+    }
+
+    return truncated;
 }
 
 
 const styles = StyleSheet.create({
     container: {
-        height: 205,
+        height: 215,
         flex: 1 / 2,
         backgroundColor: "#fff",
         position: "relative",
         elevation: 5,
         overflow: "hidden",
     },
+    template: {
+        height: 350,
+    },
     header: {
         flexDirection: "row",
+        flexWrap: "wrap",
+        gap: 8,
         alignItems: "center",
         justifyContent: "space-between",
         backgroundColor: "transparent",
         paddingHorizontal: 8,
         paddingBottom: 2,
-        paddingTop: 6,
+        paddingTop: 4,
     },
     htmlPadding: {
         paddingHorizontal: 8,
@@ -123,7 +181,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        height: height * 0.13, // Altura del 20% de la pantalla
+        height: height * 0.13,
     },
     selectedBox: {
         width: 30,

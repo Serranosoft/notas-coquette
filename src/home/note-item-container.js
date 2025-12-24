@@ -51,7 +51,7 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
     return (
         <>
             <LockScreenModal {...{ isUnlock: true, note, lockModal, setLockModal, setUnlocked, unlocked, pwd, setPwd }}/>
-            <NoteItem {...{ note, selected, onPress, highlight }} />
+            <NoteItem {...{ note, selected, onPress, highlight, isTemplate: false }} />
         </>
     )
 }

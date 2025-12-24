@@ -17,5 +17,5 @@ export const userPreferences = {
 }
 
 export const APP = {
-    currentVersion: "2.1.2"
+    currentVersion: "2.2.0"
 }

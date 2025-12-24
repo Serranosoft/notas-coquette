@@ -1,8 +1,8 @@
 const translations = {
     es: {
-
         // Header Home
         _headerTitle: "Mis notas",
+        _headerTemplates: "Plantillas",
         _headerDropdownOption1: "Cambiar cuadricula",
         _headerDropdownOption2: "Configuración",
 
@@ -13,7 +13,6 @@ const translations = {
         _tooltipVoiceTitle: "Lectura en voz alta",
         _tooltipVoiceText1: "La app leerá esta nota en voz alta.",
         _tooltipVoiceText2: "Ajusta la voz y la velocidad desde configuración.",
-
 
         // Header Dropdown
         _headerNoteDropdownOption1: "Modo edición",
@@ -35,8 +34,12 @@ const translations = {
 
         // Home
         _homeButton: "Añadir nota",
+        _homeTemplates: "Ver plantillas",
         _homeEmptyList: "No tienes ninguna nota creada",
         _elementsSelected: "elementos seleccionados",
+
+        // Templates
+        _templatesTitle: "Elige una plantilla",
 
         // Lista de idiomas
         _langListSpanish: "Español",
@@ -94,17 +97,17 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Novedades",
-        _updatesModalV1_1: "¡Ahora puedes reproducir una nota con voz! ",
-        _updatesModalV1_2: "Elige entre diferentes voces",
-        _updatesModalV1_3: "Personaliza el tono de la voz",
+        _updatesModalV1_1: "¡Nueva función: Plantillas! ",
+        _updatesModalV1_2: "Hemos diseñado algunas plantillas para ti",
+        _updatesModalV1_3: "Elige una plantilla y cambiala a tu gusto para crear las mejores notas para tu día a día 🌺",
         _updatesModalV1_4: "Personaliza el ritmo de la voz",
         _updatesModalV1_5: "Disfruta de la aplicación en Italiano y Persa",
         _updatesModalV1_6: "😊 Esperamos que disfrutes de las novedades 😊",
-
     },
     en: {
         // Header Home
         _headerTitle: "My notes",
+        _headerTemplates: "Templates",
         _headerDropdownOption1: "Change grid",
         _headerDropdownOption2: "Settings",
 
@@ -114,11 +117,11 @@ const translations = {
 
         _tooltipVoiceTitle: "Read aloud",
         _tooltipVoiceText1: "The app will read this note aloud.",
-        _tooltipVoiceText2: "Adjust the voice and speed from settings.",
+        _tooltipVoiceText2: "Adjust voice and speed in settings.",
 
         // Header Dropdown
         _headerNoteDropdownOption1: "Edit mode",
-        _headerNoteDropdownOption2: "Reading mode",
+        _headerNoteDropdownOption2: "Read mode",
         _headerNoteDropdownOption3: "Delete note",
         _headerNoteDropdownOption4: "Unlock note",
         _headerNoteDropdownOption5: "Lock note",
@@ -131,15 +134,17 @@ const translations = {
         _toastNoteSaved: "Note saved",
 
         _lockNoteTitle: "Enter PIN code",
-        _lockInfo: "This note is locked, enter the PIN code to access it",
+        _lockInfo: "This note is locked, enter the PIN code to access",
         _lockError: "Incorrect PIN",
 
         // Home
         _homeButton: "Add note",
-        _homeEmptyList: "You don’t have any notes created",
-        _elementsSelected: "selected items",
+        _homeTemplates: "Templates",
+        _homeEmptyList: "You haven't created any notes yet",
+        _elementsSelected: "Selected items",
+        _templatesTitle: "Choose a template",
 
-        // Lista de idiomas
+        // Languages
         _langListSpanish: "Spanish",
         _langListEnglish: "English",
         _langListArabic: "Arabic",
@@ -155,12 +160,12 @@ const translations = {
         _langListItalian: "Italian",
         _langListFarsi: "Farsi",
 
-        // Pantalla de settings
+        // Settings
         _settingTitle: "Settings",
         _settingsApp: "App settings",
         _settingsLang: "App language",
 
-        // Ajustes de voz
+        // Voice settings
         _settingsEditor: "Editor settings",
         _settingsVoice: "Voice settings",
         _settingsVoiceType: "Voice type",
@@ -171,42 +176,42 @@ const translations = {
         _settingsVoiceFrequency: "Voice frequency",
         _settingsVoiceSpeed: "Voice speed",
 
-        // Ajustes del texto
+        // Text settings
         _settingsNote: "Note settings",
         _settingsLineSpacing: "Paragraph spacing",
-        _toastLineSpacingUpdated: "Your notes’ line spacing has been updated",
+        _toastLineSpacingUpdated: "Line spacing updated",
         _settingsLetterSpacing: "Letter spacing",
-        _toastLetterSpacingUpdated: "Your notes’ letter spacing has been updated",
+        _toastLetterSpacingUpdated: "Letter spacing updated",
         _settingsWordSpacing: "Word spacing",
-        _toastWordSpacingUpdated: "Your notes’ word spacing has been updated",
+        _toastWordSpacingUpdated: "Word spacing updated",
         _settingsTypo: "Typography",
         _toastTypoSaved: "Typography saved",
-        _settingsTypoWarning: "When changing typography you will be redirected to the home screen to load the new font",
+        _settingsTypoWarning: "When changing the typography, you will be taken to the home screen to load the new font",
 
-        // Ajustes --> Restablecer
+        // Reset settings
         _settingsResetAll: "Reset all",
         _settingsRemoveAll: "Delete all notes",
-        _settingsRemoveAllWarning: "WARNING! By pressing the following button all saved notes will be deleted",
-        _toastAllNotesDeleted: "All notes have been deleted",
+        _settingsRemoveAllWarning: "WARNING! Clicking the following button will delete all saved notes",
+        _toastAllNotesDeleted: "All notes deleted",
 
-        // Notificaciones
+        // Notifications
         _notificationsTitle: "Shhh... We keep your secrets 🤏",
-        _notificationsBody: "Lock your notes before they get discovered",
+        _notificationsBody: "Lock your notes before they are discovered",
 
-
-        // Modal de updates
-        _updatesModalNews: "What’s new",
-        _updatesModalV1_1: "Now you can play a note with voice! ",
-        _updatesModalV1_2: "Choose from different voices",
-        _updatesModalV1_3: "Customize the voice tone",
-        _updatesModalV1_4: "Customize the voice speed",
-        _updatesModalV1_5: "Enjoy the app in Italian and Persian",
-        _updatesModalV1_6: "😊 We hope you enjoy the new features 😊",
-
+        // Updates modal
+        _updatesModalNews: "News",
+        _updatesModalV1_1: "New feature: Templates!",
+        _updatesModalV1_2: "We've designed some templates for you",
+        _updatesModalV1_3: "Choose a template and customize it to your liking to create the best notes for your daily life 🌺",
+        _updatesModalV1_4: "Adjust voice pace",
+        _updatesModalV1_5: "Enjoy the app in Italian and Farsi",
+        _updatesModalV1_6: "😊 We hope you enjoy the news 😊",
+        _closeUpdatesModal: "Close",
     },
     fr: {
         // Header Home
         _headerTitle: "Mes notes",
+        _headerTemplates: "Modèles",
         _headerDropdownOption1: "Changer la grille",
         _headerDropdownOption2: "Paramètres",
 
@@ -214,9 +219,9 @@ const translations = {
         _headerNoteTitleNew: "Ajouter une note",
         _headerNoteTitleEdit: "Modifier la note",
 
-        _tooltipVoiceTitle: "Lecture à voix haute",
-        _tooltipVoiceText1: "L'application lira cette note à voix haute.",
-        _tooltipVoiceText2: "Ajustez la voix et la vitesse depuis les paramètres.",
+        _tooltipVoiceTitle: "Lire à haute voix",
+        _tooltipVoiceText1: "L'application lira cette note à haute voix.",
+        _tooltipVoiceText2: "Ajustez la voix et la vitesse dans les paramètres.",
 
         // Header Dropdown
         _headerNoteDropdownOption1: "Mode édition",
@@ -229,19 +234,21 @@ const translations = {
         _headerNoteDropdownOption8: "Retirer des favoris",
 
         //Note 
-        noteInputPlaceholder: "Écris ta note...",
+        noteInputPlaceholder: "Écrivez votre note...",
         _toastNoteSaved: "Note enregistrée",
 
-        _lockNoteTitle: "Entrer le code PIN",
+        _lockNoteTitle: "Entrez le code PIN",
         _lockInfo: "Cette note est verrouillée, entrez le code PIN pour y accéder",
         _lockError: "PIN incorrect",
 
         // Home
         _homeButton: "Ajouter une note",
-        _homeEmptyList: "Vous n’avez créé aucune note",
-        _elementsSelected: "éléments sélectionnés",
+        _homeTemplates: "Modèles",
+        _homeEmptyList: "Vous n'avez pas encore créé de notes",
+        _elementsSelected: "Éléments sélectionnés",
+        _templatesTitle: "Choisir un modèle",
 
-        // Lista de idiomas
+        // Liste des langues
         _langListSpanish: "Espagnol",
         _langListEnglish: "Anglais",
         _langListArabic: "Arabe",
@@ -255,15 +262,15 @@ const translations = {
         _langListVietnamese: "Vietnamien",
         _langListTurkish: "Turc",
         _langListItalian: "Italien",
-        _langListFarsi: "Farsi",
+        _langListFarsi: "Persan",
 
-        // Pantalla de settings
+        // Paramètres
         _settingTitle: "Paramètres",
-        _settingsApp: "Paramètres de l’application",
-        _settingsLang: "Langue de l’application",
+        _settingsApp: "Paramètres de l'application",
+        _settingsLang: "Langue de l'application",
 
-        // Ajustes de voz
-        _settingsEditor: "Paramètres de l’éditeur",
+        // Paramètres de voix
+        _settingsEditor: "Paramètres de l'éditeur",
         _settingsVoice: "Paramètres de la voix",
         _settingsVoiceType: "Type de voix",
         _voice: "Voix",
@@ -273,42 +280,42 @@ const translations = {
         _settingsVoiceFrequency: "Fréquence de la voix",
         _settingsVoiceSpeed: "Vitesse de la voix",
 
-        // Ajustes del texto
+        // Paramètres de texte
         _settingsNote: "Paramètres de la note",
         _settingsLineSpacing: "Espacement des paragraphes",
-        _toastLineSpacingUpdated: "L’interligne de vos notes a été mis à jour",
+        _toastLineSpacingUpdated: "Espacement des lignes mis à jour",
         _settingsLetterSpacing: "Espacement des lettres",
-        _toastLetterSpacingUpdated: "L’espacement des lettres de vos notes a été mis à jour",
+        _toastLetterSpacingUpdated: "Espacement des lettres mis à jour",
         _settingsWordSpacing: "Espacement des mots",
-        _toastWordSpacingUpdated: "L’espacement des mots de vos notes a été mis à jour",
+        _toastWordSpacingUpdated: "Espacement des mots mis à jour",
         _settingsTypo: "Typographie",
         _toastTypoSaved: "Typographie enregistrée",
-        _settingsTypoWarning: "En changeant la typographie, vous serez redirigé vers l’écran d’accueil pour charger la nouvelle police",
+        _settingsTypoWarning: "En changeant la typographie, vous serez redirigé vers l'écran d'accueil pour charger la nouvelle police",
 
-        // Ajustes --> Restablecer
-        _settingsResetAll: "Réinitialiser tout",
+        // Réinitialiser
+        _settingsResetAll: "Tout réinitialiser",
         _settingsRemoveAll: "Supprimer toutes les notes",
-        _settingsRemoveAllWarning: "ATTENTION ! En appuyant sur le bouton suivant, toutes les notes sauvegardées seront supprimées",
+        _settingsRemoveAllWarning: "ATTENTION ! Cliquer sur le bouton suivant supprimera toutes les notes enregistrées",
         _toastAllNotesDeleted: "Toutes les notes ont été supprimées",
 
-        // Notificaciones
-        _notificationsTitle: "Chut... Nous gardons tes secrets 🤏",
-        _notificationsBody: "Verrouille tes notes avant qu’on les découvre",
+        // Notifications
+        _notificationsTitle: "Chut... Nous gardons vos secrets 🤏",
+        _notificationsBody: "Verrouillez vos notes avant qu'elles ne soient découvertes",
 
-
-        // Modal de updates
+        // Modal de mises à jour
         _updatesModalNews: "Nouveautés",
-        _updatesModalV1_1: "Vous pouvez maintenant lire une note à voix haute ! ",
-        _updatesModalV1_2: "Choisissez parmi différentes voix",
-        _updatesModalV1_3: "Personnalisez le ton de la voix",
-        _updatesModalV1_4: "Personnalisez le rythme de la voix",
-        _updatesModalV1_5: "Profitez de l’application en Italien et en Persan",
+        _updatesModalV1_1: "Nouvelle fonction : Modèles !",
+        _updatesModalV1_2: "Nous avons conçu quelques modèles pour vous",
+        _updatesModalV1_3: "Choisissez un modèle et modifiez-le à votre guise pour créer les meilleures notes pour votre quotidien 🌺",
+        _updatesModalV1_4: "Ajustez le rythme de la voix",
+        _updatesModalV1_5: "Profitez de l'application en italien et en persan",
         _updatesModalV1_6: "😊 Nous espérons que vous apprécierez les nouveautés 😊",
-
+        _closeUpdatesModal: "Fermer",
     },
     de: {
         // Header Home
         _headerTitle: "Meine Notizen",
+        _headerTemplates: "Vorlagen",
         _headerDropdownOption1: "Raster ändern",
         _headerDropdownOption2: "Einstellungen",
 
@@ -318,7 +325,7 @@ const translations = {
 
         _tooltipVoiceTitle: "Vorlesen",
         _tooltipVoiceText1: "Die App wird diese Notiz laut vorlesen.",
-        _tooltipVoiceText2: "Stimmen und Geschwindigkeit in den Einstellungen anpassen.",
+        _tooltipVoiceText2: "Passen Sie Stimme und Geschwindigkeit in den Einstellungen an.",
 
         // Header Dropdown
         _headerNoteDropdownOption1: "Bearbeitungsmodus",
@@ -331,7 +338,7 @@ const translations = {
         _headerNoteDropdownOption8: "Aus Favoriten entfernen",
 
         //Note 
-        noteInputPlaceholder: "Schreibe deine Notiz...",
+        noteInputPlaceholder: "Schreiben Sie Ihre Notiz...",
         _toastNoteSaved: "Notiz gespeichert",
 
         _lockNoteTitle: "PIN-Code eingeben",
@@ -340,10 +347,12 @@ const translations = {
 
         // Home
         _homeButton: "Notiz hinzufügen",
-        _homeEmptyList: "Du hast noch keine Notizen erstellt",
-        _elementsSelected: "ausgewählte Elemente",
+        _homeTemplates: "Vorlagen",
+        _homeEmptyList: "Sie haben noch keine Notizen erstellt",
+        _elementsSelected: "Ausgewählte Elemente",
+        _templatesTitle: "Vorlage auswählen",
 
-        // Lista de idiomas
+        // Sprachenliste
         _langListSpanish: "Spanisch",
         _langListEnglish: "Englisch",
         _langListArabic: "Arabisch",
@@ -357,60 +366,60 @@ const translations = {
         _langListVietnamese: "Vietnamesisch",
         _langListTurkish: "Türkisch",
         _langListItalian: "Italienisch",
-        _langListFarsi: "Farsi",
+        _langListFarsi: "Persisch",
 
-        // Pantalla de settings
+        // Einstellungen
         _settingTitle: "Einstellungen",
         _settingsApp: "App-Einstellungen",
         _settingsLang: "App-Sprache",
 
-        // Ajustes de voz
+        // Stimmeinstellungen
         _settingsEditor: "Editor-Einstellungen",
-        _settingsVoice: "Spracheinstellungen",
+        _settingsVoice: "Stimmeinstellungen",
         _settingsVoiceType: "Stimmtyp",
         _voice: "Stimme",
-        _settingsChooseVoice: "Wähle eine Stimme",
+        _settingsChooseVoice: "Eine Stimme wählen",
         _toastVoiceUpdated: "Stimme aktualisiert",
-        _settingsTestVoice: "Das ist meine Notiz",
+        _settingsTestVoice: "Dies ist meine Notiz",
         _settingsVoiceFrequency: "Stimmfrequenz",
-        _settingsVoiceSpeed: "Sprechgeschwindigkeit",
+        _settingsVoiceSpeed: "Stimmgeschwindigkeit",
 
-        // Ajustes del texto
+        // Texteinstellungen
         _settingsNote: "Notizeinstellungen",
         _settingsLineSpacing: "Absatzabstand",
-        _toastLineSpacingUpdated: "Der Zeilenabstand deiner Notizen wurde aktualisiert",
-        _settingsLetterSpacing: "Buchstabenabstand",
-        _toastLetterSpacingUpdated: "Der Buchstabenabstand deiner Notizen wurde aktualisiert",
+        _toastLineSpacingUpdated: "Zeilenabstand aktualisiert",
+        _settingsLetterSpacing: "Zeichenabstand",
+        _toastLetterSpacingUpdated: "Zeichenabstand aktualisiert",
         _settingsWordSpacing: "Wortabstand",
-        _toastWordSpacingUpdated: "Der Wortabstand deiner Notizen wurde aktualisiert",
+        _toastWordSpacingUpdated: "Wortabstand aktualisiert",
         _settingsTypo: "Typografie",
         _toastTypoSaved: "Typografie gespeichert",
-        _settingsTypoWarning: "Beim Ändern der Typografie wirst du zum Startbildschirm weitergeleitet, um die neue Schrift zu laden",
+        _settingsTypoWarning: "Wenn Sie die Typografie ändern, werden Sie zum Startbildschirm weitergeleitet, um die neue Schriftart zu laden",
 
-        // Ajustes --> Restablecer
+        // Zurücksetzen
         _settingsResetAll: "Alles zurücksetzen",
         _settingsRemoveAll: "Alle Notizen löschen",
-        _settingsRemoveAllWarning: "ACHTUNG! Beim Drücken des nächsten Buttons werden alle gespeicherten Notizen gelöscht",
+        _settingsRemoveAllWarning: "ACHTUNG! Das Klicken auf die folgende Schaltfläche löscht alle gespeicherten Notizen",
         _toastAllNotesDeleted: "Alle Notizen wurden gelöscht",
 
-        // Notificaciones
-        _notificationsTitle: "Pssst... Wir bewahren deine Geheimnisse 🤏",
+        // Notifications
+        _notificationsTitle: "Pst... Wir bewahren deine Geheimnisse 🤏",
         _notificationsBody: "Sperre deine Notizen, bevor sie entdeckt werden",
 
-
-        // Modal de updates
+        // Update-Modal
         _updatesModalNews: "Neuigkeiten",
-        _updatesModalV1_1: "Jetzt kannst du eine Notiz mit Stimme wiedergeben! ",
-        _updatesModalV1_2: "Wähle zwischen verschiedenen Stimmen",
-        _updatesModalV1_3: "Passe den Stimmton an",
-        _updatesModalV1_4: "Passe das Sprechrhythmus an",
-        _updatesModalV1_5: "Genieße die App auf Italienisch und Persisch",
-        _updatesModalV1_6: "😊 Wir hoffen, dir gefallen die Neuigkeiten 😊",
-
+        _updatesModalV1_1: "Neue Funktion: Vorlagen!",
+        _updatesModalV1_2: "Wir haben einige Vorlagen für dich entworfen",
+        _updatesModalV1_3: "Wähle eine Vorlage und passe sie nach deinen Wünschen an, um die besten Notizen für deinen Alltag zu erstellen 🌺",
+        _updatesModalV1_4: "Passen Sie das Stimmtrems an",
+        _updatesModalV1_5: "Genießen Sie die App auf Italienisch und Persisch",
+        _updatesModalV1_6: "😊 Wir hoffen, dass Ihnen die Neuigkeiten gefallen 😊",
+        _closeUpdatesModal: "Schließen",
     },
     ar: {
         // Header Home
         _headerTitle: "ملاحظاتي",
+        _headerTemplates: "القوالب",
         _headerDropdownOption1: "تغيير الشبكة",
         _headerDropdownOption2: "الإعدادات",
 
@@ -420,32 +429,34 @@ const translations = {
 
         _tooltipVoiceTitle: "القراءة بصوت عالٍ",
         _tooltipVoiceText1: "سيقوم التطبيق بقراءة هذه الملاحظة بصوت عالٍ.",
-        _tooltipVoiceText2: "قم بضبط الصوت والسرعة من الإعدادات.",
+        _tooltipVoiceText2: "اضبط الصوت والسرعة من الإعدادات.",
 
         // Header Dropdown
         _headerNoteDropdownOption1: "وضع التحرير",
         _headerNoteDropdownOption2: "وضع القراءة",
         _headerNoteDropdownOption3: "حذف الملاحظة",
-        _headerNoteDropdownOption4: "فتح الملاحظة",
+        _headerNoteDropdownOption4: "إلغاء قفل الملاحظة",
         _headerNoteDropdownOption5: "قفل الملاحظة",
         _headerNoteDropdownOption6: "الإعدادات",
         _headerNoteDropdownOption7: "إضافة إلى المفضلة",
         _headerNoteDropdownOption8: "إزالة من المفضلة",
 
         //Note 
-        noteInputPlaceholder: "اكتب ملاحظتك...",
+        noteInputPlaceholder: "اكتب ملاحظتك هنا...",
         _toastNoteSaved: "تم حفظ الملاحظة",
 
         _lockNoteTitle: "أدخل رمز PIN",
-        _lockInfo: "هذه الملاحظة مقفلة، أدخل رمز PIN للوصول إليها",
+        _lockInfo: "هذه الملاحظة مغلقة، أدخل رمز PIN للوصول إليها",
         _lockError: "رمز PIN غير صحيح",
 
         // Home
         _homeButton: "إضافة ملاحظة",
-        _homeEmptyList: "ليس لديك أي ملاحظات",
-        _elementsSelected: "عناصر محددة",
+        _homeTemplates: "القوالب",
+        _homeEmptyList: "لم تقم بإنشاء أي ملاحظات بعد",
+        _elementsSelected: "العناصر المختارة",
+        _templatesTitle: "اختر قالبًا",
 
-        // Lista de idiomas
+        // قائمة اللغات
         _langListSpanish: "الإسبانية",
         _langListEnglish: "الإنجليزية",
         _langListArabic: "العربية",
@@ -461,57 +472,58 @@ const translations = {
         _langListItalian: "الإيطالية",
         _langListFarsi: "الفارسية",
 
-        // Pantalla de settings
+        // شاشة الإعدادات
         _settingTitle: "الإعدادات",
         _settingsApp: "إعدادات التطبيق",
         _settingsLang: "لغة التطبيق",
 
-        // Ajustes de voz
+        // إعدادات الصوت
         _settingsEditor: "إعدادات المحرر",
         _settingsVoice: "إعدادات الصوت",
         _settingsVoiceType: "نوع الصوت",
-        _voice: "صوت",
+        _voice: "الصوت",
         _settingsChooseVoice: "اختر صوتًا",
         _toastVoiceUpdated: "تم تحديث الصوت",
-        _settingsTestVoice: "هذه ملاحظتي",
+        _settingsTestVoice: "هذه هي ملاحظتي",
         _settingsVoiceFrequency: "تردد الصوت",
         _settingsVoiceSpeed: "سرعة الصوت",
 
-        // Ajustes del texto
+        // إعدادات النص
         _settingsNote: "إعدادات الملاحظة",
         _settingsLineSpacing: "تباعد الفقرات",
-        _toastLineSpacingUpdated: "تم تحديث تباعد الأسطر في ملاحظاتك",
+        _toastLineSpacingUpdated: "تم تحديث تباعد الأسطر",
         _settingsLetterSpacing: "تباعد الحروف",
-        _toastLetterSpacingUpdated: "تم تحديث تباعد الحروف في ملاحظاتك",
+        _toastLetterSpacingUpdated: "تم تحديث تباعد الحروف",
         _settingsWordSpacing: "تباعد الكلمات",
-        _toastWordSpacingUpdated: "تم تحديث تباعد الكلمات في ملاحظاتك",
-        _settingsTypo: "الخط",
-        _toastTypoSaved: "تم حفظ الخط",
-        _settingsTypoWarning: "عند تغيير الخط سيتم إعادتك إلى الشاشة الرئيسية لتحميل الخط الجديد",
+        _toastWordSpacingUpdated: "تم تحديث تباعد الكلمات",
+        _settingsTypo: "خطوط الكتابة",
+        _toastTypoSaved: "تم حفظ خط الكتابة",
+        _settingsTypoWarning: "عند تغيير الخط، سيتم توجيهك إلى الشاشة الرئيسية لتحميل الخط الجديد",
 
-        // Ajustes --> Restablecer
+        // إعدادات --> إعادة ضبط
         _settingsResetAll: "إعادة ضبط الكل",
         _settingsRemoveAll: "حذف جميع الملاحظات",
-        _settingsRemoveAllWarning: "تحذير! عند الضغط على الزر التالي سيتم حذف جميع الملاحظات المحفوظة",
+        _settingsRemoveAllWarning: "تنبيه! الضغط على الزر التالي سيؤدي إلى حذف جميع الملاحظات المحفوظة",
         _toastAllNotesDeleted: "تم حذف جميع الملاحظات",
 
         // Notificaciones
-        _notificationsTitle: "شش... نحن نحفظ أسرارك 🤏",
-        _notificationsBody: "اقفل ملاحظاتك قبل أن يكتشفها أحد",
+        _notificationsTitle: "هسس... نحن نحفظ أسرارك 🤏",
+        _notificationsBody: "اقفل ملاحظاتك قبل أن تُكتشف",
 
-        // Modal de updates
-        _updatesModalNews: "التحديثات",
-        _updatesModalV1_1: "يمكنك الآن تشغيل الملاحظة بالصوت! ",
-        _updatesModalV1_2: "اختر من بين أصوات مختلفة",
-        _updatesModalV1_3: "خصص نبرة الصوت",
-        _updatesModalV1_4: "خصص سرعة الصوت",
+        // نافذة التحديثات
+        _updatesModalNews: "أخبار جديدة",
+        _updatesModalV1_1: "ميزة جديدة: القوالب!",
+        _updatesModalV1_2: "لقد صممنا بعض القوالب من أجلك",
+        _updatesModalV1_3: "اختر قالبًا وقم بتغييره حسب رغبتك لإنشاء أفضل الملاحظات لحياتك اليومية 🌺",
+        _updatesModalV1_4: "تخصيص وتيرة الصوت",
         _updatesModalV1_5: "استمتع بالتطبيق باللغتين الإيطالية والفارسية",
-        _updatesModalV1_6: "😊 نأمل أن تستمتع بالتحديثات 😊",
-
+        _updatesModalV1_6: "😊 نأمل أن تنال الميزات الجديدة إعجابكم 😊",
+        _closeUpdatesModal: "إغلاق",
     },
     hi: {
         // Header Home
         _headerTitle: "मेरे नोट्स",
+        _headerTemplates: "टेम्प्लेट्स",
         _headerDropdownOption1: "ग्रिड बदलें",
         _headerDropdownOption2: "सेटिंग्स",
 
@@ -521,37 +533,39 @@ const translations = {
 
         _tooltipVoiceTitle: "ज़ोर से पढ़ें",
         _tooltipVoiceText1: "ऐप इस नोट को ज़ोर से पढ़ेगा।",
-        _tooltipVoiceText2: "आवाज़ और गति को सेटिंग्स से समायोजित करें।",
+        _tooltipVoiceText2: "सेटिंग्स में आवाज़ और गति को समायोजित करें।",
 
         // Header Dropdown
         _headerNoteDropdownOption1: "संपादन मोड",
         _headerNoteDropdownOption2: "पढ़ने का मोड",
-        _headerNoteDropdownOption3: "नोट हटाएँ",
+        _headerNoteDropdownOption3: "नोट हटाएं",
         _headerNoteDropdownOption4: "नोट अनलॉक करें",
         _headerNoteDropdownOption5: "नोट लॉक करें",
         _headerNoteDropdownOption6: "सेटिंग्स",
         _headerNoteDropdownOption7: "पसंदीदा में जोड़ें",
-        _headerNoteDropdownOption8: "पसंदीदा से हटाएँ",
+        _headerNoteDropdownOption8: "पसंदीदा से हटाएं",
 
         //Note 
         noteInputPlaceholder: "अपना नोट लिखें...",
         _toastNoteSaved: "नोट सहेजा गया",
 
-        _lockNoteTitle: "PIN कोड दर्ज करें",
-        _lockInfo: "यह नोट लॉक है, इसे एक्सेस करने के लिए PIN कोड दर्ज करें",
-        _lockError: "गलत PIN",
+        _lockNoteTitle: "पिन कोड दर्ज करें",
+        _lockInfo: "यह नोट लॉक है, एक्सेस करने के लिए पिन कोड दर्ज करें",
+        _lockError: "गलत पिन",
 
         // Home
         _homeButton: "नोट जोड़ें",
-        _homeEmptyList: "आपके पास कोई नोट नहीं है",
-        _elementsSelected: "चयनित आइटम",
+        _homeTemplates: "टेम्प्लेट्स",
+        _homeEmptyList: "आपने अभी तक कोई नोट नहीं बनाया है",
+        _elementsSelected: "चुनी गई वस्तुएँ",
+        _templatesTitle: "टेम्प्लेट चुनें",
 
-        // Lista de idiomas
+        // भाषाओं की सूची
         _langListSpanish: "स्पेनिश",
         _langListEnglish: "अंग्रेज़ी",
         _langListArabic: "अरबी",
         _langListGerman: "जर्मन",
-        _langListFrench: "फ़्रेंच",
+        _langListFrench: "फ्रांसीसी",
         _langListHindi: "हिंदी",
         _langListIndonesian: "इंडोनेशियाई",
         _langListPortuguese: "पुर्तगाली",
@@ -560,70 +574,70 @@ const translations = {
         _langListVietnamese: "वियतनामी",
         _langListTurkish: "तुर्की",
         _langListItalian: "इतालवी",
-        _langListFarsi: "फ़ारसी",
+        _langListFarsi: "फारसी",
 
-        // Pantalla de settings
+        // सेटिंग्स स्क्रीन
         _settingTitle: "सेटिंग्स",
         _settingsApp: "ऐप सेटिंग्स",
         _settingsLang: "ऐप की भाषा",
 
-        // Ajustes de voz
+        // आवाज़ सेटिंग्स
         _settingsEditor: "संपादक सेटिंग्स",
-        _settingsVoice: "आवाज़ की सेटिंग्स",
+        _settingsVoice: "आवाज़ सेटिंग्स",
         _settingsVoiceType: "आवाज़ का प्रकार",
         _voice: "आवाज़",
-        _settingsChooseVoice: "एक आवाज़ चुनें",
+        _settingsChooseVoice: "आवाज़ चुनें",
         _toastVoiceUpdated: "आवाज़ अपडेट की गई",
         _settingsTestVoice: "यह मेरा नोट है",
-        _settingsVoiceFrequency: "आवाज़ की फ़्रीक्वेंसी",
+        _settingsVoiceFrequency: "आवाज़ की आवृत्ति",
         _settingsVoiceSpeed: "आवाज़ की गति",
 
-        // Ajustes del texto
+        // टेक्स्ट सेटिंग्स
         _settingsNote: "नोट सेटिंग्स",
-        _settingsLineSpacing: "पैराग्राफ़ स्पेसिंग",
-        _toastLineSpacingUpdated: "आपके नोट्स की लाइन स्पेसिंग अपडेट कर दी गई है",
-        _settingsLetterSpacing: "अक्षर स्पेसिंग",
-        _toastLetterSpacingUpdated: "आपके नोट्स की अक्षर स्पेसिंग अपडेट कर दी गई है",
-        _settingsWordSpacing: "शब्द स्पेसिंग",
-        _toastWordSpacingUpdated: "आपके नोट्स की शब्द स्पेसिंग अपडेट कर दी गई है",
+        _settingsLineSpacing: "पैराग्राफ रिक्ति",
+        _toastLineSpacingUpdated: "लाइन रिक्ति अपडेट की गई",
+        _settingsLetterSpacing: "अक्षर रिक्ति",
+        _toastLetterSpacingUpdated: "अक्षर रिक्ति अपडेट की गई",
+        _settingsWordSpacing: "शब्द रिक्ति",
+        _toastWordSpacingUpdated: "शब्द रिक्ति अपडेट की गई",
         _settingsTypo: "टाइपोग्राफी",
         _toastTypoSaved: "टाइपोग्राफी सहेजी गई",
-        _settingsTypoWarning: "टाइपोग्राफी बदलने पर आपको होम स्क्रीन पर भेजा जाएगा ताकि नया फ़ॉन्ट लोड हो सके",
+        _settingsTypoWarning: "टाइपोग्राफी बदलते समय, आपको नया फ़ॉन्ट लोड करने के लिए होम स्क्रीन पर ले जाया जाएगा",
 
-        // Ajustes --> Restablecer
+        // सेटिंग्स --> रीसेट
         _settingsResetAll: "सब कुछ रीसेट करें",
-        _settingsRemoveAll: "सभी नोट्स हटाएँ",
-        _settingsRemoveAllWarning: "सावधान! अगले बटन को दबाने पर सभी सहेजे गए नोट्स हटा दिए जाएंगे",
-        _toastAllNotesDeleted: "सभी नोट्स हटा दिए गए हैं",
+        _settingsRemoveAll: "सभी नोट्स हटाएं",
+        _settingsRemoveAllWarning: "चेतावनी! अगले बटन पर क्लिक करने से सभी सहेजे गए नोट्स हट जाएंगे",
+        _toastAllNotesDeleted: "सभी नोट्स हटा दिए गए",
 
-        // Notificaciones
-        _notificationsTitle: "श्श... हम तुम्हारे राज़ रखते हैं 🤏",
-        _notificationsBody: "पता चलने से पहले अपनी नोट्स लॉक करें",
+        // Notifications
+        _notificationsTitle: "शशश... हम आपके राज़ सुरक्षित रखते हैं 🤏",
+        _notificationsBody: "अपने नोट्स को दूसरों की नज़र पड़ने से पहले लॉक करें",
 
-
-        // Modal de updates
+        // अपडेट्स मॉडल
         _updatesModalNews: "नया क्या है",
-        _updatesModalV1_1: "अब आप नोट को आवाज़ के साथ चला सकते हैं! ",
-        _updatesModalV1_2: "विभिन्न आवाज़ों में से चुनें",
-        _updatesModalV1_3: "आवाज़ का टोन अनुकूलित करें",
-        _updatesModalV1_4: "आवाज़ की गति अनुकूलित करें",
-        _updatesModalV1_5: "इतालवी और फ़ारसी में ऐप का आनंद लें",
+        _updatesModalV1_1: "नई सुविधा: टेम्प्लेट्स!",
+        _updatesModalV1_2: "हमने आपके लिए कुछ टेम्प्लेट्स डिज़ाइन किए हैं",
+        _updatesModalV1_3: "एक टेम्प्लेट चुनें और अपनी दैनिक जीवन के लिए बेहतरीन नोट्स बनाने के लिए इसे अपनी पसंद के अनुसार बदलें 🌺",
+        _updatesModalV1_4: "आवाज़ की गति को समायोजित करें",
+        _updatesModalV1_5: "इतालवी और फारसी में ऐप का आनंद लें",
         _updatesModalV1_6: "😊 हमें उम्मीद है कि आपको नई सुविधाएँ पसंद आएंगी 😊",
-
+        _closeUpdatesModal: "बंद करें",
     },
     vi: {
         // Header Home
         _headerTitle: "Ghi chú của tôi",
+        _headerTemplates: "Biểu mẫu",
         _headerDropdownOption1: "Thay đổi lưới",
         _headerDropdownOption2: "Cài đặt",
 
         // Header Note
         _headerNoteTitleNew: "Thêm ghi chú",
-        _headerNoteTitleEdit: "Chỉnh sửa ghi chú",
+        _headerNoteTitleEdit: "Sửa ghi chú",
 
         _tooltipVoiceTitle: "Đọc to",
         _tooltipVoiceText1: "Ứng dụng sẽ đọc to ghi chú này.",
-        _tooltipVoiceText2: "Điều chỉnh giọng đọc và tốc độ trong cài đặt.",
+        _tooltipVoiceText2: "Điều chỉnh giọng nói và tốc độ trong cài đặt.",
 
         // Header Dropdown
         _headerNoteDropdownOption1: "Chế độ chỉnh sửa",
@@ -632,23 +646,25 @@ const translations = {
         _headerNoteDropdownOption4: "Mở khóa ghi chú",
         _headerNoteDropdownOption5: "Khóa ghi chú",
         _headerNoteDropdownOption6: "Cài đặt",
-        _headerNoteDropdownOption7: "Thêm vào mục yêu thích",
-        _headerNoteDropdownOption8: "Xóa khỏi mục yêu thích",
+        _headerNoteDropdownOption7: "Thêm vào yêu thích",
+        _headerNoteDropdownOption8: "Xóa khỏi yêu thích",
 
         //Note 
         noteInputPlaceholder: "Viết ghi chú của bạn...",
         _toastNoteSaved: "Đã lưu ghi chú",
 
         _lockNoteTitle: "Nhập mã PIN",
-        _lockInfo: "Ghi chú này đã bị khóa, nhập mã PIN để truy cập",
-        _lockError: "Sai mã PIN",
+        _lockInfo: "Ghi chú này đã bị khóa, hãy nhập mã PIN để truy cập",
+        _lockError: "Mã PIN không đúng",
 
         // Home
         _homeButton: "Thêm ghi chú",
+        _homeTemplates: "Biểu mẫu",
         _homeEmptyList: "Bạn chưa tạo ghi chú nào",
-        _elementsSelected: "mục được chọn",
+        _elementsSelected: "Các mục đã chọn",
+        _templatesTitle: "Chọn biểu mẫu",
 
-        // Lista de idiomas
+        // Danh sách ngôn ngữ
         _langListSpanish: "Tiếng Tây Ban Nha",
         _langListEnglish: "Tiếng Anh",
         _langListArabic: "Tiếng Ả Rập",
@@ -664,57 +680,58 @@ const translations = {
         _langListItalian: "Tiếng Ý",
         _langListFarsi: "Tiếng Ba Tư",
 
-        // Pantalla de settings
+        // Màn hình cài đặt
         _settingTitle: "Cài đặt",
         _settingsApp: "Cài đặt ứng dụng",
         _settingsLang: "Ngôn ngữ ứng dụng",
 
-        // Ajustes de voz
-        _settingsEditor: "Cài đặt trình chỉnh sửa",
-        _settingsVoice: "Cài đặt giọng đọc",
-        _settingsVoiceType: "Loại giọng đọc",
-        _voice: "Giọng đọc",
-        _settingsChooseVoice: "Chọn một giọng đọc",
-        _toastVoiceUpdated: "Đã cập nhật giọng đọc",
+        // Cài đặt giọng nói
+        _settingsEditor: "Cài đặt trình soạn thảo",
+        _settingsVoice: "Cài đặt giọng nói",
+        _settingsVoiceType: "Loại giọng nói",
+        _voice: "Giọng nói",
+        _settingsChooseVoice: "Chọn một giọng nói",
+        _toastVoiceUpdated: "Đã cập nhật giọng nói",
         _settingsTestVoice: "Đây là ghi chú của tôi",
-        _settingsVoiceFrequency: "Tần số giọng đọc",
-        _settingsVoiceSpeed: "Tốc độ giọng đọc",
+        _settingsVoiceFrequency: "Tần số giọng nói",
+        _settingsVoiceSpeed: "Tốc độ giọng nói",
 
-        // Ajustes del texto
+        // Cài đặt văn bản
         _settingsNote: "Cài đặt ghi chú",
-        _settingsLineSpacing: "Khoảng cách dòng",
-        _toastLineSpacingUpdated: "Khoảng cách dòng trong ghi chú đã được cập nhật",
-        _settingsLetterSpacing: "Khoảng cách chữ",
-        _toastLetterSpacingUpdated: "Khoảng cách chữ trong ghi chú đã được cập nhật",
+        _settingsLineSpacing: "Khoảng cách đoạn văn",
+        _toastLineSpacingUpdated: "Đã cập nhật khoảng cách dòng",
+        _settingsLetterSpacing: "Khoảng cách chữ cái",
+        _toastLetterSpacingUpdated: "Đã cập nhật khoảng cách chữ cái",
         _settingsWordSpacing: "Khoảng cách từ",
-        _toastWordSpacingUpdated: "Khoảng cách từ trong ghi chú đã được cập nhật",
+        _toastWordSpacingUpdated: "Đã cập nhật khoảng cách từ",
         _settingsTypo: "Kiểu chữ",
         _toastTypoSaved: "Đã lưu kiểu chữ",
-        _settingsTypoWarning: "Khi thay đổi kiểu chữ, bạn sẽ được chuyển đến màn hình chính để tải font mới",
+        _settingsTypoWarning: "Khi thay đổi kiểu chữ, bạn sẽ được đưa về màn hình chính để tải phông chữ mới",
 
-        // Ajustes --> Restablecer
+        // Cài đặt --> Đặt lại
         _settingsResetAll: "Đặt lại tất cả",
         _settingsRemoveAll: "Xóa tất cả ghi chú",
-        _settingsRemoveAllWarning: "CẢNH BÁO! Nhấn nút tiếp theo sẽ xóa tất cả ghi chú đã lưu",
-        _toastAllNotesDeleted: "Tất cả ghi chú đã bị xóa",
+        _settingsRemoveAllWarning: "CHÚ Ý! Nhấn nút tiếp theo sẽ xóa tất cả ghi chú đã lưu",
+        _toastAllNotesDeleted: "Đã xóa tất cả ghi chú",
 
-        // Notificaciones
+        // Notifications
         _notificationsTitle: "Suỵt... Chúng tôi giữ bí mật của bạn 🤏",
-        _notificationsBody: "Khóa ghi chú của bạn trước khi bị phát hiện",
+        _notificationsBody: "Khóa ghi chú của bạn trước khi chúng bị phát hiện",
 
-        // Modal de updates
-        _updatesModalNews: "Có gì mới",
-        _updatesModalV1_1: "Bây giờ bạn có thể phát ghi chú bằng giọng đọc! ",
-        _updatesModalV1_2: "Chọn trong số nhiều giọng đọc khác nhau",
-        _updatesModalV1_3: "Tùy chỉnh tông giọng",
-        _updatesModalV1_4: "Tùy chỉnh nhịp giọng",
-        _updatesModalV1_5: "Thưởng thức ứng dụng bằng tiếng Ý và tiếng Ba Tư",
-        _updatesModalV1_6: "😊 Chúng tôi hy vọng bạn thích các tính năng mới 😊",
-
+        // Modal cập nhật
+        _updatesModalNews: "Cập nhật mới",
+        _updatesModalV1_1: "Tính năng mới: Biểu mẫu!",
+        _updatesModalV1_2: "Chúng tôi đã thiết kế một số biểu mẫu cho bạn",
+        _updatesModalV1_3: "Hãy chọn một biểu mẫu và tùy chỉnh theo ý thích để tạo ra những ghi chú tốt nhất cho cuộc sống hằng ngày của bạn 🌺",
+        _updatesModalV1_4: "Điều chỉnh nhịp điệu giọng nói",
+        _updatesModalV1_5: "Trải nghiệm ứng dụng bằng tiếng Ý và tiếng Ba Tư",
+        _updatesModalV1_6: "😊 Hy vọng bạn thích những tính năng mới 😊",
+        _closeUpdatesModal: "Đóng",
     },
     pl: {
         // Header Home
         _headerTitle: "Moje notatki",
+        _headerTemplates: "Szablony",
         _headerDropdownOption1: "Zmień siatkę",
         _headerDropdownOption2: "Ustawienia",
 
@@ -746,8 +763,10 @@ const translations = {
 
         // Home
         _homeButton: "Dodaj notatkę",
+        _homeTemplates: "Szablony",
         _homeEmptyList: "Nie masz jeszcze żadnych notatek",
-        _elementsSelected: "wybrane elementy",
+        _elementsSelected: "Wybrane elementy",
+        _templatesTitle: "Wybierz szablon",
 
         // Lista de idiomas
         _langListSpanish: "Hiszpański",
@@ -784,11 +803,11 @@ const translations = {
         // Ajustes del texto
         _settingsNote: "Ustawienia notatki",
         _settingsLineSpacing: "Odstęp między akapitami",
-        _toastLineSpacingUpdated: "Odstęp między wierszami w twoich notatkach został zaktualizowany",
+        _toastLineSpacingUpdated: "Odstęp między wierszami zaktualizowany",
         _settingsLetterSpacing: "Odstęp między literami",
-        _toastLetterSpacingUpdated: "Odstęp między literami w twoich notatkach został zaktualizowany",
+        _toastLetterSpacingUpdated: "Odstęp między literami zaktualizowany",
         _settingsWordSpacing: "Odstęp między słowami",
-        _toastWordSpacingUpdated: "Odstęp między słowami w twoich notatkach został zaktualizowany",
+        _toastWordSpacingUpdated: "Odstęp między słowami zaktualizowany",
         _settingsTypo: "Typografia",
         _toastTypoSaved: "Typografia zapisana",
         _settingsTypoWarning: "Po zmianie typografii zostaniesz przeniesiony do ekranu głównego, aby załadować nową czcionkę",
@@ -805,17 +824,19 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Nowości",
-        _updatesModalV1_1: "Teraz możesz odtworzyć notatkę głosowo! ",
-        _updatesModalV1_2: "Wybierz spośród różnych głosów",
-        _updatesModalV1_3: "Dostosuj ton głosu",
+        _updatesModalV1_1: "Nowa funkcja: Szablony!",
+        _updatesModalV1_2: "Zaprojektowaliśmy dla Ciebie kilka szablonów",
+        _updatesModalV1_3: "Wybierz szablon i zmień go według własnych upodobań, aby tworzyć najlepsze notatki na co dzień 🌺",
+        _updatesModalV1_4: "Dostosuj tempo głosu",
         _updatesModalV1_4: "Dostosuj tempo głosu",
         _updatesModalV1_5: "Korzystaj z aplikacji po włosku i persku",
         _updatesModalV1_6: "😊 Mamy nadzieję, że spodobają ci się nowości 😊",
-
+        _closeUpdatesModal: "Zamknij",
     },
     pt: {
         // Header Home
         _headerTitle: "Minhas notas",
+        _headerTemplates: "Modelos",
         _headerDropdownOption1: "Alterar grade",
         _headerDropdownOption2: "Configurações",
 
@@ -847,8 +868,10 @@ const translations = {
 
         // Home
         _homeButton: "Adicionar nota",
-        _homeEmptyList: "Você não tem nenhuma nota criada",
-        _elementsSelected: "elementos selecionados",
+        _homeTemplates: "Modelos",
+        _homeEmptyList: "Você não tem nenhuma nota creada",
+        _elementsSelected: "Itens selecionados",
+        _templatesTitle: "Escolher modelo",
 
         // Lista de idiomas
         _langListSpanish: "Espanhol",
@@ -885,11 +908,11 @@ const translations = {
         // Configurações de texto
         _settingsNote: "Configurações da nota",
         _settingsLineSpacing: "Espaçamento entre parágrafos",
-        _toastLineSpacingUpdated: "O espaçamento entre linhas das suas notas foi atualizado",
+        _toastLineSpacingUpdated: "Espaçamento entre linhas atualizado",
         _settingsLetterSpacing: "Espaçamento entre letras",
-        _toastLetterSpacingUpdated: "O espaçamento entre letras das suas notas foi atualizado",
+        _toastLetterSpacingUpdated: "Espaçamento entre letras atualizado",
         _settingsWordSpacing: "Espaçamento entre palavras",
-        _toastWordSpacingUpdated: "O espaçamento entre palavras das suas notas foi atualizado",
+        _toastWordSpacingUpdated: "Espaçamento entre palavras atualizado",
         _settingsTypo: "Tipografia",
         _toastTypoSaved: "Tipografia salva",
         _settingsTypoWarning: "Ao alterar a tipografia, você será levado à tela inicial para carregar a nova fonte",
@@ -906,17 +929,18 @@ const translations = {
 
         // Modal de atualizações
         _updatesModalNews: "Novidades",
-        _updatesModalV1_1: "Agora você pode reproduzir uma nota em voz alta! ",
-        _updatesModalV1_2: "Escolha entre diferentes vozes",
-        _updatesModalV1_3: "Personalize o tom da voz",
+        _updatesModalV1_1: "Nova função: Modelos!",
+        _updatesModalV1_2: "Projetamos alguns modelos para você",
+        _updatesModalV1_3: "Escolha um modelo e altere-o ao seu gosto para criar as melhores notas para o seu dia a dia 🌺",
         _updatesModalV1_4: "Personalize o ritmo da voz",
         _updatesModalV1_5: "Aproveite o app em Italiano e Persa",
         _updatesModalV1_6: "😊 Esperamos que você aproveite as novidades 😊",
-
+        _closeUpdatesModal: "Fechar",
     },
     tr: {
         // Header Home
         _headerTitle: "Notlarım",
+        _headerTemplates: "Şablonlar",
         _headerDropdownOption1: "Izgara değiştir",
         _headerDropdownOption2: "Ayarlar",
 
@@ -948,8 +972,10 @@ const translations = {
 
         // Home
         _homeButton: "Not ekle",
+        _homeTemplates: "Şablonlar",
         _homeEmptyList: "Hiç not oluşturmadınız",
-        _elementsSelected: "öğe seçildi",
+        _elementsSelected: "Öğeler seçildi",
+        _templatesTitle: "Şablon seç",
 
         // Dil listesi
         _langListSpanish: "İspanyolca",
@@ -986,11 +1012,11 @@ const translations = {
         // Metin ayarları
         _settingsNote: "Not ayarları",
         _settingsLineSpacing: "Paragraflar arası boşluk",
-        _toastLineSpacingUpdated: "Notlarınızdaki satır aralığı güncellendi",
+        _toastLineSpacingUpdated: "Satır aralığı güncellendi",
         _settingsLetterSpacing: "Harfler arası boşluk",
-        _toastLetterSpacingUpdated: "Notlarınızdaki harf aralığı güncellendi",
+        _toastLetterSpacingUpdated: "Harf aralığı güncellendi",
         _settingsWordSpacing: "Kelimeler arası boşluk",
-        _toastWordSpacingUpdated: "Notlarınızdaki kelime aralığı güncellendi",
+        _toastWordSpacingUpdated: "Kelime aralığı güncellendi",
         _settingsTypo: "Tipografi",
         _toastTypoSaved: "Tipografi kaydedildi",
         _settingsTypoWarning: "Tipografiyi değiştirdiğinizde, yeni yazı tipini yüklemek için ana ekrana yönlendirileceksiniz",
@@ -1007,17 +1033,18 @@ const translations = {
 
         // Güncelleme modali
         _updatesModalNews: "Yenilikler",
-        _updatesModalV1_1: "Artık bir notu sesli olarak dinleyebilirsiniz! ",
-        _updatesModalV1_2: "Farklı sesler arasından seçim yapın",
-        _updatesModalV1_3: "Ses tonunu özelleştirin",
+        _updatesModalV1_1: "Yeni özellik: Şablonlar!",
+        _updatesModalV1_2: "Sizin için bazı şablonlar tasarladık",
+        _updatesModalV1_3: "Günlük hayatınız için en iyi notları oluşturmak için bir şablon seçin ve zevkinize göre değiştirin 🌺",
         _updatesModalV1_4: "Ses hızını özelleştirin",
         _updatesModalV1_5: "Uygulamayı İtalyanca ve Farsça olarak kullanın",
         _updatesModalV1_6: "😊 Yeniliklerin keyfini çıkaracağınızı umuyoruz 😊",
-
+        _closeUpdatesModal: "Kapat",
     },
     id: {
         // Header Home
         _headerTitle: "Catatan Saya",
+        _headerTemplates: "Templat",
         _headerDropdownOption1: "Ubah grid",
         _headerDropdownOption2: "Pengaturan",
 
@@ -1049,8 +1076,10 @@ const translations = {
 
         // Home
         _homeButton: "Tambah catatan",
+        _homeTemplates: "Templat",
         _homeEmptyList: "Kamu belum membuat catatan",
-        _elementsSelected: "item dipilih",
+        _elementsSelected: "Item dipilih",
+        _templatesTitle: "Pilih templat",
 
         // Lista de idiomas
         _langListSpanish: "Spanyol",
@@ -1087,11 +1116,11 @@ const translations = {
         // Ajustes del texto
         _settingsNote: "Pengaturan catatan",
         _settingsLineSpacing: "Jarak antar paragraf",
-        _toastLineSpacingUpdated: "Jarak baris catatanmu diperbarui",
+        _toastLineSpacingUpdated: "Jarak baris diperbarui",
         _settingsLetterSpacing: "Jarak antar huruf",
-        _toastLetterSpacingUpdated: "Jarak huruf catatanmu diperbarui",
+        _toastLetterSpacingUpdated: "Jarak huruf diperbarui",
         _settingsWordSpacing: "Jarak antar kata",
-        _toastWordSpacingUpdated: "Jarak kata catatanmu diperbarui",
+        _toastWordSpacingUpdated: "Jarak kata diperbarui",
         _settingsTypo: "Tipografi",
         _toastTypoSaved: "Tipografi disimpan",
         _settingsTypoWarning: "Saat mengubah tipografi, kamu akan diarahkan ke layar beranda untuk memuat font baru",
@@ -1108,17 +1137,18 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Apa yang baru",
-        _updatesModalV1_1: "Sekarang kamu bisa memutar catatan dengan suara! ",
-        _updatesModalV1_2: "Pilih dari berbagai suara",
-        _updatesModalV1_3: "Sesuaikan nada suara",
+        _updatesModalV1_1: "Fitur baru: Templat!",
+        _updatesModalV1_2: "Kami telah merancang beberapa templat untuk Anda",
+        _updatesModalV1_3: "Pilih templat dan ubah sesuai keinginan untuk membuat catatan terbaik untuk keseharian Anda 🌺",
         _updatesModalV1_4: "Sesuaikan ritme suara",
         _updatesModalV1_5: "Nikmati aplikasi dalam bahasa Italia dan Persia",
         _updatesModalV1_6: "😊 Semoga kamu suka dengan fitur baru 😊",
-
+        _closeUpdatesModal: "Tutup",
     },
     ru: {
         // Header Home
         _headerTitle: "Мои заметки",
+        _headerTemplates: "Шаблоны",
         _headerDropdownOption1: "Изменить сетку",
         _headerDropdownOption2: "Настройки",
 
@@ -1150,8 +1180,10 @@ const translations = {
 
         // Home
         _homeButton: "Добавить заметку",
+        _homeTemplates: "Шаблоны",
         _homeEmptyList: "У вас нет созданных заметок",
-        _elementsSelected: "элементов выбрано",
+        _elementsSelected: "Выбранные элементы",
+        _templatesTitle: "Выберите шаблон",
 
         // Список языков
         _langListSpanish: "Испанский",
@@ -1188,11 +1220,11 @@ const translations = {
         // Настройки текста
         _settingsNote: "Настройки заметки",
         _settingsLineSpacing: "Интервал между абзацами",
-        _toastLineSpacingUpdated: "Межстрочный интервал ваших заметок обновлён",
+        _toastLineSpacingUpdated: "Межстрочный интервал обновлён",
         _settingsLetterSpacing: "Расстояние между буквами",
-        _toastLetterSpacingUpdated: "Интервал между буквами ваших заметок обновлён",
+        _toastLetterSpacingUpdated: "Интервал между буквами обновлён",
         _settingsWordSpacing: "Расстояние между словами",
-        _toastWordSpacingUpdated: "Интервал между словами ваших заметок обновлён",
+        _toastWordSpacingUpdated: "Интервал между словами обновлён",
         _settingsTypo: "Типография",
         _toastTypoSaved: "Типография сохранена",
         _settingsTypoWarning: "При изменении шрифта вы будете перенаправлены на главный экран для загрузки нового шрифта",
@@ -1207,20 +1239,20 @@ const translations = {
         _notificationsTitle: "Тссс... Мы храним твои секреты 🤏",
         _notificationsBody: "Заблокируй свои заметки, пока их не нашли",
 
-
         // Модальное окно обновлений
         _updatesModalNews: "Новости",
-        _updatesModalV1_1: "Теперь вы можете прослушать заметку вслух! ",
-        _updatesModalV1_2: "Выбирайте из разных голосов",
-        _updatesModalV1_3: "Настройте тон голоса",
+        _updatesModalV1_1: "Новая функция: Шаблоны!",
+        _updatesModalV1_2: "Мы разработали для вас несколько шаблонов",
+        _updatesModalV1_3: "Выберите шаблон и измените его по своему вкусу, чтобы создавать лучшие заметки на каждый день 🌺",
         _updatesModalV1_4: "Настройте ритм голоса",
         _updatesModalV1_5: "Наслаждайтесь приложением на итальянском и персидском",
         _updatesModalV1_6: "😊 Надеемся, вам понравятся новинки 😊",
-
+        _closeUpdatesModal: "Закрыть",
     },
     it: {
         // Header Home
         _headerTitle: "Le mie note",
+        _headerTemplates: "Modelli",
         _headerDropdownOption1: "Cambia griglia",
         _headerDropdownOption2: "Impostazioni",
 
@@ -1252,8 +1284,10 @@ const translations = {
 
         // Home
         _homeButton: "Aggiungi nota",
+        _homeTemplates: "Modelli",
         _homeEmptyList: "Non hai ancora creato nessuna nota",
-        _elementsSelected: "elementi selezionati",
+        _elementsSelected: "Elementi selezionati",
+        _templatesTitle: "Scegli modello",
 
         // Lista de idiomas
         _langListSpanish: "Spagnolo",
@@ -1290,11 +1324,11 @@ const translations = {
         // Ajustes del texto
         _settingsNote: "Impostazioni nota",
         _settingsLineSpacing: "Spaziatura paragrafi",
-        _toastLineSpacingUpdated: "La spaziatura delle righe delle tue note è stata aggiornata",
+        _toastLineSpacingUpdated: "Spaziatura righe aggiornata",
         _settingsLetterSpacing: "Spaziatura lettere",
-        _toastLetterSpacingUpdated: "La spaziatura delle lettere delle tue note è stata aggiornata",
+        _toastLetterSpacingUpdated: "Spaziatura lettere aggiornata",
         _settingsWordSpacing: "Spaziatura parole",
-        _toastWordSpacingUpdated: "La spaziatura delle parole delle tue note è stata aggiornata",
+        _toastWordSpacingUpdated: "Spaziatura parole aggiornata",
         _settingsTypo: "Tipografia",
         _toastTypoSaved: "Tipografia salvata",
         _settingsTypoWarning: "Quando cambi tipografia verrai reindirizzato alla schermata principale per caricare il nuovo font",
@@ -1311,17 +1345,18 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Novità",
-        _updatesModalV1_1: "Ora puoi riprodurre una nota con la voce! ",
-        _updatesModalV1_2: "Scegli tra voci diverse",
-        _updatesModalV1_3: "Personalizza il tono della voce",
+        _updatesModalV1_1: "Nuova funzione: Modelli!",
+        _updatesModalV1_2: "Abbiamo progettato alcuni modelli per te",
+        _updatesModalV1_3: "Scegli un modello e modificalo a tuo piacimento per creare le migliori note per la tua vita quotidiana 🌺",
         _updatesModalV1_4: "Personalizza la velocità della voce",
         _updatesModalV1_5: "Goditi l’app in Italiano e Persiano",
         _updatesModalV1_6: "😊 Speriamo che ti piacciano le novità 😊",
-
+        _closeUpdatesModal: "Chiudi",
     },
     fa: {
         // Header Home
         _headerTitle: "یادداشت‌های من",
+        _headerTemplates: "قالب‌ها",
         _headerDropdownOption1: "تغییر شبکه",
         _headerDropdownOption2: "تنظیمات",
 
@@ -1353,8 +1388,10 @@ const translations = {
 
         // Home
         _homeButton: "افزودن یادداشت",
+        _homeTemplates: "قالب‌ها",
         _homeEmptyList: "شما هیچ یادداشتی ایجاد نکرده‌اید",
-        _elementsSelected: "موارد انتخاب‌شده",
+        _elementsSelected: "موارد انتخاب شده",
+        _templatesTitle: "انتخاب قالب",
 
         // Lista de idiomas
         _langListSpanish: "اسپانیایی",
@@ -1391,11 +1428,11 @@ const translations = {
         // Ajustes del texto
         _settingsNote: "تنظیمات یادداشت",
         _settingsLineSpacing: "فاصله بین پاراگراف‌ها",
-        _toastLineSpacingUpdated: "فاصله خطوط یادداشت‌های شما به‌روزرسانی شد",
+        _toastLineSpacingUpdated: "فاصله خطوط به‌روزرسانی شد",
         _settingsLetterSpacing: "فاصله بین حروف",
-        _toastLetterSpacingUpdated: "فاصله حروف یادداشت‌های شما به‌روزرسانی شد",
+        _toastLetterSpacingUpdated: "فاصله حروف به‌روزرسانی شد",
         _settingsWordSpacing: "فاصله بین کلمات",
-        _toastWordSpacingUpdated: "فاصله کلمات یادداشت‌های شما به‌روزرسانی شد",
+        _toastWordSpacingUpdated: "فاصله کلمات به‌روزرسانی شد",
         _settingsTypo: "تایپوگرافی",
         _toastTypoSaved: "تایپوگرافی ذخیره شد",
         _settingsTypoWarning: "با تغییر تایپوگرافی به صفحه اصلی هدایت می‌شوید تا فونت جدید بارگیری شود",
@@ -1412,13 +1449,13 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "اخبار جدید",
-        _updatesModalV1_1: "اکنون می‌توانید یک یادداشت را با صدا پخش کنید! ",
-        _updatesModalV1_2: "از بین صداهای مختلف انتخاب کنید",
-        _updatesModalV1_3: "تن صدای خود را شخصی‌سازی کنید",
+        _updatesModalV1_1: "ویژگی جدید: قالب‌ها!",
+        _updatesModalV1_2: "ما چند قالب برای شما طراحی کرده‌ایm",
+        _updatesModalV1_3: "یک قالب انتخاب کنید و آن را به دلخواه خود تغییر دهید تا بهترین یادداشت‌ها را برای زندگی روزمره خود بسازید 🌺",
         _updatesModalV1_4: "ریتم صدا را شخصی‌سازی کنید",
         _updatesModalV1_5: "از برنامه به زبان ایتالیایی و فارسی لذت ببرید",
         _updatesModalV1_6: "😊 امیدواریم از ویژگی‌های جدید لذت ببرید 😊",
-
+        _closeUpdatesModal: "بستن",
     }
 }
 

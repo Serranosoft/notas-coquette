@@ -15,7 +15,7 @@ import { userPreferences } from "../utils/user-preferences";
 
 export default function NoteContainer() {
 
-    const { id } = useLocalSearchParams();
+    const { id, source } = useLocalSearchParams();
 
     const { language } = useContext(LangContext);
 
@@ -136,7 +136,12 @@ export default function NoteContainer() {
         // Guardar nota
         await saveNote();
         // Volver a la pantalla anterior
-        router.back();
+        // Si vengo de una plantilla, me interesa volver a la home
+        if (source === "template") {
+            router.navigate("/");
+        } else {
+            router.back();
+        }
     }
 
     async function saveNote() {

@@ -2,14 +2,14 @@ import { Link } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors, ui } from "../utils/styles";
 
-export default function HomeButton({ language }) {
+export default function HomeWatchTemplatesBtn({ language }) {
 
     return (
-        <Link href="/note" asChild>
+        <Link href="/templates" asChild>
             <TouchableOpacity activeOpacity={0.7}>
                 <View style={styles.btn}>
-                    <Text style={ui.h3}>{language.t("_homeButton")}</Text>
-                    <Image style={styles.img} source={require("../../assets/decoration-1.png")} />
+                    <Text style={ui.h4}>{language.t("_homeTemplates")}</Text>
+                    <Image style={styles.img} source={require("../../assets/decoration-2.png")} />
                 </View>
             </TouchableOpacity>
         </Link>
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
         padding: 8,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 60,
-        marginBottom: 40,
+        marginTop: 24,
+        marginBottom: 32,
         borderRadius: 6,
         shadowColor: "#000",
         shadowOffset: {
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
 
     img: {
         position: "absolute",
-        top: -85,
-        left: -24,
-        width: 140,
-        height: 140,
-        transform: [{ rotate: "-15deg" }],
+        top: -8,
+        right: 32,
+        width: 60,
+        height: 60,
+        transform: [{ rotate: "15deg" }],
     },
 })
