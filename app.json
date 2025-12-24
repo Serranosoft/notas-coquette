@@ -95,36 +95,9 @@
                     },
                     "ios": {
                         "fonts": [
-                            {
-                                "fontFamily": "Regular",
-                                "fontDefinitions": [
-                                    {
-                                        "path": "./assets/fonts/AncizarSans-Regular.ttf",
-                                        "weight": "400",
-                                        "style": "normal"
-                                    }
-                                ]
-                            },
-                            {
-                                "fontFamily": "Medium",
-                                "fontDefinitions": [
-                                    {
-                                        "path": "./assets/fonts/AncizarSans-Medium.ttf",
-                                        "weight": "500",
-                                        "style": "normal"
-                                    }
-                                ]
-                            },
-                            {
-                                "fontFamily": "Semibold",
-                                "fontDefinitions": [
-                                    {
-                                        "path": "./assets/fonts/AncizarSans-Bold.ttf",
-                                        "weight": "600",
-                                        "style": "normal"
-                                    }
-                                ]
-                            }
+                            "./assets/fonts/AncizarSans-Regular.ttf",
+                            "./assets/fonts/AncizarSans-Medium.ttf",
+                            "./assets/fonts/AncizarSans-Bold.ttf"
                         ]
                     }
                 }
