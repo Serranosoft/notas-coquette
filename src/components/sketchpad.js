@@ -1,36 +1,22 @@
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle, useMemo } from 'react';
 import { View, StyleSheet, PanResponder } from 'react-native';
-import { Canvas, Path, Skia, Circle } from '@shopify/react-native-skia';
+import { Canvas, Path, Skia, Circle, Group } from '@shopify/react-native-skia';
 import { addDraw, deleteAllDrawsFromNote, getDrawingsFromId } from '../utils/sqlite';
 import simplify from 'simplify-js';
 import { baseSize } from '../rich-editor/drawing/drawing';
 
+const CHUNK_HEIGHT = 4000;
+
 const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
     const [paths, setPaths] = useState([]);
     const currentPoints = useRef([]);
-    const canvasRef = useRef();
     const pathsRef = useRef(paths);
     const drawingRef = useRef(drawing);
     const [rubberPos, setRubberPos] = useState(null);
     const hasMoved = useRef(false);
-
-    const disposed = useRef(false);
-
-    useEffect(() => {
-        return () => {
-            if (disposed.current) return;
-            disposed.current = true;
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    try {
-                        if (canvasRef.current?._nativeId)canvasRef.current.dispose?.();
-                    } catch (err) {
-                        console.warn("Error liberando canvas:", err);
-                    }
-                }, 100);
-            });
-        };
-    }, []);
+    
+    // Estado para capturar la altura real del contenedor
+    const [containerHeight, setContainerHeight] = useState(0);
 
     useEffect(() => {
         loadFromDB();
@@ -293,31 +279,61 @@ const SketchPad = forwardRef(({ note_id, drawing, setDrawing }, ref) => {
         });
     }, [paths]);
 
+    // Lógica para calcular cuántos trozos de canvas necesitamos
+    const renderCanvasChunks = () => {
+        if (containerHeight === 0) return null;
+        
+        // Calculamos cuántos trozos de 4000px necesitamos para cubrir la altura total
+        const chunks = [];
+        const numChunks = Math.ceil(containerHeight / CHUNK_HEIGHT);
+
+        for (let i = 0; i < numChunks; i++) {
+            const top = i * CHUNK_HEIGHT;
+            const height = Math.min(CHUNK_HEIGHT, containerHeight - top);
+            
+            chunks.push(
+                <View 
+                    key={i} 
+                    style={{ position: 'absolute', top: top, left: 0, width: '100%', height: height }}
+                >
+                    <Canvas style={{ flex: 1 }}>
+                        <Group transform={[{ translateY: -top }]}>
+                             {renderPaths.map((p, index) => (
+                                <Path
+                                    key={`p-${i}-${index}`}
+                                    path={p.path}
+                                    color={p.color}
+                                    style="stroke"
+                                    strokeWidth={p.width}
+                                    opacity={p.alpha}
+                                    strokeCap={p.alpha === 0.5 ? "round" : "butt"}
+                                    strokeJoin={p.alpha === 0.5 ? "round" : "mitter"}
+                                />
+                            ))}
+                            {rubberPos && (
+                                <Circle
+                                    cx={rubberPos.x}
+                                    cy={rubberPos.y}
+                                    r={45}
+                                    color="rgba(204, 82, 122,0.3)"
+                                />
+                            )}
+                        </Group>
+                    </Canvas>
+                </View>
+            );
+        }
+        return chunks;
+    };
+
     return (
         <View style={[styles.container, { zIndex: 1000, pointerEvents: drawing.isDrawing ? "auto" : "none" }]} >
-            <View style={styles.canvasContainer} {...panResponder.panHandlers}>
-                <Canvas ref={canvasRef} style={styles.canvas}>
-                    {renderPaths.map((p, i) => (
-                        <Path
-                            key={i}
-                            path={p.path}
-                            color={p.color}
-                            style="stroke"
-                            strokeWidth={p.width}
-                            opacity={p.alpha}
-                            strokeCap={p.alpha === 0.5 ? "round" : "butt"}
-                            strokeJoin={p.alpha === 0.5 ? "round" : "mitter"}
-                        />
-                    ))}
-                    {rubberPos && (
-                        <Circle
-                            cx={rubberPos.x}
-                            cy={rubberPos.y}
-                            r={45}
-                            color="rgba(204, 82, 122,0.3)"
-                        />
-                    )}
-                </Canvas>
+            <View 
+                style={styles.canvasContainer} 
+                {...panResponder.panHandlers}
+                onLayout={(e) => setContainerHeight(e.nativeEvent.layout.height)}
+            >
+                {renderCanvasChunks()}
             </View>
         </View>
     );
@@ -329,5 +345,4 @@ export default SketchPad;
 const styles = StyleSheet.create({
     container: { flex: 1, position: "absolute", width: "100%", height: "100%" },
     canvasContainer: { flex: 1 },
-    canvas: { flex: 1 },
 });
