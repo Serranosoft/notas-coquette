@@ -17,6 +17,7 @@ import { userPreferences } from "../src/utils/user-preferences";
 import * as Notifications from 'expo-notifications';
 import { scheduleWeeklyNotification } from "../src/utils/notifications";
 import Constants from "expo-constants";
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
 export default function Layout() {
 
@@ -36,9 +37,13 @@ export default function Layout() {
 
     // Arrancar base de datos, configurar notificaciones y cargar preferencias de usuario
     useEffect(() => {
-        getUserPreferences();
-        configureNotifications();
-        init();
+        async function prepare() {
+            await handleTrackingAds();
+            await getUserPreferences();
+            await configureNotifications();
+            await init();
+        }
+        prepare();
     }, [])
 
     // Al terminar de configurar el idioma se lanza notificación
@@ -87,6 +92,10 @@ export default function Layout() {
                 // No borrar el AsyncStorage por si debo recuperar los registros en el próximo despliegue. 
             }
         }
+    }
+
+    async function handleTrackingAds() {
+        return await requestTrackingPermissionsAsync();
     }
 
     async function getUserPreferences() {

@@ -30,6 +30,7 @@
     "expo-sqlite": "~15.2.14",
     "expo-status-bar": "~2.2.3",
     "expo-store-review": "~8.1.5",
+    "expo-tracking-transparency": "~5.2.4",
     "i18n-js": "^4.4.3",
     "lottie-react-native": "7.2.2",
     "patch-package": "^8.0.0",

@@ -2,7 +2,7 @@
     "expo": {
         "name": "Notas Coquette",
         "slug": "notas-coquette",
-        "version": "2.2.0",
+        "version": "2.2.1",
         "orientation": "portrait",
         "icon": "./assets/icon-notes.png",
         "userInterfaceStyle": "light",
@@ -18,10 +18,11 @@
         ],
         "ios": {
             "supportsTablet": true,
-            "buildNumber": "5",
+            "buildNumber": "6",
             "bundleIdentifier": "com.paulaymanu113.notascoquette",
             "infoPlist": {
-                "ITSAppUsesNonExemptEncryption": false
+                "ITSAppUsesNonExemptEncryption": false,
+                "NSUserTrackingUsageDescription": "Este identificador se utilizará para mostrarte anuncios personalizados y mejorar la relevancia de la publicidad que recibes."
             }
         },
         "locales": {
@@ -125,6 +126,12 @@
                 "expo-notifications",
                 {
                     "icon": "./assets/notification.png"
+                }
+            ],
+            [
+                "expo-tracking-transparency",
+                {
+                    "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
                 }
             ]
         ]
