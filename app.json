@@ -2,7 +2,7 @@
     "expo": {
         "name": "Notas Coquette",
         "slug": "notas-coquette",
-        "version": "2.2.1",
+        "version": "2.2.2",
         "orientation": "portrait",
         "icon": "./assets/icon-notes.png",
         "userInterfaceStyle": "light",
@@ -18,7 +18,7 @@
         ],
         "ios": {
             "supportsTablet": true,
-            "buildNumber": "6",
+            "buildNumber": "7",
             "bundleIdentifier": "com.paulaymanu113.notascoquette",
             "infoPlist": {
                 "ITSAppUsesNonExemptEncryption": false,
