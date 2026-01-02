@@ -16,6 +16,8 @@ const AdsHandler = forwardRef((props, ref) => {
     /* CONSENT */
     const isMobileAdsStartCalledRef = useRef(false);
     useEffect(() => {
+        if (!props.canStartAds) return;
+
         const prepare = async () => {
             const consentInfo = await AdsConsent.requestInfoUpdate();
             AdsConsent.loadAndShowConsentFormIfRequired()
@@ -25,7 +27,7 @@ const AdsHandler = forwardRef((props, ref) => {
         }
 
         prepare();
-    }, []);
+    }, [props.canStartAds]);
 
     async function startGoogleMobileAdsSDK() {
         const { canRequestAds } = await AdsConsent.getConsentInfo();

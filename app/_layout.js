@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
+import { SplashScreen } from "expo-router";
 import { View, StatusBar, StyleSheet, Platform } from "react-native";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useCallback, useEffect, useState } from "react";
 import { colors } from "../src/utils/styles";
 import { setInitialNote } from "../src/utils/setInitialNote";
 import { getLocales } from 'expo-localization';
@@ -19,10 +20,14 @@ import { scheduleWeeklyNotification } from "../src/utils/notifications";
 import Constants from "expo-constants";
 import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function Layout() {
 
+    // App State
+    const [appIsReady, setAppIsReady] = useState(false);
+
     // Idioma
-    const [langRdy, setLangRdy] = useState(false);
     const [language, setLanguage] = useState(getLocales()[0].languageCode);
     const i18n = new I18n(translations);
     if (language) i18n.locale = language;
@@ -38,20 +43,25 @@ export default function Layout() {
     // Arrancar base de datos, configurar notificaciones y cargar preferencias de usuario
     useEffect(() => {
         async function prepare() {
-            await handleTrackingAds();
-            await getUserPreferences();
-            await configureNotifications();
-            await init();
+            try {
+                await handleTrackingAds();
+                await getUserPreferences();
+                await configureNotifications();
+                await init();
+            } catch(error) {
+            } finally {
+                setAppIsReady(true);
+            }
         }
         prepare();
     }, [])
 
     // Al terminar de configurar el idioma se lanza notificación
     useEffect(() => {
-        if (langRdy) {
+        if (appIsReady) {
             scheduleWeeklyNotification(i18n);
         }
-    }, [language, langRdy])
+    }, [appIsReady])
 
     // Gestión de anuncios
     useEffect(() => {
@@ -102,7 +112,6 @@ export default function Layout() {
         // Language
         const language = await AsyncStorage.getItem(userPreferences.LANGUAGE);
         setLanguage(language || getLocales()[0].languageCode);
-        setLangRdy(true);
     }
 
     async function configureNotifications() {
@@ -129,12 +138,22 @@ export default function Layout() {
         }
     }
 
+    const onLayoutRootView = useCallback(async () => {
+        if (appIsReady) {
+            await SplashScreen.hideAsync();
+        }
+    }, [appIsReady]);
+
+    if (!appIsReady) {
+        return null;
+    }
+
     return (
         <GestureHandlerRootView style={styles.wrapper}>
             <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, adsLoaded: adsLoaded, setShowOpenAd: setShowOpenAd }}>
-                <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
+                <AdsHandler canStartAds={appIsReady} ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
                 <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
-                    <View style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
+                    <View onLayout={onLayoutRootView} style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
                         <Stack />
                         <StatusBar style="light" />
                     </View>
