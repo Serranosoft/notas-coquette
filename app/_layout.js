@@ -45,6 +45,9 @@ export default function Layout() {
         async function prepare() {
             try {
                 await handleTrackingAds();
+                if (Platform.OS === 'ios') {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
                 await getUserPreferences();
                 await configureNotifications();
                 await init();
