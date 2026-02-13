@@ -1,11 +1,8 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import { colors, ui } from "../utils/styles";
-import { Path, Svg } from "react-native-svg";
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
-import GridBackground from '../components/grid';
+import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions, Image } from "react-native";
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';
-
-const { height } = Dimensions.get('window');
+import { Svg, Path } from "react-native-svg";
+import GridBackground from '../components/grid';
 
 // Mapeo de tamaños para indicar a renderHTML el tamaño a renderizar de cada tag <font />
 const FONT_SIZE_MAP = {
@@ -36,11 +33,12 @@ const FontRenderer = ({ TDefaultRenderer, ...props }) => {
 const renderers = {
     font: FontRenderer
 };
-export default function NoteItem({ note, selected, onPress, highlight, isTemplate }) {
+
+export default function NoteItem({ note, onPress }) {
 
     const { width } = useWindowDimensions();
-    const source = { html: getSubstringUntilNthDiv(note.content) }
 
+    // Custom HTML models
     const customHTMLElementModels = {
         'font': HTMLElementModel.fromCustomModel({
             tagName: 'font',
@@ -57,70 +55,65 @@ export default function NoteItem({ note, selected, onPress, highlight, isTemplat
         return html.replace(/<input[^>]*>/g, '☐ ');
     }
 
-    const isSelected = selected.includes(note.id);
+    // Colors for the bullet point, rotating based on index or random could be nice, 
+    // but let's stick to a nice pink/red for now or use the design's "Color" valid.
+    const bulletColor = colors.button;
+
+    // Function to format date nicely
+    const formatDate = (dateMs) => {
+        if (!dateMs) return "";
+        const date = new Date(parseInt(dateMs));
+        return date.toLocaleDateString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' });
+    };
+
+    const isBlocked = note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0;
 
     return (
-
-        <TouchableOpacity style={[styles.container, isSelected && styles.selected, isTemplate && styles.template]} onLongPress={highlight} onPress={onPress}>
+        <TouchableOpacity style={styles.container} onPress={() => onPress(note.id)} activeOpacity={0.8}>
             <GridBackground />
-            <View>
-                {
-                    note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0 ?
-                        <View style={styles.screenBlock}>
-                            <Image source={require("../../assets/lock-home.png")} />
+            {
+                isBlocked ?
+                    <View style={styles.screenBlock}>
+                        <Image source={require("../../assets/lock-home.png")} style={{ width: 40, height: 40, opacity: 0.5 }} resizeMode="contain" />
+                    </View>
+                    :
+                    <View style={styles.contentWrapper}>
+                        <View style={styles.header}>
+                            <View style={[styles.bullet, { backgroundColor: bulletColor }]} />
+                            <Text style={styles.dateText}>{formatDate(note.date)}</Text>
+                            {/* Decoration icon could go here if available */}
+                            <View style={{ flex: 1 }} />
+                            {note.favorite === 1 &&
+                                <Svg width={16} height={16} viewBox="0 0 24 24" fill={colors.pink} stroke="none">
+                                    <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </Svg>
+                            }
                         </View>
-                        :
-                        <>
-                            <View style={styles.header}>
-                                {note.favorite === 1 ?
-                                    <Svg
-                                        height={24}
-                                        viewBox="0 -10 511.98685 511"
-                                        width={24}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <Path
-                                            d="M510.652 185.902a27.158 27.158 0 00-23.425-18.71l-147.774-13.419-58.433-136.77C276.71 6.98 266.898.494 255.996.494s-20.715 6.487-25.023 16.534l-58.434 136.746-147.797 13.418A27.208 27.208 0 001.34 185.902c-3.371 10.368-.258 21.739 7.957 28.907l111.7 97.96-32.938 145.09c-2.41 10.668 1.73 21.696 10.582 28.094 4.757 3.438 10.324 5.188 15.937 5.188 4.84 0 9.64-1.305 13.95-3.883l127.468-76.184 127.422 76.184c9.324 5.61 21.078 5.097 29.91-1.305a27.223 27.223 0 0010.582-28.094l-32.937-145.09 111.699-97.94a27.224 27.224 0 007.98-28.927zm0 0"
-                                            fill={colors.dark}
-                                        />
-                                    </Svg>
-                                    :
-                                    <Text></Text>
-                                }
-                                {note.date && <Text style={[ui.muted, { color: "#8a8a8a" }]}>{new Date(parseInt(note.date)).toLocaleDateString()}</Text>}
-                                {note.title && <Text style={[ui.muted, { color: "#8a8a8a" }]}>{note.title}</Text>}
-                            </View>
-                            <View style={styles.htmlPadding}>
+
+                        <View style={styles.contentContainer}>
+                            {/* <Text style={styles.title} numberOfLines={2}>
+                            {note.title || "Sin título"}
+                        </Text> */}
+                            <View style={styles.htmlContainer}>
                                 <RenderHTML
-                                    contentWidth={width}
-                                    source={{ html: sanitizeHTML(note.content) }}
+                                    contentWidth={width - 64} // Adjustable padding
+                                    source={{ html: getSubstringUntilNthDiv(sanitizeHTML(note.content)) }}
                                     customHTMLElementModels={customHTMLElementModels}
-                                    baseStyle={{ color: "#3a3a3a", fontSize: 16 }}
+                                    baseStyle={{ color: "#666", fontSize: 14, lineHeight: 20 }}
                                     renderers={renderers}
-                                    enableUserAgentStyles={true}
+                                    defaultTextProps={{ numberOfLines: 3 }}
                                 />
                             </View>
-                        </>
-                }
-            </View>
-            {selected.length < 1 && <LinearGradient colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']} style={styles.gradient} />}
-            {
-                selected.length > 0 &&
-                <View style={styles.selectedBox}>
-                    {isSelected &&
-                        <Svg width={32} height={32} viewBox="0 0 40 40">
-                            <Path d="M15.48 28.62a1 1 0 01-.71-.29l-7.54-7.54a1 1 0 010-1.41 1 1 0 011.42 0l6.83 6.83L32.12 9.57a1 1 0 011.41 0 1 1 0 010 1.42L16.18 28.33a1 1 0 01-.7.29z" />
-                        </Svg>
-                    }
-                </View>
+                        </View>
+                    </View>
             }
         </TouchableOpacity>
-    )
+    );
 }
-
 
 // Renderizar en cada nota de la home un limite de 9 <div> **Mejora de performance**
 function getSubstringUntilNthDiv(html, limit = 9) {
+    if (!html) return "";
     const regex = /<\/div>/g;
     let match;
     let count = 0;
@@ -139,7 +132,7 @@ function getSubstringUntilNthDiv(html, limit = 9) {
     // Si el HTML cortado tiene un div abierto pero no cerrado, lo cerramos
     const openDivs = (truncated.match(/<div/g) || []).length;
     const closeDivs = (truncated.match(/<\/div>/g) || []).length;
-    
+
     for (let i = 0; i < (openDivs - closeDivs); i++) {
         truncated += '</div>';
     }
@@ -147,63 +140,57 @@ function getSubstringUntilNthDiv(html, limit = 9) {
     return truncated;
 }
 
-
 const styles = StyleSheet.create({
     container: {
-        height: 215,
-        flex: 1 / 2,
         backgroundColor: "#fff",
-        position: "relative",
-        elevation: 5,
-        overflow: "hidden",
+        borderRadius: 8,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 3,
+        borderWidth: 1,
+        borderColor: "rgba(0,0,0,0.02)",
+        overflow: 'hidden',
+        height: 225
     },
-    template: {
-        height: 350,
+    contentWrapper: {
+        padding: 16,
     },
     header: {
         flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 8,
         alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "transparent",
-        paddingHorizontal: 8,
-        paddingBottom: 2,
-        paddingTop: 4,
+        marginBottom: 8,
+        gap: 8,
     },
-    htmlPadding: {
-        paddingHorizontal: 8,
-        paddingVertical: 4,
-        position: "relative",
+    bullet: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
     },
-    gradient: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: height * 0.13,
+    dateText: {
+        fontSize: 12,
+        color: colors.button,
+        fontWeight: "600",
+        textTransform: "capitalize",
     },
-    selectedBox: {
-        width: 30,
-        height: 30,
-        borderWidth: 1,
-        borderRadius: 100,
-        position: "absolute",
-        right: 10,
-        bottom: 10,
-        zIndex: 9,
-        backgroundColor: "#fff"
+    contentContainer: {
+        gap: 4,
     },
-    selected: {
-        backgroundColor: colors.selected,
-        elevation: 0,
-        borderWidth: 2,
-        borderColor: colors.dark
+    title: {
+        fontSize: 20, // Large bold text
+        fontWeight: "bold", // Using serif if possible would be closer to "Coquette" design language, but sticking to system font weights for now or styles.js if it had it.
+        color: "#333",
+        // fontFamily: 'Serif', // Can try if `ui.h1` font is available
+    },
+    htmlContainer: {
+        maxHeight: 100, // Limit height to show preview
+        overflow: "hidden",
     },
     screenBlock: {
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
-        opacity: 0.4,
+        opacity: 0.6,
     }
-})
+});

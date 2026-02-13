@@ -5,15 +5,15 @@ import { useContext } from "react";
 import { LangContext } from "../utils/Context";
 
 export default function HeaderHome({ setColumnNumber, columnNumber }) {
-    
+
     const { language } = useContext(LangContext);
 
     return (
-        <View style={[components.header, { paddingRight: 0 }]}>
+        <View style={[components.header, { paddingRight: 0, backgroundColor: "transparent" }]}>
             <View style={layout.title}>
                 <Text style={[ui.h4, ui.black]}>{language.t("_headerTitle")}</Text>
             </View>
-            <HeaderHomeOptionsContainer {...{setColumnNumber, columnNumber }} />
+            <HeaderHomeOptionsContainer {...{ setColumnNumber, columnNumber }} />
         </View>
     )
 }

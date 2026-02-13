@@ -2,7 +2,10 @@ export const colors = {
     button: "#cc527a",
     selected: "rgba(230, 34, 114, 0.25)",
     light: "#FACCD6",
-    dark: "#cc527a"
+    pink: "#e91e63",
+    lightPink: "#FDEFF4",
+    dark: "#cc527a",
+    pattern: "rgba(255, 255, 255, 0.4)",
 }
 
 export const ui = {
@@ -78,7 +81,7 @@ export const layout = {
         paddingTop: 16,
         paddingBottom: 100
     },
-    
+
     zIndex: {
         zIndex: 1,
     },

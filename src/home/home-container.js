@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import HeaderHome from "./header-home";
+
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { Platform } from "react-native";
@@ -67,8 +67,8 @@ export default function HomeContainer() {
 
     return (
         <>
-            <Stack.Screen options={{ header: () => <HeaderHome {...{ setColumnNumber, columnNumber }} /> }} />
-            <Home {...{ columnNumber, notes, deleteNotes, selected, setSelected, emptySelected }} />
+            <Stack.Screen options={{ headerShown: false }} />
+            <Home {...{ columnNumber, setColumnNumber, notes, deleteNotes, selected, setSelected, emptySelected }} />
             {adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />}
         </>
     )

@@ -5,26 +5,31 @@ import { LangContext } from "../utils/Context";
 import GridDeleteWrapper from "./grid-delete-wrapper";
 import HomeItems from "./home-items";
 import HomeNewNoteBtn from "./home-new-note-btn";
-import HomeWatchTemplatesBtn from "./home-watch-templates-btn";
+import TemplateCategories from "./template-categories";
+import PinkPatternLayout from "../components/pink-pattern-layout";
+import HeaderHome from "./header-home";
 
-function Home({ columnNumber, notes, emptySelected, selected, setSelected, deleteNotes }) {
+function Home({ columnNumber, setColumnNumber, notes, emptySelected, selected, setSelected, deleteNotes }) {
 
     const { language } = useContext(LangContext);
 
     return (
-        <>
-            <View style={[layout.flex, layout.backgroundLight, layout.paddingHorizontal]}>
-                <HomeNewNoteBtn {...{ language }} />
-                <HomeWatchTemplatesBtn {...{ language }} />
+        <PinkPatternLayout>
+            <HeaderHome {...{ columnNumber, setColumnNumber }} />
+            <View style={[layout.flex, { paddingHorizontal: 0 }]}>
+                <HomeNewNoteBtn />
+
                 {
                     notes.length > 0 ?
                         <HomeItems {...{ notes, columnNumber, selected, setSelected }} />
                         :
-                        <Text style={[ui.muted, sizes.medium]}>{language.t("_homeEmptyList")}</Text>
+                        <View style={{ padding: 20 }}>
+                            <Text style={[ui.muted, sizes.medium, { textAlign: 'center', marginTop: 40 }]}>{language.t("_homeEmptyList")}</Text>
+                        </View>
                 }
             </View>
             {selected.length > 0 && <GridDeleteWrapper {...{ selected, emptySelected, deleteNotes }} />}
-        </>
+        </PinkPatternLayout>
     )
 }
 

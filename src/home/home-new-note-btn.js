@@ -1,15 +1,17 @@
 import { Link } from "expo-router";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors, ui } from "../utils/styles";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { colors } from "../utils/styles";
+import { Svg, Path } from "react-native-svg";
 
-export default function HomeNewNoteBtn({ language }) {
+export default function HomeNewNoteBtn() {
 
     return (
         <Link href="/note" asChild>
-            <TouchableOpacity activeOpacity={0.7}>
-                <View style={styles.btn}>
-                    <Text style={ui.h3}>{language.t("_homeButton")}</Text>
-                    <Image style={styles.img} source={require("../../assets/decoration-1.png")} />
+            <TouchableOpacity activeOpacity={0.8} style={styles.fabContainer}>
+                <View style={styles.fab}>
+                    <Svg width={32} height={32} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                        <Path d="M12 5v14M5 12h14" />
+                    </Svg>
                 </View>
             </TouchableOpacity>
         </Link>
@@ -17,30 +19,26 @@ export default function HomeNewNoteBtn({ language }) {
 }
 
 const styles = StyleSheet.create({
-    btn: {
-        position: "relative",
-        backgroundColor: colors.button,
-        padding: 8,
+    fabContainer: {
+        position: "absolute",
+        bottom: 30, // Adjust distance from bottom
+        right: 20, // Adjust distance from right
+        zIndex: 999, // Ensure it's on top
+    },
+    fab: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: colors.pink || colors.button, // Use the new pink if defined, or button color
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 48,
-        borderRadius: 6,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 4,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-
-    img: {
-        position: "absolute",
-        top: -85,
-        left: -24,
-        width: 140,
-        height: 140,
-        transform: [{ rotate: "-15deg" }],
+        shadowOpacity: 0.3,
+        shadowRadius: 4.65,
+        elevation: 8,
     },
 })
