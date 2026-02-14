@@ -1,5 +1,5 @@
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
-import { layout } from "../../src/utils/styles";
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, StyleSheet } from "react-native";
+import { layout, colors } from "../../src/utils/styles";
 import FooterEditor from "../rich-editor/footer-editor";
 import Separators from "../rich-editor/separators/separators";
 import { bannerId, bannerIdIOS } from "../utils/constants";
@@ -8,11 +8,14 @@ import { memo, useContext } from "react";
 import { AdsContext } from "../utils/Context";
 import Drawing from "../rich-editor/drawing/drawing";
 import NoteContent from "./note-content";
+import PinkPatternLayout from "../components/pink-pattern-layout";
+import HeaderNoteContainer from "./header-note-container";
 
 function Note(
     {
         note,
         readingMode,
+        setReadingMode,
         setFontSize,
         fontSize,
         richText,
@@ -35,15 +38,42 @@ function Note(
         wordSpacing,
         letterSpacing,
         isReady,
+        setIsReady,
         changeColor,
-        changeHiliteColor
+        changeHiliteColor,
+        back,
+        playing,
+        voiceState,
+        handleNotePlaying,
+        isNew
     }) {
 
     const windowHeight = Dimensions.get('window').height;
     const { adsLoaded } = useContext(AdsContext);
 
     return (
-        <View style={[layout.flex, layout.backgroundWhite]}>
+        <PinkPatternLayout>
+            <HeaderNoteContainer
+                setIsReady={setIsReady}
+                drawing={drawing}
+                setDrawing={setDrawing}
+                note={note}
+                readingMode={readingMode}
+                setReadingMode={setReadingMode}
+                back={back}
+                richText={richText}
+                activeOption={activeOption}
+                setActiveOption={setActiveOption}
+                handleNotePlaying={handleNotePlaying}
+                playing={playing}
+                voiceState={voiceState}
+                isNew={isNew}
+            />
+
+            {
+                adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            }
+
             {
                 isReady && font &&
                 <>
@@ -55,15 +85,19 @@ function Note(
                         <Drawing drawing={drawing} setDrawing={setDrawing} />
                     )}
 
-                    {adsLoaded && <BannerAd unitId={Platform.OS === "android" ? bannerId : bannerIdIOS} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />}
-
                     <KeyboardAvoidingView
                         behavior={Platform.OS === "ios" ? "padding" : undefined}
-                        keyboardVerticalOffset={Platform.OS === "ios" ? 85 : 0} // Ajusta según el diseño
+                        keyboardVerticalOffset={Platform.OS === "ios" ? 85 : 0}
                         style={{ flex: 1 }}
                     >
-                        <View style={[layout.flex, layout.zIndex]}>
-                            <ScrollView style={layout.zIndex} contentContainerStyle={{ height: "auto" }} ref={scrollRef} scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing} onTouchEnd={handleFocusContent}>
+                        <View style={[styles.card, layout.zIndex]}>
+                            <ScrollView
+                                style={[layout.zIndex/* , { flex: 1 } */]}
+                                contentContainerStyle={{ height: "auto", paddingBottom: 80 }}
+                                ref={scrollRef}
+                                scrollEnabled={drawing.mode === "scroll" || !drawing.isDrawing}
+                                onTouchEnd={handleFocusContent}
+                            >
 
                                 <NoteContent
                                     key={note.id}
@@ -86,24 +120,37 @@ function Note(
                             </ScrollView>
                             {
                                 note &&
-                                <FooterEditor {...
-                                    {
-                                        richText,
-                                        readingMode,
-                                        sticker,
-                                        drawing,
-                                        activeOption,
-                                        setActiveOption,
-                                        insertCheckbox,
-                                        setSticker,
-                                        setSeparator,
-                                        setFontSize,
-                                        fontSize,
-                                        changeColor,
-                                        changeHiliteColor
+                                <View
+                                    pointerEvents="box-none"
+                                    style={{
+                                        position: "absolute",
+                                        top: 0,
+                                        bottom: 24,
+                                        left: 0,
+                                        right: 0,
+                                        zIndex: 9999,
+                                        justifyContent: "flex-end"
+                                    }}
+                                >
+                                    <FooterEditor {...
+                                        {
+                                            richText,
+                                            readingMode,
+                                            sticker,
+                                            drawing,
+                                            activeOption,
+                                            setActiveOption,
+                                            insertCheckbox,
+                                            setSticker,
+                                            setSeparator,
+                                            setFontSize,
+                                            fontSize,
+                                            changeColor,
+                                            changeHiliteColor
+                                        }
                                     }
-                                }
-                                />
+                                    />
+                                </View>
                             }
 
                         </View>
@@ -111,9 +158,32 @@ function Note(
                 </>
 
             }
-
-        </View>
+        </PinkPatternLayout>
     )
 }
+
+const styles = StyleSheet.create({
+    card: {
+        backgroundColor: "#fff",
+        flex: 1,
+        marginHorizontal: 12,
+        marginBottom: 12,
+        marginTop: 8,
+        borderRadius: 12,
+        padding: 4,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3.84,
+        elevation: 5,
+        overflow: "visible" // Keeps footer inside rounded corners? Or maybe not if footer needs to pop out?
+        // If footer options pop out, overflow hidden might be bad.
+        // But the design shows footer inside.
+        // I will keep overflow hidden for now to round the content.
+    }
+});
 
 export default memo(Note);

@@ -1,11 +1,13 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
-import { editor, padding } from "../utils/styles";
+import { editor, padding, colors } from "../utils/styles";
 import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, foreColorLabel, hiliteColorLabel, italicLabel, listLabel, orderedListLabel, removeFormatLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
 import FontSizeContainer from "./font-size/font-size-container";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
+import { LinearGradient } from 'expo-linear-gradient';
+import { Svg, Path } from "react-native-svg";
 
 export default function FooterEditor({
     richText,
@@ -61,7 +63,7 @@ export default function FooterEditor({
         <View style={{ paddingTop: padding.bigTop, height: readingMode ? 0 : "auto" }}>
             <View style={{ position: "relative", width: "90%", alignSelf: "center", }}>
                 <RichToolbar
-                    style={[editor.richBar, editor.footer, padding.bigHorizontal, { height: "auto" }]}
+                    style={[editor.richBar, editor.footer, padding.bigHorizontal, { height: "auto", backgroundColor: 'rgba(250, 204, 214, 0.85)', marginBottom: 0, shadowOpacity: 0, elevation: 0 }]}
                     editor={richText}
                     selectedIconTint={"rgba(255, 255, 255, 0.75)"}
                     iconTint={"transparent"}
@@ -86,7 +88,6 @@ export default function FooterEditor({
                         "fontSize",
                         "separator"
                     ]}
-
                     iconSize={30}
                     iconMap={{
                         [actions.removeFormat]: removeFormatLabel,
@@ -115,13 +116,29 @@ export default function FooterEditor({
                     hiliteColor={() => handleOption(activeOption === "hiliteColors" ? null : "hiliteColors")}
                 />
 
-                <View style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100, borderTopLeftRadius: 16, borderBottomLeftRadius: 16, }]}>
-                    <Image source={require("../../assets/left.png")} style={{ width: 20, height: 20 }} />
-                </View>
+                <LinearGradient
+                    colors={['rgba(250, 204, 214, 0.85)', 'rgba(250, 204, 214, 0)']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100 }]}
+                    pointerEvents="none"
+                >
+                    <Svg width={24} height={24} viewBox="0 0 24 24">
+                        <Path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill={colors.button} />
+                    </Svg>
+                </LinearGradient>
 
-                <View style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100, borderTopLeftRadius: 16, borderBottomLeftRadius: 16, }]}>
-                    <Image source={require("../../assets/right.png")} style={{ width: 20, height: 20 }} />
-                </View>
+                <LinearGradient
+                    colors={['rgba(250, 204, 214, 0)', 'rgba(250, 204, 214, 0.85)']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100 }]}
+                    pointerEvents="none"
+                >
+                    <Svg width={24} height={24} viewBox="0 0 24 24">
+                        <Path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill={colors.button} />
+                    </Svg>
+                </LinearGradient>
                 <Animated.View
                     style={
                         [
@@ -154,11 +171,11 @@ export default function FooterEditor({
 const styles = StyleSheet.create({
     selectedOption: {
         position: "absolute",
-        bottom: (20 + 24 + 24),
+        bottom: "100%",
         right: 32,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
-        zIndex: 99,
+        zIndex: 9999,
         overflow: "hidden",
     },
     arrow: {
@@ -166,9 +183,7 @@ const styles = StyleSheet.create({
         zIndex: 9,
         top: 0,
         bottom: 0,
-        width: 24,
-        height: 48,
-        backgroundColor: "rgba(255,255,255,0.5)",
+        width: 32,
         justifyContent: "center",
         alignItems: "center",
     }

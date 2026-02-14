@@ -1,7 +1,6 @@
 import Note from "./note";
 import { useCallback, useContext, useEffect, useRef } from "react";
 import { Stack, useFocusEffect, useLocalSearchParams } from "expo-router";
-import HeaderNoteContainer from "./header-note-container";
 import useBackHandler from "../components/use-back-handler";
 import { LangContext } from "../utils/Context";
 import { useNoteLogic } from "../hooks/useNoteLogic";
@@ -114,31 +113,19 @@ export default function NoteContainer() {
 
     return (
         <>
-            <Stack.Screen options={{
-                header: () => (
-                    <HeaderNoteContainer
-                        setIsReady={setIsReady} // Passed correctly now
-                        drawing={drawing}
-                        setDrawing={setDrawing}
-                        note={note}
-                        readingMode={readingMode}
-                        setReadingMode={setReadingMode}
-                        back={back}
-                        richText={richText}
-                        activeOption={activeOption}
-                        setActiveOption={setActiveOption}
-                        handleNotePlaying={() => handleNotePlaying(note?.content)}
-                        playing={playing}
-                        voiceState={voiceState}
-                        isNew={isNew}
-                    />
-                )
-            }} />
+            <Stack.Screen options={{ headerShown: false }} />
 
             <Note
                 isReady={isReady}
+                setIsReady={setIsReady}
                 note={note}
                 readingMode={readingMode}
+                setReadingMode={setReadingMode}
+                back={back}
+                playing={playing}
+                voiceState={voiceState}
+                handleNotePlaying={() => handleNotePlaying(note?.content)}
+                isNew={isNew}
                 fontSize={fontSize}
                 setFontSize={setFontSize}
                 richText={richText}

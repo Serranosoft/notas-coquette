@@ -39,7 +39,7 @@ export default function HeaderNote({
                 <Image style={header.img} source={require("../../assets/back.png")} />
             </Pressable>
             <Text style={[ui.h5, { color: "#000" }]}>
-                {isNew ? language.t("_headerNoteTitleNew") : language.t("_headerNoteTitleEdit") }
+                {isNew ? language.t("_headerNoteTitleNew") : language.t("_headerNoteTitleEdit")}
             </Text>
         </View>
     );
@@ -79,7 +79,7 @@ export default function HeaderNote({
 
 
     return (
-        <View style={components.header}>
+        <View style={[components.header, { backgroundColor: "transparent" }]}>
             <Title />
 
             <View style={components.row}>
@@ -87,7 +87,7 @@ export default function HeaderNote({
                     <HeaderLeftEditor {...{ richText, readingMode }} />
                 )}
                 <DrawingToggle />
-                { voiceState && voiceState.voice && voiceState.voice !== "0" && <VoiceIcon /> }
+                {voiceState && voiceState.voice && voiceState.voice !== "0" && <VoiceIcon />}
                 <HeaderNoteOptionsContainer
                     {...{ note, setReadingMode, readingMode, setIsReady }}
                 />
