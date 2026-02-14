@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { router } from "expo-router";
 import { LangContext } from "../utils/Context";
 import HeaderHomeOptionsContainer from "../home/header-home-options-container";
+import PinkPatternBackground from "../components/pink-pattern-background";
 
 export default function HeaderTemplates({ setColumnNumber, columnNumber }) {
 
@@ -14,7 +15,8 @@ export default function HeaderTemplates({ setColumnNumber, columnNumber }) {
     }
 
     return (
-        <View style={[components.header, { paddingRight: 0 }]}>
+        <View style={[components.header, { paddingRight: 0, backgroundColor: 'transparent' }]}>
+            <PinkPatternBackground />
             <View style={layout.title}>
                 <Pressable onPress={back}>
                     <Image style={header.img} source={require("../../assets/back.png")} />
@@ -23,5 +25,5 @@ export default function HeaderTemplates({ setColumnNumber, columnNumber }) {
             </View>
             <HeaderHomeOptionsContainer {...{ setColumnNumber, columnNumber }} />
         </View>
-    )
+    );
 }

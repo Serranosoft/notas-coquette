@@ -34,7 +34,7 @@ const renderers = {
     font: FontRenderer
 };
 
-export default function NoteItem({ note, onPress }) {
+export default function NoteItem({ note, onPress, isTemplate }) {
 
     const { width } = useWindowDimensions();
 
@@ -69,7 +69,7 @@ export default function NoteItem({ note, onPress }) {
     const isBlocked = note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0;
 
     return (
-        <TouchableOpacity style={styles.container} onPress={() => onPress(note.id)} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.container} onPress={() => onPress(isTemplate ? note : note.id)} activeOpacity={0.8}>
             <GridBackground />
             {
                 isBlocked ?
@@ -78,17 +78,19 @@ export default function NoteItem({ note, onPress }) {
                     </View>
                     :
                     <View style={styles.contentWrapper}>
-                        <View style={styles.header}>
-                            <View style={[styles.bullet, { backgroundColor: bulletColor }]} />
-                            <Text style={styles.dateText}>{formatDate(note.date)}</Text>
-                            {/* Decoration icon could go here if available */}
-                            <View style={{ flex: 1 }} />
-                            {note.favorite === 1 &&
-                                <Svg width={16} height={16} viewBox="0 0 24 24" fill={colors.pink} stroke="none">
-                                    <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                </Svg>
-                            }
-                        </View>
+                        {!isTemplate && (
+                            <View style={styles.header}>
+                                <View style={[styles.bullet, { backgroundColor: bulletColor }]} />
+                                <Text style={styles.dateText}>{formatDate(note.date)}</Text>
+                                {/* Decoration icon could go here if available */}
+                                <View style={{ flex: 1 }} />
+                                {note.favorite === 1 &&
+                                    <Svg width={16} height={16} viewBox="0 0 24 24" fill={colors.pink} stroke="none">
+                                        <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </Svg>
+                                }
+                            </View>
+                        )}
 
                         <View style={styles.contentContainer}>
                             {/* <Text style={styles.title} numberOfLines={2}>
@@ -184,7 +186,7 @@ const styles = StyleSheet.create({
         // fontFamily: 'Serif', // Can try if `ui.h1` font is available
     },
     htmlContainer: {
-        maxHeight: 100, // Limit height to show preview
+        maxHeight: 200, // Limit height to show preview
         overflow: "hidden",
     },
     screenBlock: {
