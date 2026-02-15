@@ -10,6 +10,7 @@ import Drawing from "../rich-editor/drawing/drawing";
 import NoteContent from "./note-content";
 import PinkPatternLayout from "../components/pink-pattern-layout";
 import HeaderNoteContainer from "./header-note-container";
+import AudioRecorder from "../components/audio-recorder";
 
 function Note(
     {
@@ -52,6 +53,7 @@ function Note(
     const { adsLoaded } = useContext(AdsContext);
 
     const [counts, setCounts] = useState({ words: 0, characters: 0 });
+    const [recordingModal, setRecordingModal] = useState(false);
     const countTimeoutRef = useRef(null);
 
     const calculateCounts = useMemo(() => (html) => {
@@ -84,6 +86,21 @@ function Note(
         }, 800);
     }, [calculateCounts]);
 
+    const onStopRecording = useCallback((uri) => {
+        setRecordingModal(false);
+        if (uri) {
+            // Insert the custom HTML block for the audio memo
+            const audioHtml = `
+                <div class="audio-memo" data-uri="${uri}" contenteditable="false">
+                    <span class="audio-icon">🎵</span>
+                    <span class="audio-text">Nota de audio</span>
+                    <span class="audio-play">▶️</span>
+                </div>
+            `;
+            richText.current?.insertHTML(audioHtml);
+        }
+    }, [richText]);
+
     return (
         <PinkPatternLayout>
             <HeaderNoteContainer
@@ -110,6 +127,12 @@ function Note(
             {
                 isReady && font &&
                 <>
+                    <AudioRecorder
+                        visible={recordingModal}
+                        onStop={onStopRecording}
+                        onClose={() => setRecordingModal(false)}
+                    />
+
                     {activeOption === 'separators' && !readingMode && (
                         <Separators setSeparator={setSeparator} />
                     )}
@@ -181,7 +204,8 @@ function Note(
                                             setFontSize,
                                             fontSize,
                                             changeColor,
-                                            changeHiliteColor
+                                            changeHiliteColor,
+                                            startAudioRecording: () => setRecordingModal(true)
                                         }
                                     }
                                     />

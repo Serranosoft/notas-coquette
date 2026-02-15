@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { RichEditor } from "react-native-pell-rich-editor";
 import SketchPad from "../components/sketchpad";
 import GridBackground from "../components/grid";
@@ -6,6 +6,8 @@ import { useIsFocused } from '@react-navigation/native';
 import { memo, useContext, useMemo } from "react";
 import { ui } from "../utils/styles";
 import { LangContext } from "../utils/Context";
+import AudioPlayer from "../components/audio-player";
+import RenderHTML from "react-native-render-html";
 
 function NoteContent({
     note,
@@ -39,6 +41,39 @@ function NoteContent({
                 margin-top: 16px;
                 vertical-align: -8px;
             }
+            .audio-memo {
+                background-color: #fbe4e9;
+                border: 2px solid #fabcc2;
+                border-radius: 20px;
+                padding: 8px 16px;
+                margin: 10px 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                user-select: none;
+            }
+            .audio-icon {
+                font-size: 20px;
+            }
+            .audio-text {
+                font-family: inherit;
+                color: #cc527a;
+                font-weight: bold;
+                margin: 0 10px;
+                flex: 1;
+            }
+            .audio-play {
+                background-color: #cc527a;
+                color: white;
+                width: 30px;
+                height: 30px;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+            }
         `,
         backgroundColor: "transparent",
         contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};line-height: ${lineSpacing};word-spacing: ${wordSpacing}px;letter-spacing: ${letterSpacing}px; padding-top: 24px;`,
@@ -49,6 +84,16 @@ function NoteContent({
             }
         `
     }), [font, lineSpacing, wordSpacing, letterSpacing]);
+
+    const renderers = useMemo(() => ({
+        div: (props) => {
+            if (props.tnode.classes.includes('audio-memo')) {
+                const uri = props.tnode.attributes['data-uri'];
+                return <AudioPlayer uri={uri} />;
+            }
+            return null; // Fallback to default
+        }
+    }), []);
 
     return (
         <>
@@ -62,23 +107,40 @@ function NoteContent({
                 />
             )}
 
-            <RichEditor
-                useContainer={true}
-                ref={richText}
-                placeholder={language.t("noteInputPlaceholder") || "..."}
-                onChange={(content) => {
-                    note.content = content;
-                    onContentChange?.(content);
-                }}
-                style={{ zIndex: 999 }}
-                editorStyle={editorStyle}
-                initialContentHTML={note.content ?? ""}
-                disabled={readingMode || drawing.isDrawing}
-                onCursorPosition={handleCursorPosition}
-                initialHeight={800}
-                onHeightChange={handleHeightChange}
-                pasteWithStyle={true}
-            />
+            {!readingMode ? (
+                <RichEditor
+                    useContainer={true}
+                    ref={richText}
+                    placeholder={language.t("noteInputPlaceholder") || "..."}
+                    onChange={(content) => {
+                        note.content = content;
+                        onContentChange?.(content);
+                    }}
+                    style={{ zIndex: 999 }}
+                    editorStyle={editorStyle}
+                    initialContentHTML={note.content ?? ""}
+                    disabled={drawing.isDrawing}
+                    onCursorPosition={handleCursorPosition}
+                    initialHeight={800}
+                    onHeightChange={handleHeightChange}
+                    pasteWithStyle={true}
+                />
+            ) : (
+                <View style={{ padding: 16 }}>
+                    <RenderHTML
+                        contentWidth={Dimensions.get('window').width - 32}
+                        source={{ html: note.content }}
+                        renderers={renderers}
+                        tagsStyles={{
+                            body: {
+                                fontFamily: font.fontFamily,
+                                fontSize: 18,
+                                lineHeight: parseInt(lineSpacing) || 24,
+                            }
+                        }}
+                    />
+                </View>
+            )}
 
             <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
 

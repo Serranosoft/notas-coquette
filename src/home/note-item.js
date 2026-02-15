@@ -5,6 +5,8 @@ import { Svg, Path } from "react-native-svg";
 import GridBackground from '../components/grid';
 import { memo, useMemo } from "react";
 
+import AudioPlayer from "../components/audio-player";
+
 // Mapeo de tamaños para indicar a renderHTML el tamaño a renderizar de cada tag <font />
 const FONT_SIZE_MAP = {
     "1": 10,
@@ -32,7 +34,13 @@ const FontRenderer = ({ TDefaultRenderer, ...props }) => {
 };
 
 const renderers = {
-    font: FontRenderer
+    font: FontRenderer,
+    div: (props) => {
+        if (props.tnode.classes.includes('audio-memo')) {
+            const uri = props.tnode.attributes['data-uri'];
+            return <AudioPlayer uri={uri} />;
+        }
+    }
 };
 
 // Custom HTML models

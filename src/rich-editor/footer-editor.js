@@ -1,6 +1,6 @@
 import { RichToolbar, actions } from "react-native-pell-rich-editor";
 import { editor, padding, colors } from "../utils/styles";
-import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, foreColorLabel, hiliteColorLabel, italicLabel, listLabel, orderedListLabel, removeFormatLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
+import { alignCenterLabel, alignFullLabel, alignLeftLabel, alignRightLabel, boldLabel, checkboxLabel, codeLabel, colorsLabel, fontSizeLabel, foreColorLabel, hiliteColorLabel, italicLabel, listLabel, micLabel, orderedListLabel, removeFormatLabel, separatorsLabel, stickersLabel, strikeThroughLabel, underlineLabel } from "../utils/labels";
 import { Image, StyleSheet, View } from "react-native";
 import Stickers from "./stickers/stickers";
 import Colors from "./colors/colors";
@@ -20,7 +20,8 @@ export default function FooterEditor({
     setFontSize,
     fontSize,
     changeColor,
-    changeHiliteColor
+    changeHiliteColor,
+    startAudioRecording
 }) {
 
     const height = useSharedValue(0);
@@ -77,6 +78,7 @@ export default function FooterEditor({
                         actions.code,
                         "checkbox",
                         actions.insertImage,
+                        "audio",
                         actions.hiliteColor,
                         actions.removeFormat,
                         actions.alignLeft,
@@ -99,6 +101,7 @@ export default function FooterEditor({
                         [actions.setUnderline]: underlineLabel,
                         [actions.setStrikethrough]: strikeThroughLabel,
                         [actions.insertImage]: () => stickersLabel(activeOption === "stickers" ? true : false),
+                        audio: micLabel,
                         [actions.alignLeft]: alignLeftLabel,
                         [actions.alignCenter]: alignCenterLabel,
                         [actions.alignRight]: alignRightLabel,
@@ -113,6 +116,7 @@ export default function FooterEditor({
                     separator={() => handleOption(activeOption === "separators" ? null : "separators")}
                     foreColor={() => handleOption(activeOption === "colors" ? null : "colors")}
                     checkbox={() => insertCheckbox()}
+                    audio={() => startAudioRecording()}
                     hiliteColor={() => handleOption(activeOption === "hiliteColors" ? null : "hiliteColors")}
                 />
 

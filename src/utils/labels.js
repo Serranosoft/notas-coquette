@@ -299,6 +299,25 @@ export const startVoiceLabel = () =>
         <Path d="M16 2a1 1 0 00-1 1v26a1 1 0 002 0V3a1 1 0 00-1-1zM20 9a1 1 0 00-1 1v13a1 1 0 002 0V10a1 1 0 00-1-1zM24 6a1 1 0 00-1 1v19a1 1 0 002 0V7a1 1 0 00-1-1zM28 12a1 1 0 00-1 1v7a1 1 0 002 0v-7a1 1 0 00-1-1zM12 9a1 1 0 00-1 1v13a1 1 0 002 0V10a1 1 0 00-1-1zM8 6a1 1 0 00-1 1v19a1 1 0 002 0V7a1 1 0 00-1-1zM4 12a1 1 0 00-1 1v7a1 1 0 002 0v-7a1 1 0 00-1-1z" />
     </Svg>
 
+export const micLabel = () =>
+    <View>
+        <Svg
+            height={24}
+            viewBox="0 0 24 24"
+            width={24}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <Path
+                d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"
+                fill="#000"
+            />
+            <Path
+                d="M19 10a1 1 0 00-1 1 6.006 6.006 0 01-5 5.917V19a1 1 0 002 0v-2.083A6.006 6.006 0 016 11a1 1 0 10-2 0 8.008 8.008 0 007 7.931V21a1 1 0 002 0v-2.069A8.008 8.008 0 0020 11a1 1 0 00-1-1z"
+                fill="#000"
+            />
+        </Svg>
+    </View>
+
 export const pauseVoiceLabel = () =>
     <Svg
         fill="none"
