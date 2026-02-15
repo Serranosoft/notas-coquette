@@ -1,7 +1,7 @@
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { HomeFlatListItem } from "./home-flat-list-item";
-import { memo, useContext } from "react";
-import { colors, gap, layout } from "../utils/styles";
+import HomeFlatListItem from "./home-flat-list-item";
+import { memo, useCallback, useContext } from "react";
+import { colors, layout } from "../utils/styles";
 import { Svg, Path } from "react-native-svg";
 import { router } from "expo-router";
 import { LangContext } from "../utils/Context";
@@ -9,6 +9,16 @@ import { LangContext } from "../utils/Context";
 function HomeItems({ notes, columnNumber, selected, setSelected }) {
 
     const { language } = useContext(LangContext);
+
+    const renderItem = useCallback(({ item }) => (
+        <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} />
+    ), [selected, setSelected]);
+
+    const getItemLayout = useCallback((data, index) => ({
+        length: 241, // Height(225) + Gap(16)
+        offset: 241 * index,
+        index,
+    }), []);
 
     return (
         <View style={[layout.flex, styles.container]}>
@@ -30,9 +40,14 @@ function HomeItems({ notes, columnNumber, selected, setSelected }) {
                             <Text style={styles.sectionTitle}>{language.t("_recent").toUpperCase()}</Text>
                         </View>
                     }
-                    renderItem={({ item, index }) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} />}
+                    renderItem={renderItem}
                     keyExtractor={(item) => item.id}
                     showsVerticalScrollIndicator={false}
+                    initialNumToRender={6}
+                    windowSize={5}
+                    maxToRenderPerBatch={10}
+                    removeClippedSubviews={true}
+                    getItemLayout={getItemLayout}
                 />
             </View>
         </View>

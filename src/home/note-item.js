@@ -1,8 +1,9 @@
-import { colors, ui } from "../utils/styles";
+import { colors } from "../utils/styles";
 import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions, Image } from "react-native";
 import RenderHTML, { HTMLContentModel, HTMLElementModel } from 'react-native-render-html';
 import { Svg, Path } from "react-native-svg";
 import GridBackground from '../components/grid';
+import { memo, useMemo } from "react";
 
 // Mapeo de tamaños para indicar a renderHTML el tamaño a renderizar de cada tag <font />
 const FONT_SIZE_MAP = {
@@ -34,84 +35,30 @@ const renderers = {
     font: FontRenderer
 };
 
-export default function NoteItem({ note, onPress, isTemplate }) {
+// Custom HTML models
+const customHTMLElementModels = {
+    'font': HTMLElementModel.fromCustomModel({
+        tagName: 'font',
+        contentModel: HTMLContentModel.textual
+    }),
+    'input': HTMLElementModel.fromCustomModel({
+        tagName: 'input',
+        contentModel: HTMLContentModel.textual
+    })
+};
 
-    const { width } = useWindowDimensions();
-
-    // Custom HTML models
-    const customHTMLElementModels = {
-        'font': HTMLElementModel.fromCustomModel({
-            tagName: 'font',
-            contentModel: HTMLContentModel.textual
-        }),
-        'input': HTMLElementModel.fromCustomModel({
-            tagName: 'input',
-            contentModel: HTMLContentModel.textual
-        })
-    };
-
-    // Sanitizamos el html para reemplazar los inputs por un emoji representativo
-    function sanitizeHTML(html) {
-        return html.replace(/<input[^>]*>/g, '☐ ');
-    }
-
-    // Colors for the bullet point, rotating based on index or random could be nice, 
-    // but let's stick to a nice pink/red for now or use the design's "Color" valid.
-    const bulletColor = colors.button;
-
-    // Function to format date nicely
-    const formatDate = (dateMs) => {
-        if (!dateMs) return "";
-        const date = new Date(parseInt(dateMs));
-        return date.toLocaleDateString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' });
-    };
-
-    const isBlocked = note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0;
-
-    return (
-        <TouchableOpacity style={styles.container} onPress={() => onPress(isTemplate ? note : note.id)} activeOpacity={0.8}>
-            <GridBackground />
-            {
-                isBlocked ?
-                    <View style={styles.screenBlock}>
-                        <Image source={require("../../assets/lock-home.png")} style={{ width: 40, height: 40, opacity: 0.5 }} resizeMode="contain" />
-                    </View>
-                    :
-                    <View style={styles.contentWrapper}>
-                        {!isTemplate && (
-                            <View style={styles.header}>
-                                <View style={[styles.bullet, { backgroundColor: bulletColor }]} />
-                                <Text style={styles.dateText}>{formatDate(note.date)}</Text>
-                                {/* Decoration icon could go here if available */}
-                                <View style={{ flex: 1 }} />
-                                {note.favorite === 1 &&
-                                    <Svg width={16} height={16} viewBox="0 0 24 24" fill={colors.pink} stroke="none">
-                                        <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </Svg>
-                                }
-                            </View>
-                        )}
-
-                        <View style={styles.contentContainer}>
-                            {/* <Text style={styles.title} numberOfLines={2}>
-                            {note.title || "Sin título"}
-                        </Text> */}
-                            <View style={styles.htmlContainer}>
-                                <RenderHTML
-                                    contentWidth={width - 64} // Adjustable padding
-                                    source={{ html: getSubstringUntilNthDiv(sanitizeHTML(note.content)) }}
-                                    customHTMLElementModels={customHTMLElementModels}
-                                    baseStyle={{ color: "#666", fontSize: 14, lineHeight: 20 }}
-                                    renderers={renderers}
-                                    defaultTextProps={{ numberOfLines: 3 }}
-                                />
-                            </View>
-                        </View>
-                    </View>
-            }
-        </TouchableOpacity>
-    );
+// Sanitizamos el html para reemplazar los inputs por un emoji representativo
+function sanitizeHTML(html) {
+    if (!html) return "";
+    return html.replace(/<input[^>]*>/g, '☐ ');
 }
+
+// Function to format date nicely
+const formatDate = (dateMs) => {
+    if (!dateMs) return "";
+    const date = new Date(parseInt(dateMs));
+    return date.toLocaleDateString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' });
+};
 
 // Renderizar en cada nota de la home un limite de 9 <div> **Mejora de performance**
 function getSubstringUntilNthDiv(html, limit = 9) {
@@ -141,6 +88,65 @@ function getSubstringUntilNthDiv(html, limit = 9) {
 
     return truncated;
 }
+
+function NoteItem({ note, isSelected, onPress, isTemplate }) {
+
+    const { width } = useWindowDimensions();
+
+    const isBlocked = note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0;
+
+    const formattedDate = useMemo(() => formatDate(note.date), [note.date]);
+    const htmlPreview = useMemo(() => ({
+        html: getSubstringUntilNthDiv(sanitizeHTML(note.content))
+    }), [note.content]);
+
+    return (
+        <TouchableOpacity
+            style={[styles.container, isSelected && styles.selected]}
+            onPress={() => onPress(isTemplate ? note : note.id)}
+            activeOpacity={0.8}
+        >
+            <GridBackground />
+            {
+                isBlocked ?
+                    <View style={styles.screenBlock}>
+                        <Image source={require("../../assets/lock-home.png")} style={{ width: 40, height: 40, opacity: 0.5 }} resizeMode="contain" />
+                    </View>
+                    :
+                    <View style={styles.contentWrapper}>
+                        {!isTemplate && (
+                            <View style={styles.header}>
+                                <View style={[styles.bullet, { backgroundColor: colors.button }]} />
+                                <Text style={styles.dateText}>{formattedDate}</Text>
+                                {/* Decoration icon could go here if available */}
+                                <View style={{ flex: 1 }} />
+                                {note.favorite === 1 &&
+                                    <Svg width={16} height={16} viewBox="0 0 24 24" fill={colors.pink} stroke="none">
+                                        <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                    </Svg>
+                                }
+                            </View>
+                        )}
+
+                        <View style={styles.contentContainer}>
+                            <View style={styles.htmlContainer}>
+                                <RenderHTML
+                                    contentWidth={width - 64} // Adjustable padding
+                                    source={htmlPreview}
+                                    customHTMLElementModels={customHTMLElementModels}
+                                    baseStyle={{ color: "#666", fontSize: 14, lineHeight: 20 }}
+                                    renderers={renderers}
+                                    defaultTextProps={{ numberOfLines: 3 }}
+                                />
+                            </View>
+                        </View>
+                    </View>
+            }
+        </TouchableOpacity>
+    );
+}
+
+export default memo(NoteItem);
 
 const styles = StyleSheet.create({
     container: {

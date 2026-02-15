@@ -3,11 +3,11 @@ import { RichEditor } from "react-native-pell-rich-editor";
 import SketchPad from "../components/sketchpad";
 import GridBackground from "../components/grid";
 import { useIsFocused } from '@react-navigation/native';
-import { useContext, useEffect } from "react";
+import { memo, useContext, useMemo } from "react";
 import { ui } from "../utils/styles";
 import { LangContext } from "../utils/Context";
 
-export default function NoteContent({
+function NoteContent({
     note,
     font,
     drawing,
@@ -27,6 +27,28 @@ export default function NoteContent({
 }) {
     const isFocused = useIsFocused();
     const { language } = useContext(LangContext);
+
+    const editorStyle = useMemo(() => ({
+        initialCSSText: `
+            ${font && font.fontFace}
+            input[type="checkbox"] {
+                width: 24px;
+                height: 24px;
+                accent-color: #cc527a;
+                margin-right: 4px;
+                margin-top: 16px;
+                vertical-align: -8px;
+            }
+        `,
+        backgroundColor: "transparent",
+        contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};line-height: ${lineSpacing};word-spacing: ${wordSpacing}px;letter-spacing: ${letterSpacing}px; padding-top: 24px;`,
+        cssText: `
+            ${font.fontFace}
+            pre, pre code {
+                font-family: ${font.fontFamily};
+            }
+        `
+    }), [font, lineSpacing, wordSpacing, letterSpacing]);
 
     return (
         <>
@@ -49,32 +71,13 @@ export default function NoteContent({
                     onContentChange?.(content);
                 }}
                 style={{ zIndex: 999 }}
-                editorStyle={{
-                    initialCSSText: `
-                        ${font && font.fontFace}
-                        input[type="checkbox"] {
-                            width: 24px;
-                            height: 24px;
-                            accent-color: #cc527a;
-                            margin-right: 4px;
-                            margin-top: 16px;
-                            vertical-align: -8px;
-                        }
-                    `,
-                    backgroundColor: "transparent",
-                    contentCSSText: `font-size: 18px; font-family: ${font.fontFamily};line-height: ${lineSpacing};word-spacing: ${wordSpacing}px;letter-spacing: ${letterSpacing}px; padding-top: 24px;`,
-                    cssText: `
-                        ${font.fontFace}
-                        pre, pre code {
-                            font-family: ${font.fontFamily};
-                        }
-                    `
-                }}
+                editorStyle={editorStyle}
                 initialContentHTML={note.content ?? ""}
                 disabled={readingMode || drawing.isDrawing}
                 onCursorPosition={handleCursorPosition}
                 initialHeight={800}
                 onHeightChange={handleHeightChange}
+                pasteWithStyle={true}
             />
 
             <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
@@ -89,6 +92,8 @@ export default function NoteContent({
         </>
     );
 };
+
+export default memo(NoteContent);
 
 const styles = StyleSheet.create({
     countOverlay: {

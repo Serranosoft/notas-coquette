@@ -1,25 +1,29 @@
 import NoteItem from "./note-item";
-import { useContext, useEffect, useState } from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 import { router } from "expo-router";
 import LockScreenModal from "../modals/lock-screen-modal";
 import { AdsContext } from "../utils/Context";
 
-export default function NoteItemContainer({ note, selected, setSelected }) {
+function NoteItemContainer({ note, selected, setSelected }) {
 
     const [unlocked, setUnlocked] = useState(null);
     const [lockModal, setLockModal] = useState(false);
     const [pwd, setPwd] = useState("");
     const { setAdTrigger } = useContext(AdsContext);
 
-    function highlight() {
-        if (selected.includes(note.id)) {
-            const updatedSelected = selected.filter(item => item !== note.id);
-            setSelected(updatedSelected);
-        } else {
-            setSelected((selected) => [...selected, note.id]);
-        }
-    }
-    function onPress() {
+    const isSelected = selected.includes(note.id);
+
+    const highlight = useCallback(() => {
+        setSelected((currentSelected) => {
+            if (currentSelected.includes(note.id)) {
+                return currentSelected.filter(item => item !== note.id);
+            } else {
+                return [...currentSelected, note.id];
+            }
+        });
+    }, [note.id, setSelected]);
+
+    const onPress = useCallback(() => {
         if (selected.length > 0) {
             // Hace highlight o unhighlight, depende.
             highlight();
@@ -28,20 +32,20 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
             if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
                 setLockModal(true);
             } else {
-                router.push({ pathname: "/note", params: {id: note.id } });
+                router.push({ pathname: "/note", params: { id: note.id } });
             }
         }
 
         setAdTrigger((adTrigger) => adTrigger + 1);
-    }
+    }, [selected.length, note, highlight, setAdTrigger]);
 
     useEffect(() => {
         if (unlocked === true) {
-            router.push({ pathname: "/note", params: {id: note.id } });
+            router.push({ pathname: "/note", params: { id: note.id } });
             onPush();
         }
         setPwd("");
-    }, [unlocked])
+    }, [unlocked, note.id])
 
     function onPush() {
         setLockModal(false);
@@ -50,8 +54,10 @@ export default function NoteItemContainer({ note, selected, setSelected }) {
 
     return (
         <>
-            <LockScreenModal {...{ isUnlock: true, note, lockModal, setLockModal, setUnlocked, unlocked, pwd, setPwd }}/>
-            <NoteItem {...{ note, selected, onPress, highlight, isTemplate: false }} />
+            <LockScreenModal {...{ isUnlock: true, note, lockModal, setLockModal, setUnlocked, unlocked, pwd, setPwd }} />
+            <NoteItem {...{ note, isSelected, onPress, highlight, isTemplate: false }} />
         </>
     )
 }
+
+export default memo(NoteItemContainer);

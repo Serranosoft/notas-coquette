@@ -4,7 +4,7 @@ import FooterEditor from "../rich-editor/footer-editor";
 import Separators from "../rich-editor/separators/separators";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { memo, useContext, useState, useEffect } from "react";
+import { memo, useContext, useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { AdsContext } from "../utils/Context";
 import Drawing from "../rich-editor/drawing/drawing";
 import NoteContent from "./note-content";
@@ -52,15 +52,16 @@ function Note(
     const { adsLoaded } = useContext(AdsContext);
 
     const [counts, setCounts] = useState({ words: 0, characters: 0 });
+    const countTimeoutRef = useRef(null);
 
-    const calculateCounts = (html) => {
+    const calculateCounts = useMemo(() => (html) => {
         if (!html) return { words: 0, characters: 0 };
         // Strip HTML tags and normalize whitespace
         const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
         const words = text ? text.split(' ').length : 0;
         const characters = text.length;
         return { words, characters };
-    };
+    }, []);
 
     useEffect(() => {
         if (note?.content) {
@@ -68,11 +69,20 @@ function Note(
         } else {
             setCounts({ words: 0, characters: 0 });
         }
-    }, [note?.id]);
+        return () => {
+            if (countTimeoutRef.current) clearTimeout(countTimeoutRef.current);
+        };
+    }, [note?.id, calculateCounts]);
 
-    const handleContentChange = (content) => {
-        setCounts(calculateCounts(content));
-    };
+    // Optimize content change with debouncing to avoid re-renders on every keystroke
+    const handleContentChange = useCallback((content) => {
+        if (countTimeoutRef.current) clearTimeout(countTimeoutRef.current);
+
+        // We use a timeout to debounce the count update
+        countTimeoutRef.current = setTimeout(() => {
+            setCounts(calculateCounts(content));
+        }, 800);
+    }, [calculateCounts]);
 
     return (
         <PinkPatternLayout>

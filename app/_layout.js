@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { View, StatusBar, StyleSheet, Platform } from "react-native";
-import { createRef, useCallback, useEffect, useState } from "react";
+import { createRef, useCallback, useEffect, useMemo, useState } from "react";
 import { colors } from "../src/utils/styles";
 import { setInitialNote } from "../src/utils/setInitialNote";
 import { getLocales } from 'expo-localization';
@@ -29,10 +29,14 @@ export default function Layout() {
 
     // Idioma
     const [language, setLanguage] = useState(getLocales()[0].languageCode);
-    const i18n = new I18n(translations);
-    if (language) i18n.locale = language;
-    i18n.enableFallback = true
-    i18n.defaultLocale = "es";
+    // Memoize i18n instance
+    const i18n = useMemo(() => {
+        const instance = new I18n(translations);
+        if (language) instance.locale = language;
+        instance.enableFallback = true;
+        instance.defaultLocale = "es";
+        return instance;
+    }, [language]);
 
     // Gestión de anuncios
     const [adsLoaded, setAdsLoaded] = useState(false);
@@ -51,7 +55,7 @@ export default function Layout() {
                 await getUserPreferences();
                 await configureNotifications();
                 await init();
-            } catch(error) {
+            } catch (error) {
             } finally {
                 setAppIsReady(true);
             }
@@ -64,7 +68,7 @@ export default function Layout() {
         if (appIsReady) {
             scheduleWeeklyNotification(i18n);
         }
-    }, [appIsReady])
+    }, [appIsReady, i18n])
 
     // Gestión de anuncios
     useEffect(() => {
@@ -77,7 +81,7 @@ export default function Layout() {
                 setAdTrigger(0);
             }
         }
-    }, [adTrigger])
+    }, [adTrigger, adsLoaded])
 
     async function init() {
         await initDb();
@@ -147,15 +151,27 @@ export default function Layout() {
         }
     }, [appIsReady]);
 
+    // Memoize context values to prevent unnecessary re-renders
+    const adsContextValue = useMemo(() => ({
+        setAdTrigger,
+        adsLoaded,
+        setShowOpenAd
+    }), [adsLoaded, showOpenAd]);
+
+    const langContextValue = useMemo(() => ({
+        setLanguage,
+        language: i18n
+    }), [i18n]);
+
     if (!appIsReady) {
         return null;
     }
 
     return (
         <GestureHandlerRootView style={styles.wrapper}>
-            <AdsContext.Provider value={{ setAdTrigger: setAdTrigger, adsLoaded: adsLoaded, setShowOpenAd: setShowOpenAd }}>
+            <AdsContext.Provider value={adsContextValue}>
                 <AdsHandler canStartAds={appIsReady} ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
-                <LangContext.Provider value={{ setLanguage: setLanguage, language: i18n }}>
+                <LangContext.Provider value={langContextValue}>
                     <View onLayout={onLayoutRootView} style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
                         <Stack />
                         <StatusBar style="light" />
