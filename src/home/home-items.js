@@ -1,11 +1,14 @@
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { HomeFlatListItem } from "./home-flat-list-item";
-import { memo } from "react";
+import { memo, useContext } from "react";
 import { colors, gap, layout } from "../utils/styles";
 import { Svg, Path } from "react-native-svg";
 import { router } from "expo-router";
+import { LangContext } from "../utils/Context";
 
 function HomeItems({ notes, columnNumber, selected, setSelected }) {
+
+    const { language } = useContext(LangContext);
 
     return (
         <View style={[layout.flex, styles.container]}>
@@ -22,9 +25,9 @@ function HomeItems({ notes, columnNumber, selected, setSelected }) {
                                 <Svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2}>
                                     <Path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                                 </Svg>
-                                <Text style={styles.templatesText}>Ver Plantillas</Text>
+                                <Text style={styles.templatesText}>{language.t("_seeTemplates")}</Text>
                             </TouchableOpacity>
-                            <Text style={styles.sectionTitle}>RECIENTES</Text>
+                            <Text style={styles.sectionTitle}>{language.t("_recent").toUpperCase()}</Text>
                         </View>
                     }
                     renderItem={({ item, index }) => <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} />}

@@ -1,10 +1,10 @@
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, StyleSheet } from "react-native";
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, StyleSheet, Text } from "react-native";
 import { layout, colors } from "../../src/utils/styles";
 import FooterEditor from "../rich-editor/footer-editor";
 import Separators from "../rich-editor/separators/separators";
 import { bannerId, bannerIdIOS } from "../utils/constants";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { memo, useContext } from "react";
+import { memo, useContext, useState, useEffect } from "react";
 import { AdsContext } from "../utils/Context";
 import Drawing from "../rich-editor/drawing/drawing";
 import NoteContent from "./note-content";
@@ -50,6 +50,29 @@ function Note(
 
     const windowHeight = Dimensions.get('window').height;
     const { adsLoaded } = useContext(AdsContext);
+
+    const [counts, setCounts] = useState({ words: 0, characters: 0 });
+
+    const calculateCounts = (html) => {
+        if (!html) return { words: 0, characters: 0 };
+        // Strip HTML tags and normalize whitespace
+        const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+        const words = text ? text.split(' ').length : 0;
+        const characters = text.length;
+        return { words, characters };
+    };
+
+    useEffect(() => {
+        if (note?.content) {
+            setCounts(calculateCounts(note.content));
+        } else {
+            setCounts({ words: 0, characters: 0 });
+        }
+    }, [note?.id]);
+
+    const handleContentChange = (content) => {
+        setCounts(calculateCounts(content));
+    };
 
     return (
         <PinkPatternLayout>
@@ -115,6 +138,8 @@ function Note(
                                     lineSpacing={lineSpacing}
                                     wordSpacing={wordSpacing}
                                     letterSpacing={letterSpacing}
+                                    onContentChange={handleContentChange}
+                                    counts={counts}
                                 />
 
                             </ScrollView>
@@ -179,10 +204,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3.84,
         elevation: 5,
-        overflow: "visible" // Keeps footer inside rounded corners? Or maybe not if footer needs to pop out?
-        // If footer options pop out, overflow hidden might be bad.
-        // But the design shows footer inside.
-        // I will keep overflow hidden for now to round the content.
+        overflow: "visible"
+    },
+    countText: {
+        fontSize: 12,
+        color: "#888",
     }
 });
 
