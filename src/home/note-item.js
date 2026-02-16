@@ -35,11 +35,12 @@ const FontRenderer = ({ TDefaultRenderer, ...props }) => {
 
 const renderers = {
     font: FontRenderer,
-    div: (props) => {
+    div: ({ TDefaultRenderer, ...props }) => {
         if (props.tnode.classes.includes('audio-memo')) {
             const uri = props.tnode.attributes['data-uri'];
             return <AudioPlayer uri={uri} />;
         }
+        return <TDefaultRenderer {...props} />;
     }
 };
 
