@@ -58,8 +58,16 @@ function Note(
 
     const calculateCounts = useMemo(() => (html) => {
         if (!html) return { words: 0, characters: 0 };
-        // Strip HTML tags and normalize whitespace
-        const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+        // 1. Remove audio timers content (the "0:00" parts) and zero-width space entities/chars
+        // We do this BEFORE stripping all tags to specifically target the timer text.
+        const cleanContent = html
+            .replace(/<span class="audio-timer">.*?<\/span>/g, '')
+            .replace(/&#8203;/g, '')
+            .replace(/\u200B/g, '');
+
+        // 2. Strip remaining HTML tags and normalize whitespace
+        const text = cleanContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
         const words = text ? text.split(' ').length : 0;
         const characters = text.length;
         return { words, characters };
