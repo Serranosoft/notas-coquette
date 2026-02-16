@@ -17,7 +17,7 @@ function Home({ columnNumber, setColumnNumber, notes, emptySelected, selected, s
         <PinkPatternLayout>
             <HeaderHome {...{ columnNumber, setColumnNumber }} />
             <View style={[layout.flex, { paddingHorizontal: 0 }]}>
-                <HomeNewNoteBtn />
+                {selected.length === 0 && <HomeNewNoteBtn />}
 
                 {
                     notes.length > 0 ?

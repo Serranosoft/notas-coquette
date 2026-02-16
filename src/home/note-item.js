@@ -97,7 +97,7 @@ function getSubstringUntilNthDiv(html, limit = 9) {
     return truncated;
 }
 
-function NoteItem({ note, isSelected, onPress, isTemplate }) {
+function NoteItem({ note, isSelected, onPress, onLongPress, isTemplate }) {
 
     const { width } = useWindowDimensions();
 
@@ -112,6 +112,7 @@ function NoteItem({ note, isSelected, onPress, isTemplate }) {
         <TouchableOpacity
             style={[styles.container, isSelected && styles.selected]}
             onPress={() => onPress(isTemplate ? note : note.id)}
+            onLongPress={onLongPress}
             activeOpacity={0.8}
         >
             <GridBackground />
@@ -202,6 +203,17 @@ const styles = StyleSheet.create({
     htmlContainer: {
         maxHeight: 200, // Limit height to show preview
         overflow: "hidden",
+    },
+    selected: {
+        borderWidth: 2,
+        borderColor: colors.pink,
+        backgroundColor: "#FFF0F3",
+        shadowColor: colors.pink,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 16,
+        elevation: 8,
+        transform: [{ scale: 1.03 }],
     },
     screenBlock: {
         height: "100%",

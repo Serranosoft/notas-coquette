@@ -55,7 +55,7 @@ function NoteItemContainer({ note, selected, setSelected }) {
     return (
         <>
             <LockScreenModal {...{ isUnlock: true, note, lockModal, setLockModal, setUnlocked, unlocked, pwd, setPwd }} />
-            <NoteItem {...{ note, isSelected, onPress, highlight, isTemplate: false }} />
+            <NoteItem {...{ note, isSelected, onPress, onLongPress: highlight, isTemplate: false }} />
         </>
     )
 }
