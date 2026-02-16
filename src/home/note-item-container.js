@@ -4,14 +4,12 @@ import { router } from "expo-router";
 import LockScreenModal from "../modals/lock-screen-modal";
 import { AdsContext } from "../utils/Context";
 
-function NoteItemContainer({ note, selected, setSelected }) {
+function NoteItemContainer({ note, isSelected, setSelected }) {
 
     const [unlocked, setUnlocked] = useState(null);
     const [lockModal, setLockModal] = useState(false);
     const [pwd, setPwd] = useState("");
     const { setAdTrigger } = useContext(AdsContext);
-
-    const isSelected = selected.includes(note.id);
 
     const highlight = useCallback(() => {
         setSelected((currentSelected) => {
@@ -24,20 +22,27 @@ function NoteItemContainer({ note, selected, setSelected }) {
     }, [note.id, setSelected]);
 
     const onPress = useCallback(() => {
-        if (selected.length > 0) {
-            // Hace highlight o unhighlight, depende.
-            highlight();
-        } else {
-            // Accede a la nota.
-            if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
-                setLockModal(true);
+        setSelected((currentSelected) => {
+            if (currentSelected.length > 0) {
+                // Estamos en modo selección, toggle esta nota
+                if (currentSelected.includes(note.id)) {
+                    return currentSelected.filter(item => item !== note.id);
+                } else {
+                    return [...currentSelected, note.id];
+                }
             } else {
-                router.push({ pathname: "/note", params: { id: note.id } });
+                // No hay selección, acceder a la nota
+                if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
+                    setLockModal(true);
+                } else {
+                    router.push({ pathname: "/note", params: { id: note.id } });
+                }
+                return currentSelected;
             }
-        }
+        });
 
         setAdTrigger((adTrigger) => adTrigger + 1);
-    }, [selected.length, note, highlight, setAdTrigger]);
+    }, [note, setSelected, setAdTrigger]);
 
     useEffect(() => {
         if (unlocked === true) {

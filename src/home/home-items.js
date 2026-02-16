@@ -1,6 +1,6 @@
 import { FlatList, View, Text, StyleSheet } from "react-native"
 import HomeFlatListItem from "./home-flat-list-item";
-import { memo, useCallback, useContext } from "react";
+import { memo, useCallback, useContext, useRef } from "react";
 import { colors, layout } from "../utils/styles";
 import { LangContext } from "../utils/Context";
 
@@ -8,9 +8,13 @@ function HomeItems({ notes, columnNumber, selected, setSelected }) {
 
     const { language } = useContext(LangContext);
 
-    const renderItem = useCallback(({ item }) => (
-        <HomeFlatListItem note={item} selected={selected} setSelected={setSelected} />
-    ), [selected, setSelected]);
+    const selectedRef = useRef(selected);
+    selectedRef.current = selected;
+
+    const renderItem = useCallback(({ item }) => {
+        const isSelected = selectedRef.current.includes(item.id);
+        return <HomeFlatListItem note={item} isSelected={isSelected} setSelected={setSelected} />;
+    }, [setSelected]);
 
     const getItemLayout = useCallback((data, index) => ({
         length: 241, // Height(225) + Gap(16)
@@ -25,6 +29,7 @@ function HomeItems({ notes, columnNumber, selected, setSelected }) {
                     key={columnNumber}
                     numColumns={columnNumber}
                     data={notes}
+                    extraData={selected}
                     contentContainerStyle={styles.contentList}
                     columnWrapperStyle={columnNumber > 1 ? { gap: 16 } : undefined}
                     ListHeaderComponent={
