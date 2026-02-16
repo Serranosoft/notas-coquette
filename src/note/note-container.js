@@ -6,6 +6,7 @@ import { LangContext } from "../utils/Context";
 import { useNoteLogic } from "../hooks/useNoteLogic";
 import { useNoteAudio } from "../hooks/useNoteAudio";
 import { useNoteDrawing } from "../hooks/useNoteDrawing";
+import { useEditorAudio } from "../hooks/useEditorAudio";
 
 export default function NoteContainer() {
 
@@ -28,6 +29,11 @@ export default function NoteContainer() {
         handleNotePlaying,
         stopSpeech
     } = useNoteAudio();
+
+    const {
+        handleEditorMessage,
+        playbackScript
+    } = useEditorAudio(richText);
 
     const {
         noteState,
@@ -153,6 +159,8 @@ export default function NoteContainer() {
                 lineSpacing={lineSpacing}
                 wordSpacing={wordSpacing}
                 letterSpacing={letterSpacing}
+                handleEditorMessage={handleEditorMessage}
+                playbackScript={playbackScript}
             />
         </>
     )

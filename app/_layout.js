@@ -101,9 +101,9 @@ export default function Layout() {
                 // Obtener notas.
                 notes = JSON.parse(notes);
                 // Para cada nota, crear un nuevo registro en sqlite.
-                notes.forEach(async (note) => {
+                for (const note of notes) {
                     await addNote(note.id, note.content, note.pwd, note.date);
-                })
+                }
                 // Notificar que ya se ha realizado la migración para no volver a repetirla.
                 await AsyncStorage.setItem(userPreferences.MIGRATED, "true");
                 // No borrar el AsyncStorage por si debo recuperar los registros en el próximo despliegue. 
@@ -170,7 +170,7 @@ export default function Layout() {
     return (
         <GestureHandlerRootView style={styles.wrapper}>
             <AdsContext.Provider value={adsContextValue}>
-                <AdsHandler canStartAds={appIsReady} ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
+                {/* <AdsHandler canStartAds={appIsReady} ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} /> */}
                 <LangContext.Provider value={langContextValue}>
                     <View onLayout={onLayoutRootView} style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
                         <Stack />

@@ -10,7 +10,6 @@ import Drawing from "../rich-editor/drawing/drawing";
 import NoteContent from "./note-content";
 import PinkPatternLayout from "../components/pink-pattern-layout";
 import HeaderNoteContainer from "./header-note-container";
-import AudioRecorder from "../components/audio-recorder";
 
 function Note(
     {
@@ -46,14 +45,15 @@ function Note(
         playing,
         voiceState,
         handleNotePlaying,
-        isNew
+        isNew,
+        handleEditorMessage,
+        playbackScript
     }) {
 
     const windowHeight = Dimensions.get('window').height;
     const { adsLoaded } = useContext(AdsContext);
 
     const [counts, setCounts] = useState({ words: 0, characters: 0 });
-    const [recordingModal, setRecordingModal] = useState(false);
     const countTimeoutRef = useRef(null);
 
     const calculateCounts = useMemo(() => (html) => {
@@ -87,16 +87,23 @@ function Note(
     }, [calculateCounts]);
 
     const onStopRecording = useCallback((uri) => {
-        setRecordingModal(false);
         if (uri) {
             // Insert the custom HTML block for the audio memo
-            const audioHtml = `
-                <div class="audio-memo" data-uri="${uri}" contenteditable="false">
-                    <span class="audio-icon">🎵</span>
-                    <span class="audio-text">Nota de audio</span>
-                    <span class="audio-play">▶️</span>
+            // This structure is designed to be updated in real-time by the updateWebView logic in NoteContent.js
+            const audioHtml = `&#8203;<div class="audio-memo" data-uri="${uri}" contenteditable="false" 
+                onclick="event.preventDefault(); event.stopPropagation(); window.ReactNativeWebView.postMessage(JSON.stringify({type: 'PLAY_AUDIO', uri: '${uri}'})); return false;"
+                style="outline: none;">
+                <div class="audio-play-circle"></div>
+                <div class="audio-progress-container">
+                    <div class="audio-progress-bar">
+                        <div class="audio-progress-fill"></div>
+                    </div>
+                    <div class="audio-timer-container">
+                        <span class="audio-timer">0:00</span>
+                        <span class="audio-timer">0:00</span>
+                    </div>
                 </div>
-            `;
+            </div>&#8203;`;
             richText.current?.insertHTML(audioHtml);
         }
     }, [richText]);
@@ -127,12 +134,6 @@ function Note(
             {
                 isReady && font &&
                 <>
-                    <AudioRecorder
-                        visible={recordingModal}
-                        onStop={onStopRecording}
-                        onClose={() => setRecordingModal(false)}
-                    />
-
                     {activeOption === 'separators' && !readingMode && (
                         <Separators setSeparator={setSeparator} />
                     )}
@@ -172,6 +173,8 @@ function Note(
                                     wordSpacing={wordSpacing}
                                     letterSpacing={letterSpacing}
                                     onContentChange={handleContentChange}
+                                    handleEditorMessage={handleEditorMessage}
+                                    playbackScript={playbackScript}
                                     counts={counts}
                                 />
 
@@ -205,7 +208,7 @@ function Note(
                                             fontSize,
                                             changeColor,
                                             changeHiliteColor,
-                                            startAudioRecording: () => setRecordingModal(true)
+                                            onStopRecording
                                         }
                                     }
                                     />

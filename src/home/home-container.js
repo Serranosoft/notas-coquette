@@ -56,7 +56,9 @@ export default function HomeContainer() {
     })
 
     const deleteNotes = useCallback(async () => {
-        selected.forEach(async (note) => await deleteNoteFromId(note));
+        for (const noteId of selected) {
+            await deleteNoteFromId(noteId);
+        }
         emptySelected();
         getNotes();
     }, [selected]);

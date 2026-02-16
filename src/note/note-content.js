@@ -25,10 +25,14 @@ function NoteContent({
     wordSpacing,
     letterSpacing,
     onContentChange,
-    counts
+    counts,
+    handleEditorMessage,
+    playbackScript
 }) {
     const isFocused = useIsFocused();
     const { language } = useContext(LangContext);
+
+
 
     const editorStyle = useMemo(() => ({
         initialCSSText: `
@@ -44,35 +48,101 @@ function NoteContent({
             .audio-memo {
                 background-color: #fbe4e9;
                 border: 2px solid #fabcc2;
-                border-radius: 20px;
-                padding: 8px 16px;
-                margin: 10px 0;
+                border-radius: 25px;
+                padding: 10px;
+                margin: 4px 0;
                 display: flex;
+                flex-direction: row;
                 align-items: center;
-                justify-content: space-between;
                 cursor: pointer;
                 user-select: none;
+                -webkit-user-select: none;
+                -webkit-tap-highlight-color: transparent;
+                outline: none !important;
+                gap: 12px;
+                box-sizing: border-box;
+                font-family: sans-serif;
             }
-            .audio-icon {
-                font-size: 20px;
+            .audio-memo * {
+                -webkit-tap-highlight-color: transparent;
+                user-select: none;
+                -webkit-user-select: none;
+                pointer-events: none; /* Make sub-elements non-clickable so the parent gets the click */
             }
-            .audio-text {
-                font-family: inherit;
-                color: #cc527a;
-                font-weight: bold;
-                margin: 0 10px;
-                flex: 1;
-            }
-            .audio-play {
+            .audio-play-circle, .audio-play {
                 background-color: #cc527a;
-                color: white;
-                width: 30px;
-                height: 30px;
-                border-radius: 15px;
+                width: 40px;
+                height: 40px;
+                border-radius: 20px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 14px;
+                color: white;
+                font-size: 0; /* Hide text */
+                flex-shrink: 0;
+                box-sizing: border-box;
+                position: relative;
+            }
+            /* Create a play triangle CSS icon */
+            .audio-play-circle::after, .audio-play::after {
+                content: '';
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 12px solid white;
+                margin-left: 4px;
+            }
+            /* Pause state class */
+            .audio-playing .audio-play-circle::after, .audio-playing .audio-play::after {
+                border: none;
+                width: 14px;
+                height: 16px;
+                border-left: 4px solid white;
+                border-right: 4px solid white;
+                margin-left: 0;
+            }
+            .audio-progress-container, .audio-text {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            /* Hide description text in old structure */
+            .audio-text {
+                font-size: 0;
+            }
+            .audio-progress-bar {
+                height: 4px;
+                background-color: #fabcc2;
+                border-radius: 2px;
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+            }
+            .audio-progress-fill {
+                height: 100%;
+                background-color: #cc527a;
+                border-radius: 2px;
+                width: 0%;
+                transition: width 0.2s linear;
+            }
+            .audio-timer-container {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                flex-direction: row;
+            }
+            .audio-timer, .audio-time-text {
+                color: #cc527a;
+                font-weight: bold;
+                font-size: 10px;
+                font-family: sans-serif;
+            }
+            /* Legacy support icons */
+            .audio-icon {
+                display: none;
             }
         `,
         backgroundColor: "transparent",
@@ -116,6 +186,7 @@ function NoteContent({
                         note.content = content;
                         onContentChange?.(content);
                     }}
+                    onMessage={handleEditorMessage}
                     style={{ zIndex: 999 }}
                     editorStyle={editorStyle}
                     initialContentHTML={note.content ?? ""}
@@ -124,6 +195,15 @@ function NoteContent({
                     initialHeight={800}
                     onHeightChange={handleHeightChange}
                     pasteWithStyle={true}
+                    // Light Bridge initialization
+                    injectedJavaScript={playbackScript}
+                    editorInitializedCallback={() => {
+                        richText.current?.injectJavascript(playbackScript);
+                    }}
+                    allowFileAccess={true}
+                    allowUniversalAccessFromFileURLs={true}
+                    allowFileAccessFromFileURLs={true}
+                    originWhitelist={['*']}
                 />
             ) : (
                 <View style={{ padding: 16 }}>

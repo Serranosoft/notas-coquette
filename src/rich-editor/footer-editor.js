@@ -8,6 +8,7 @@ import FontSizeContainer from "./font-size/font-size-container";
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Svg, Path } from "react-native-svg";
+import AudioRecorder from "../components/audio-recorder";
 
 export default function FooterEditor({
     richText,
@@ -21,14 +22,28 @@ export default function FooterEditor({
     fontSize,
     changeColor,
     changeHiliteColor,
-    startAudioRecording
+    onStopRecording
 }) {
 
     const height = useSharedValue(0);
 
     function handleOption(option) {
+        // Recording is handled separately (not in the animated container)
+        if (option === "recording") {
+            if (activeOption === "recording") {
+                setActiveOption(null);
+            } else {
+                // Close any open panel first
+                if (activeOption) {
+                    height.value = withTiming(0, { duration: 300 });
+                }
+                setActiveOption("recording");
+            }
+            return;
+        }
+
         // No hay nada abierto, abro la opción
-        if (!activeOption) {
+        if (!activeOption || activeOption === "recording") {
             setActiveOption(option);
             height.value = withTiming(200, { duration: 300 });
         } else {
@@ -116,7 +131,7 @@ export default function FooterEditor({
                     separator={() => handleOption(activeOption === "separators" ? null : "separators")}
                     foreColor={() => handleOption(activeOption === "colors" ? null : "colors")}
                     checkbox={() => insertCheckbox()}
-                    audio={() => startAudioRecording()}
+                    audio={() => handleOption(activeOption === "recording" ? null : "recording")}
                     hiliteColor={() => handleOption(activeOption === "hiliteColors" ? null : "hiliteColors")}
                 />
 
@@ -143,6 +158,8 @@ export default function FooterEditor({
                         <Path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill={colors.button} />
                     </Svg>
                 </LinearGradient>
+
+                {/* Animated panel for stickers, colors, fontSize */}
                 <Animated.View
                     style={
                         [
@@ -166,6 +183,19 @@ export default function FooterEditor({
                     }
                 </Animated.View>
 
+                {/* Recording Island - rendered OUTSIDE the animated container */}
+                {activeOption === "recording" &&
+                    <View style={styles.recordingIsland}>
+                        <AudioRecorder
+                            onStop={(uri) => {
+                                onStopRecording(uri);
+                                setActiveOption(null);
+                            }}
+                            onClose={() => setActiveOption(null)}
+                        />
+                    </View>
+                }
+
             </View>
         </View>
 
@@ -181,6 +211,13 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 8,
         zIndex: 9999,
         overflow: "hidden",
+    },
+    recordingIsland: {
+        position: "absolute",
+        bottom: "100%",
+        left: 0,
+        right: 0,
+        zIndex: 9999,
     },
     arrow: {
         position: "absolute",

@@ -121,8 +121,8 @@ export function useNoteLogic(id, source, language, richTextRef, sketchPadRef, se
         // Dismiss keyboard
         richTextRef.current?.dismissKeyboard();
 
-        // Reset UI states
-        setNoteState(prev => ({ ...prev, activeOption: null }));
+        // Reset UI states, but preserve recording island (it handles its own cleanup)
+        setNoteState(prev => ({ ...prev, activeOption: prev.activeOption === "recording" ? "recording" : null }));
         setDrawing(prev => ({ ...prev, isDrawing: false }));
 
         if (!note) return;
@@ -154,6 +154,9 @@ export function useNoteLogic(id, source, language, richTextRef, sketchPadRef, se
     const back = async () => {
         stopSpeech();
         await saveNote();
+
+        // Force-close recording island before navigating (expo-router may not unmount)
+        setNoteState(prev => ({ ...prev, activeOption: null }));
 
         if (source === "template") {
             router.navigate("/");

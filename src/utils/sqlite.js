@@ -59,24 +59,26 @@ export async function getAllNotes() {
 }
 
 export async function addNote(id, content, pwd, date) {
-    db.runAsync("INSERT INTO notes (id, content, pwd, date) VALUES (?, ?, ?, ?)", id, content, pwd, date);
+    await db.runAsync("INSERT INTO notes (id, content, pwd, date) VALUES (?, ?, ?, ?)", id, content, pwd, date);
     return id;
 }
 
 export async function editNote(id, content, pwd, favorite, date) {
-    db.runAsync("UPDATE notes SET content = ? WHERE id = ?", content, id);
-    db.runAsync("UPDATE notes SET pwd = ? WHERE id = ?", pwd, id);
-    db.runAsync("UPDATE notes SET favorite = ? WHERE id = ?", favorite ? "1" : "0", id);
-    db.runAsync("UPDATE notes SET date = ? WHERE id = ?", date, id);
+    await db.runAsync("UPDATE notes SET content = ? WHERE id = ?", content, id);
+    await db.runAsync("UPDATE notes SET pwd = ? WHERE id = ?", pwd, id);
+    await db.runAsync("UPDATE notes SET favorite = ? WHERE id = ?", favorite ? "1" : "0", id);
+    await db.runAsync("UPDATE notes SET date = ? WHERE id = ?", date, id);
 }
 
 export async function deleteNoteFromId(id) {
-    db.runAsync("DELETE FROM notes WHERE id = ?", id);
+    await db.runAsync("DELETE FROM notes WHERE id = ?", id);
 }
 
 export async function deleteAllNotes() {
     const notes = await getAllNotes();
-    notes.forEach(async (note) => await deleteNoteFromId(note.id));
+    for (const note of notes) {
+        await deleteNoteFromId(note.id);
+    }
 }
 
 export async function getNoteFromId(id) {
@@ -93,7 +95,7 @@ export async function addDraw(note_id, data) {
 
     if (!existing) {
         const id = uuid.v4();
-        db.runAsync("INSERT INTO drawings (id, note_id, data) VALUES (?, ?, ?)", id, note_id, data);
+        await db.runAsync("INSERT INTO drawings (id, note_id, data) VALUES (?, ?, ?)", id, note_id, data);
         return id;
     }
 }
@@ -105,7 +107,7 @@ export async function getDrawingsFromId(note_id) {
 
 export async function deleteAllDrawsFromNote(note_id) {
     const drawings = await db.getAllAsync('SELECT id FROM drawings WHERE note_id = ?', note_id);
-    drawings.map((path) => {
-        db.runAsync("DELETE FROM drawings WHERE id = ?", path.id);
-    })
+    for (const path of drawings) {
+        await db.runAsync("DELETE FROM drawings WHERE id = ?", path.id);
+    }
 }
