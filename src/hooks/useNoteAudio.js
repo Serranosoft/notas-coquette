@@ -29,6 +29,7 @@ export function useNoteAudio() {
             if (!content) return "";
 
             const thingToSay = content
+                .replace(/<span[^>]*class="audio-timer"[^>]*>[^<]*<\/span>/gi, "")
                 .replace(/<img[^>]*>/gi, "")
                 .replace(/<li[^>]*>/gi, "\n• ")
                 .replace(/<\/li>/gi, "")
