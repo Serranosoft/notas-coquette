@@ -97,9 +97,9 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Novedades",
-        _updatesModalV1_1: "¡Nueva función: Plantillas! ",
-        _updatesModalV1_2: "Hemos diseñado algunas plantillas para ti",
-        _updatesModalV1_3: "Elige una plantilla y cambiala a tu gusto para crear las mejores notas para tu día a día 🌺",
+        _updatesModalV1_1: "✨ Hemos retocado el diseño de la aplicación",
+        _updatesModalV1_2: "📌 ¡Contador de palabras y carácteres!",
+        _updatesModalV1_3: "🙌 ¡Ahora puedes añadir audios en tus notas!",
         _updatesModalV1_4: "Personaliza el ritmo de la voz",
         _updatesModalV1_5: "Disfruta de la aplicación en Italiano y Persa",
         _updatesModalV1_6: "😊 Esperamos que disfrutes de las novedades 😊",
@@ -211,9 +211,9 @@ const translations = {
 
         // Updates modal
         _updatesModalNews: "News",
-        _updatesModalV1_1: "New feature: Templates!",
-        _updatesModalV1_2: "We've designed some templates for you",
-        _updatesModalV1_3: "Choose a template and customize it to your liking to create the best notes for your daily life 🌺",
+        _updatesModalV1_1: "✨ We've refreshed the app design",
+        _updatesModalV1_2: "📌 Word and character counter!",
+        _updatesModalV1_3: "🙌 You can now add audio to your notes!",
         _updatesModalV1_4: "Adjust voice pace",
         _updatesModalV1_5: "Enjoy the app in Italian and Farsi",
         _updatesModalV1_6: "😊 We hope you enjoy the news 😊",
@@ -325,9 +325,9 @@ const translations = {
 
         // Modal de mises à jour
         _updatesModalNews: "Nouveautés",
-        _updatesModalV1_1: "Nouvelle fonction : Modèles !",
-        _updatesModalV1_2: "Nous avons conçu quelques modèles pour vous",
-        _updatesModalV1_3: "Choisissez un modèle et modifiez-le à votre guise pour créer les meilleures notes pour votre quotidien 🌺",
+        _updatesModalV1_1: "✨ Nous avons retouché le design de l'application",
+        _updatesModalV1_2: "📌 Compteur de mots et de caractères !",
+        _updatesModalV1_3: "🙌 Vous pouvez maintenant ajouter des audios à vos notes !",
         _updatesModalV1_4: "Ajustez le rythme de la voix",
         _updatesModalV1_5: "Profitez de l'application en italien et en persan",
         _updatesModalV1_6: "😊 Nous espérons que vous apprécierez les nouveautés 😊",
@@ -439,9 +439,9 @@ const translations = {
 
         // Update-Modal
         _updatesModalNews: "Neuigkeiten",
-        _updatesModalV1_1: "Neue Funktion: Vorlagen!",
-        _updatesModalV1_2: "Wir haben einige Vorlagen für dich entworfen",
-        _updatesModalV1_3: "Wähle eine Vorlage und passe sie nach deinen Wünschen an, um die besten Notizen für deinen Alltag zu erstellen 🌺",
+        _updatesModalV1_1: "✨ Wir haben das Design der App überarbeitet",
+        _updatesModalV1_2: "📌 Wort- und Zeichenzähler!",
+        _updatesModalV1_3: "🙌 Du kannst jetzt Audios zu deinen Notizen hinzufügen!",
         _updatesModalV1_4: "Passen Sie das Stimmtrems an",
         _updatesModalV1_5: "Genießen Sie die App auf Italienisch und Persisch",
         _updatesModalV1_6: "😊 Wir hoffen, dass Ihnen die Neuigkeiten gefallen 😊",
@@ -553,9 +553,9 @@ const translations = {
 
         // نافذة التحديثات
         _updatesModalNews: "أخبار جديدة",
-        _updatesModalV1_1: "ميزة جديدة: القوالب!",
-        _updatesModalV1_2: "لقد صممنا بعض القوالب من أجلك",
-        _updatesModalV1_3: "اختر قالبًا وقم بتغييره حسب رغبتك لإنشاء أفضل الملاحظات لحياتك اليومية 🌺",
+        _updatesModalV1_1: "✨ لقد قمنا بتحديث تصميم التطبيق",
+        _updatesModalV1_2: "📌 عدّاد الكلمات والأحرف!",
+        _updatesModalV1_3: "🙌 يمكنك الآن إضافة تسجيلات صوتية إلى ملاحظاتك!",
         _updatesModalV1_4: "تخصيص وتيرة الصوت",
         _updatesModalV1_5: "استمتع بالتطبيق باللغتين الإيطالية والفارسية",
         _updatesModalV1_6: "😊 نأمل أن تنال الميزات الجديدة إعجابكم 😊",
@@ -667,9 +667,9 @@ const translations = {
 
         // अपडेट्स मॉडल
         _updatesModalNews: "नया क्या है",
-        _updatesModalV1_1: "नई सुविधा: टेम्प्लेट्स!",
-        _updatesModalV1_2: "हमने आपके लिए कुछ टेम्प्लेट्स डिज़ाइन किए हैं",
-        _updatesModalV1_3: "एक टेम्प्लेट चुनें और अपनी दैनिक जीवन के लिए बेहतरीन नोट्स बनाने के लिए इसे अपनी पसंद के अनुसार बदलें 🌺",
+        _updatesModalV1_1: "✨ हमने ऐप का डिज़ाइन नया किया है",
+        _updatesModalV1_2: "📌 शब्द और अक्षर काउंटर!",
+        _updatesModalV1_3: "🙌 अब आप अपने नोट्स में ऑडियो जोड़ सकते हैं!",
         _updatesModalV1_4: "आवाज़ की गति को समायोजित करें",
         _updatesModalV1_5: "इतालवी और फारसी में ऐप का आनंद लें",
         _updatesModalV1_6: "😊 हमें उम्मीद है कि आपको नई सुविधाएँ पसंद आएंगी 😊",
@@ -781,9 +781,9 @@ const translations = {
 
         // Modal cập nhật
         _updatesModalNews: "Cập nhật mới",
-        _updatesModalV1_1: "Tính năng mới: Biểu mẫu!",
-        _updatesModalV1_2: "Chúng tôi đã thiết kế một số biểu mẫu cho bạn",
-        _updatesModalV1_3: "Hãy chọn một biểu mẫu và tùy chỉnh theo ý thích để tạo ra những ghi chú tốt nhất cho cuộc sống hằng ngày của bạn 🌺",
+        _updatesModalV1_1: "✨ Chúng tôi đã làm mới thiết kế ứng dụng",
+        _updatesModalV1_2: "📌 Bộ đếm từ và ký tự!",
+        _updatesModalV1_3: "🙌 Giờ đây bạn có thể thêm âm thanh vào ghi chú!",
         _updatesModalV1_4: "Điều chỉnh nhịp điệu giọng nói",
         _updatesModalV1_5: "Trải nghiệm ứng dụng bằng tiếng Ý và tiếng Ba Tư",
         _updatesModalV1_6: "😊 Hy vọng bạn thích những tính năng mới 😊",
@@ -895,9 +895,9 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Nowości",
-        _updatesModalV1_1: "Nowa funkcja: Szablony!",
-        _updatesModalV1_2: "Zaprojektowaliśmy dla Ciebie kilka szablonów",
-        _updatesModalV1_3: "Wybierz szablon i zmień go według własnych upodobań, aby tworzyć najlepsze notatki na co dzień 🌺",
+        _updatesModalV1_1: "✨ Odświeżyliśmy wygląd aplikacji",
+        _updatesModalV1_2: "📌 Licznik słów i znaków!",
+        _updatesModalV1_3: "🙌 Teraz możesz dodawać nagrania audio do swoich notatek!",
         _updatesModalV1_4: "Dostosuj tempo głosu",
         _updatesModalV1_4: "Dostosuj tempo głosu",
         _updatesModalV1_5: "Korzystaj z aplikacji po włosku i persku",
@@ -1010,9 +1010,9 @@ const translations = {
 
         // Modal de atualizações
         _updatesModalNews: "Novidades",
-        _updatesModalV1_1: "Nova função: Modelos!",
-        _updatesModalV1_2: "Projetamos alguns modelos para você",
-        _updatesModalV1_3: "Escolha um modelo e altere-o ao seu gosto para criar as melhores notas para o seu dia a dia 🌺",
+        _updatesModalV1_1: "✨ Renovamos o design do aplicativo",
+        _updatesModalV1_2: "📌 Contador de palavras e caracteres!",
+        _updatesModalV1_3: "🙌 Agora você pode adicionar áudios às suas notas!",
         _updatesModalV1_4: "Personalize o ritmo da voz",
         _updatesModalV1_5: "Aproveite o app em Italiano e Persa",
         _updatesModalV1_6: "😊 Esperamos que você aproveite as novidades 😊",
@@ -1124,9 +1124,9 @@ const translations = {
 
         // Güncelleme modali
         _updatesModalNews: "Yenilikler",
-        _updatesModalV1_1: "Yeni özellik: Şablonlar!",
-        _updatesModalV1_2: "Sizin için bazı şablonlar tasarladık",
-        _updatesModalV1_3: "Günlük hayatınız için en iyi notları oluşturmak için bir şablon seçin ve zevkinize göre değiştirin 🌺",
+        _updatesModalV1_1: "✨ Uygulamanın tasarımını yeniledik",
+        _updatesModalV1_2: "📌 Kelime ve karakter sayacı!",
+        _updatesModalV1_3: "🙌 Artık notlarınıza ses ekleyebilirsiniz!",
         _updatesModalV1_4: "Ses hızını özelleştirin",
         _updatesModalV1_5: "Uygulamayı İtalyanca ve Farsça olarak kullanın",
         _updatesModalV1_6: "😊 Yeniliklerin keyfini çıkaracağınızı umuyoruz 😊",
@@ -1238,9 +1238,9 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Apa yang baru",
-        _updatesModalV1_1: "Fitur baru: Templat!",
-        _updatesModalV1_2: "Kami telah merancang beberapa templat untuk Anda",
-        _updatesModalV1_3: "Pilih templat dan ubah sesuai keinginan untuk membuat catatan terbaik untuk keseharian Anda 🌺",
+        _updatesModalV1_1: "✨ Kami telah memperbarui desain aplikasi",
+        _updatesModalV1_2: "📌 Penghitung kata dan karakter!",
+        _updatesModalV1_3: "🙌 Sekarang kamu bisa menambahkan audio ke catatanmu!",
         _updatesModalV1_4: "Sesuaikan ritme suara",
         _updatesModalV1_5: "Nikmati aplikasi dalam bahasa Italia dan Persia",
         _updatesModalV1_6: "😊 Semoga kamu suka dengan fitur baru 😊",
@@ -1352,9 +1352,9 @@ const translations = {
 
         // Модальное окно обновлений
         _updatesModalNews: "Новости",
-        _updatesModalV1_1: "Новая функция: Шаблоны!",
-        _updatesModalV1_2: "Мы разработали для вас несколько шаблонов",
-        _updatesModalV1_3: "Выберите шаблон и измените его по своему вкусу, чтобы создавать лучшие заметки на каждый день 🌺",
+        _updatesModalV1_1: "✨ Мы обновили дизайн приложения",
+        _updatesModalV1_2: "📌 Счётчик слов и символов!",
+        _updatesModalV1_3: "🙌 Теперь вы можете добавлять аудио в свои заметки!",
         _updatesModalV1_4: "Настройте ритм голоса",
         _updatesModalV1_5: "Наслаждайтесь приложением на итальянском и персидском",
         _updatesModalV1_6: "😊 Надеемся, вам понравятся новинки 😊",
@@ -1466,9 +1466,9 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "Novità",
-        _updatesModalV1_1: "Nuova funzione: Modelli!",
-        _updatesModalV1_2: "Abbiamo progettato alcuni modelli per te",
-        _updatesModalV1_3: "Scegli un modello e modificalo a tuo piacimento per creare le migliori note per la tua vita quotidiana 🌺",
+        _updatesModalV1_1: "✨ Abbiamo rinnovato il design dell'app",
+        _updatesModalV1_2: "📌 Contatore di parole e caratteri!",
+        _updatesModalV1_3: "🙌 Ora puoi aggiungere audio alle tue note!",
         _updatesModalV1_4: "Personalizza la velocità della voce",
         _updatesModalV1_5: "Goditi l’app in Italiano e Persiano",
         _updatesModalV1_6: "😊 Speriamo che ti piacciano le novità 😊",
@@ -1580,9 +1580,9 @@ const translations = {
 
         // Modal de updates
         _updatesModalNews: "اخبار جدید",
-        _updatesModalV1_1: "ویژگی جدید: قالب‌ها!",
-        _updatesModalV1_2: "ما چند قالب برای شما طراحی کرده‌ایm",
-        _updatesModalV1_3: "یک قالب انتخاب کنید و آن را به دلخواه خود تغییر دهید تا بهترین یادداشت‌ها را برای زندگی روزمره خود بسازید 🌺",
+        _updatesModalV1_1: "✨ ما طراحی برنامه را بازسازی کردیم",
+        _updatesModalV1_2: "📌 شمارنده کلمات و کاراکترها!",
+        _updatesModalV1_3: "🙌 حالا می‌توانید به یادداشت‌های خود صدا اضافه کنید!",
         _updatesModalV1_4: "ریتم صدا را شخصی‌سازی کنید",
         _updatesModalV1_5: "از برنامه به زبان ایتالیایی و فارسی لذت ببرید",
         _updatesModalV1_6: "😊 امیدواریم از ویژگی‌های جدید لذت ببرید 😊",
