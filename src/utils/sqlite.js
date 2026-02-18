@@ -16,7 +16,11 @@ export async function initDb() {
     // Update 31/07/2025 - Add new column to notes
     await addFavNoteColumn();
     // Update 17/09/2025 - Refactor to add initial values to user preferences
-    await setInitialUserPreferences();
+    try {
+        await setInitialUserPreferences();
+    } catch (e) {
+        console.warn("setInitialUserPreferences failed:", e);
+    }
 }
 
 async function setInitialUserPreferences() {

@@ -13,17 +13,17 @@ export async function save({ note, noteSavedId, hasDraws }) {
             if (note.hasOwnProperty("pwd") && oldNote.pwd !== note.pwd) {
                 differences++;
             }
-            
+
             if (note.hasOwnProperty("favorite") && oldNote.favorite !== note.favorite) {
                 differences++;
             }
             if (differences > 0) {
-                editNote(note.id, note.content, note.pwd, note.favorite, note.date)
+                await editNote(note.id, note.content, note.pwd, note.favorite, note.date)
             } else {
                 return false;
             }
         } else {
-            addNote(note.id, note.content, note.pwd, note.date);
+            await addNote(note.id, note.content, note.pwd, note.date);
         }
 
         return true;

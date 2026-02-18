@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { View, StatusBar, StyleSheet, Platform } from "react-native";
-import { createRef, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { colors } from "../src/utils/styles";
 import { setInitialNote } from "../src/utils/setInitialNote";
 import { getLocales } from 'expo-localization';
@@ -42,20 +42,21 @@ export default function Layout() {
     const [adsLoaded, setAdsLoaded] = useState(false);
     const [adTrigger, setAdTrigger] = useState(0);
     const [showOpenAd, setShowOpenAd] = useState(true);
-    const adsHandlerRef = createRef();
+    const adsHandlerRef = useRef(null);
 
     // Arrancar base de datos, configurar notificaciones y cargar preferencias de usuario
     useEffect(() => {
         async function prepare() {
             try {
-                await handleTrackingAds();
+                try { await handleTrackingAds(); } catch (e) { console.warn("Tracking init failed:", e); }
                 if (Platform.OS === 'ios') {
                     await new Promise(resolve => setTimeout(resolve, 1000));
                 }
-                await getUserPreferences();
-                await configureNotifications();
-                await init();
+                try { await getUserPreferences(); } catch (e) { console.warn("User prefs failed:", e); }
+                try { await configureNotifications(); } catch (e) { console.warn("Notifications failed:", e); }
+                try { await init(); } catch (e) { console.warn("DB init failed:", e); }
             } catch (error) {
+                console.error("Critical prepare error:", error);
             } finally {
                 setAppIsReady(true);
             }
@@ -77,7 +78,7 @@ export default function Layout() {
         }
         if (adsLoaded) {
             if (adTrigger > 4) {
-                adsHandlerRef.current.showIntersitialAd();
+                adsHandlerRef.current?.showIntersitialAd();
                 setAdTrigger(0);
             }
         }
@@ -96,17 +97,30 @@ export default function Layout() {
 
         let migrated = await AsyncStorage.getItem(userPreferences.MIGRATED);
         if (!migrated) {
-            let notes = await AsyncStorage.getItem(userPreferences.NOTES) || [];
-            if (notes.length > 0) {
+            const notesRaw = await AsyncStorage.getItem(userPreferences.NOTES);
+            if (notesRaw && notesRaw.length > 0) {
                 // Obtener notas.
-                notes = JSON.parse(notes);
+                let notes;
+                try {
+                    notes = JSON.parse(notesRaw);
+                } catch (e) {
+                    console.warn("Migration parse failed:", e);
+                    await AsyncStorage.setItem(userPreferences.MIGRATED, "true");
+                    return;
+                }
+                if (!Array.isArray(notes)) {
+                    await AsyncStorage.setItem(userPreferences.MIGRATED, "true");
+                    return;
+                }
                 // Para cada nota, crear un nuevo registro en sqlite.
                 for (const note of notes) {
                     await addNote(note.id, note.content, note.pwd, note.date);
                 }
                 // Notificar que ya se ha realizado la migración para no volver a repetirla.
                 await AsyncStorage.setItem(userPreferences.MIGRATED, "true");
-                // No borrar el AsyncStorage por si debo recuperar los registros en el próximo despliegue. 
+                // No borrar el AsyncStorage por si debo recuperar los registros en el próximo despliegue.
+            } else {
+                await AsyncStorage.setItem(userPreferences.MIGRATED, "true");
             }
         }
     }
@@ -170,7 +184,7 @@ export default function Layout() {
     return (
         <GestureHandlerRootView style={styles.wrapper}>
             <AdsContext.Provider value={adsContextValue}>
-                {/* <AdsHandler canStartAds={appIsReady} ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} /> */}
+                <AdsHandler canStartAds={appIsReady} ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
                 <LangContext.Provider value={langContextValue}>
                     <View onLayout={onLayoutRootView} style={[styles.container, Platform.OS === "ios" && styles.iosWrapper]}>
                         <Stack />
