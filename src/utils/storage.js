@@ -1,7 +1,7 @@
 import { addNote, editNote, getNoteFromId } from "./sqlite";
 
 export async function save({ note, noteSavedId, hasDraws }) {
-    if (note.content.length > 0 || hasDraws) {
+    if ((note?.content && note.content.length > 0) || hasDraws) {
         const oldNote = await getNoteFromId(noteSavedId);
         // Si existe una oldNote, debo saber si debo actualizarla o no.
         if (oldNote) {
@@ -10,11 +10,11 @@ export async function save({ note, noteSavedId, hasDraws }) {
             if (oldNote.content !== note.content) {
                 differences++;
             }
-            if (note.hasOwnProperty("pwd") && oldNote.pwd !== note.pwd) {
+            if (note.pwd !== undefined && oldNote.pwd !== note.pwd) {
                 differences++;
             }
 
-            if (note.hasOwnProperty("favorite") && oldNote.favorite !== note.favorite) {
+            if (note.favorite !== undefined && oldNote.favorite !== note.favorite) {
                 differences++;
             }
             if (differences > 0) {

@@ -102,7 +102,7 @@ function NoteItem({ note, isSelected, onPress, onLongPress, isTemplate }) {
 
     const { width } = useWindowDimensions();
 
-    const isBlocked = note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0;
+    const isBlocked = note?.pwd && note.pwd.length > 0;
 
     const formattedDate = useMemo(() => formatDate(note.date), [note.date]);
     const htmlPreview = useMemo(() => ({

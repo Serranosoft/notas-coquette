@@ -57,7 +57,7 @@ export default function HeaderNoteOptionsContainer({ note, setReadingMode, readi
 
     useEffect(() => {
         if (note) {
-            if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
+            if (note?.pwd && note.pwd.length > 0) {
                 setNoteLocked(true);
                 setPwd(note.pwd);
             }

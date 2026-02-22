@@ -32,7 +32,7 @@ function NoteItemContainer({ note, isSelected, setSelected }) {
                 }
             } else {
                 // No hay selección, acceder a la nota
-                if (note.hasOwnProperty("pwd") && note.pwd && note.pwd.length > 0) {
+                if (note?.pwd && note.pwd.length > 0) {
                     setLockModal(true);
                 } else {
                     router.push({ pathname: "/note", params: { id: note.id } });
