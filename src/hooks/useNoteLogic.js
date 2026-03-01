@@ -111,19 +111,34 @@ export function useNoteLogic(id, source, language, richTextRef, sketchPadRef, se
     }, []);
 
     useEffect(() => {
-        if (note) saveNote();
+        if (note) {
+            // Don't close UI if returning to active. Close UI and don't toast when backgrounding.
+            const isBackgrounding = appStateChanged !== "active";
+            saveNote(false, isBackgrounding);
+        }
     }, [appStateChanged]);
+
+    // Auto-save periodically without interrupting user
+    useEffect(() => {
+        if (!note) return;
+        const intervalId = setInterval(() => {
+            saveNote(false, false);
+        }, 15000);
+        return () => clearInterval(intervalId);
+    }, [note, noteSavedId]);
 
 
     // --- Actions ---
 
-    const saveNote = async () => {
-        // Dismiss keyboard
-        richTextRef.current?.dismissKeyboard();
+    const saveNote = async (showToast = true, closeUi = true) => {
+        if (closeUi) {
+            // Dismiss keyboard
+            richTextRef.current?.dismissKeyboard();
 
-        // Reset UI states, but preserve recording island (it handles its own cleanup)
-        setNoteState(prev => ({ ...prev, activeOption: prev.activeOption === "recording" ? "recording" : null }));
-        setDrawing(prev => ({ ...prev, isDrawing: false }));
+            // Reset UI states, but preserve recording island (it handles its own cleanup)
+            setNoteState(prev => ({ ...prev, activeOption: prev.activeOption === "recording" ? "recording" : null }));
+            setDrawing(prev => ({ ...prev, isDrawing: false }));
+        }
 
         if (!note) return;
 
@@ -135,7 +150,7 @@ export function useNoteLogic(id, source, language, richTextRef, sketchPadRef, se
 
         sketchPadRef.current?.save(); // Save drawings
 
-        if (isSaved) {
+        if (isSaved && showToast) {
             onSaveToast();
         }
     };
