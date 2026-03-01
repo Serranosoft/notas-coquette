@@ -76,7 +76,7 @@ export default function FooterEditor({
     return (
 
         !drawing.isDrawing &&
-        <View style={{ paddingTop: padding.bigTop, height: readingMode ? 0 : "auto" }}>
+        <View style={{ paddingTop: readingMode ? 0 : padding.bigTop, height: readingMode ? 0 : "auto", display: readingMode ? "none" : "flex" }}>
             <View style={{ position: "relative", width: "90%", alignSelf: "center", }}>
                 <RichToolbar
                     style={[editor.richBar, editor.footer, padding.bigHorizontal, { height: "auto", backgroundColor: 'rgba(250, 204, 214, 0.85)', marginBottom: 0, shadowOpacity: 0, elevation: 0 }]}
@@ -135,29 +135,33 @@ export default function FooterEditor({
                     hiliteColor={() => handleOption(activeOption === "hiliteColors" ? null : "hiliteColors")}
                 />
 
-                <LinearGradient
-                    colors={['rgba(250, 204, 214, 0.85)', 'rgba(250, 204, 214, 0)']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100 }]}
-                    pointerEvents="none"
-                >
-                    <Svg width={24} height={24} viewBox="0 0 24 24">
-                        <Path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill={colors.button} />
-                    </Svg>
-                </LinearGradient>
+                {!readingMode && (
+                    <>
+                        <LinearGradient
+                            colors={['rgba(250, 204, 214, 0.85)', 'rgba(250, 204, 214, 0)']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 0 }}
+                            style={[styles.arrow, { left: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100 }]}
+                            pointerEvents="none"
+                        >
+                            <Svg width={24} height={24} viewBox="0 0 24 24">
+                                <Path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill={colors.button} />
+                            </Svg>
+                        </LinearGradient>
 
-                <LinearGradient
-                    colors={['rgba(250, 204, 214, 0)', 'rgba(250, 204, 214, 0.85)']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100 }]}
-                    pointerEvents="none"
-                >
-                    <Svg width={24} height={24} viewBox="0 0 24 24">
-                        <Path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill={colors.button} />
-                    </Svg>
-                </LinearGradient>
+                        <LinearGradient
+                            colors={['rgba(250, 204, 214, 0)', 'rgba(250, 204, 214, 0.85)']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 0 }}
+                            style={[styles.arrow, { right: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100 }]}
+                            pointerEvents="none"
+                        >
+                            <Svg width={24} height={24} viewBox="0 0 24 24">
+                                <Path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill={colors.button} />
+                            </Svg>
+                        </LinearGradient>
+                    </>
+                )}
 
                 {/* Animated panel for stickers, colors, fontSize */}
                 <Animated.View

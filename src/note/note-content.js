@@ -7,7 +7,6 @@ import { memo, useContext, useMemo } from "react";
 import { ui } from "../utils/styles";
 import { LangContext } from "../utils/Context";
 import AudioPlayer from "../components/audio-player";
-import RenderHTML from "react-native-render-html";
 
 function NoteContent({
     note,
@@ -161,13 +160,23 @@ function NoteContent({
                 const uri = props.tnode.attributes['data-uri'];
                 return <AudioPlayer uri={uri} />;
             }
-            return null; // Fallback to default
+            const { TDefaultRenderer, ...rest } = props;
+            return <TDefaultRenderer {...rest} />;
+        },
+        font: (props) => {
+            const color = props.tnode.attributes['color'] || props.tnode.attributes['face'];
+            const { TDefaultRenderer, ...rest } = props;
+            return (
+                <Text style={{ color: color }}>
+                    <TDefaultRenderer {...rest} />
+                </Text>
+            );
         }
     }), []);
 
     return (
         <>
-            {isFocused && (
+            {isFocused && !readingMode && (
                 <SketchPad
                     key={note.id}
                     ref={sketchPadRef}
@@ -177,52 +186,38 @@ function NoteContent({
                 />
             )}
 
-            {!readingMode ? (
-                <RichEditor
-                    useContainer={true}
-                    ref={richText}
-                    placeholder={language.t("noteInputPlaceholder") || "..."}
-                    onChange={(content) => {
-                        note.content = content;
-                        onContentChange?.(content);
-                    }}
-                    onMessage={handleEditorMessage}
-                    style={{ zIndex: 999 }}
-                    editorStyle={editorStyle}
-                    initialContentHTML={note.content ?? ""}
-                    disabled={drawing.isDrawing}
-                    onCursorPosition={handleCursorPosition}
-                    initialHeight={800}
-                    onHeightChange={handleHeightChange}
-                    pasteWithStyle={true}
-                    // Light Bridge initialization
-                    injectedJavaScript={playbackScript}
-                    editorInitializedCallback={() => {
-                        richText.current?.injectJavascript(playbackScript);
-                    }}
-                    allowFileAccess={true}
-                    allowUniversalAccessFromFileURLs={true}
-                    allowFileAccessFromFileURLs={true}
-                    originWhitelist={['*']}
-                />
-            ) : (
-                <View style={{ padding: 16 }}>
-                    <RenderHTML
-                        contentWidth={Dimensions.get('window').width - 32}
-                        source={{ html: note.content }}
-                        renderers={renderers}
-                        tagsStyles={{
-                            body: {
-                                fontFamily: font.fontFamily,
-                                fontSize: 18,
-                                lineHeight: parseInt(lineSpacing) || 24,
-                            }
-                        }}
-                    />
-                </View>
-            )}
 
-            <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />
+            <RichEditor
+                useContainer={true}
+                ref={richText}
+                placeholder={language.t("noteInputPlaceholder") || "..."}
+                onChange={(content) => {
+                    note.content = content;
+                    onContentChange?.(content);
+                }}
+                onMessage={handleEditorMessage}
+                style={{ zIndex: 999 }}
+                editorStyle={editorStyle}
+                initialContentHTML={note.content ?? ""}
+                disabled={drawing.isDrawing || readingMode}
+                onCursorPosition={handleCursorPosition}
+                initialHeight={800}
+                onHeightChange={handleHeightChange}
+                pasteWithStyle={true}
+                // Light Bridge initialization
+                injectedJavaScript={playbackScript}
+                editorInitializedCallback={() => {
+                    richText.current?.injectJavascript(playbackScript);
+                }}
+                allowFileAccess={true}
+                allowUniversalAccessFromFileURLs={true}
+                allowFileAccessFromFileURLs={true}
+                originWhitelist={['*']}
+            />
+
+
+
+            {!readingMode && <GridBackground contentHeight={Math.max(editorHeight, windowHeight)} />}
 
             {counts && (
                 <View style={styles.countOverlay}>
